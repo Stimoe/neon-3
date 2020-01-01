@@ -1,0 +1,110 @@
+*{
+  overflow: hidden;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: space-around;
+  max-width: 100%;
+  position: absolute;
+  top: 5%;
+  align-items: center;
+  justify-content: center;
+}
+.neon2 {
+  top: 100%;
+  font-size: 1.5em;
+  background-color: #b6379e;
+  text-shadow: 2px 2px #52c0da;
+  box-shadow: -4px -4px #52c0da;
+}
+
+.neon3 {
+  color: #ffffff;
+  text-transform: uppercase;
+  font-size: 1.5em;
+  text-shadow: 2px 2px #52c0da;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1%;
+  font-size: 2em;
+}
+.neon4 {
+  font-size: 1em;
+  color: black !important ;
+  background-color: #fff;
+  text-shadow: 2px 2px #52c0da;
+}
+.landing2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* height: 68vh; */
+  background-size: 100% 100%;
+  background-position: center center;
+  background-image: url(./raina.gif);
+}
+.decks {
+  margin: 0px !important;
+  /* background-color: black !important; */
+}
+
+.bars {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  color: white !important;
+}
+.nes-progress {
+  background-color: transparent;
+}
+.em {
+  float: right !important;
+  color: #ffffff;
+}
+.neon4:hover {
+  background-color: #9c9c9c !important;
+}
+.hb {
+  color: #ffffff;
+}
+.raise:hover{
+  transform: translate(0px, -60px) !important;
+  transition: all .4s ease-in-out;
+}
+.raise1:hover{
+  transform: translate(0px, 100px) !important;
+  transition: all .4s ease-in-out;
+}
+/* .grow:hover { transform: scale(2.1); } */
+.emm{
+  /* background-image: url(./fire.gif); */
+  position: fixed;
+  left: 40%;
+  top: 35%;
+  width: 20%;
+  height:30%;
+  /* height: 68vh; */
+  background-size: 100% 100%;
+  background-position: center center;
+}
+.emm1{
+  /* background-image: url(./idle.gif); */
+  position: fixed;
+  left: 603px;
+  top: 460px;
+  width: 20%;
+  height:30%;
+  /* height: 68vh; */
+  background-size: 100% 100%;
+  background-position: center center;
+}
+.player{
+height: 20%;
+image-rendering: pixelated;
+}
