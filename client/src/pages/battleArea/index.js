@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
-// import React from "react";
-import ReactDOM from "react-dom";
+import React, { Component } from "react";
+import Component from "react"
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./style.css";
 import enemies from "../../enemy.json";
@@ -105,7 +104,7 @@ class BattlePage extends Component {
     if (this.state.currentEnemyHealth <= 0) {
 
       localStorage.setItem('userWinCount', this.state.winCount);
-      return <Redirect to='/award' />
+      return <Route to='/award' />
     }
   }
 
