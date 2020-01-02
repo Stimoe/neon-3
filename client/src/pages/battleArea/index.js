@@ -13,7 +13,7 @@ import Player from './players.png'
 
 import GameOver from "../../components/gameOver"
 
-import EnemyModal from "../../components/enemiesActionModul";
+// import EnemyModal from "../../components/enemiesActionModul";
 
 
 var newWinCounts;

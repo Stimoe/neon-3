@@ -21,7 +21,29 @@ class Login extends Component {
     };
   }
 
+  setUserState(event) {
+    let field = event.target.name;
+    let value = event.target.value;
+    this.state.user[field] = value;
+    return this.setState({ user: this.state.user });
+  };
 
+
+
+  onChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
+
+
+
+  handleChange = event => {
+    console.log("change")
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
+    })
+  }
 
 
 
@@ -83,16 +105,16 @@ class Login extends Component {
 //     this.readSessions();
 //   }
 
-  handleChange= event=>{
-      console.log("change")
-    const {username,value}=event.target;
-    this.setState({
-      [username]:value
-    })
-  }
-  onChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
+  // handleChange= event=>{
+  //     console.log("change")
+  //   const {username,value}=event.target;
+  //   this.setState({
+  //     [username]:value
+  //   })
+  // }
+  // onChange = e => {
+  //   this.setState({ [e.target.name]: e.target.value });
+  // };
 
   // readSessions = ()=>{
   //   Axios.get(`${this.state.url}/api/users/readsessions`,{withCredentials:true}).then(res=>{
