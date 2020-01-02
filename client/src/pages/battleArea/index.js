@@ -103,7 +103,7 @@ class BattlePage extends Component {
     if (this.state.currentEnemyHealth <= 0) {
 
       localStorage.setItem('userWinCount', this.state.winCount);
-      return <Route to='/award' />
+      // return <Route to='/award' />
     }
   }
 
