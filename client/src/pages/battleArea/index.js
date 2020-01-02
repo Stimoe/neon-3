@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Component from "react"
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./style.css";
 import enemies from "../../enemy.json";
