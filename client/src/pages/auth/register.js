@@ -84,7 +84,8 @@ class Register extends Component {
   handleLoginFormSubmit = event => {
 
     event.preventDefault();
-axios.post('/login', function (req, res) {
+axios.post('/api/user/login', { username: this.state.username, password: this.state.password }).then(res => {
+  // console.log("line 26 ", res.data, res.status)
       User.findOne({
           where: {
               username: req.body.username
