@@ -1,23 +1,23 @@
 import React, { Component } from "react";
 import "./style.css";
+import { Redirect } from "react-router-dom";
 import enemies from "../../enemy.json";
 
 import DeckBrain from "../../components/deck-managment";
 
-import { Redirect } from "react-router-dom";
 import FireEm from './fire.gif';
 import IdleEm from './idle.gif';
 import Death from './death.gif';
 import Player from './players.png'
-import Rain from './rain.gif'
+// import Rain from './rain.gif'
 
 import GameOver from "../../components/gameOver"
 
 import EnemyModal from "../../components/enemiesActionModul";
 
 
-var newWinCounts;
-var newEnemyObject;
+// var newWinCounts;
+// var newEnemyObject;
 
 class BattlePage extends Component {
   state = {
