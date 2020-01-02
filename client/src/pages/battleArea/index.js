@@ -1,5 +1,7 @@
-import React, { Component } from "react";
-import { BrowserRouter as Redirect } from 'react-router-dom'
+import React, { Component } from 'react';
+// import React from "react";
+import ReactDOM from "react-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./style.css";
 import enemies from "../../enemy.json";
 import DeckBrain from "../../components/deck-managment";
@@ -337,17 +339,17 @@ class BattlePage extends Component {
 
 
 
-    if (this.state.userHealth <= 0) {
-      this.setState({
-        winCount: 0
-      })
-      return (
-        <GameOver />
-      )
-    }
+    // if (this.state.userHealth <= 0) {
+    //   this.setState({
+    //     winCount: 0
+    //   })
+    //   return (
+    //     <GameOver />
+    //   )
+    // }
 
 
-    else {
+    // else {
 
       return (
         <div>
@@ -414,7 +416,7 @@ class BattlePage extends Component {
         </div>
       );
     }
-  }
+  
 }
 export default BattlePage;
 
