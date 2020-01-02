@@ -4,7 +4,7 @@ import axios from "axios";
 import "./style.css";
 const mongoose = require('mongoose');
 const User = mongoose.model('users');
-// const Bcrypt = require("bcryptjs");
+const Bcrypt = require("bcryptjs");
 
 class Register extends Component {
   // constructor() {
@@ -108,7 +108,7 @@ class Register extends Component {
   
     User.getUserByUsername(username)
       .then(function(user) {
-          return bcrypt.compare(password, user.password);
+          return Bcrypt.compare(password, user.password);
       })
       .then(function(samePassword) {
           if(!samePassword) {
