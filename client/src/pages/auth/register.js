@@ -73,7 +73,7 @@ class Register extends Component {
 
     axios.post('/api/user/register', { username: this.state.username, password: this.state.password }).then(res => {
       console.log("line 26 ", res.data, res.status)
-      // this.handleLoginFormSubmit();
+      this.handleLoginFormSubmit();
     }).catch(err => {
       console.log(err.response);
       alert("Username already exists or password could not be validated")
@@ -81,70 +81,58 @@ class Register extends Component {
   }
 
 
-//   handleLoginFormSubmit = event => {
+  handleLoginFormSubmit = event => {
 
-//     event.preventDefault();
-// axios.post('/api/user/login', { username: this.state.username, password: this.state.password }).then(res => {
-//   // console.log("line 26 ", res.data, res.status)
-//       User.findOne({
-//           where: {
-//               username: req.body.username
-//           }
-//       }).then(function (User) {
-//           if (!User) {
-//               res.status(500).send("no such user")
-//           }
-//           else {
-  
-//               //compares password send in req.body to one in database, will return true if matched.
-//               if (Bcrypt.compareSync(req.body.password, User.password)) {
-//                   //create new session property "user", set equal to logged in user
-//                   req.session.user = { id: User.id, name: User.name }
-//                   req.session.error = null;
-//                   res.status(200).json(req.session);
-//               }
-//               else {
-//                   //delete existing user, add error
-//                   req.session.user = false;
-//                   req.session.error = 'auth failed bro';
-//                   res.status(401).send("password incorrect");
-//               }
-//           }
-//       })
-//   })
-// }
-handleLoginFormSubmit = event => {
-
-  event.preventDefault();
-axios.post('/api/user/login', { username: this.state.username, password: this.state.password }, function (req, res) {
-  User.findOne({
-      where: {
+    event.preventDefault();
+    axios.post('/api/user/login', { username: this.state.username, password: this.state.password }, function (req, res) {
+      User.findOne({
+        where: {
           username: req.body.username
-      }
-  }).then(function (User) {
-        if (!User) {
-            res.status(500).send("no such user")
         }
-        else {
-
-            //compares password send in req.body to one in database, will return true if matched.
-            if (Bcrypt.compareSync(req.body.password, User.password)) {
-                //create new session property "user", set equal to logged in user
-                req.session.user = { id: User.id, username: User.username }
-                req.session.error = null;
-                res.status(200).json(req.session);
-                this.props.history.push("/storypage")
-            }
-            else {
-                //delete existing user, add error
-                req.session.user = false;
-                req.session.error = 'auth failed bro';
-                res.status(401).send("password incorrect");
-            }
-        }
+      }).then(res => {
+        console.log("line 26 ", res.data, res.status)
+       
+      }).catch(err => {
+        console.log(err.response);
+        alert("Username already exists or password could not be validated")
+      })
     })
-})
-}
+  }
+
+
+
+  // handleLoginFormSubmit = event => {
+
+  //   event.preventDefault();
+  // axios.post('/api/user/login', { username: this.state.username, password: this.state.password }, function (req, res) {
+  //   User.findOne({
+  //       where: {
+  //           username: req.body.username
+  //       }
+  //   }).then(function (User) {
+  //         if (!User) {
+  //             res.status(500).send("no such user")
+  //         }
+  //         else {
+
+  //             //compares password send in req.body to one in database, will return true if matched.
+  //             if (Bcrypt.compareSync(req.body.password, User.password)) {
+  //                 //create new session property "user", set equal to logged in user
+  //                 req.session.user = { id: User.id, username: User.username }
+  //                 req.session.error = null;
+  //                 res.status(200).json(req.session);
+  //                 this.props.history.push("/storypage")
+  //             }
+  //             else {
+  //                 //delete existing user, add error
+  //                 req.session.user = false;
+  //                 req.session.error = 'auth failed bro';
+  //                 res.status(401).send("password incorrect");
+  //             }
+  //         }
+  //     })
+  // })
+  // }
 
 
 
@@ -163,12 +151,12 @@ axios.post('/api/user/login', { username: this.state.username, password: this.st
 
 
 
-  
+
 
   render() {
     const { errors } = this.state;
     return (
-      <div className="container inputS">
+      <div className="container inputS" >
         <div className="landing3">
           <div className="home-wrap3">
             <div className="home-inner3"></div>
