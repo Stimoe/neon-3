@@ -12,12 +12,20 @@ module.exports = (app) => {
   app.post(`/api/user/register`, async (req, res) => {
     var username = req.body.username;
     var password = req.body.password;
+console.log(username);
+console.log(password);
+
+
+
     bcrypt.hash(password, BCRYPT_SALT_ROUNDS)
+   
+    
     .then(function(hashedPassword) {
+      console.log(hashedPassword);
         return User.saveUser(username, hashedPassword);
     })
     .then(function() {
-        res.send();
+        res.send(User);
     })
     .catch(function(error){
         console.log("Error saving user: ");
