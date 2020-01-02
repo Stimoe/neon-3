@@ -15,8 +15,8 @@ import GameOver from "../../components/gameOver"
 import EnemyModal from "../../components/enemiesActionModul";
 
 
-// var newWinCounts;
-// var newEnemyObject;
+var newWinCounts;
+var newEnemyObject;
 
 class BattlePage extends Component {
   state = {
@@ -333,21 +333,21 @@ class BattlePage extends Component {
   render() {
 
     const userTurnOver = this.state.userTurnOver;
-    // let enemyHealth = this.state.currentEnemyHealth;
+    let enemyHealth = this.state.currentEnemyHealth;
 
 
 
-    // if (this.state.userHealth <= 0) {
-    //   this.setState({
-    //     winCount: 0
-    //   })
-    //   return (
-    //     <GameOver />
-    //   )
-    // }
+    if (this.state.userHealth <= 0) {
+      this.setState({
+        winCount: 0
+      })
+      return (
+        <GameOver />
+      )
+    }
 
 
-    // else {
+    
 
       return (
         <div>
@@ -381,7 +381,7 @@ class BattlePage extends Component {
 
             <div>
 
-              <EnemyModal turnEnded = {this.state.userTurnOver}/>
+              {/* <EnemyModal turnEnded = {this.state.userTurnOver}/> */}
             </div>
 
 
