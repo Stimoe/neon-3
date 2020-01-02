@@ -92,7 +92,7 @@ class BattlePage extends Component {
         frozen: false
       });
     }
-    if (this.state.userTurnOver == true) {
+    if (this.state.userTurnOver === true) {
 
       setTimeout(function () {
         this.setState({ userTurnOver: false });
@@ -148,15 +148,16 @@ class BattlePage extends Component {
       }
       return {
         newHealth,
-        newArmor
+        newArmor, 
+        gameWon
       }
     }
-    console.log(newArmor, newHealth)
-    return {
-      newArmor,
-      newHealth,
-      gameWon
-    };
+    // console.log(newArmor, newHealth)
+    // return {
+    //   newArmor,
+    //   newHealth,
+    //   gameWon
+    // };
   };
 
   firstEnemyAction = () => {

@@ -4,7 +4,7 @@ import axios from "axios";
 import "./style.css";
 const mongoose = require('mongoose');
 const User = mongoose.model('users');
-const Bcrypt = require("bcryptjs");
+// const Bcrypt = require("bcryptjs");
 
 class Register extends Component {
   // constructor() {
@@ -33,12 +33,12 @@ class Register extends Component {
       errors: {}
     };
   }
-  setUserState(event) {
-    let field = event.target.name;
-    let value = event.target.value;
-    this.state.user[field] = value;
-    return this.setState({ user: this.state.user });
-  };
+  // setUserState(event) {
+  //   let field = event.target.name;
+  //   let value = event.target.value;
+  //   this.state.user[field] = value;
+  //   return this.setState({ user: this.state.user });
+  // };
 
 
 
