@@ -9,6 +9,3 @@ const userSchema = new Schema({
 
 mongoose.model('users', userSchema);
 
-User.beforeCreate(function(user) {
-    user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null);
-  });

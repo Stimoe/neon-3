@@ -33,7 +33,26 @@ module.exports = (app) => {
     // })
   })
 
-
+  app.post('/api/user/login', function (req, res, next) { 
+    var username = req.body.username;
+    var password = req.body.password;
+  
+    User.getUserByUsername(username)
+      .then(function(user) {
+          return bcrypt.compare(password, user.password);
+      })
+      .then(function(samePassword) {
+          if(!samePassword) {
+              res.status(403).send();
+          }
+          res.send();
+      })
+      .catch(function(error){
+          console.log("Error authenticating user: ");
+          console.log(error);
+          next();
+      });
+  });
 
 
 
