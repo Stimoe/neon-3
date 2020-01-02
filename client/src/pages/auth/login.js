@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import Axios from "axios";
+import axios from "axios";
 import "./style.css";
-
+const mongoose = require('mongoose');
+const User = mongoose.model('users');
+const Bcrypt = require("bcryptjs");
 
 class Login extends Component {
   constructor() {
