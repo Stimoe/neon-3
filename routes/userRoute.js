@@ -21,7 +21,7 @@ bcrypt.hash(password, BCRYPT_SALT_ROUNDS)
     var user ={username: req.body.username, password: hashedPassword}
 
 
-    let newUser = await User.create(user);
+    let newUser = User.create(user);
     return res.status(201).send({
       error: false,
       newUser
@@ -30,23 +30,7 @@ bcrypt.hash(password, BCRYPT_SALT_ROUNDS)
   })
   })
 
-  // bcrypt.hash(password, BCRYPT_SALT_ROUNDS)
-   
-    
-  // .then(function(hashedPassword) {
-  //   console.log(hashedPassword);
 
-    
-  //     return User.saveUser(username, hashedPassword);
-  // })
-  // .then(function() {
-  //     res.send(User);
-  // })
-  // .catch(function(error){
-  //     console.log("Error saving user: ");
-  //     console.log(error);
-  //     next();
-  // });
 
 
 
