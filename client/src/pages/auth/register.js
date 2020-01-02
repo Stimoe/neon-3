@@ -37,7 +37,7 @@ class Register extends Component {
     return this.setState({ user: this.state.user });
   };
 
-  // onChange = e => { this.setUserState.bind(this) }
+
 
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
