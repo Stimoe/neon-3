@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const User = mongoose.model('users');
-var bcrypt = require('bcryptjs');
+const Bcrypt = require("bcryptjs");
 var BCRYPT_SALT_ROUNDS = 12;
 module.exports = (app) => {
 
@@ -9,28 +9,37 @@ module.exports = (app) => {
     return res.status(200).send(users);
   });
 
-  app.post(`/api/user/register`, async (req, res) => {
+//   app.post(`/api/user/register`, async (req, res) => {
 
-console.log(username);
-console.log(password);
-var username = req.body.username;
-var password = req.body.password;
+// console.log(username);
+// console.log(password);
+// var username = req.body.username;
+// var password = req.body.password;
 
-bcrypt.hash(password, BCRYPT_SALT_ROUNDS)
-  .then(function(hashedPassword) {
-    var user ={username: req.body.username, password: hashedPassword}
-
-
-    let newUser = User.create(user);
-    return res.status(201).send({
-      error: false,
-      newUser
-    })
-
-  })
-  })
+// bcrypt.hash(password, BCRYPT_SALT_ROUNDS)
+//   .then(function(hashedPassword) {
+//     var user ={username: req.body.username, password: hashedPassword}
 
 
+//     let newUser = User.create(user);
+//     return res.status(201).send({
+//       error: false,
+//       newUser
+//     })
+
+//   })
+//   })
+
+  app.post("/api/user/register", async (request, response) => {
+    try {
+        request.body.password = Bcrypt.hashSync(request.body.password, 10);
+        var user = new User(request.body);
+        var result = await user.save();
+        response.send(result);
+    } catch (error) {
+        response.status(500).send(error);
+    }
+});
 
 
 
