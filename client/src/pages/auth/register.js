@@ -70,11 +70,19 @@ class Register extends Component {
 
     axios.post('/api/user/register', { username: this.state.username, password: this.state.password }).then(res => {
       console.log("line 26 ", res.data, res.status)
-      // this.handleLoginFormSubmit();
+      this.handleLoginFormSubmit();
     }).catch(err => {
       console.log(err.response);
       alert("Username already exists or password could not be validated")
     })
+  }
+
+
+  handleLoginFormSubmit = event => {
+
+    event.preventDefault();
+axios
+
   }
 
 
@@ -84,6 +92,18 @@ class Register extends Component {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+  
 
   render() {
     const { errors } = this.state;
