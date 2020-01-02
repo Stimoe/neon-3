@@ -86,6 +86,7 @@ class Register extends Component {
 
 
     axios.post('/api/user/login', { username: this.state.username, password: this.state.password }, function (req, res) {
+     
       User.findOne({
         where: {
           username: req.body.username
@@ -97,6 +98,7 @@ class Register extends Component {
         console.log(err.response);
         alert("Username already exists or password could not be validated")
       })
+      console.log("line 26 ", res.data, res.status)
     })
   }
 
