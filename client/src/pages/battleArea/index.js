@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
-import { Redirect } from "react-router-dom";
 import "./style.css";
 import enemies from "../../enemy.json";
 import DeckBrain from "../../components/deck-managment";
