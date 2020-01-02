@@ -114,7 +114,7 @@ class Register extends Component {
           if(!samePassword) {
               res.status(403).send();
           }
-          res.send();
+          res.send("same!");
       })
       .catch(function(error){
           console.log("Error authenticating user: ");
