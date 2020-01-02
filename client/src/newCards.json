@@ -1,0 +1,68 @@
+[
+    {
+        "id": 1,
+        "name": "DoS Attack",
+        "damage": 10,
+        "image": "https://cdn1.vectorstock.com/i/1000x1000/72/45/two-crossed-light-neon-swords-laser-sabers-war-vector-19807245.jpg",
+        "text": "This Card does 10 damage to the enemy",
+        "class": "battleMage",
+        "type": "Action" 
+    },
+
+    {
+        "id": 2,
+        "name": "Syntax Error",
+        "armor": 6,
+        "image": "TBD",
+        "text": "This card increase your armor by 6 pts until next turn",
+        "class": "battleMage",
+        "type": "Action" 
+    },
+    {
+        "id": 3,
+        "name": "Hijack",
+        "image": "TBD",
+        "effect": null,
+        "text": "This spell does 15 direct damage to the enemy, you take 8 damage",
+        "damage": 15,
+        "selfDamage": 8,
+        "class": "battleMage",
+        "type": "Spell" 
+    },
+    {
+        "id": 5,
+        "name": "BruteForce Armor",
+        "image": "TBD",
+        "effect": null,
+        "text": "This spell removes all enemy armor",
+        "class": "battleMage",
+        "type": "Spell" 
+    },
+    {
+        "id": 6,
+        "name": "Server Backup",
+        "image": "TBD",
+        "effect": null,
+        "text": "This spell heals you for 10",
+        "healValue": 10,
+        "class": "battleMage",
+        "type": "Spell" 
+    },
+    {
+        "id": 7,
+        "name": "Merge Conflict",
+        "image": "TBD",
+        "effect": null,
+        "text": "This spell makes the enemy skip their next turn",
+        "class": "battleMage",
+        "type": "Spell" 
+    }
+
+
+
+
+
+
+]
+
+

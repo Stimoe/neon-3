@@ -1,0 +1,50 @@
+.row1 {
+  margin-right: -60px;
+  margin-left: -60px;
+}
+.playArea {
+  display: flex;
+  justify-content: center;
+  top: 10%;
+  margin: 0;
+  bottom: 0% !important;
+}
+.playCard {
+
+  width: 20%;
+  padding: 10px;
+  padding-top: 100px !important;
+  transform: scale(0.7);
+}
+.handArea {
+  margin-top: 0px;
+  top: 650px;
+ 
+  margin-top: 0%;
+  display: flex;
+  justify-content: center;
+}
+
+.handCard {
+  padding-top: 100px !important;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+  width: 20%;
+  padding: 10px;
+  transform: scale(0.7);
+}
+
+.stuffs{
+  transform: scale(0.7);
+  padding: 100%;
+}
+.row2 {
+  margin-right: -60px;
+  margin-left: -60px;
+}
+.buzz{
+  position: fixed;
+  top: 2%;
+  /* left: 0;
+  right: 0; */
+}

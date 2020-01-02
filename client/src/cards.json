@@ -1,0 +1,96 @@
+[
+    {
+        "id": 1,
+        "name": "SQL Injection Attack",
+        "damage": 5,
+        "image": "TBD",
+        "text": "This Card does 5 damage to the enemy",
+        "class": "battleMage",
+        "type": "Action" 
+    },
+    {
+        "id": 1,
+        "name": "SQL Injection Attack",
+        "damage": 5,
+        "image": "TBD",
+        "text": "This Card does 5 damage to the enemy!",
+        "class": "battleMage",
+        "type": "Action" 
+    },
+    {
+        "id": 1,
+        "name": "SQL Injection Attack",
+        "damage": 5,
+        "image": "TBD",
+        "text": "This Card does 5 damage to the enemy!!",
+        "class": "battleMage",
+        "type": "Action" 
+    },
+    {
+        "id": 1,
+        "name": "SQL Injection Attack",
+        "damage": 5,
+        "image": "TBD",
+        "text": "This Card does 5 damage to the enemy!!!",
+        "class": "battleMage",
+        "type": "Action" 
+    },
+    {
+        "id": 2,
+        "name": "Firewall",
+        "armor": 3,
+        "image": "TBD",
+        "text": "This card increase your armor by 3 pts until next turn",
+        "class": "battleMage",
+        "type": "Action" 
+    },
+    {
+        "id": 2,
+        "name": "Firewall",
+        "armor": 3,
+        "image": "TBD",
+        "text": "This card increase your armor by 3 pts until next turn!",
+        "class": "battleMage",
+        "type": "Action" 
+    },
+    {
+        "id": 2,
+        "name": "Firewall",
+        "armor": 3,
+        "image": "TBD",
+        "text": "This card increase your armor by 3 pts until next turn!!",
+        "class": "battleMage",
+        "type": "Action" 
+    },
+    {
+        "id": 2,
+        "name": "Firewall",
+        "armor": 3,
+        "image": "TBD",
+        "text": "This card increase your armor by 3 pts until next turn!!",
+        "class": "battleMage",
+        "type": "Action" 
+    },
+    {
+        "id": 3,
+        "name": "Buffer Overrun",
+        "image": "TBD",
+        "effect": null,
+        "text": "This spell does 10 direct damage to the enemy, you take 4 damage",
+        "damage": 10,
+        "selfDamage": 4,
+        "class": "battleMage",
+        "type": "Spell" 
+    },
+  
+    {
+        "id": 7,
+        "name": "Jammer",
+        "image": "TBD",
+        "effect": null,
+        "text": "This spell makes the enemy skip their next turn",
+        "class": "battleMage",
+        "type": "Spell" 
+    }
+  
+]

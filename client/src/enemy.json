@@ -1,0 +1,38 @@
+[
+    {
+        "id": 0,
+        "name": "js@n",
+        "health":50,
+        "actions":[1,2],
+        "attack": 7,
+        "armor": 0,
+        "armorGain":2,
+        "image": "TBD",
+        "text": "This enemy is the first challenger"
+    },
+    {
+        "id": 1,
+        "name": "B@m",
+        "health":100,
+        "actions":[1,2],
+        "attack": 12,
+        "armor": 0,
+        "armorGain":5,
+        "image": "TBD",
+        "text": "This enemy is the second challenger"
+    },
+    {
+        "id": 2,
+        "name": "$yber",
+        "health":175,
+        "actions":[1,2],
+        "attack": 17,
+        "armor": 0,
+        "armorGain":8,
+        "image": "TBD",
+        "text": "This enemy is the second challenger"
+    }
+
+
+
+]
