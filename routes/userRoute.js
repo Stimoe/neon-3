@@ -10,36 +10,43 @@ module.exports = (app) => {
   });
 
   app.post(`/api/user/register`, async (req, res) => {
+    console.log(req.body)
     var username = req.body.username;
     var password = req.body.password;
 console.log(username);
 console.log(password);
 
+let user = await User.create(req.body);
+    return res.status(201).send({
+      error: false,
+      user
+    })
+
+ 
 
 
-    bcrypt.hash(password, BCRYPT_SALT_ROUNDS)
+  
+  })
+
+  // bcrypt.hash(password, BCRYPT_SALT_ROUNDS)
    
     
-    .then(function(hashedPassword) {
-      console.log(hashedPassword);
-        return User.saveUser(username, hashedPassword);
-    })
-    .then(function() {
-        res.send(User);
-    })
-    .catch(function(error){
-        console.log("Error saving user: ");
-        console.log(error);
-        next();
-    });
+  // .then(function(hashedPassword) {
+  //   console.log(hashedPassword);
+
+    
+  //     return User.saveUser(username, hashedPassword);
+  // })
+  // .then(function() {
+  //     res.send(User);
+  // })
+  // .catch(function(error){
+  //     console.log("Error saving user: ");
+  //     console.log(error);
+  //     next();
+  // });
 
 
-    // let user = await User.create(req.body);
-    // return res.status(201).send({
-    //   error: false,
-    //   user
-    // })
-  })
 
   app.post('/api/user/login', function (req, res, next) { 
     var username = req.body.username;
