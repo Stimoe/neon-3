@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import "./style.css";
 const mongoose = require('mongoose');
 const User = mongoose.model('users');
 const Bcrypt = require("bcryptjs");
-import axios from "axios";
-import "./style.css";
 
 class Register extends Component {
   // constructor() {
