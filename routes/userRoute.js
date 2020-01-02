@@ -18,7 +18,7 @@ var password = req.body.password;
 
 bcrypt.hash(password, BCRYPT_SALT_ROUNDS)
   .then(function(hashedPassword) {
-    var user ={username: req.body.username, password: password}
+    var user ={username: req.body.username, password: hashedPassword}
 
 
     let newUser = await User.create(user);
