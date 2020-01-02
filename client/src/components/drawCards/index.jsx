@@ -1,9 +1,6 @@
 import React, { Component } from "react";
-import deckJson from "../../cards.json";
 import Cards from "../cards";
 import newCardsFromJson from "../../newCards.json";
-import PlayArea from "../playArea";
-import style from "./style.css";
 var UserInitialDeck = require('../../cards.json');
 
 class DrawBrain extends Component {

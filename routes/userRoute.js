@@ -9,26 +9,7 @@ module.exports = (app) => {
     return res.status(200).send(users);
   });
 
-//   app.post(`/api/user/register`, async (req, res) => {
 
-// console.log(username);
-// console.log(password);
-// var username = req.body.username;
-// var password = req.body.password;
-
-// bcrypt.hash(password, BCRYPT_SALT_ROUNDS)
-//   .then(function(hashedPassword) {
-//     var user ={username: req.body.username, password: hashedPassword}
-
-
-//     let newUser = User.create(user);
-//     return res.status(201).send({
-//       error: false,
-//       newUser
-//     })
-
-//   })
-//   })
 
   app.post("/api/user/register", async (request, response) => {
     try {
@@ -43,27 +24,20 @@ module.exports = (app) => {
 
 
 
-  // app.post('/api/user/login', function (req, res, next) { 
-  //   var username = req.body.username;
-  //   var password = req.body.password;
-  
-  //   User.getUserByUsername(username)
-  //     .then(function(user) {
-  //         return bcrypt.compare(password, user.password);
-  //     })
-  //     .then(function(samePassword) {
-  //         if(!samePassword) {
-  //             res.status(403).send();
-  //         }
-  //         res.send();
-  //     })
-  //     .catch(function(error){
-  //         console.log("Error authenticating user: ");
-  //         console.log(error);
-  //         next();
-  //     });
-  // });
-
+// app.post("/api/user/login", async (request, response) => {
+//   try {
+//       var user = await User.findOne({ username: request.body.username }).exec();
+//       if(!user) {
+//           return response.status(400).send({ message: "The username does not exist" });
+//       }
+//       if(!Bcrypt.compareSync(request.body.password, user.password)) {
+//           return response.status(400).send({ message: "The password is invalid" });
+//       }
+//       response.send({ message: "The username and password combination is correct!" });
+//   } catch (error) {
+//       response.status(500).send(error);
+//   }
+// });
 
 
 
