@@ -130,9 +130,10 @@ axios.post('/api/user/login', { username: this.state.username, password: this.st
             //compares password send in req.body to one in database, will return true if matched.
             if (Bcrypt.compareSync(req.body.password, User.password)) {
                 //create new session property "user", set equal to logged in user
-                req.session.user = { id: User.id, name: User.name }
+                req.session.user = { id: User.id, username: User.username }
                 req.session.error = null;
                 res.status(200).json(req.session);
+                this.props.history.push("/storypage")
             }
             else {
                 //delete existing user, add error
