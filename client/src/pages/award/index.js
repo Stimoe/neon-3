@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import Axios from "axios";
 import "./style.css";
 import DrawBrain from "../../components/drawCards";
-import { booleanLiteral } from "@babel/types";
+// import { booleanLiteral } from "@babel/types";
 import { Redirect } from "react-router-dom";
-var UserInitialDeck = require("../../cards.json");
+// var UserInitialDeck = require("../../cards.json");
 
 
 class Save extends Component {

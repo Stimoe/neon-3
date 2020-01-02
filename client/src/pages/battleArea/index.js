@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
+import { BrowserRouter as Redirect } from 'react-router-dom'
 import "./style.css";
 import enemies from "../../enemy.json";
 import DeckBrain from "../../components/deck-managment";
@@ -242,7 +242,7 @@ class BattlePage extends Component {
     let userHealValue = 0;
     let newHealth = 0;
     let multiplier = 1
-    let newDamage = 0
+    // let newDamage = 0
     let armor = this.state.userArmor;
     playedCards.forEach(card => {
 
@@ -333,7 +333,7 @@ class BattlePage extends Component {
   render() {
 
     const userTurnOver = this.state.userTurnOver;
-    let enemyHealth = this.state.currentEnemyHealth;
+    // let enemyHealth = this.state.currentEnemyHealth;
 
 
 
