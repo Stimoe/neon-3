@@ -10,22 +10,24 @@ module.exports = (app) => {
   });
 
   app.post(`/api/user/register`, async (req, res) => {
-    console.log(req.body)
-    var username = req.body.username;
-    var password = req.body.password;
+
 console.log(username);
 console.log(password);
+var username = req.body.username;
+var password = req.body.password;
 
-let user = await User.create(req.body);
+bcrypt.hash(password, BCRYPT_SALT_ROUNDS)
+  .then(function(hashedPassword) {
+    var user ={username: req.body.username, password: password}
+
+
+    let newUser = await User.create(user);
     return res.status(201).send({
       error: false,
-      user
+      newUser
     })
 
- 
-
-
-  
+  })
   })
 
   // bcrypt.hash(password, BCRYPT_SALT_ROUNDS)
