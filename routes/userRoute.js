@@ -8,7 +8,7 @@ module.exports = (app) => {
     return res.status(200).send(users);
   });
 
-  app.post(`/api/user`, async (req, res) => {
+  app.post(`/api/user/register`, async (req, res) => {
     let user = await User.create(req.body);
     return res.status(201).send({
       error: false,
