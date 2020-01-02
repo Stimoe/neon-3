@@ -68,7 +68,7 @@ class Register extends Component {
 
     event.preventDefault();
 
-    axios.post('/api/users/register', { username: this.state.username, password: this.state.password }).then(res => {
+    axios.post('/api/user/register', { username: this.state.username, password: this.state.password }).then(res => {
       console.log("line 26 ", res.data, res.status)
       // this.handleLoginFormSubmit();
     }).catch(err => {
