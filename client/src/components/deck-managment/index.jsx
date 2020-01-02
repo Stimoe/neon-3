@@ -1,9 +1,9 @@
-import React, { useState, Component } from "react";
+import React, { Component } from "react";
 import deckJson from "../../cards.json";
 import Cards from "../cards";
-import Axios from "axios"
-import EnemyModal from "../../components/enemiesActionModul";
-import style from "./style.css";
+// import Axios from "axios"
+// import EnemyModal from "../../components/enemiesActionModul";
+// import style from "./style.css";
 // import Modal from 'react-bootstrap/Modal';
 // import Button from 'react-bootstrap/Button';
 
