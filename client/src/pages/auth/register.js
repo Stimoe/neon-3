@@ -11,7 +11,7 @@ class Register extends Component {
   //     password: "",
   //     loggedInUser: "",
   //     url: "https://stimoe.github.io/expressNeonRainServer",
-  //     // url:"http://localhost:4000",
+  //     // url:"http://localhost:5000",
   //     // url:"https://neon-rain-express-server.herokuapp.com",
   //     // url: "https://neon-rain-game-new.herokuapp.com",
   //     errors: {}
@@ -68,7 +68,7 @@ class Register extends Component {
 
     event.preventDefault();
 
-    axios.post('/api/user/register', { username: this.state.username, password: this.state.password }).then(res => {
+    axios.post('http://localhost:5000/api/user/register', { username: this.state.username, password: this.state.password }).then(res => {
       console.log("line 26 ", res.data, res.status)
       // this.handleLoginFormSubmit();
     }).catch(err => {
