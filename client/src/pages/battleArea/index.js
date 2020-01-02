@@ -35,7 +35,7 @@ class BattlePage extends Component {
     frozen: false,
     redirect: false,
     enemyAction: "",
-    maxEnemyHealth:0
+    maxEnemyHealth: 0
   };
 
   componentDidMount() {
@@ -43,26 +43,26 @@ class BattlePage extends Component {
     let localWins = 0;
     let tempWins = parseInt(localStorage.getItem('userWinCount'))
     console.log(tempWins)
-    if (!tempWins){
+    if (!tempWins) {
       localWins = 0
-  }
+    }
     else {
       localWins = tempWins
-      
+
     }
     console.log(localWins);
-    
+
     // this.atStartOfBattle()
     let currentEnemy = enemies[localWins];
-    
-    
+
+
     let currentEnemyHealth = currentEnemy.health;
     let currentEnemyArmor = currentEnemy.armor;
     let newEnemyAbilities = currentEnemy.actions;
     let newEnemyAttack = currentEnemy.attack;
     let newEnemyArmorGain = currentEnemy.armorGain;
     this.setState({
-      maxEnemyHealth:currentEnemyHealth,
+      maxEnemyHealth: currentEnemyHealth,
       winCount: localWins,
       currentEnemyHealth: currentEnemyHealth,
       currentEnemyArmor: currentEnemyArmor,
@@ -73,9 +73,9 @@ class BattlePage extends Component {
   }
 
   componentDidUpdate(prevprops, prevState) {
-    
-    
-    const turnEnded = this.state.userTurnOver ===true;
+
+
+    const turnEnded = this.state.userTurnOver === true;
     const frozen = this.state.frozen;
 
     if (this.state.currentEnemyHealth <= 0) {
@@ -92,16 +92,16 @@ class BattlePage extends Component {
         frozen: false
       });
     }
-    if(this.state.userTurnOver==true) {
+    if (this.state.userTurnOver == true) {
 
-      setTimeout(function(){
-           this.setState({userTurnOver:false});
-      }.bind(this),2000); 
- }
+      setTimeout(function () {
+        this.setState({ userTurnOver: false });
+      }.bind(this), 2000);
+    }
   }
   renderRedirect = () => {
-    
-    if (this.state.currentEnemyHealth <= 0){
+
+    if (this.state.currentEnemyHealth <= 0) {
 
       localStorage.setItem('userWinCount', this.state.winCount);
       return <Redirect to='/award' />
@@ -114,14 +114,14 @@ class BattlePage extends Component {
     let newArmor = 0;
     let gameWon = false;
     let newHealth;
-    let newCurrentEnemyHealth=this.state.currentEnemyHealth
-    let newCurrentEnemyArmor=this.state.currentEnemyArmor
-  console.log("Here is damage ",damage)
-  console.log("armor ",newCurrentEnemyArmor)
+    let newCurrentEnemyHealth = this.state.currentEnemyHealth
+    let newCurrentEnemyArmor = this.state.currentEnemyArmor
+    console.log("Here is damage ", damage)
+    console.log("armor ", newCurrentEnemyArmor)
     if (newCurrentEnemyArmor >= damage) {
       let tempArmor = this.state.currentEnemyArmor;
       newArmor = tempArmor - damage;
-      newHealth=newCurrentEnemyHealth
+      newHealth = newCurrentEnemyHealth
       console.log(newArmor)
       // this.setState({
       //   currentEnemyArmor:newArmor
@@ -130,28 +130,28 @@ class BattlePage extends Component {
         newArmor,
         newHealth
       }
-    } 
+    }
     else {
       let newDamage = damage - newCurrentEnemyArmor;
       let tempHealth = this.state.currentEnemyHealth;
       newHealth = tempHealth - newDamage;
-      newArmor=0
+      newArmor = 0
       if (newHealth <= 0) {
         let tempWins2 = this.state.winCount
         console.log(tempWins2);
-        
-        tempWins2 = tempWins2 +1
+
+        tempWins2 = tempWins2 + 1
         console.log(tempWins2)
         this.setState({
           winCount: tempWins2
         })
       }
- return{
-   newHealth,
-   newArmor
- }
+      return {
+        newHealth,
+        newArmor
+      }
     }
-console.log(newArmor,newHealth)
+    console.log(newArmor, newHealth)
     return {
       newArmor,
       newHealth,
@@ -167,10 +167,10 @@ console.log(newArmor,newHealth)
     let newUserHealth = this.state.userHealth;
     let newUserArmor = this.state.userArmor;
     // console.log(possibleEnemyActions.length + 1);
-    
+
     let randomAction = Math.floor(Math.random() * possibleEnemyActions.length + 1
     );
-    console.log("The action the enemy did ",randomAction);
+    console.log("The action the enemy did ", randomAction);
 
     switch (randomAction) {
       case 1:
@@ -181,25 +181,25 @@ console.log(newArmor,newHealth)
           this.setState({
             userArmor: newArmor,
             enemyAction: newEnemyAttackAction,
-            userTurnOver:false
+            userTurnOver: false
           });
-        } 
-       
-        
+        }
+
+
         else {
           let newAttack = newEnemyAttack - newUserArmor;
           let newHealth = newUserHealth - newAttack;
           this.setState({
             userHealth: newHealth,
             userArmor: 0,
-           userTurnOver:false
+            userTurnOver: false
           });
           if (this.state.userHealth <= 0) {
             this.userLoses()
           }
         }
         this.setState({
-          userTurnOver:false
+          userTurnOver: false
         })
         break;
       case 2:
@@ -209,7 +209,7 @@ console.log(newArmor,newHealth)
         this.setState({
           currentEnemyArmor: newArmor,
           enemyAction: newEnemyAction,
-          userTurnOver:false
+          userTurnOver: false
         });
         return;
     }
@@ -232,7 +232,7 @@ console.log(newArmor,newHealth)
 
 
   handlePlayedCards = (playedCards) => {
-// console.log("cards array ",playedCards);
+    // console.log("cards array ",playedCards);
 
     let damage = 0;
     // let currentArmor = this.state.userArmor;
@@ -241,29 +241,29 @@ console.log(newArmor,newHealth)
     let newEnemyArmor;
     let userHealValue = 0;
     let newHealth = 0;
-    let multiplier=1
-    let newDamage=0
+    let multiplier = 1
+    let newDamage = 0
     let armor = this.state.userArmor;
     playedCards.forEach(card => {
-      
-    // console.log(card);
-    
-      
+
+      // console.log(card);
+
+
       switch (card.id) {
-      
+
         case 1:
-        // newDamage= multiplier * card.damage
-        // console.log(multiplier, newDamage);
-        //   newDamage=card.damage
-        //   console.log(newDamage);
-          damage +=card.damage *multiplier
+          // newDamage= multiplier * card.damage
+          // console.log(multiplier, newDamage);
+          //   newDamage=card.damage
+          //   console.log(newDamage);
+          damage += card.damage * multiplier
           // damage = newDamage;
-    console.log(damage);
-    
+          console.log(damage);
+
           break;
 
         case 2:
-            armor += card.armor;
+          armor += card.armor;
 
           break;
         case 3:
@@ -271,11 +271,11 @@ console.log(newArmor,newHealth)
           selfDamage += card.selfDamage;
           break;
         case 4:
-          multiplier=card.multiplier
-        console.log(multiplier);
-        damage= damage * multiplier
-        console.log(damage);
-          
+          multiplier = card.multiplier
+          console.log(multiplier);
+          damage = damage * multiplier
+          console.log(damage);
+
           break;
         case 5:
           newEnemyArmor = 0;
@@ -307,7 +307,7 @@ console.log(newArmor,newHealth)
           winCount: tempWin
         });
       }
-      console.log(newArmor,newHealth)
+      console.log(newArmor, newHealth)
       this.setState({
         currentEnemyArmor: newArmor,
         currentEnemyHealth: newHealth,
@@ -315,17 +315,17 @@ console.log(newArmor,newHealth)
         // userArmor: armor,
         userHealth: tempHealth
       });
-    } 
+    }
     else {
 
-   
+
       this.setState({
         // userTurnOver: turnOver,
         userArmor: armor
       });
     }
     this.setState({
-      userTurnOver:true
+      userTurnOver: true
     })
   };
 
@@ -335,11 +335,11 @@ console.log(newArmor,newHealth)
     const userTurnOver = this.state.userTurnOver;
     let enemyHealth = this.state.currentEnemyHealth;
 
-    
+
 
     if (this.state.userHealth <= 0) {
       this.setState({
-        winCount:0
+        winCount: 0
       })
       return (
         <GameOver />
@@ -347,72 +347,73 @@ console.log(newArmor,newHealth)
     }
 
 
+    else {
 
+      return (
+        <div>
+          <div className="landing2"></div>
+          <div className="rain"></div>
+          <div className="row bars">
+            <div className="health col-md-6">
+              <div>
+                <progress
+                  className="nes-progress health is-error"
+                  value={this.state.userHealth}
+                  max="100"
+                ></progress>
+              </div>
+              <p className="hb">Player:{this.state.userHealth}</p>
+              <p className="hb">Armor:{this.state.userArmor}</p>
+              <img className="player" src={Player}></img>
 
-    return (
-      <div>
-        <div className="landing2"></div>
-        <div className="rain"></div>
-        <div className="row bars">
-          <div className="health col-md-6">
-            <div>
-              <progress
-                className="nes-progress health is-error"
-                value={this.state.userHealth}
-                max="100"
-              ></progress>
             </div>
-            <p className="hb">Player:{this.state.userHealth}</p>
-            <p className="hb">Armor:{this.state.userArmor}</p>
-            <img  className="player" src={Player}></img>
-            
-          </div>
-          <div className="emhealth col-md-6">
-            <div>
-              <progress
-                className="nes-progress emhealth is-error"
-                value={this.state.currentEnemyHealth}
-                max={this.state.maxEnemyHealth}
-              ></progress>
+            <div className="emhealth col-md-6">
+              <div>
+                <progress
+                  className="nes-progress emhealth is-error"
+                  value={this.state.currentEnemyHealth}
+                  max={this.state.maxEnemyHealth}
+                ></progress>
+              </div>
+              <p className="em">Enemy:{this.state.currentEnemyHealth}</p>
+              <p className="em">Armor:{this.state.currentEnemyArmor}</p>
             </div>
-            <p className="em">Enemy:{this.state.currentEnemyHealth}</p>
-            <p className="em">Armor:{this.state.currentEnemyArmor}</p>
+
+            <div>
+
+              <EnemyModal turnEnded = {this.state.userTurnOver}/>
+            </div>
+
+
           </div>
-
-          <div>
-
-          <EnemyModal turnEnded = {this.state.userTurnOver}/>
-          </div>
-
-
-        </div>
           <div>
             <div>
               {userTurnOver ? (
                 <img className="emm1" src={FireEm} ></img>
-                ) : (
+              ) : (
                   <img className="emm" src={IdleEm}></img>
-                  )}
-                    {
+                )}
+              {
                 (this.state.currentEnemyHealth <= 0)
                   ? <img className="emm1" src={Death} ></img>
                   : null
               }
-              
+
             </div>
           </div>
-        <div className="d-flex carddeck justify-content-center">
-          <DeckBrain
-            readPlayed={this.handlePlayedCards}
-            hasWon={this.state.winCount}
+          <div className="d-flex carddeck justify-content-center">
+            <DeckBrain
+              readPlayed={this.handlePlayedCards}
+              hasWon={this.state.winCount}
 
 
 
-          />
-          {this.renderRedirect()}
+            />
+            {this.renderRedirect()}
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
   }
 }
 export default BattlePage;
