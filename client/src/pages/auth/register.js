@@ -82,78 +82,47 @@ class Register extends Component {
   }
 
 
-  handleLoginFormSubmit = () => {
+  // handleLoginFormSubmit = () => {
 
 
-    axios.post('/api/user/login', { username: this.state.username, password: this.state.password }, function (req, res) {
+  //   axios.post('/api/user/login', { username: this.state.username, password: this.state.password }, function (req, res) {
      
-      User.findOne({
-        where: {
-          username: req.body.username
-        }
-      }).then(res => {
-        console.log("line 26 ", res.data, res.status)
-       
-      }).catch(err => {
-        console.log(err.response);
-        alert("Username already exists or password could not be validated")
-      })
-      console.log("line 26 ", res.data, res.status)
-    })
-  }
-
-
-
-  // handleLoginFormSubmit = event => {
-
-  //   event.preventDefault();
-  // axios.post('/api/user/login', { username: this.state.username, password: this.state.password }, function (req, res) {
-  //   User.findOne({
+  //     User.findOne({
   //       where: {
-  //           username: req.body.username
+  //         username: req.body.username
   //       }
-  //   }).then(function (User) {
-  //         if (!User) {
-  //             res.status(500).send("no such user")
-  //         }
-  //         else {
-
-  //             //compares password send in req.body to one in database, will return true if matched.
-  //             if (Bcrypt.compareSync(req.body.password, User.password)) {
-  //                 //create new session property "user", set equal to logged in user
-  //                 req.session.user = { id: User.id, username: User.username }
-  //                 req.session.error = null;
-  //                 res.status(200).json(req.session);
-  //                 this.props.history.push("/storypage")
-  //             }
-  //             else {
-  //                 //delete existing user, add error
-  //                 req.session.user = false;
-  //                 req.session.error = 'auth failed bro';
-  //                 res.status(401).send("password incorrect");
-  //             }
-  //         }
+  //     }).then(res => {
+  //       console.log("line 26 ", res.data, res.status)
+       
+  //     }).catch(err => {
+  //       console.log(err.response);
+  //       alert("Username already exists or password could not be validated")
   //     })
-  // })
+  //     console.log("line 26 ", res.data, res.status)
+  //   })
   // }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  handleLoginFormSubmit = () => {
+  axios.post('/api/user/login', function (req, res, next) { 
+    var username = req.body.username;
+    var password = req.body.password;
+  
+    User.getUserByUsername(username)
+      .then(function(user) {
+          return bcrypt.compare(password, user.password);
+      })
+      .then(function(samePassword) {
+          if(!samePassword) {
+              res.status(403).send();
+          }
+          res.send();
+      })
+      .catch(function(error){
+          console.log("Error authenticating user: ");
+          console.log(error);
+          next();
+      });
+  });
+  }
 
 
   render() {
