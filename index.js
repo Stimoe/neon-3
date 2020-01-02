@@ -4,8 +4,7 @@ const bodyParser = require('body-parser');
 
 // IMPORT MODELS
 require('./models/User');
-var bcrypt = require('bcrypt');
-const saltRounds = 10;
+
 const app = express();
 
 mongoose.Promise = global.Promise;
