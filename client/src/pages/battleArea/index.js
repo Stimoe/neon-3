@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import "./style.css";
-import { Redirect } from "react-router-dom";
+// import { Redirect } from "react-router-dom";
 import enemies from "../../enemy.json";
-
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 import DeckBrain from "../../components/deck-managment";
 
 import FireEm from './fire.gif';
