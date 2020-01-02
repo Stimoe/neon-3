@@ -9,11 +9,11 @@ import FireEm from './fire.gif';
 import IdleEm from './idle.gif';
 import Death from './death.gif';
 import Player from './players.png'
-// import Rain from './rain.gif'
+import Rain from './rain.gif'
 
 import GameOver from "../../components/gameOver"
 
-// import EnemyModal from "../../components/enemiesActionModul";
+import EnemyModal from "../../components/enemiesActionModul";
 
 
 var newWinCounts;
