@@ -29,47 +29,56 @@ class Login extends Component {
 
 
 
-  handleSignupFormSubmit = event=>{
+  // handleSignupFormSubmit = event=>{
+  //   event.preventDefault();
+  //   Axios.post(`${this.state.url}/api/users/register`,{username:this.state.username,password:this.state.password},{withCredentials:true}).then(res=>{
+  //     console.log(res.data,res.status)
+  //     this.handleLoginFormSubmit();
+  //   }).catch(err=>{
+  //     console.log(err.response);
+  //   })
+  // }
+
+  handleLoginFormSubmit = event => {
+
     event.preventDefault();
-    Axios.post(`${this.state.url}/api/users/register`,{username:this.state.username,password:this.state.password},{withCredentials:true}).then(res=>{
-      console.log(res.data,res.status)
-      this.handleLoginFormSubmit();
-    }).catch(err=>{
-      console.log(err.response);
-    })
-  }
-
-
-
-
-
-
-  handleLoginFormSubmit = event=>{
-    if(event){
-
-      event.preventDefault();
-    }
-    Axios.post(`${this.state.url}/api/users/login`,{username:this.state.username,password:this.state.password},{withCredentials:true}).then(res=>{
-      console.log(res.data,res.status)
-      this.setState({
-        username:"",
-        password:"",
-        loggedInUser:res.data.user
-      });
-      this.props.history.push("/storypage")
-    }).catch(err=>{
-      console.log(err.response);
-      this.setState({
-        username:"",
-        password:"",
-        loggedInUser:""
+  axios.post('/api/user/login', { username: this.state.username, password: this.state.password }, function (req, res) {
+    User.findOne({
+        where: {
+            username: req.body.username
+        }
+    }).then(function (User) {
+          if (!User) {
+              res.status(500).send("no such user")
+          }
+          else {
+  
+              //compares password send in req.body to one in database, will return true if matched.
+              if (Bcrypt.compareSync(req.body.password, User.password)) {
+                  //create new session property "user", set equal to logged in user
+                  req.session.user = { id: User.id, name: User.name }
+                  req.session.error = null;
+                  res.status(200).json(req.session);
+              }
+              else {
+                  //delete existing user, add error
+                  req.session.user = false;
+                  req.session.error = 'auth failed bro';
+                  res.status(401).send("password incorrect");
+              }
+          }
       })
-    })
+  })
   }
 
-componentDidMount(){
-    this.readSessions();
-  }
+
+
+
+
+
+// componentDidMount(){
+//     this.readSessions();
+//   }
 
   handleChange= event=>{
       console.log("change")
@@ -82,12 +91,12 @@ componentDidMount(){
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  readSessions = ()=>{
-    Axios.get(`${this.state.url}/api/users/readsessions`,{withCredentials:true}).then(res=>{
-      console.log(res.data)
-      this.setState({loggedInUser:res.data.user})
-    })
-  }
+  // readSessions = ()=>{
+  //   Axios.get(`${this.state.url}/api/users/readsessions`,{withCredentials:true}).then(res=>{
+  //     console.log(res.data)
+  //     this.setState({loggedInUser:res.data.user})
+  //   })
+  // }
 
   
   
