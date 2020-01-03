@@ -20,6 +20,6 @@ UserSchema.methods.comparePassword = function(plaintext, callback) {
     return callback(null, Bcrypt.compareSync(plaintext, this.password));
 };
 
-const UserModel = new Mongoose.model("user", UserSchema);
 
-module.exports = Mongoose.model(UserModel);
+
+module.exports = Mongoose.model("user", UserSchema);
