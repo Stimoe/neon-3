@@ -4,7 +4,7 @@ import axios from "axios";
 import "./style.css";
 const mongoose = require('mongoose');
 const User = mongoose.model('users');
-const Bcrypt = require("bcryptjs");
+// const bcrypt = require("bcryptjs");
 
 class Register extends Component {
   // constructor() {
@@ -102,26 +102,13 @@ class Register extends Component {
   //   })
   // }
   handleLoginFormSubmit = () => {
-  axios.post('/api/user/login', function (req, res, next) { 
-    var username = req.body.username;
-    var password = req.body.password;
-  
-    User.getUserByUsername(username)
-      .then(function(user) {
-          return Bcrypt.compare(password, user.password);
-      })
-      .then(function(samePassword) {
-          if(!samePassword) {
-              res.status(403).send();
-          }
-          res.send("same!");
-      })
-      .catch(function(error){
-          console.log("Error authenticating user: ");
-          console.log(error);
-          next();
-      });
-  });
+  axios.post('/api/user/login', { username: this.state.username, password: this.state.password }).then(res => {
+    console.log("line 26 ", res.data, res.status)
+   
+  }).catch(err => {
+    console.log(err.response);
+    alert("Username already exists or password could not be validated")
+  })
   }
 
 
