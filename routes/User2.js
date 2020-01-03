@@ -1,6 +1,6 @@
 var mongoose = require('mongoose'),
 Bcrypt = require("bcryptjs");
-User = require('../models/User2');
+User = require('../models/User');
 
 
  module.exports = (app) => {
@@ -49,7 +49,7 @@ app.post('/api/user/login', function (req, res) {
 Bcrypt.compare(req.body.password, user.password, function (err, result) {
 
 
-       if (result === true) {
+       if (result == true) {
            res.status(200).send({ message: "The username and password combination is correct!" })
        } else {
         res.send('Incorrect password');

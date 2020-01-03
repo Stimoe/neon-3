@@ -4,8 +4,7 @@ import {Redirect} from 'react-router-dom';
 import axios from "axios";
 import "./style.css";
 const mongoose = require('mongoose');
-const User = mongoose.model('users');
-const Bcrypt = require("bcryptjs");
+
 
 class Login extends Component {
   constructor() {
@@ -45,6 +44,8 @@ class Login extends Component {
       event.preventDefault();
       axios.post('/api/user/login', { username: this.state.username, password: this.state.password }).then(res => {
         console.log("line 26 ", res.data, res.status)
+        console.log(res.data.message);
+        
         let newStatus= (res.status)
         console.log("newStatus ",newStatus);
         
