@@ -31,13 +31,13 @@ class Login extends Component {
 
 
 
-  handleChange = event => {
-    console.log("change")
-    const { name, value } = event.target;
-    this.setState({
-      [name]: value
-    })
-  }
+  // handleChange = event => {
+  //   console.log("change")
+  //   const { name, value } = event.target;
+  //   this.setState({
+  //     [name]: value
+  //   })
+  // }
 
 
 
