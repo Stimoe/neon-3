@@ -27,7 +27,7 @@ app.post("/api/user/login", async (request, response) => {
         if(!Bcrypt.compareSync(request.body.password, user.password)) {
             return response.status(400).send({ message: "The password is invalid" });
         }
-        return response.status(200).send({ message: "The username and password combination is correct!" });
+        response.send({ message: "The username and password combination is correct!" });
     } catch (error) {
         response.status(500).send(error);
     }
