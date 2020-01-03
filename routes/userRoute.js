@@ -23,7 +23,7 @@ module.exports = (app) => {
   app.post('/api/user/login', function (req, res) {
     User.findOne({ username: req.body.username }, function (err, user) {
       if (err) throw err;
-      res.status(400).send({ message: "The username does not exist" });
+      // res.status(400).send({ message: "The username does not exist" });
       // test a matching password
       user.comparePassword(req.body.password, function (err, isMatch) {
         if (err) throw err;
