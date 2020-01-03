@@ -1,7 +1,7 @@
 var db = require('../models/User');
 var bcrypt = require('bcryptjs');
 const saltRounds = 10;
-
+module.exports = (app) => {
 app.post('/api/user/register', function (req, res) {
     bcrypt.hash(req.body.password, saltRounds, function (err,   hash) {
    db.User.create({
@@ -35,3 +35,4 @@ bcrypt.compare(req.body.password, user.password, function (err, result) {
     }
  });
 });
+}
