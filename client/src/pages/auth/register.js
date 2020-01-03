@@ -51,10 +51,11 @@ class Register extends Component {
 
     axios.post('/api/user/register', { username: this.state.username, password: this.state.password }).then(res => {
       console.log("line 26 ", res.status)
-    if(res.status(200)){
-        this.setState({ redirect: true })
-        console.log(this.state.redirect)
-    }
+    // if(res.status(200)){
+    //     this.setState({ redirect: true })
+    //     console.log(this.state.redirect)
+    // }
+    this.props.history.push("/storypage")
     
     }).catch(err => {
       console.log(err.response);
