@@ -43,14 +43,14 @@ app.post('/api/user/login', function (req, res) {
                 }
     }).then(function (user) {
         if (!user) {
-            return response.status(400).send({ message: "The username does not exist" });
+           res.redirect('/register');
         } else {
 Bcrypt.compare(req.body.password, user.password, function (err, result) {
        if (result == true) {
-        return response.status(200).send({ message: "The username and password combination is correct!" });
+           res.redirect('/storypage');
        } else {
         res.send('Incorrect password');
-        return response.status(400).send({ message: "The password is invalid" });
+        res.redirect('/login');
        }
      });
     }
