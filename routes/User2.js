@@ -10,8 +10,8 @@ app.post("/api/user/register", async (request, response) => {
         request.body.password = Bcrypt.hashSync(request.body.password, 10);
         var user = new User(request.body);
         var result = await user.save();
-        response.send(result),
-        response.redirect('/storypage')
+        response.send(result)
+        // response.redirect('/storypage')
     } catch (error) {
         response.status(500).send(error);
     }
