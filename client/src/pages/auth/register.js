@@ -55,7 +55,7 @@ class Register extends Component {
     //     this.setState({ redirect: true })
     //     console.log(this.state.redirect)
     // }
-    this.props.history.push("/storypage")
+    // this.props.history.push("/storypage")
     
     }).catch(err => {
       console.log(err.response);

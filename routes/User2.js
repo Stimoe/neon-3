@@ -11,7 +11,7 @@ app.post("/api/user/register", async (request, response) => {
         var user = new User(request.body);
         var result = await user.save();
         response.send(result)
-        // response.redirect('/storypage')
+     
     } catch (error) {
         response.status(500).send(error);
     }
