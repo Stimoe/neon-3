@@ -45,7 +45,7 @@ app.post('/api/user/login', function (req, res) {
         if (!user) {
            res.status(400).send({ message: "The username does not exist" });;
         } else {
-crypt.compare(req.body.password, user.password, function (err, result) {
+Bcrypt.compare(req.body.password, user.password, function (err, result) {
        if (result == true) {
            res.status(200).send({ message: "The username and password combination is correct!" })
        } else {
