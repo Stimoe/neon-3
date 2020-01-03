@@ -1,5 +1,5 @@
 var db = require('../models/User');
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcryptjs');
 const saltRounds = 10;
 
 app.post('/api/user/register', function (req, res) {
