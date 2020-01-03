@@ -13,7 +13,7 @@ mongoose.connect(process.env.MONGODB_URI || `mongodb://localhost:27017/neon-rain
 app.use(bodyParser.json());
 
 //IMPORT ROUTES
-require('./routes/User')(app);
+require('./routes/User2')(app);
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));

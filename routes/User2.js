@@ -1,6 +1,6 @@
 var mongoose = require('mongoose'),
-const Bcrypt = require("bcryptjs");
- User = require('../models/User');
+Bcrypt = require("bcryptjs");
+User = require('../models/User2');
 
 
  module.exports = (app) => {
@@ -33,12 +33,3 @@ app.post("/api/user/login", async (request, response) => {
 
  }
 
- app.post("/register", async (request, response) => {
-    try {
-        var user = new UserModel(request.body);
-        var result = await user.save();
-        response.send(result);
-    } catch (error) {
-        response.status(500).send(error);
-    }
-});
