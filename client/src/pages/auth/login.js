@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import {Redirect} from 'react-router-dom';
 import axios from "axios";
 import "./style.css";
 const mongoose = require('mongoose');
@@ -13,6 +14,7 @@ class Login extends Component {
       username: "",
       password: "",
       loggedInUser:"",
+      redirect: false,
       // url:"https://stimoe.github.io/expressNeonRainServer",
       // url:"http://localhost:8080",
       // url:"https://neon-rain-express-server.herokuapp.com",
@@ -21,12 +23,12 @@ class Login extends Component {
     };
   }
 
-  setUserState(event) {
-    let field = event.target.name;
-    let value = event.target.value;
-    this.state.user[field] = value;
-    return this.setState({ user: this.state.user });
-  };
+  // setUserState(event) {
+  //   let field = event.target.name;
+  //   let value = event.target.value;
+  //   this.state.user[field] = value;
+  //   return this.setState({ user: this.state.user });
+  // };
 
 
 
@@ -47,60 +49,14 @@ class Login extends Component {
 
 
 
-
-
-
-
-
-
-  // handleSignupFormSubmit = event=>{
-  //   event.preventDefault();
-  //   Axios.post(`${this.state.url}/api/users/register`,{username:this.state.username,password:this.state.password},{withCredentials:true}).then(res=>{
-  //     console.log(res.data,res.status)
-  //     this.handleLoginFormSubmit();
-  //   }).catch(err=>{
-  //     console.log(err.response);
-  //   })
-  // }
-
-  // handleLoginFormSubmit = event => {
-
-  //   event.preventDefault();
-  // axios.post('/api/user/login', { username: this.state.username, password: this.state.password }, function (req, res) {
-  //   User.findOne({
-  //       where: {
-  //           username: req.body.username
-  //       }
-  //   }).then(function (User) {
-  //         if (!User) {
-  //             res.status(500).send("no such user")
-  //         }
-  //         else {
-  
-  //             //compares password send in req.body to one in database, will return true if matched.
-  //             if (Bcrypt.compareSync(req.body.password, User.password)) {
-  //                 //create new session property "user", set equal to logged in user
-  //                 req.session.user = { id: User.id, username: User.username }
-  //                 req.session.error = null;
-  //                 res.status(200).json(req.session);
-  //                 this.props.history.push("/storypage")
-  //             }
-  //             else {
-  //                 //delete existing user, add error
-  //                 req.session.user = false;
-  //                 req.session.error = 'auth failed bro';
-  //                 res.status(401).send("password incorrect");
-  //             }
-  //         }
-  //     })
-  // })
-  // }
-
-
     handleLoginFormSubmit = event => {
       event.preventDefault();
       axios.post('/api/user/login', { username: this.state.username, password: this.state.password }).then(res => {
         console.log("line 26 ", res.data, res.status)
+        if(res.status===200){
+          this.setState({ redirect: true })
+          console.log(this.state.redirect)
+        }
        
       }).catch(err => {
         console.log(err.response);
@@ -109,36 +65,17 @@ class Login extends Component {
       }
     
 
-
-
-
-// componentDidMount(){
-//     this.readSessions();
-//   }
-
-  // handleChange= event=>{
-  //     console.log("change")
-  //   const {username,value}=event.target;
-  //   this.setState({
-  //     [username]:value
-  //   })
-  // }
-  // onChange = e => {
-  //   this.setState({ [e.target.name]: e.target.value });
-  // };
-
-  // readSessions = ()=>{
-  //   Axios.get(`${this.state.url}/api/users/readsessions`,{withCredentials:true}).then(res=>{
-  //     console.log(res.data)
-  //     this.setState({loggedInUser:res.data.user})
-  //   })
-  // }
-
   
   
   
   render() {
+    const { redirect } = this.state;
     const { errors } = this.state;
+
+    if (redirect) {
+      return <Redirect to='/storypage'/>;
+    }
+
     return (
       
       <div className="container inputS">
