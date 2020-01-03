@@ -2,7 +2,7 @@
 
 var mongoose = require('mongoose'),
   User = require('../models/User');
-
+  Bcrypt = require("bcryptjs");
 module.exports = (app) => {
   // create a user a new user
   app.post("/api/user/register", async (request, response) => {
@@ -16,6 +16,7 @@ module.exports = (app) => {
       response.status(500).send(error);
     }
   });
+
 
 
 
