@@ -20,7 +20,7 @@ app.post("/api/user/register", async (request, response) => {
 app.post("/api/user/login", async (request, response) => {
     try {
         var user = await User.findOne({ username: request.body.username }).exec();
-        response.send(user)
+        // response.send(user)
         if(!user) {
             return response.status(400).send({ message: "The username does not exist" });
         }
