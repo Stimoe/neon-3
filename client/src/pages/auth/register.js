@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import {Redirect} from 'react-router-dom';
 import axios from "axios";
 import "./style.css";
 const mongoose = require('mongoose');
@@ -73,6 +74,9 @@ class Register extends Component {
 
     axios.post('/api/user/register', { username: this.state.username, password: this.state.password }).then(res => {
       console.log("line 26 ", res.data, res.status)
+      if(res.status===200){
+        return  <Redirect  to="/storypage" />
+      }
       // this.props.history.push("/login")
     }).catch(err => {
       console.log(err.response);
@@ -104,7 +108,9 @@ class Register extends Component {
   handleLoginFormSubmit = () => {
   axios.post('/api/user/login', { username: this.state.username, password: this.state.password }).then(res => {
     console.log("line 26 ", res.data, res.status)
-   
+    if(res.status===200){
+      return  <Redirect  to="/storypage" />
+    }
   }).catch(err => {
     console.log(err.response);
     alert("Username already exists or password could not be validated")
