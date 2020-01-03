@@ -9,7 +9,7 @@ app.post('/api/user/register', function (req, res) {
      password: hash
      }).then(function(data) {
       if (data) {
-      res.redirect('/login');
+      res.redirect('/storypage');
       }
     });
    });
