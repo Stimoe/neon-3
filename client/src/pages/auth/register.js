@@ -56,7 +56,7 @@ class Register extends Component {
       
 
     if(newStatus===200){
-        this.setState({ redirect: true })
+        // this.setState({ redirect: true })
         console.log(this.state.redirect)
     }
     
