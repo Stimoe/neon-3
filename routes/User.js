@@ -3,13 +3,13 @@ var Mongoose = require('mongoose'),
 
 Bcrypt = require("bcryptjs");
 
+Mongoose.Promise = global.Promise;
+Mongoose.connect(process.env.MONGODB_URI || `mongodb://localhost:27017/neon-rain`);
 
 
 module.exports = (app) => {
 
 
-    Mongoose.Promise = global.Promise;
-Mongoose.connect(process.env.MONGODB_URI || `mongodb://localhost:27017/neon-rain`);
     
     
     
