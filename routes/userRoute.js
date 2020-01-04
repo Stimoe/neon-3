@@ -1,7 +1,7 @@
 
 const bcrypt = require("bcryptjs");
 
-const userSchema = require("../models/User2");
+const userSchema = require("../models/User");
 
 module.exports = (app) => {
 // Sign-up
