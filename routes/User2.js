@@ -1,5 +1,5 @@
 
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcryptjs');
 var usersDB = require('../models/User');
 
 module.exports = (app) => {
