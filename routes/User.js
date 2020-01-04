@@ -1,8 +1,39 @@
 
-var mongoose = require('mongoose'),
-UserModel = require('../models/User2');
+var Mongoose = require('mongoose'),
+
 Bcrypt = require("bcryptjs");
+
+
 module.exports = (app) => {
+
+
+    
+    
+    
+    
+    const UserSchema = new Mongoose.Schema({
+        username: String,
+        password: String
+    });
+    
+    UserSchema.pre("save", function(next) {
+        if(!this.isModified("password")) {
+            return next();
+        }
+        this.password = Bcrypt.hashSync(this.password, 10);
+        next();
+    });
+    
+    UserSchema.methods.comparePassword = function(plaintext, callback) {
+        return callback(null, Bcrypt.compareSync(plaintext, this.password));
+    };
+
+
+    const UserModel = new Mongoose.model("user", UserSchema);
+
+
+
+
 
     app.post("/api/user/register", async (request, response) => {
         try {
@@ -18,6 +49,7 @@ module.exports = (app) => {
         try {
             var user = await UserModel.findOne({ username: request.body.username }).exec();
             response.send({ user })
+            
             if(!user) {
                 return response.status(400).send({ message: "The username does not exist" });
             }
