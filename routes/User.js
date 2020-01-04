@@ -49,6 +49,8 @@ module.exports = (app) => {
         try {
             var user = await UserModel.findOne({ username: request.body.username }).exec();
             // response.send({ user })
+            console.log(user);
+            
             
             if(!user) {
                 return response.status(400).send({ message: "The username does not exist" });
