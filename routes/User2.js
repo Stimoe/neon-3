@@ -1,17 +1,17 @@
 
 var bcrypt = require('bcryptjs');
-var usersDB = require('../models/User');
+var User = require('../models/User');
+var BCRYPT_SALT_ROUNDS = 12;
 
 module.exports = (app) => {
 
-var BCRYPT_SALT_ROUNDS = 12;
 app.post('/api/user/register', function (req, res, next) {
   var username = req.body.username;
   var password = req.body.password;
 
   bcrypt.hash(password, BCRYPT_SALT_ROUNDS)
     .then(function(hashedPassword) {
-        return usersDB.saveUser(username, hashedPassword);
+        return User.saveUser(username, hashedPassword);
     })
     .then(function() {
         res.send();
@@ -27,7 +27,7 @@ app.post('/api/user/login', function (req, res, next) {
     var username = req.body.username;
     var password = req.body.password;
   
-    usersDB.getUserByUsername(username)
+    User.getUserByUsername(username)
       .then(function(user) {
           return bcrypt.compare(password, user.password);
       })
