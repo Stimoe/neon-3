@@ -53,10 +53,10 @@ class Login extends Component {
         console.log("newStatus ",newStatus);
         
   
-      if(newStatus===200){
-          this.setState({ redirect: true })
-          console.log(this.state.redirect)
-      }
+      // if(newStatus===200){
+      //     this.setState({ redirect: true })
+      //     console.log(this.state.redirect)
+      // }
        
       }).catch(err => {
         console.log(err.response);
