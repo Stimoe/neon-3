@@ -8,8 +8,8 @@ Bcrypt = require("bcryptjs");
 module.exports = (app) => {
 
 
-    mongoose.Promise = global.Promise;
-mongoose.connect(process.env.MONGODB_URI || `mongodb://localhost:27017/neon-rain`);
+    Mongoose.Promise = global.Promise;
+Mongoose.connect(process.env.MONGODB_URI || `mongodb://localhost:27017/neon-rain`);
     
     
     
