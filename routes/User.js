@@ -4,10 +4,12 @@ var Mongoose = require('mongoose'),
 Bcrypt = require("bcryptjs");
 
 
+
 module.exports = (app) => {
 
 
-    
+    mongoose.Promise = global.Promise;
+mongoose.connect(process.env.MONGODB_URI || `mongodb://localhost:27017/neon-rain`);
     
     
     
@@ -49,7 +51,7 @@ module.exports = (app) => {
         try {
             var user = await UserModel.findOne({ username: request.body.username }).exec();
             // response.send({ user })
-            response.send(user)
+            // response.send(user)
             
             
             if(!user) {
@@ -60,7 +62,12 @@ module.exports = (app) => {
                     return response.status(400).send({ message: "The password is invalid" });
                 }
             });
-            response.send({ message: "The username and password combination is correct!" });
+            user.comparePassword(request.body.password, (error, match) => {
+                if(match) {
+                    response.send({ message: "The username and password combination is correct!" });
+                }
+            });
+         
         } catch (error) {
             response.status(500).send(error);
         }
