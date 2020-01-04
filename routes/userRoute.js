@@ -1,7 +1,7 @@
 
 const bcrypt = require("bcryptjs");
 
-const userSchema = require("../models/User");
+const userSchema = require("../models/User3");
 
 module.exports = (app) => {
 // Sign-up
@@ -31,16 +31,17 @@ app.post("/api/user/login", (req, res, next) => {
   }).then(user => {
       if (!user) {
           return res.status(401).json({
-              message: "Authentication failed"
+              message: "Authentication failed, No user by that name"
           });
       }
       return bcrypt.compare(req.body.password, user.password);
   }).then(response => {
       if (!response) {
           return res.status(401).json({
-              message: "Authentication failed"
+              message: "Authentication failed, wrong password"
           });
       }
+      res.send("Correct!!")
   }).catch(err => {
       return res.status(401).json({
           message: "Authentication failed"
