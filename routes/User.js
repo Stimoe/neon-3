@@ -49,7 +49,7 @@ module.exports = (app) => {
         try {
             var user = await UserModel.findOne({ username: request.body.username }).exec();
             // response.send({ user })
-            console.log(user);
+            response.send(user)
             
             
             if(!user) {
