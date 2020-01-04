@@ -17,7 +17,7 @@ module.exports = (app) => {
     app.post("/api/user/login", async (request, response) => {
         try {
             var user = await UserModel.findOne({ username: request.body.username }).exec();
-            response.send({message: user})
+            response.send({ user })
             if(!user) {
                 return response.status(400).send({ message: "The username does not exist" });
             }

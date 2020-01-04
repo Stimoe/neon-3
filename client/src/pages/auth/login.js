@@ -47,7 +47,7 @@ class Login extends Component {
         console.log(this.state.password);
         
         console.log("line 26 ", res.data, res.status)
-        console.log(res.data.message);
+        console.log(res.data);
         
         let newStatus= (res.status)
         console.log("newStatus ",newStatus);
