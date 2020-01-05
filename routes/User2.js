@@ -18,16 +18,16 @@ module.exports = (app) => {
                     if (err) {
                         throw err
                     } else {
-                        console.log(hash)
-                        var newUser={
+                        // console.log(hash)
+                        var newUser = {
                             username: username,
                             password: hash
                         }
 
                         var user = new User(newUser);
-                                    var result = await user.save();
-                                    res.send(result);
-                        
+                        var result = user.save();
+                        res.send(result);
+
                     }
                 })
             }
@@ -42,7 +42,7 @@ module.exports = (app) => {
         User.getUserByUsername(username)
             .then(function (user) {
                 hash = user.password
-               res.send(hash)
+                res.send(hash)
             })
         bcrypt.compare(password, hash, function (err, isMatch) {
             if (err) {
