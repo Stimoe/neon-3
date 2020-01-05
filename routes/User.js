@@ -9,28 +9,13 @@ module.exports = (app) => {
         var username = req.body.username;
         var password = req.body.password;
 
-        bcrypt.genSalt(saltRounds, function (err, salt) {
-            if (err) {
-                throw err
-            } else {
-                bcrypt.hash(password, salt, function (err, hash) {
-                    if (err) {
-                        throw err
-                    } else {
-                        // console.log(hash)
-                        var newUser = {
-                            username: username,
-                            password: hash
-                        }
-
-                        var user = new User(newUser);
-                        var result = user.save();
-                        res.send(result);
-
-                    }
-                })
-            }
-        })
+      User.createUser(req.body, function(err, user){
+        if(err) throw err;
+        return done(null, false, {message: 'Made new user'});
+        
+        
+        
+      })
 
     })
 
