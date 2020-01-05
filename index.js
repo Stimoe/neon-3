@@ -8,16 +8,29 @@ var app = Express();
 app.use(BodyParser.json());
 app.use(BodyParser.urlencoded({ extend: true }));
 
-Mongoose.connect(process.env.MONGODB_URI || `mongodb://localhost:27017/neon-rain`);
+Mongoose.connect("mongodb://localhost/thepolyglotdeveloper");
 
-const UserModel = new Mongoose.model("user", {
+const UserSchema = new Mongoose.Schema({
     username: String,
     password: String
 });
 
+UserSchema.pre("save", function(next) {
+    if(!this.isModified("password")) {
+        return next();
+    }
+    this.password = Bcrypt.hashSync(this.password, 10);
+    next();
+});
+
+UserSchema.methods.comparePassword = function(plaintext, callback) {
+    return callback(null, Bcrypt.compareSync(plaintext, this.password));
+};
+
+const UserModel = new Mongoose.model("user", UserSchema);
+
 app.post("/api/user/register", async (request, response) => {
     try {
-        request.body.password = Bcrypt.hashSync(request.body.password, 10);
         var user = new UserModel(request.body);
         var result = await user.save();
         response.send(result);
@@ -32,9 +45,11 @@ app.post("/api/user/login", async (request, response) => {
         if(!user) {
             return response.status(400).send({ message: "The username does not exist" });
         }
-        if(!Bcrypt.compareSync(request.body.password, user.password)) {
-            return response.status(400).send({ message: "The password is invalid" });
-        }
+        user.comparePassword(request.body.password, (error, match) => {
+            if(!match) {
+                return response.status(400).send({ message: "The password is invalid" });
+            }
+        });
         response.send({ message: "The username and password combination is correct!" });
     } catch (error) {
         response.status(500).send(error);
