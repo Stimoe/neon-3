@@ -41,10 +41,11 @@ module.exports = (app) => {
             if (!user) {
                 return done(null, false, { message: 'Unknown User' });
             }
-
+res.send("username is ", user)
             User.comparePassword(password, user.password, function (err, isMatch) {
                 if (err) throw err;
                 if (isMatch) {
+                    res.send("true")
                     return done(null, user);
                 } else {
                     return done(null, false, { message: 'Invalid password' });
