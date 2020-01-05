@@ -8,7 +8,8 @@ var app = Express();
 app.use(BodyParser.json());
 app.use(BodyParser.urlencoded({ extend: true }));
 
-Mongoose.connect("mongodb://localhost/thepolyglotdeveloper");
+mongoose.Promise = global.Promise;
+Mongoose.connect(process.env.MONGODB_URI || `mongodb://localhost:27017/neon-rain`);
 
 const UserSchema = new Mongoose.Schema({
     username: String,
