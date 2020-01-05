@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import {Redirect} from 'react-router-dom';
 import axios from "axios";
 import "./style.css";
-const mongoose = require('mongoose');
+
 
 
 class Login extends Component {

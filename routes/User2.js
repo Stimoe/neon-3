@@ -1,64 +1,64 @@
+// // var mongoose = require('mongoose'),
+// var bcrypt = require('bcryptjs');
+// var User = require('../models/User2');
 
-var bcrypt = require('bcryptjs');
-var User = require('../models/User');
 
+// const saltRounds = 10
+// module.exports = (app) => {
 
-const saltRounds = 10
-module.exports = (app) => {
+//     app.post('/api/user/register', function (req, res, next) {
+//         var username = req.body.username;
+//         var password = req.body.password;
 
-    app.post('/api/user/register', function (req, res, next) {
-        var username = req.body.username;
-        var password = req.body.password;
+//         bcrypt.genSalt(saltRounds, function (err, salt) {
+//             if (err) {
+//                 throw err
+//             } else {
+//                 bcrypt.hash(password, salt, function (err, hash) {
+//                     if (err) {
+//                         throw err
+//                     } else {
+//                         // console.log(hash)
+//                         var newUser = {
+//                             username: username,
+//                             password: hash
+//                         }
 
-        bcrypt.genSalt(saltRounds, function (err, salt) {
-            if (err) {
-                throw err
-            } else {
-                bcrypt.hash(password, salt, function (err, hash) {
-                    if (err) {
-                        throw err
-                    } else {
-                        // console.log(hash)
-                        var newUser = {
-                            username: username,
-                            password: hash
-                        }
+//                         var user = new User(newUser);
+//                         var result = user.save();
+//                         res.send(result);
 
-                        var user = new User(newUser);
-                        var result = user.save();
-                        res.send(result);
+//                     }
+//                 })
+//             }
+//         })
 
-                    }
-                })
-            }
-        })
+//     })
 
-    })
+//     app.post('/api/user/login', function (req, res, next) {
+//         var username = req.body.username;
+//         var password = req.body.password;
+//         let hash = ''
+//         User.getUserByUsername(username)
+//             .then(function (user) {
+//                 hash = user.password
+//                 res.send(hash)
+//             })
+//         bcrypt.compare(password, hash, function (err, isMatch) {
+//             if (err) {
+//                 throw err
+//             } else if (!isMatch) {
+//                 console.log("Password doesn't match!")
+//                 res.send({ message: "Password doesn't match!" })
+//             } else {
+//                 console.log("Password matches!")
+//                 res.send({ message: "Password matches!" })
+//             }
+//         })
 
-    app.post('/api/user/login', function (req, res, next) {
-        var username = req.body.username;
-        var password = req.body.password;
-        let hash = ''
-        User.getUserByUsername(username)
-            .then(function (user) {
-                hash = user.password
-                res.send(hash)
-            })
-        bcrypt.compare(password, hash, function (err, isMatch) {
-            if (err) {
-                throw err
-            } else if (!isMatch) {
-                console.log("Password doesn't match!")
-                res.send({ message: "Password doesn't match!" })
-            } else {
-                console.log("Password matches!")
-                res.send({ message: "Password matches!" })
-            }
-        })
+//     });
 
-    });
-
-}
+// }
 
 
 // const passwordEnteredByUser = "mypass123"

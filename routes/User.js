@@ -1,77 +1,64 @@
-
-// var Mongoose = require('mongoose'),
-
-// Bcrypt = require("bcryptjs");
-
-// Mongoose.Promise = global.Promise;
-// Mongoose.connect(process.env.MONGODB_URI || `mongodb://localhost:27017/neon-rain`);
+var bcrypt = require('bcryptjs');
+var User = require('../models/User2');
 
 
-// module.exports = (app) => {
+const saltRounds = 10
+module.exports = (app) => {
+
+    app.post('/api/user/register', function (req, res, next) {
+        var username = req.body.username;
+        var password = req.body.password;
+
+        bcrypt.genSalt(saltRounds, function (err, salt) {
+            if (err) {
+                throw err
+            } else {
+                bcrypt.hash(password, salt, function (err, hash) {
+                    if (err) {
+                        throw err
+                    } else {
+                        // console.log(hash)
+                        var newUser = {
+                            username: username,
+                            password: hash
+                        }
+
+                        var user = new User(newUser);
+                        var result = user.save();
+                        res.send(result);
+
+                    }
+                })
+            }
+        })
+
+    })
+
+    app.post('/api/user/login', function (req, res, next) {
+        let username = req.body.username;
+        let password = req.body.password;
+       
+            User.getUserByUsername(username, function(err, user){
+              if(err) throw err;
+              if(!user){
+                return done(null, false, {message: 'Unknown User'});
+            }
+        
+            User.comparePassword(password, user.password, function(err, isMatch){
+              if(err) throw err;
+              if(isMatch){
+                return done(null, user);
+              } else {
+                return done(null, false, {message: 'Invalid password'});
+              }
+            });
+           });
 
 
-    
-    
-    
-//     const UserSchema = new Mongoose.Schema({
-//         username: String,
-//         password: String
-//     });
-    
-//     UserSchema.pre("save", function(next) {
-//         if(!this.isModified("password")) {
-//             return next();
-//         }
-//         this.password = Bcrypt.hashSync(this.password, 10);
-//         next();
-//     });
-    
-//     UserSchema.methods.comparePassword = function(plaintext, callback) {
-//         return callback(null, Bcrypt.compareSync(plaintext, this.password));
-//     };
 
-
-//     const UserModel = new Mongoose.model("user", UserSchema);
+    })
 
 
 
 
-
-//     app.post("/api/user/register", async (request, response) => {
-//         try {
-//             var user = new UserModel(request.body);
-//             var result = await user.save();
-//             response.send(result);
-//         } catch (error) {
-//             response.status(500).send(error);
-//         }
-//     });
-
-//     app.post("/api/user/login", async (request, response) => {
-//         try {
-//             var user = await UserModel.findOne({ username: request.body.username }).exec();
-//             // response.send({ user })
-//             // response.send(user)
-            
-            
-//             if(!user) {
-//                 return response.status(400).send({ message: "The username does not exist" });
-//             }
-//             user.comparePassword(request.body.password, (error, match) => {
-//                 if(!match) {
-//                     return response.status(400).send({ message: "The password is invalid" });
-//                 }
-//             });
-//             user.comparePassword(request.body.password, (error, match) => {
-//                 if(match) {
-//                     response.send({ message: "The username and password combination is correct!" });
-//                 }
-//             });
-         
-//         } catch (error) {
-//             response.status(500).send(error);
-//         }
-//     });
-
-
-// }
+}
