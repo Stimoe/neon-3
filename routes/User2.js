@@ -6,7 +6,7 @@ var User = require('../models/User');
 const saltRounds = 10
 module.exports = (app) => {
 
-    app.post('/api/user/register', function (req, res, next) {
+    app.post('/api/user/register', async, function (req, res, next) {
         var username = req.body.username;
         var password = req.body.password;
 
