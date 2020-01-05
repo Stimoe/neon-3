@@ -1,35 +1,42 @@
 
-// var bcrypt = require('bcryptjs');
-// var User = require('../models/User');
-// var BCRYPT_SALT_ROUNDS = 12;
+var bcrypt = require('bcryptjs');
+var User = require('../models/User');
 
-// module.exports = (app) => {
 
-// app.post('/api/user/register', function (req, res, next) {
-//   var username = req.body.username;
-//   var password = req.body.password;
+module.exports = (app) => {
 
-//   bcrypt.hash(password, BCRYPT_SALT_ROUNDS)
-//     .then(function(hashedPassword) {
-//         return User.saveUser(username, hashedPassword);
-//     })
-//     .then(function() {
-//         res.send();
-//     })
-//     .catch(function(error){
-//         res.send("Error saving user: ");
-//         res.send(error);
-//         next();
-//     });
-// });
+app.post('/api/user/register', function (req, res, next) {
+  var username = req.body.username;
+  var password = req.body.password;
+  const saltRounds = 10
 
+  bcrypt.genSalt(saltRounds, function (err, salt) {
+    if (err) {
+      throw err
+    } else {
+      bcrypt.hash(password, salt, function(err, hash) {
+        if (err) {
+          throw err
+        } else {
+          console.log(hash)
+          return User.saveUser(username, hash);
+        }
+      })
+    }
+  })
+ 
+})
+}
 // app.post('/api/user/login', function (req, res, next) { 
 //     var username = req.body.username;
 //     var password = req.body.password;
   
 //     User.getUserByUsername(username)
 //       .then(function(user) {
-//           return bcrypt.compare(password, user.password);
+//           res.send(user)
+//           bcrypt.compare(password, hash, function(err, res) {
+//             // res === true
+//         });
 //       })
 //       .then(function(samePassword) {
 //           if(!samePassword) {
@@ -45,3 +52,43 @@
 //   });
 
 // }
+
+// const password = "mypass123"
+// const saltRounds = 10
+ 
+// bcrypt.genSalt(saltRounds, function (err, salt) {
+//   if (err) {
+//     throw err
+//   } else {
+//     bcrypt.hash(password, salt, function(err, hash) {
+//       if (err) {
+//         throw err
+//       } else {
+//         console.log(hash)
+//         //$2a$10$FEBywZh8u9M0Cec/0mWep.1kXrwKeiWDba6tdKvDfEBjyePJnDT7K
+//       }
+//     })
+//   }
+// })
+
+
+
+
+
+
+
+
+
+// bcrypt.genSalt(10, function(err, salt) {
+//     bcrypt.hash(password, salt, function(err, hash) {
+//         return User.saveUser(username, hash);
+//     })
+//     .then(function() {
+//         res.send();
+//     })
+//     .catch(function(error){
+//         res.send("Error saving user: ");
+//         res.send(error);
+//         next();
+//     });
+// });
