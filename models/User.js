@@ -1,42 +1,28 @@
-// var mongoose = require('mongoose');
-// var Schema = mongoose.Schema;
-// var passportLocalMongoose = require('passport-local-mongoose');
-// var bcrypt = require('bcrypt');
+const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
+// const mongouri = require('../config/mongodb');
 
-// var userSchema = mongoose.Schema({
-//   username: String,
-//   password: String
-// });
+const userSchema = new mongoose.Schema({
+    username: {type: String, required: true, unique: true},
+    password: {type: String, required: true},
+    tokens: [{type: String}],
+    isActive: {type: Boolean, required: true}
+});
 
-// userSchema.plugin(passportLocalMongoose);
+userSchema.pre('save', function(next) {    //Mongoose middleware, performs password hashing before saving data into database
+    let user = this;
+    if(user.isModified('password')) {  //Check if the password is modifed, if so then only perform hasing
+        bcrypt.genSalt(10, (error, salt) => {
+            bcrypt.hash(user.password, salt, (error, hash) => {
+                user.password = hash;
+                next();
+            });
+        });
+    }
+    else {
+        next();
+    }
+});
+const userModel = mongoose.model('user', userSchema);
 
-// var User = mongoose.model('User', userSchema);
-
-// module.exports = {
-//   User: User
-// };
-
-// module.exports.createUser = function(newUser, callback){
-//     bcrypt.genSalt(10, function(err, salt) {
-//         bcrypt.hash(newUser.password, salt, function(err, hash) {
-//             newUser.password = hash;
-//             newUser.save(callback);
-//         });
-//     });
-// }
-
-// module.exports.getUserByUsername = function(username, callback){
-//     var query = {username: username};
-//     User.findOne(query, callback);
-// }
-
-// module.exports.getUserById = function(id, callback){
-//     User.findById(id, callback);
-// }
-
-// module.exports.comparePassword = function(candidatePassword, hash, callback){
-//     bcrypt.compare(candidatePassword, hash, function(err, isMatch) {
-//         if(err) throw err;
-//         callback(null, isMatch);
-//     });
-// }
+module.exports = userModel;

@@ -14,8 +14,24 @@ UserSchema.pre("save", function(next) {
     next();
 });
 
-UserSchema.methods.comparePassword = function(plaintext, callback) {
-    return callback(null, Bcrypt.compareSync(plaintext, this.password));
-};
+UserSchema.methods = {
 
-module.exports = Mongoose.model('User', UserSchema);
+    getUserByUsername: function(username, callback){
+        var query = {username: username};
+        UserSchema.findOne(query, callback);
+        /*UserSchema.findOne(query, function(err, user) {
+            callback(err, user);
+        }); */
+    },
+
+
+
+    comparePassword: function(candidatePassword, hash, callback){
+        bcrypt.compare(candidatePassword, hash, function(err, isMatch) {
+            if(err) throw err;
+            callback(null, isMatch);
+        });
+    }
+}
+
+module.exports = mongoose.model('User', UserSchema);
