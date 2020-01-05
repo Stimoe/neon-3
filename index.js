@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
 // IMPORT MODELS
-require('./models/User2');
+require('./models/User3');
 
 const app = express();
 
@@ -13,7 +13,7 @@ mongoose.connect(process.env.MONGODB_URI || `mongodb://localhost:27017/neon-rain
 app.use(bodyParser.json());
 
 //IMPORT ROUTES
-require('./routes/User')(app);
+require('./routes/User2')(app);
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));

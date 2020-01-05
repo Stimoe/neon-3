@@ -1,147 +1,110 @@
-// // var mongoose = require('mongoose'),
-// var bcrypt = require('bcryptjs');
-// var User = require('../models/User2');
 
+var User = require('../models/User3');
 
-// const saltRounds = 10
-// module.exports = (app) => {
+module.exports = (app) => {
 
-//     app.post('/api/user/register', function (req, res, next) {
-//         var username = req.body.username;
-//         var password = req.body.password;
+    app.post('/api/user/register', function (req, res, next) {
+      
+        var testUser = new User({
+            username: req.body.username,
+            password: req.body.password
+        });
+        
+        // save user to database
+        testUser.save(function(err) {
+            if (err) throw err;
+        
+            // attempt to authenticate user
+            User.getAuthenticated(req.body.username, req.body.password, function(err, user, reason) {
+                if (err) throw err;
+        
+                // login was successful if we have a user
+                if (user) {
+                    // handle login success
+                    console.log('login success');
+                    return;
+                }
+        
+                // otherwise we can determine why we failed
+                var reasons = User.failedLogin;
+                switch (reason) {
+                    case reasons.NOT_FOUND:
+                    case reasons.PASSWORD_INCORRECT:
+                        // note: these cases are usually treated the same - don't tell
+                        // the user *why* the login failed, only that it did
+                        break;
+                    case reasons.MAX_ATTEMPTS:
+                        // send email or otherwise notify user that account is
+                        // temporarily locked
+                        break;
+                }
+            });
+        });
+    })
 
-//         bcrypt.genSalt(saltRounds, function (err, salt) {
-//             if (err) {
-//                 throw err
-//             } else {
-//                 bcrypt.hash(password, salt, function (err, hash) {
-//                     if (err) {
-//                         throw err
-//                     } else {
-//                         // console.log(hash)
-//                         var newUser = {
-//                             username: username,
-//                             password: hash
-//                         }
+    app.post('/api/user/login', function (req, res, next) {
+        let username = req.body.username;
+        let password = req.body.password;
 
-//                         var user = new User(newUser);
-//                         var result = user.save();
-//                         res.send(result);
+        User.getAuthenticated(username, password, function(err, user, reason) {
+            if (err) throw err;
+    
+            // login was successful if we have a user
+            if (user) {
+                // handle login success
+                console.log('login success');
+                return;
+            }
+    
+            // otherwise we can determine why we failed
+            var reasons = User.failedLogin;
+            switch (reason) {
+                case reasons.NOT_FOUND:
+                case reasons.PASSWORD_INCORRECT:
+                    // note: these cases are usually treated the same - don't tell
+                    // the user *why* the login failed, only that it did
+                    break;
+                case reasons.MAX_ATTEMPTS:
+                    // send email or otherwise notify user that account is
+                    // temporarily locked
+                    break;
+            }
+        });
+})
+}
+// // create a user a new user
+// var testUser = new User({
+//     username: 'jmar777',
+//     password: 'Password123'
+// });
 
-//                     }
-//                 })
-//             }
-//         })
+// // save user to database
+// testUser.save(function(err) {
+//     if (err) throw err;
 
-//     })
+//     // attempt to authenticate user
+//     User.getAuthenticated('jmar777', 'Password123', function(err, user, reason) {
+//         if (err) throw err;
 
-//     app.post('/api/user/login', function (req, res, next) {
-//         var username = req.body.username;
-//         var password = req.body.password;
-//         let hash = ''
-//         User.getUserByUsername(username)
-//             .then(function (user) {
-//                 hash = user.password
-//                 res.send(hash)
-//             })
-//         bcrypt.compare(password, hash, function (err, isMatch) {
-//             if (err) {
-//                 throw err
-//             } else if (!isMatch) {
-//                 console.log("Password doesn't match!")
-//                 res.send({ message: "Password doesn't match!" })
-//             } else {
-//                 console.log("Password matches!")
-//                 res.send({ message: "Password matches!" })
-//             }
-//         })
-
-//     });
-
-// }
-
-
-// const passwordEnteredByUser = "mypass123"
-// const hash = "YOUR_HASH_STRING"
-
-// bcrypt.compare(passwordEnteredByUser, hash, function (err, isMatch) {
-//     if (err) {
-//         throw err
-//     } else if (!isMatch) {
-//         console.log("Password doesn't match!")
-//     } else {
-//         console.log("Password matches!")
-//     }
-// })
-
-
-
-
-
-// User.getUserByUsername(username)
-//     .then(function (user) {
-//         res.send(user)
-//         bcrypt.compare(password, hash, function (err, res) {
-//             // res === true
-//         });
-//     })
-//     .then(function (samePassword) {
-//         if (!samePassword) {
-//             res.status(403).send();
+//         // login was successful if we have a user
+//         if (user) {
+//             // handle login success
+//             console.log('login success');
+//             return;
 //         }
-//         res.send();
-//     })
-//     .catch(function (error) {
-//         res.send("Error authenticating user: ");
-//         res.send(error);
-//         next();
-//     });
 
-
-
-
-
-
-
-
-
-
-// const password = "mypass123"
-// const saltRounds = 10
-
-// bcrypt.genSalt(saltRounds, function (err, salt) {
-//   if (err) {
-//     throw err
-//   } else {
-//     bcrypt.hash(password, salt, function(err, hash) {
-//       if (err) {
-//         throw err
-//       } else {
-//         console.log(hash)
-//         //$2a$10$FEBywZh8u9M0Cec/0mWep.1kXrwKeiWDba6tdKvDfEBjyePJnDT7K
-//       }
-//     })
-//   }
-// })
-
-
-
-
-
-
-
-
-
-// bcrypt.genSalt(10, function(err, salt) {
-//     bcrypt.hash(password, salt, function(err, hash) {
-//         return User.saveUser(username, hash);
-//     })
-//     .then(function() {
-//         res.send();
-//     })
-//     .catch(function(error){
-//         res.send("Error saving user: ");
-//         res.send(error);
-//         next();
+//         // otherwise we can determine why we failed
+//         var reasons = User.failedLogin;
+//         switch (reason) {
+//             case reasons.NOT_FOUND:
+//             case reasons.PASSWORD_INCORRECT:
+//                 // note: these cases are usually treated the same - don't tell
+//                 // the user *why* the login failed, only that it did
+//                 break;
+//             case reasons.MAX_ATTEMPTS:
+//                 // send email or otherwise notify user that account is
+//                 // temporarily locked
+//                 break;
+//         }
 //     });
 // });
