@@ -1,7 +1,7 @@
 
 
 
-var User = require('../models/User3');
+var UserModel = require('../models/User3');
 
 module.exports = (app) => {
 
