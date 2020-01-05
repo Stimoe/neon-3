@@ -36,5 +36,5 @@ module.exports.comparePassword = function(candidatePassword, hash, callback){
 }
 
 
-var User = mongoose.model('User', UserSchema);
+var User = mongoose.model('User', userSchema);
 module.exports = User;
