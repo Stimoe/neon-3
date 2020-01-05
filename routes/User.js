@@ -5,10 +5,11 @@ var User = require('../models/User2');
 module.exports = (app) => {
 
     app.post('/api/user/register', function (req, res, next) {
+        res.send("here")
         User.createUser(req.body, function (err, user) {
             if (err) throw err;
+            res.send({ message: 'Made new user' }, { user })
             return done(null, false, { message: 'Made new user' });
-
         })
     })
 

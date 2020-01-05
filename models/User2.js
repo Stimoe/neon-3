@@ -1,36 +1,52 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-
-var bcrypt = require('bcryptjs');
-
-var userSchema = mongoose.Schema({
-  username: String,
-  password: String
+const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
+// const saltRounds = 10;
+//Define a schema
+const Schema = mongoose.Schema;
+const userSchema = new Schema({
+ username: {
+  type: String,
+  trim: true,  
+  required: true,
+ },
+ password: {
+  type: String,
+  trim: true,
+  required: true
+ }
 });
 
 
-userSchema.methods = {
-    createUser : function(newUser, callback){
+
+
+
+
+userSchema.methods.createUser = function(newUser, callback){
         bcrypt.genSalt(10, function(err, salt) {
             bcrypt.hash(newUser.password, salt, function(err, hash) {
                 newUser.password = hash;
                 newUser.save(callback);
             });
         });
-    },
-    getUserByUsername : function(username, callback){
+    }
+    userSchema.methods.getUserByUsername = function(username, callback){
         var query = {username: username};
         User.findOne(query, callback);
-    },
+    }
   
-    comparePassword : function(candidatePassword, hash, callback){
+    userSchema.methods.comparePassword = function(candidatePassword, hash, callback){
         bcrypt.compare(candidatePassword, hash, function(err, isMatch) {
             if(err) throw err;
             callback(null, isMatch);
         });
     }
 
-}
+
+
+
+
+module.exports = mongoose.model('User', userSchema);
+
 
 
 
@@ -57,6 +73,3 @@ userSchema.methods = {
 //         callback(null, isMatch);
 //     });
 // }
-
-
-module.exports = mongoose.model('User', userSchema);
