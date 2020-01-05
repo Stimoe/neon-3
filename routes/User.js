@@ -1,22 +1,35 @@
-
+var bcrypt = require('bcryptjs');
 var User = require('../models/User2');
-
+const saltRounds = 10
 
 module.exports = (app) => {
 
     app.post('/api/user/register', function (req, res, next) {
-      let newUser=req.body
+        var username = req.body.username;
+        var password = req.body.password;
 
-        // res.send("here")
-        // User.createUser(req.body, function (err, user) {
-        //     if (err) throw err;
-        //     res.send({ message: 'Made new user' }, { user })
-        //     return done(null, false, { message: 'Made new user' });
-        // })
+        bcrypt.genSalt(saltRounds, function (err, salt) {
+            if (err) {
+                throw err
+            } else {
+                bcrypt.hash(password, salt, function (err, hash) {
+                    if (err) {
+                        throw err
+                    } else {
+                        // console.log(hash)
+                        var newUser = {
+                            username: username,
+                            password: hash
+                        }
 
-        newUser.save(function(err) {
-            if (err) throw err;
-        });
+                        var user = new User(newUser);
+                        var result = user.save();
+                        res.send(result);
+
+                    }
+                })
+            }
+        })
     })
 
     app.post('/api/user/login', function (req, res, next) {
