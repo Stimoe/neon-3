@@ -1,77 +1,77 @@
 
-// var Mongoose = require('mongoose'),
+var Mongoose = require('mongoose'),
 
-// Bcrypt = require("bcryptjs");
+Bcrypt = require("bcryptjs");
 
-// Mongoose.Promise = global.Promise;
-// Mongoose.connect(process.env.MONGODB_URI || `mongodb://localhost:27017/neon-rain`);
+Mongoose.Promise = global.Promise;
+Mongoose.connect(process.env.MONGODB_URI || `mongodb://localhost:27017/neon-rain`);
 
 
-// module.exports = (app) => {
+module.exports = (app) => {
 
 
     
     
     
-//     const UserSchema = new Mongoose.Schema({
-//         username: String,
-//         password: String
-//     });
+    const UserSchema = new Mongoose.Schema({
+        username: String,
+        password: String
+    });
     
-//     UserSchema.pre("save", function(next) {
-//         if(!this.isModified("password")) {
-//             return next();
-//         }
-//         this.password = Bcrypt.hashSync(this.password, 10);
-//         next();
-//     });
+    UserSchema.pre("save", function(next) {
+        if(!this.isModified("password")) {
+            return next();
+        }
+        this.password = Bcrypt.hashSync(this.password, 10);
+        next();
+    });
     
-//     UserSchema.methods.comparePassword = function(plaintext, callback) {
-//         return callback(null, Bcrypt.compareSync(plaintext, this.password));
-//     };
+    UserSchema.methods.comparePassword = function(plaintext, callback) {
+        return callback(null, Bcrypt.compareSync(plaintext, this.password));
+    };
 
 
-//     const UserModel = new Mongoose.model("user", UserSchema);
+    const UserModel = new Mongoose.model("user", UserSchema);
 
 
 
 
 
-//     app.post("/api/user/register", async (request, response) => {
-//         try {
-//             var user = new UserModel(request.body);
-//             var result = await user.save();
-//             response.send(result);
-//         } catch (error) {
-//             response.status(500).send(error);
-//         }
-//     });
+    app.post("/api/user/register", async (request, response) => {
+        try {
+            var user = new UserModel(request.body);
+            var result = await user.save();
+            response.send(result);
+        } catch (error) {
+            response.status(500).send(error);
+        }
+    });
 
-//     app.post("/api/user/login", async (request, response) => {
-//         try {
-//             var user = await UserModel.findOne({ username: request.body.username }).exec();
-//             // response.send({ user })
-//             // response.send(user)
+    app.post("/api/user/login", async (request, response) => {
+        try {
+            var user = await UserModel.findOne({ username: request.body.username }).exec();
+            // response.send({ user })
+            // response.send(user)
             
             
-//             if(!user) {
-//                 return response.status(400).send({ message: "The username does not exist" });
-//             }
-//             user.comparePassword(request.body.password, (error, match) => {
-//                 if(!match) {
-//                     return response.status(400).send({ message: "The password is invalid" });
-//                 }
-//             });
-//             user.comparePassword(request.body.password, (error, match) => {
-//                 if(match) {
-//                     response.send({ message: "The username and password combination is correct!" });
-//                 }
-//             });
+            if(!user) {
+                return response.status(400).send({ message: "The username does not exist" });
+            }
+            user.comparePassword(request.body.password, (error, match) => {
+                if(!match) {
+                    return response.status(400).send({ message: "The password is invalid" });
+                }
+            });
+            user.comparePassword(request.body.password, (error, match) => {
+                if(match) {
+                    response.send({ message: "The username and password combination is correct!" });
+                }
+            });
          
-//         } catch (error) {
-//             response.status(500).send(error);
-//         }
-//     });
+        } catch (error) {
+            response.status(500).send(error);
+        }
+    });
 
 
-// }
+}
