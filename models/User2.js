@@ -10,7 +10,7 @@ var userSchema = mongoose.Schema({
 
 
 userSchema.methods = {
-    createUser = function(newUser, callback){
+    createUser : function(newUser, callback){
         bcrypt.genSalt(10, function(err, salt) {
             bcrypt.hash(newUser.password, salt, function(err, hash) {
                 newUser.password = hash;
@@ -18,12 +18,12 @@ userSchema.methods = {
             });
         });
     },
-    getUserByUsername = function(username, callback){
+    getUserByUsername : function(username, callback){
         var query = {username: username};
         User.findOne(query, callback);
     },
   
-    comparePassword = function(candidatePassword, hash, callback){
+    comparePassword : function(candidatePassword, hash, callback){
         bcrypt.compare(candidatePassword, hash, function(err, isMatch) {
             if(err) throw err;
             callback(null, isMatch);
