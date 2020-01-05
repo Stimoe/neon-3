@@ -17,15 +17,28 @@ const userSchema = new Schema({
 });
 
 
-
-
+var nowUser = {
+                                username: newUser.username,
+                                password: hash
+                            }
+    
+    //                         var user = new User(newUser);
+    //                         var result = user.save();
+    //                         res.send(result);
 
 
 userSchema.methods.createUser = function (newUser, callback) {
     bcrypt.genSalt(10, function (err, salt) {
         bcrypt.hash(newUser.password, salt, function (err, hash) {
-            newUser.password = hash;
-            userSchema.save(callback);
+            var nowUser = {
+                username: newUser.username,
+                password: hash
+            }
+            nowUser.save();
+            // newUser.password = hash;
+
+
+
         });
     });
 }
