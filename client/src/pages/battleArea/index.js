@@ -120,12 +120,10 @@ getWinCount = ()=> {
 
   axios.get('/api/user/winCount', { username: this.state.username }).then(res => {
     console.log("line 26 ", res.data)
-    // if(res.status===200){
-    //   return  <Redirect  to="/award" />
-    // }
+  
   }).catch(err => {
     console.log(err.response);
-    alert("Username already exists or password could not be validated")
+    res.send("Username already exists or password could not be validated")
   })
   
 }

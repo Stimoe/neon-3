@@ -64,7 +64,7 @@ module.exports = (app) => {
         const user = await User.findOne({ username: req.body.username });
 let currentWinCount=user.winCount
 // res.send("update document success");
-                res.send(currentWinCount);
+                res.send("currentWinCount");
     })     
 
 
