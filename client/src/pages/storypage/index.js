@@ -35,7 +35,7 @@ console.log(this.state.username)
 
 
   handleStart= event => {
-
+    console.log(this.state.username)
     event.preventDefault();
     this.setState({
       redirect: true,
