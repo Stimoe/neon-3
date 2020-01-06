@@ -123,7 +123,7 @@ getWinCount = ()=> {
   
   }).catch(err => {
     console.log(err.response);
-    res.send("Username already exists or password could not be validated")
+    console.log("Username already exists or password could not be validated")
   })
   
 }
