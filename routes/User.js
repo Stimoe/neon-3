@@ -48,7 +48,7 @@ module.exports = (app) => {
             const passwordHash = await bcrypt.hash(req.body.password, user.hash);
             if (passwordHash == user.password) {
                 // console.log("in")
-                res.send('You are logged in!', user.winCount);
+                res.send('You are logged in!');
             } else {
                 console.log('incorrect password');
             }
