@@ -29,7 +29,7 @@ class Storypage extends Component {
     this.setState({
       username: currentUser,
     });
-
+console.log(this.state.username)
   }
 
 

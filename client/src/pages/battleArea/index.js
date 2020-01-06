@@ -51,6 +51,7 @@ class BattlePage extends Component {
   componentDidMount() {
     this.getWinCount()
     let currentUser = this.props.location.state.username
+    console.log(currentUser)
     let localWins = 0;
     let tempWins = this.state.winCount
     console.log(tempWins)
