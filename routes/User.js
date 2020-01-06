@@ -21,7 +21,7 @@ module.exports = (app) => {
         const password = req.body.password
     
         //find user exist or not
-        User.findOne({ username })
+        User.findOne(username)
             .then(user => {
                 res.send({message: "found user"},{ user })
                 //if user not exist than return status 400
