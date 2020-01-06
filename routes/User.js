@@ -6,40 +6,40 @@ module.exports = (app) => {
 
     app.post('/api/user/register', function (req, res, next) {
         var myData = new User(req.body);
-  myData.save()
-    .then(item => {
-      res.send("item saved to database");
-    })
-    .catch(err => {
-      res.status(400).send("unable to save to database");
+        myData.save()
+            .then(item => {
+                res.send("item saved to database");
+            })
+            .catch(err => {
+                res.status(400).send("unable to save to database");
+            });
     });
-});
 
     app.post('/api/user/login', async (req, res) => {
         //email and password
         const username = req.body.username
         const password = req.body.password
-    // res.send(username)
+        // res.send(username)
 
-    user = await User.findOne({ username: req.body.username })
-    
+        user = await User.findOne({ username: req.body.username })
 
-    res.send(user.password, req.body.password)
-    // .then(user => {
-    //     // bcrypt.compare(password, user.password, function(err, res) {
-    //     //     if (err){
-    //     //         res.status(403).send();
-    //     //     }
-    //     //     if (res){
-    //     //       res.send("true")
-    //     //     } else {
-    //     //       // response is OutgoingMessage object that server response http request
-    //     //       return res.json({success: false, message: 'passwords do not match'});
-    //     //     }
-    //     //   });
-    // })
-    
-    
+
+        res.send(user.password, req.body.password)
+        // .then(user => {
+        //     // bcrypt.compare(password, user.password, function(err, res) {
+        //     //     if (err){
+        //     //         res.status(403).send();
+        //     //     }
+        //     //     if (res){
+        //     //       res.send("true")
+        //     //     } else {
+        //     //       // response is OutgoingMessage object that server response http request
+        //     //       return res.json({success: false, message: 'passwords do not match'});
+        //     //     }
+        //     //   });
+        // })
+
+
     })
 }
 
