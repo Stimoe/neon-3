@@ -105,7 +105,7 @@ class BattlePage extends Component {
   }
 
 updateWinCount = ()=> {
-  axios.put('/api/user/winCount', { username: this.state.username, winCount: this.state.winCount }).then(res => {
+  axios.post('/api/user/winCount', { username: this.state.username, winCount: this.state.winCount }).then(res => {
     console.log("line 26 ", res.data, res.status)
     if(res.status===200){
       return  <Redirect  to="/award" />
@@ -119,7 +119,7 @@ updateWinCount = ()=> {
 getWinCount = ()=> {
 
   axios.get('/api/user/winCount', { username: this.state.username }).then(res => {
-    console.log("line 26 ", res.data, res.status)
+    console.log("line 26 ", res.data)
     // if(res.status===200){
     //   return  <Redirect  to="/award" />
     // }

@@ -48,7 +48,7 @@ module.exports = (app) => {
             const passwordHash = await bcrypt.hash(req.body.password, user.hash);
             if (passwordHash == user.password) {
                 // console.log("in")
-                res.send('You are logged in!');
+                res.send('You are logged in!', user.winCount);
             } else {
                 console.log('incorrect password');
             }
@@ -60,28 +60,60 @@ module.exports = (app) => {
         }
     
     });
-
-    app.put('/api/user/winCount', async (req, res) => {
-
-        let newWinCount=this.body.winCount
-        const user = await User.findOne({ username: req.body.username });
-        user.findOneAndUpdate({winCount: newWinCount}
-        , function (err, doc) {
-            if (err) {
-                res.send("update document error");
-            } else {
-               res.send("update document success");
-                res.send(doc);
-            }
-        })
-    })
-
     app.get('/api/user/winCount', async (req, res) => {
         const user = await User.findOne({ username: req.body.username });
 let currentWinCount=user.winCount
-res.send("update document success");
+// res.send("update document success");
                 res.send(currentWinCount);
     })     
-}
 
+
+    app.post('/api/user/winCount', async (req, res) => {
+
+        let newWinCount=this.body.winCount
+        await User.findOne({ username: req.body.username }, function(err, user) {
+            if (err) throw err;
+          
+            // change the users location
+            user.winCount = newWinCount;
+          
+            // save the user
+            user.save(function(err) {
+              if (err) throw err;
+          
+              res.send('User successfully updated!');
+            });
+          
+          });
+        })
+    }
+
+
+// User.findById(1, function(err, user) {
+//     if (err) throw err;
+  
+//     // change the users location
+//     user.location = 'uk';
+  
+//     // save the user
+//     user.save(function(err) {
+//       if (err) throw err;
+  
+//       console.log('User successfully updated!');
+//     });
+  
+//   });
+
+
+
+//   user.findOneAndUpdate({winCount: newWinCount}
+//     , function (err, doc) {
+//         if (err) {
+//             res.send("update document error");
+//         } else {
+//            res.send("update document success");
+//             res.send(doc);
+//         }
+//     })
+// })
 
