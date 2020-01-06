@@ -25,27 +25,44 @@ module.exports = (app) => {
     
 
     .then(user => {
-res.send(user.username)
-res.send(user.password)
+        return bcrypt.compare(password, user.password);
+    })
+    .then(function(samePassword) {
+        if(!samePassword) {
+            res.status(403).send();
+        }
+        res.send();
+    })
+    .catch(function(error){
+        console.log("Error authenticating user: ");
+        console.log(error);
+        next();
+    });
     })
     
     
-    })
+  
 }
 
+// ({}, function(err, result) {
+//     if (err) throw err;
+//     console.log(result.name);
 
-// .post("/register", async (req, res) => {
-//     console.log("in here");
-//     user = await User.findOne({ email: req.body.email }) 
-//       .then(user => {
-//         console.log("in here");
-//         if (user) {
-//           console.log("2");
-//           return res.status(400).json({ email: "Email address already exists" });
-//         } else {
-//           const newUser = new User({
-//             first: req.body.first,
-//             last: req.body.last,
-//             email: req.body.email,
-//             password: req.body.password
-//           });
+
+
+
+
+
+// return bcrypt.compare(password, user.password);
+// })
+// .then(function(samePassword) {
+//     if(!samePassword) {
+//         res.status(403).send();
+//     }
+//     res.send();
+// })
+// .catch(function(error){
+//     console.log("Error authenticating user: ");
+//     console.log(error);
+//     next();
+// });
