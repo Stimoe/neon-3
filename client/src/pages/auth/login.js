@@ -43,20 +43,11 @@ class Login extends Component {
     handleLoginFormSubmit = event => {
       event.preventDefault();
       axios.post('/api/user/login', { username: this.state.username, password: this.state.password }).then(res => {
-        console.log(this.state.username);
-        console.log(this.state.password);
-        
-        console.log("line 26 ", res.data, res.status)
-        console.log(res.data);
-        
         let newStatus= (res.status)
-        console.log("newStatus ",newStatus);
-        
-  
-      // if(newStatus===200){
-      //     this.setState({ redirect: true })
-      //     console.log(this.state.redirect)
-      // }
+      if(newStatus===200){
+          this.setState({ redirect: true })
+          // console.log(this.state.redirect)
+      }
        
       }).catch(err => {
         console.log(err.response);

@@ -50,14 +50,14 @@ class Register extends Component {
     event.preventDefault();
 
     axios.post('/api/user/register', { username: this.state.username, password: this.state.password }).then(res => {
-      console.log("line 26 ", res.status)
+      // console.log("line 26 ", res.status)
       let newStatus= (res.status)
-      console.log("newStatus ",newStatus);
+      // console.log("newStatus ",newStatus);
       
 
     if(newStatus===201){
-        // this.setState({ redirect: true })
-        console.log(this.state.redirect)
+        this.setState({ redirect: true })
+        // console.log(this.state.redirect)
     }
     
     

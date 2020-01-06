@@ -1,9 +1,12 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./style.css";
 import enemies from "../../enemy.json";
+import Axios from "axios";
 import DeckBrain from "../../components/deck-managment";
+import HealthBar from "../../components/plyr-healthbar";
+import EHBar from "../../components/ehealthbar";
 
+import { Redirect } from "react-router-dom";
 import FireEm from './fire.gif';
 import IdleEm from './idle.gif';
 import Death from './death.gif';
@@ -11,13 +14,12 @@ import Player from './players.png'
 // import Rain from './rain.gif'
 
 import GameOver from "../../components/gameOver"
-
+import EnemyAction from "../../components/enemiesActionModul"
 import EnemyModal from "../../components/enemiesActionModul";
-
+import { log } from "util";
 
 var newWinCounts;
 var newEnemyObject;
-
 class BattlePage extends Component {
   state = {
     winCount: 0,
