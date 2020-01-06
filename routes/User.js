@@ -19,7 +19,15 @@ module.exports = (app) => {
         //email and password
         const username = req.body.username
         const password = req.body.password
-    res.send(username)
+    // res.send(username)
+
+
+    User.findOne(username)
+
+    .then(user => {
+res.send(user.username)
+
+    })
         //find user exist or not
         // User.findOne(username)
         //     .then(user => {
