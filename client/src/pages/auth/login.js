@@ -56,6 +56,10 @@ class Login extends Component {
       }
     
 
+
+
+
+
   
   
   
@@ -63,9 +67,19 @@ class Login extends Component {
     const { redirect } = this.state;
     const { errors } = this.state;
 
-    if (redirect) {
-      return <Redirect to='/storypage'/>;
-    }
+    // if (redirect) {
+    //   return <Redirect to='/storypage'/>;
+    // }
+
+ if (redirect) {
+   return <Redirect to={{
+    pathname: '/storypage',
+    state: { username: this.state.username }
+}}
+/>
+ }
+
+
 
     return (
       

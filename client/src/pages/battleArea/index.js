@@ -22,6 +22,7 @@ var newWinCounts;
 var newEnemyObject;
 class BattlePage extends Component {
   state = {
+    username: '',
     winCount: 0,
     userHealth: 100,
     userArmor: 0,
@@ -39,8 +40,17 @@ class BattlePage extends Component {
     maxEnemyHealth: 0
   };
 
+
+  // currentUser = this.props.location.state.username
+
+  // this.setState({
+  //   username: currentUser,
+  // });
+
+
   componentDidMount() {
     this.getWinCount()
+    let currentUser = this.props.location.state.username
     let localWins = 0;
     let tempWins = this.state.winCount
     console.log(tempWins)
@@ -63,6 +73,7 @@ class BattlePage extends Component {
     let newEnemyAttack = currentEnemy.attack;
     let newEnemyArmorGain = currentEnemy.armorGain;
     this.setState({
+      username: currentUser,
       maxEnemyHealth: currentEnemyHealth,
       winCount: localWins,
       currentEnemyHealth: currentEnemyHealth,
@@ -71,6 +82,7 @@ class BattlePage extends Component {
       currentEnemyAttack: newEnemyAttack,
       currentEnemyArmorGain: newEnemyArmorGain
     });
+    console.log(this.state.username)
   }
 
   componentDidUpdate(prevprops, prevState) {
@@ -128,7 +140,17 @@ getWinCount = ()=> {
   
 }
 
-
+handleLoginFormSubmit = () => {
+  axios.post('/api/user/login', { username: this.state.username, password: this.state.password }).then(res => {
+    console.log("line 26 ", res.data, res.status)
+    if(res.status===200){
+      return  <Redirect  to="/storypage" />
+    }
+  }).catch(err => {
+    console.log(err.response);
+    alert("Username already exists or password could not be validated")
+  })
+  }
 
 
 
