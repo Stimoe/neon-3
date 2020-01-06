@@ -5,22 +5,15 @@ const saltRounds = 10
 module.exports = (app) => {
 
     app.post('/api/user/register', function (req, res, next) {
-        var newUsername = req.body.username;
-        var newPassword = req.body.password;
-
-        var newUser = User({
-            username: newUsername,
-            password: newPassword,
-
-          });
-          
-          // save the user
-          newUser.save(function(err) {
-            if (err) throw err;
-          
-            console.log('User created!');
-          });
-        })
+        var myData = new User(req.body);
+  myData.save()
+    .then(item => {
+      res.send("item saved to database");
+    })
+    .catch(err => {
+      res.status(400).send("unable to save to database");
+    });
+});
 
     app.post('/api/user/login', (req, res) => {
         //email and password
@@ -30,6 +23,7 @@ module.exports = (app) => {
         //find user exist or not
         User.findOne({ username })
             .then(user => {
+                res.send({message: "found user"})
                 //if user not exist than return status 400
                 if (!user) return res.status(400).json({ msg: "User not exist" })
     
