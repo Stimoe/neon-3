@@ -15,59 +15,37 @@ module.exports = (app) => {
     });
 });
 
-    app.post('/api/user/login', (req, res) => {
+    app.post('/api/user/login', async (req, res) => {
         //email and password
         const username = req.body.username
         const password = req.body.password
     // res.send(username)
 
-
-    User.findOne(username)
+    user = await User.findOne({ username: req.body.username })
+    
 
     .then(user => {
 res.send(user.username)
-
+res.send(user.password)
     })
-        //find user exist or not
-        // User.findOne(username)
-        //     .then(user => {
-        //         res.send({message: "found user"},{ user })
-        //         //if user not exist than return status 400
-        //         if (!user) return res.status(400).json({ msg: "User not exist" })
     
-        //         //if user exist than compare password
-        //         //password comes from the user
-        //         //user.password comes from the database
-        //         bcrypt.compare(password, user.password, (err, data) => {
-        //             //if error than throw error
-        //             if (err) throw err
-    
-        //             //if both match than you can do anything
-        //             if (data) {
-        //                 return res.status(200).json({ msg: "Login success" })
-        //             } else {
-        //                 return res.status(401).json({ msg: "Invalid credencial" })
-        //             }
-    
-        //         })
-    
-        //     })
     
     })
 }
 
 
-// User.getUserByUsername(username, function(err, user){
-//     if(err) throw err;
-//     if(!user){
-//       return done(null, false, {message: 'Unknown User'});
-//   }
-
-//   User.comparePassword(password, user.password, function(err, isMatch){
-//     if(err) throw err;
-//     if(isMatch){
-//       return done(null, user);
-//     } else {
-//       return done(null, false, {message: 'Invalid password'});
-//     }
-//   });
+// .post("/register", async (req, res) => {
+//     console.log("in here");
+//     user = await User.findOne({ email: req.body.email }) 
+//       .then(user => {
+//         console.log("in here");
+//         if (user) {
+//           console.log("2");
+//           return res.status(400).json({ email: "Email address already exists" });
+//         } else {
+//           const newUser = new User({
+//             first: req.body.first,
+//             last: req.body.last,
+//             email: req.body.email,
+//             password: req.body.password
+//           });
