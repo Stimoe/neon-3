@@ -1,48 +1,48 @@
 
 
 
-var UserModel = require('../models/User3');
+// var UserModel = require('../models/User3');
 
-module.exports = (app) => {
+// module.exports = (app) => {
 
 
-app.post("/api/user/register", async (request, response) => {
-    try {
-        var user = new UserModel(request.body);
-        var result = await user.save();
-        response.send(result);
-    } catch (error) {
-        response.status(500).send(error);
-    }
-});
+// app.post("/api/user/register", async (request, response) => {
+//     try {
+//         var user = new UserModel(request.body);
+//         var result = await user.save();
+//         response.send(result);
+//     } catch (error) {
+//         response.status(500).send(error);
+//     }
+// });
 
-app.post("/api/user/login", async (request, response) => {
-    let username = req.body.username;
-       let password = req.body.password;
+// app.post("/api/user/login", async (request, response) => {
+//     let username = req.body.username;
+//        let password = req.body.password;
 
        
 
-       UserModel.getUserByUsername(username, function(err, user){
-          if(err) throw err;
-          if(!user){
-            return done(null, false, {message: 'Unknown User'});
-            next()
-        }
+//        UserModel.getUserByUsername(username, function(err, user){
+//           if(err) throw err;
+//           if(!user){
+//             return done(null, false, {message: 'Unknown User'});
+//             next()
+//         }
     
-        UserModel.comparePassword(password, user.password, function(err, isMatch){
-          if(err) throw err;
-          if(isMatch){
-            return done(null, user);
-          } else {
-            return done(null, false, {message: 'Invalid password'});
-          }
-        });
-       });
+//         UserModel.comparePassword(password, user.password, function(err, isMatch){
+//           if(err) throw err;
+//           if(isMatch){
+//             return done(null, user);
+//           } else {
+//             return done(null, false, {message: 'Invalid password'});
+//           }
+//         });
+//        });
      
  
 
-})
-}
+// })
+// }
 // User.findOne({ username: 'jmar777' }, function(err, user) {
 //     if (err) throw err;
 

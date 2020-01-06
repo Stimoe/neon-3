@@ -69,11 +69,11 @@ app.post('/api/user/login', (req, res) => {  // the POST login route, use to log
                     mongoose.connection.close();
                     res.status(401).send({error: "Authentication unsuccessful, access denied."}); // if password matching fails throw error
                 }
-                let token = jwt.sign({email: user.email, _id: user._id}, secret_key); //else sign a token
+                let token = jwt.sign({username: user.username, _id: user._id}, secret_key); //else sign a token
                 user.tokens.push(token); // add token to database
                 user.save().then((msg) => {
                     mongoose.connection.close();
-                    res.header('x-auth', token).send({id: msg._id, firstName: msg.firstName, lastName: msg.lastName, email: msg.email});  // send token and user data as response
+                    res.header('x-auth', token).send({id: msg._id,  username: msg.username});  // send token and user data as response
                 }).catch((errorObj) => {
                     mongoose.connection.close();
                     res.status(400).send({error: errorObj.message});  //if user data is invalid throw error
