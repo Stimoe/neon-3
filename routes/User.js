@@ -61,11 +61,22 @@ module.exports = (app) => {
     
     });
     app.get('/api/user/winCount', async (req, res) => {
-        const user = await User.findOne({ username: req.body.username });
-let currentWinCount=user.winCount
+        const user = await User.findOne({ username: req.body.username }, function(err, response){
+        if(err) res.send(err);
+          res.json(response);
+      
 // res.send("update document success");
-                res.send("currentWinCount");
+                // res.send("currentWinCount");
     })     
+})
+  
+
+
+
+
+
+
+
 
 
     app.post('/api/user/winCount', async (req, res) => {
