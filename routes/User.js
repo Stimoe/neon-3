@@ -24,7 +24,7 @@ module.exports = (app) => {
     user = await User.findOne({ username: req.body.username })
     
 
-    res.send(user.password, password)
+    res.send(user.password, req.body.password)
     // .then(user => {
     //     // bcrypt.compare(password, user.password, function(err, res) {
     //     //     if (err){
