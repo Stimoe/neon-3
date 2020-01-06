@@ -25,6 +25,7 @@ module.exports = (app) => {
     
 
     .then(user => {
+        res.send(user.password)
         bcrypt.compare(password, user.password, function(err, res) {
             if (err){
                 res.status(403).send();
