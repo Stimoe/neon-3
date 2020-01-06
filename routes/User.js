@@ -26,17 +26,17 @@ module.exports = (app) => {
 
     .then(user => {
         res.send(user.password, password)
-        bcrypt.compare(password, user.password, function(err, res) {
-            if (err){
-                res.status(403).send();
-            }
-            if (res){
-              res.send("true")
-            } else {
-              // response is OutgoingMessage object that server response http request
-              return res.json({success: false, message: 'passwords do not match'});
-            }
-          });
+        // bcrypt.compare(password, user.password, function(err, res) {
+        //     if (err){
+        //         res.status(403).send();
+        //     }
+        //     if (res){
+        //       res.send("true")
+        //     } else {
+        //       // response is OutgoingMessage object that server response http request
+        //       return res.json({success: false, message: 'passwords do not match'});
+        //     }
+        //   });
     })
     
     
