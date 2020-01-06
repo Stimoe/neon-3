@@ -4,45 +4,60 @@ const saltRounds = 10
 
 module.exports = (app) => {
 
-    app.post('/api/user/register', function (req, res, next) {
-        var myData = new User(req.body);
-        myData.save()
-            .then(item => {
-                res.send("item saved to database");
-            })
-            .catch(err => {
-                res.status(400).send("unable to save to database");
+    app.post('/api/user/register', async (req, res) => {
+        // Encrypt Password
+        try {
+            const findUser = await User.findOne({ username: req.body.username }).exec();
+            if (findUser !== null) {
+                throw new Error('That user already exisits!');
+            }
+            console.log('Encrypt');
+            bcrypt.genSalt(10, (err, salt) => {
+                bcrypt.hash(req.body.password, salt, (err, hash) => {
+                    console.log('-----password:', hash, '& salt', salt, '-----');
+                    passwordHash = hash;
+                    saltHash = salt;
+                    const user = new User({
+                        username: req.body.username,
+                        password: passwordHash,
+                        hash: saltHash,
+                    });
+                    console.log(user);
+                    user.save();
+                    res.send('Registered');
+                });
             });
+        } catch (err) {
+            return res.status(400).send({
+                error: true,
+                reason: err.message
+            })
+        }
     });
-
+    
+    // // Login User
     app.post('/api/user/login', async (req, res) => {
-        //email and password
-        const username = req.body.username
-        const password = req.body.password
-        // res.send(username)
-
-        user = await User.findOne({ username: req.body.username })
-
-
-        res.send(user.password, req.body.password)
-        // .then(user => {
-        //     // bcrypt.compare(password, user.password, function(err, res) {
-        //     //     if (err){
-        //     //         res.status(403).send();
-        //     //     }
-        //     //     if (res){
-        //     //       res.send("true")
-        //     //     } else {
-        //     //       // response is OutgoingMessage object that server response http request
-        //     //       return res.json({success: false, message: 'passwords do not match'});
-        //     //     }
-        //     //   });
-        // })
-
-
-    })
+        try {
+            const user = await User.findOne({ username: req.body.username });
+            // console.log(user);
+            if (!user) {
+                return res.status(400).send('Incorrect username');
+            }
+            //Decrypt Password
+            const passwordHash = await bcrypt.hash(req.body.password, user.hash);
+            if (passwordHash == user.password) {
+                // console.log("in")
+                res.send('You are logged in!');
+            } else {
+                console.log('incorrect password');
+            }
+        } catch(error) {
+            return res.status(400).send({
+                error: true,
+                reason: err.message
+            })
+        }
+    
+    });
 }
 
-// bcrypt.compare("B4c0/\/", hash, function(err, res) {
-//     // res === true
-// });
