@@ -19,31 +19,31 @@ module.exports = (app) => {
         //email and password
         const username = req.body.username
         const password = req.body.password
-    
+    res.send(username)
         //find user exist or not
-        User.findOne(username)
-            .then(user => {
-                res.send({message: "found user"},{ user })
-                //if user not exist than return status 400
-                if (!user) return res.status(400).json({ msg: "User not exist" })
+        // User.findOne(username)
+        //     .then(user => {
+        //         res.send({message: "found user"},{ user })
+        //         //if user not exist than return status 400
+        //         if (!user) return res.status(400).json({ msg: "User not exist" })
     
-                //if user exist than compare password
-                //password comes from the user
-                //user.password comes from the database
-                bcrypt.compare(password, user.password, (err, data) => {
-                    //if error than throw error
-                    if (err) throw err
+        //         //if user exist than compare password
+        //         //password comes from the user
+        //         //user.password comes from the database
+        //         bcrypt.compare(password, user.password, (err, data) => {
+        //             //if error than throw error
+        //             if (err) throw err
     
-                    //if both match than you can do anything
-                    if (data) {
-                        return res.status(200).json({ msg: "Login success" })
-                    } else {
-                        return res.status(401).json({ msg: "Invalid credencial" })
-                    }
+        //             //if both match than you can do anything
+        //             if (data) {
+        //                 return res.status(200).json({ msg: "Login success" })
+        //             } else {
+        //                 return res.status(401).json({ msg: "Invalid credencial" })
+        //             }
     
-                })
+        //         })
     
-            })
+        //     })
     
     })
 }
