@@ -25,7 +25,7 @@ module.exports = (app) => {
     
 
     .then(user => {
-        bcrypt.compare(req.body.password, user.password, function(err, res) {
+        bcrypt.compare(password, user.password, function(err, res) {
             if (err){
                 res.status(403).send();
             }
@@ -33,7 +33,7 @@ module.exports = (app) => {
               res.send("true")
             } else {
               // response is OutgoingMessage object that server response http request
-              return response.json({success: false, message: 'passwords do not match'});
+              return res.json({success: false, message: 'passwords do not match'});
             }
           });
     })
@@ -42,25 +42,6 @@ module.exports = (app) => {
     })
 }
 
-// ({}, function(err, result) {
-//     if (err) throw err;
-//     console.log(result.name);
-
-
-
-
-
-
-// return bcrypt.compare(password, user.password);
-// })
-// .then(function(samePassword) {
-//     if(!samePassword) {
-//         res.status(403).send();
-//     }
-//     res.send();
-// })
-// .catch(function(error){
-//     console.log("Error authenticating user: ");
-//     console.log(error);
-//     next();
+// bcrypt.compare("B4c0/\/", hash, function(err, res) {
+//     // res === true
 // });
