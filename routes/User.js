@@ -24,20 +24,20 @@ module.exports = (app) => {
     user = await User.findOne({ username: req.body.username })
     
 
-    .then(user => {
-        res.send(user.password, password)
-        // bcrypt.compare(password, user.password, function(err, res) {
-        //     if (err){
-        //         res.status(403).send();
-        //     }
-        //     if (res){
-        //       res.send("true")
-        //     } else {
-        //       // response is OutgoingMessage object that server response http request
-        //       return res.json({success: false, message: 'passwords do not match'});
-        //     }
-        //   });
-    })
+    res.send(user.password, password)
+    // .then(user => {
+    //     // bcrypt.compare(password, user.password, function(err, res) {
+    //     //     if (err){
+    //     //         res.status(403).send();
+    //     //     }
+    //     //     if (res){
+    //     //       res.send("true")
+    //     //     } else {
+    //     //       // response is OutgoingMessage object that server response http request
+    //     //       return res.json({success: false, message: 'passwords do not match'});
+    //     //     }
+    //     //   });
+    // })
     
     
     })
