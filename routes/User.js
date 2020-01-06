@@ -23,7 +23,7 @@ module.exports = (app) => {
         //find user exist or not
         User.findOne({ username })
             .then(user => {
-                res.send({message: "found user"}, user)
+                // res.send({message: "found user"}, user)
                 //if user not exist than return status 400
                 if (!user) return res.status(400).json({ msg: "User not exist" })
     
