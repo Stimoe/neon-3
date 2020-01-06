@@ -21,6 +21,7 @@ module.exports = (app) => {
                         username: req.body.username,
                         password: passwordHash,
                         hash: saltHash,
+                        winCount: 0
                     });
                     console.log(user);
                     user.save();
@@ -59,5 +60,28 @@ module.exports = (app) => {
         }
     
     });
+
+    app.put('/api/user/winCount', async (req, res) => {
+
+        let newWinCount=this.body.winCount
+        const user = await User.findOne({ username: req.body.username });
+        user.findOneAndUpdate({winCount: newWinCount}
+        , function (err, doc) {
+            if (err) {
+                res.send("update document error");
+            } else {
+               res.send("update document success");
+                res.send(doc);
+            }
+        })
+    })
+
+    app.get('/api/user/winCount', async (req, res) => {
+        const user = await User.findOne({ username: req.body.username });
+let currentWinCount=user.winCount
+res.send("update document success");
+                res.send(currentWinCount);
+    })     
 }
+
 

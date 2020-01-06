@@ -22,6 +22,11 @@ const UserSchema = new Schema({
         minlength: 5,
         maxlength: 1024
     },
+    winCount: {
+type: Number,
+min: 0,
+max: 3
+    }
 });
 const User = mongoose.model('User', UserSchema);
 

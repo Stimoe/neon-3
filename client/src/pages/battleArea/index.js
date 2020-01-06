@@ -1,18 +1,18 @@
 import React, { Component } from "react";
 import "./style.css";
 import enemies from "../../enemy.json";
-import Axios from "axios";
+import axios from "axios";
 import DeckBrain from "../../components/deck-managment";
 import HealthBar from "../../components/plyr-healthbar";
 import EHBar from "../../components/ehealthbar";
+import {Redirect} from 'react-router-dom';
 
-import { Redirect } from "react-router-dom";
 import FireEm from './fire.gif';
 import IdleEm from './idle.gif';
 import Death from './death.gif';
 import Player from './players.png'
 // import Rain from './rain.gif'
-
+import GameWon from "../../components/gameWon"
 import GameOver from "../../components/gameOver"
 import EnemyAction from "../../components/enemiesActionModul"
 import EnemyModal from "../../components/enemiesActionModul";
@@ -40,9 +40,9 @@ class BattlePage extends Component {
   };
 
   componentDidMount() {
-
+    this.getWinCount()
     let localWins = 0;
-    let tempWins = parseInt(localStorage.getItem('userWinCount'))
+    let tempWins = this.state.winCount
     console.log(tempWins)
     if (!tempWins) {
       localWins = 0
@@ -80,11 +80,14 @@ class BattlePage extends Component {
     const frozen = this.state.frozen;
 
     if (this.state.currentEnemyHealth <= 0) {
-      // this.saveState(this.state.winCount)
+      let tempWins2 = this.state.winCount
+      tempWins2 = tempWins2 + 1
       this.setState({
-        redirect: true
+        winCount: tempWins2,
+        redirect: true,
+
       });
-      this.renderRedirect();
+      this.updateWinCount();
     }
     if (turnEnded && !frozen) {
       this.firstEnemyAction();
@@ -100,12 +103,49 @@ class BattlePage extends Component {
       }.bind(this), 2000);
     }
   }
+
+updateWinCount = ()=> {
+  axios.put('/api/user/winCount', { username: this.state.username, winCount: this.state.winCount }).then(res => {
+    console.log("line 26 ", res.data, res.status)
+    if(res.status===200){
+      return  <Redirect  to="/award" />
+    }
+  }).catch(err => {
+    console.log(err.response);
+    alert("Username already exists or password could not be validated")
+  })
+  }
+   
+getWinCount = ()=> {
+
+  axios.get('/api/user/winCount', { username: this.state.username }).then(res => {
+    console.log("line 26 ", res.data, res.status)
+    // if(res.status===200){
+    //   return  <Redirect  to="/award" />
+    // }
+  }).catch(err => {
+    console.log(err.response);
+    alert("Username already exists or password could not be validated")
+  })
+  
+}
+
+
+
+
+
+
+
+
+
+
+
   renderRedirect = () => {
 
     if (this.state.currentEnemyHealth <= 0) {
 
-      localStorage.setItem('userWinCount', this.state.winCount);
-      // return <Route to='/award' />
+      // localStorage.setItem('userWinCount', this.state.winCount);
+      return <Redirect to='/award'/>;
     }
   }
 
@@ -348,7 +388,14 @@ class BattlePage extends Component {
       )
     }
 
-
+    if (this.state.winCount === 3) {
+      this.setState({
+        winCount: 0
+      })
+      return (
+        <GameWon />
+      )
+    }
     
 
       return (
