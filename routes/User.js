@@ -63,7 +63,7 @@ module.exports = (app) => {
 
     app.get('/api/user/winCount/user', async (req, res) => {
         // res.send(req.params)
-        let currentUser=req.params.username
+        let currentUser=req.config.params.username
         res.send(currentUser)
 //         try {
 //             const user = await User.findOne({ username: currentUser });
@@ -77,7 +77,7 @@ module.exports = (app) => {
 //                 reason: err.message
 //             })
 //         }
-
+config.params.username
    
     })
 
