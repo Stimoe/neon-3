@@ -61,14 +61,14 @@ module.exports = (app) => {
 
     });
 
-    app.get('/api/user/winCount/:user', function(req, res, next){
+    app.get('/api/user/winCount/user', function(req, res, next){
 
         res.send(req.params.user)
-        // User.findOne({userName: req.params.user},
-        //     function (err, post) {
-        //                if (err) return next(err);
-        //                res.json(post);
-        //              });
+        User.findOne({userName: req.params.user},
+            function (err, post) {
+                       if (err) return next(err);
+                       res.json(post);
+                     });
                    });
             // User.findOne({ username: checkUserName }, function(e, result){
             //     if (e) return next(e)
