@@ -62,8 +62,12 @@ module.exports = (app) => {
     });
     app.get('/api/user/winCount', async (req, res) => {
         const user = await User.findOne({ username: req.body.username }, function(err, response){
+let currentWinCount=response.winCount
+
+            //  res.send(currentWinCount);
         if(err) res.send(err);
-          res.json(response);
+        res.send(currentWinCount);
+          res.json(currentWinCount);
       
 // res.send("update document success");
                 // res.send("currentWinCount");
