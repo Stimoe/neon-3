@@ -52,7 +52,7 @@ class BattlePage extends Component {
       this.getCurrentWinCount()
     })
 
-    console.log(this.state.username)
+  
     // this.getWinCount()
     let localWins = 0;
     let tempWins = this.state.winCount
@@ -136,7 +136,7 @@ updateWinCount = ()=> {
   }
    
 getWinCount = ()=> {
-console.log(this.state.username)
+// console.log(this.state.username)
 let user=this.state.username
 
 axios.get('/api/user/winCount', {

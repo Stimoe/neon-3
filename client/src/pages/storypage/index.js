@@ -25,7 +25,7 @@ class Storypage extends Component {
   componentDidMount() {
 
     let currentUser = this.props.location.state.username
-    console.log(currentUser)
+
     this.setState({
       username: currentUser,
     });

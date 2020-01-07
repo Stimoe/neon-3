@@ -36,10 +36,10 @@ class DeckBrain extends Component {
     else {
 newestDeck=deckJson
     }
-      console.log(newestDeck)
+      // console.log(newestDeck)
     const shuffledDeck = this.shuffleCards(newestDeck);
 
-    console.log(shuffledDeck);
+    // console.log(shuffledDeck);
     this.setState(
       {
         deck: shuffledDeck,
