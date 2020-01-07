@@ -127,13 +127,29 @@ class BattlePage extends Component {
     axios.post('/api/user/winCount', { username: this.state.username, winCount: this.state.winCount }).then(res => {
       console.log("line 26 ", res.data, res.status)
       if (res.status === 200) {
-        return <Redirect to="/award" />
+       
       }
     }).catch(err => {
       console.log(err.response);
       alert("Username already exists or password could not be validated")
     })
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   getWinCount = () => {
     // console.log(this.state.username)
@@ -146,9 +162,7 @@ class BattlePage extends Component {
     })
       .then(res => {
         console.log("line 26 ", res.data, res.status)
-        if (res.status === 200) {
-          return <Redirect to="/award" />
-        }
+   
       }).catch(err => {
         console.log(err.response);
         alert("Username already exists or password could not be validated")

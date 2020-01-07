@@ -67,11 +67,11 @@ module.exports = (app) => {
      
         
             const user = await User.findOne({ username: currentUser });
-            res.send(user)
+            res.send(user.winCount)
 //             const userWinCount = await (user.winCount);
 // res.send(userWinCount)
          
-         
+
      
 
    
