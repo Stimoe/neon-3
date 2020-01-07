@@ -131,7 +131,7 @@ updateWinCount = ()=> {
   }
    
 getWinCount = ()=> {
-
+console.log(this.state.username)
   axios.get('/api/user/winCount', { username: this.state.username }).then(res => {
     console.log("line 26 ", res.data)
   
