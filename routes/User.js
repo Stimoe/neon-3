@@ -60,27 +60,20 @@ module.exports = (app) => {
         }
 
     });
-    app.get('/api/user/winCount', function (req, res) {
-        // req.user should be defined here because of the ensureAuth middleware
-        var UserUsername = req.body.username;
-      
-        User.findOne({username: req.body.username}, function (err, user) {
-          if (err) return res.json(400, {message: `user not found.`});
-      
-          // make sure you omit sensitive user information 
-          // on this object before sending it to the client.
-          res.send(user.winCount);
-        });
-      });
 
-    //   app.get("/api/user/winCount", (request, response) => {
-    //     User.findOne({ username: new ObjectId(request.params.username) }, (error, result) => {
-    //         if(error) {
-    //             return response.status(500).send(error);
-    //         }
-    //         response.send(result);
-    //     });
-    // }); 
+    app.get('/api/user/winCount', async (req, res) => {
+       
+            User.findOne({ username: req.body.username }, function(e, result){
+                if (e) return next(e)
+                res.send(result.winCount)
+              })
+            })
+            // console.log(user);
+         
+
+        
+
+
 
 
 
@@ -93,7 +86,7 @@ module.exports = (app) => {
 
     app.post('/api/user/winCount', async (req, res) => {
 
-        let newWinCount = this.body.winCount
+        let newWinCount = req.body.winCount
         await User.findOne({ username: req.body.username }, function (err, user) {
             if (err) throw err;
 
@@ -112,20 +105,6 @@ module.exports = (app) => {
 }
 
 
-// User.findById(1, function(err, user) {
-//     if (err) throw err;
-
-//     // change the users location
-//     user.location = 'uk';
-
-//     // save the user
-//     user.save(function(err) {
-//       if (err) throw err;
-
-//       console.log('User successfully updated!');
-//     });
-
-//   });
 
 
 
