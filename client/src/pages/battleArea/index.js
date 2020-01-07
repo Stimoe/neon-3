@@ -88,7 +88,7 @@ class BattlePage extends Component {
   }
 
   getCurrentWinCount = ()=>{
-    console.log(this.state.username)
+    // console.log(this.state.username)
     this.getWinCount()
   }
 
@@ -139,11 +139,7 @@ getWinCount = ()=> {
 // console.log(this.state.username)
 let user=this.state.username
 
-axios.get('/api/user/winCount', {
-  params: {
-    username: user
-  }
-})
+axios.get('/api/user/winCount?username='+user) 
 .then(function (response) {
   console.log(response);
 })
