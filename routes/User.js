@@ -35,7 +35,7 @@ module.exports = (app) => {
             })
         }
     });
-    
+
     // // Login User
     app.post('/api/user/login', async (req, res) => {
         try {
@@ -52,28 +52,27 @@ module.exports = (app) => {
             } else {
                 console.log('incorrect password');
             }
-        } catch(error) {
+        } catch (error) {
             return res.status(400).send({
                 error: true,
                 reason: err.message
             })
         }
-    
+
     });
     app.get('/api/user/winCount', async (req, res) => {
-        await User.findOne({ username: req.body.username }, function(err, response){
-let currentWinCount=response.winCount
 
-            //  res.send(currentWinCount);
-        if(err) res.send(err);
-        res.send(currentWinCount);
-          res.json(currentWinCount);
-      
-// res.send("update document success");
-                // res.send("currentWinCount");
-    })     
-})
-  
+        User.findOne({ username: req.body.username }, function (err, doc) {
+            // console.log(user);
+            if (err) throw err;
+            if (doc)
+                res.send(doc.winCount)
+            else
+                res.send("Not found");
+
+        })
+    })
+
 
 
 
@@ -85,38 +84,38 @@ let currentWinCount=response.winCount
 
     app.post('/api/user/winCount', async (req, res) => {
 
-        let newWinCount=this.body.winCount
-        await User.findOne({ username: req.body.username }, function(err, user) {
+        let newWinCount = this.body.winCount
+        await User.findOne({ username: req.body.username }, function (err, user) {
             if (err) throw err;
-          
+
             // change the users location
             user.winCount = newWinCount;
-          
+
             // save the user
-            user.save(function(err) {
-              if (err) throw err;
-          
-              res.send('User successfully updated!');
+            user.save(function (err) {
+                if (err) throw err;
+
+                res.send('User successfully updated!');
             });
-          
-          });
-        })
-    }
+
+        });
+    })
+}
 
 
 // User.findById(1, function(err, user) {
 //     if (err) throw err;
-  
+
 //     // change the users location
 //     user.location = 'uk';
-  
+
 //     // save the user
 //     user.save(function(err) {
 //       if (err) throw err;
-  
+
 //       console.log('User successfully updated!');
 //     });
-  
+
 //   });
 
 
