@@ -41,11 +41,6 @@ class BattlePage extends Component {
   };
 
 
-  // currentUser = this.props.location.state.username
-
-  // this.setState({
-  //   username: currentUser,
-  // });
 
 
   componentDidMount() {
@@ -53,10 +48,12 @@ class BattlePage extends Component {
     let currentUser = this.props.location.state.username
     this.setState({
       username: currentUser,
+    }, () => {
+      this.getCurrentWinCount()
     })
 
     console.log(this.state.username)
-    this.getWinCount()
+    // this.getWinCount()
     let localWins = 0;
     let tempWins = this.state.winCount
     // console.log(tempWins)
@@ -87,7 +84,7 @@ class BattlePage extends Component {
       currentEnemyAttack: newEnemyAttack,
       currentEnemyArmorGain: newEnemyArmorGain
     });
-   this.getCurrentWinCount()
+ 
   }
 
   getCurrentWinCount = ()=>{
