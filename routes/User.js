@@ -63,28 +63,20 @@ module.exports = (app) => {
 
     app.get('/api/user/winCount/user', async (req, res) => {
         // res.send(req.params)
-        let currentUser=req.params.username
+        let currentUser=req.params.user
         res.send(currentUser)
-        // res.send(JSON.stringify(currentUser));
-        // try {
-        //     const user = await User.findOne({ username: req.params.user });
-        //     // console.log(user);
-        //     if (!user) {
-        //         return res.status(400).send('Incorrect username');
-        //     }
-        //     //Decrypt Password
-        //     const userWinCount = await (user.winCount);
-        //     res.send(JSON.stringify(userWinCount));
-        //         // console.log("in")
-        //         // res.send('You are logged in!');
+//         try {
+//             const user = await User.findOne({ username: currentUser });
+//             const userWinCount = await (user.winCount);
+// res.send(userWinCount)
          
          
-        // } catch (error) {
-        //     return res.status(400).send({
-        //         error: true,
-        //         reason: err.message
-        //     })
-        // }
+//         } catch (error) {
+//             return res.status(400).send({
+//                 error: true,
+//                 reason: err.message
+//             })
+//         }
 
    
     })
