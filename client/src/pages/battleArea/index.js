@@ -59,7 +59,7 @@ class BattlePage extends Component {
     this.getWinCount()
     let localWins = 0;
     let tempWins = this.state.winCount
-    console.log(tempWins)
+    // console.log(tempWins)
     if (!tempWins) {
       localWins = 0
     }
@@ -67,7 +67,7 @@ class BattlePage extends Component {
       localWins = tempWins
 
     }
-    console.log(localWins);
+    // console.log(localWins);
 
     // this.atStartOfBattle()
     let currentEnemy = enemies[localWins];
@@ -87,7 +87,12 @@ class BattlePage extends Component {
       currentEnemyAttack: newEnemyAttack,
       currentEnemyArmorGain: newEnemyArmorGain
     });
-   
+   this.getCurrentWinCount()
+  }
+
+  getCurrentWinCount = ()=>{
+    console.log(this.state.username)
+    this.getWinCount()
   }
 
   componentDidUpdate(prevprops, prevState) {

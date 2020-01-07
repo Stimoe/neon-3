@@ -29,13 +29,13 @@ class Storypage extends Component {
     this.setState({
       username: currentUser,
     });
-console.log(this.state.username)
+// console.log(this.state.username)
   }
 
 
 
   handleStart= event => {
-    console.log(this.state.username)
+    // console.log(this.state.username)
     event.preventDefault();
     this.setState({
       redirect: true,
