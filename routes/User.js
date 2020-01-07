@@ -66,12 +66,17 @@ module.exports = (app) => {
         let currentUser = req.query.username
 
 
-        await User.findOne({ username: currentUser }, function (user) {
+        await User.findOne({ username: currentUser }, 'winCount', function (err, user) {
             res.send(user)
-            // newWinCount = user.winCount;
+            // newWinCount = user.winCount; 
             // res.send({ message: newWinCount });
         })
     })
+
+    dventure.findOne({ type: 'iphone' }, 'name', function (err, adventure) {});
+
+
+
 
     app.patch('/api/user/winCount/', function (req, res) {
         var WinCountAndUser = req.body; 
