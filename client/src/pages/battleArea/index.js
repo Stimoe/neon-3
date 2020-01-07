@@ -135,29 +135,25 @@ updateWinCount = ()=> {
   })
   }
    
-getWinCount = ()=> {
-console.log(this.state.username)
-  axios.get('/api/user/winCount', { username: this.state.username }).then(res => {
-    console.log("line 26 ", res.data)
-    console.log("line 26 ", res)
-  }).catch(err => {
-    console.log(err.response);
-    console.log("Username already exists or password could not be validated")
-  })
-  
-}
-
-// handleLoginFormSubmit = () => {
-//   axios.post('/api/user/login', { username: this.state.username, password: this.state.password }).then(res => {
-//     console.log("line 26 ", res.data, res.status)
-//     if(res.status===200){
-//       return  <Redirect  to="/storypage" />
-//     }
+// getWinCount = ()=> {
+// console.log(this.state.username)
+//   axios.get('/api/user/winCount', { username: this.state.username }).then(res => {
+//     console.log("line 26 ", res.data)
+//     console.log("line 26 ", res)
 //   }).catch(err => {
 //     console.log(err.response);
-//     alert("Username already exists or password could not be validated")
+//     console.log("Username already exists or password could not be validated")
 //   })
-//   }
+  
+// }
+async getWinCount(){
+  const response =
+    await axios.get("/api/user/winCount",
+        { params: {username: this.state.username}}
+    )
+  console.log(response.data)
+}
+
 
 
 
