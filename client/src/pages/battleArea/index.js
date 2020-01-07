@@ -123,15 +123,15 @@ class BattlePage extends Component {
     }
   }
 
-  // updateWinCount = () => {
-  //   axios.patch('/api/user/winCount', { username: this.state.username, winCount: this.state.winCount }) .then(res => {
-  //     console.log("line 26 ", res.data, res.status)
+  updateWinCount = () => {
+    axios.patch('/api/user/winCount', { username: this.state.username, winCount: this.state.winCount }) .then(res => {
+      console.log("line 26 ", res.data, res.status)
  
-  //   }).catch(err => {
-  //     console.log(err.response);
-  //     alert("Username already exists or password could not be validated")
-  //   })
-  // }
+    }).catch(err => {
+      console.log(err.response);
+      alert("Username already exists or password could not be validated")
+    })
+  }
 
 
 
@@ -173,7 +173,7 @@ class BattlePage extends Component {
    
       }).catch(err => {
         console.log(err.response);
-        alert("Username already exists or password could not be validated")
+        console.log("Username already exists or password could not be validated")
       })
   }
 

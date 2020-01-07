@@ -67,9 +67,23 @@ module.exports = (app) => {
 
 
         await User.findOne({ username: currentUser }, function (user) {
-            newWinCount = user.winCount;
-            res.send({ message: newWinCount });
+            res.send(user)
+            // newWinCount = user.winCount;
+            // res.send({ message: newWinCount });
         })
     })
+
+    app.patch('/api/user/winCount/', function (req, res) {
+        var WinCountAndUser = req.body; 
+        res.send(WinCountAndUser)
+        // var id = req.params.id;
+        // db.users.update({_id  : ObjectId(id)}, {$set: updateObject});
+    });
+
+
+
+
+
+
 
 }
