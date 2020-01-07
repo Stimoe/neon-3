@@ -61,7 +61,7 @@ module.exports = (app) => {
 
     });
 
-    app.get('/api/user/winCount/user', function(req, res, next){
+    app.get('/api/user/winCount/user', async (req, res) => {
         try {
             const user = await User.findOne({ username: req.params.user });
             // console.log(user);
