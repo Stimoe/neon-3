@@ -62,77 +62,14 @@ module.exports = (app) => {
     });
 
     app.get('/api/user/winCount', async (req, res) => {
-  
-        let currentUser=req.query.username 
-     
-        
-             await User.findOne({ username: currentUser }, function(user) {
-                newWinCount = user.winCount;
-                res.send({message: newWinCount});
-                })   
-              })
-         
-//             const userWinCount = await (user.winCount);
-// res.send(userWinCount)
-         
 
-     
-
-   
-    
+        let currentUser = req.query.username
 
 
-         
-
-        
-
-
-    // try {
-    //     const response = await axios.patch('http://demo0725191.mockable.io/patch_data', { new_name: 'My new cool name!' });
-    //     console.log('👉 Returned data:', response);
-    //   } catch (e) {
-    //     console.log(`😱 Axios request failed: ${e}`);
-    //   }
-
-
-
-
-
-
-
-
-    app.post('/api/user/winCount', async (req, res) => {
-
-        let newWinCount = req.body.winCount
-        await User.findOne({ username: req.body.username }, function (err, user) {
-            if (err) throw err;
-
-            // change the users location
-            user.winCount = newWinCount;
-
-            // save the user
-            user.save(function (err) {
-                if (err) throw err;
-
-                res.send('User successfully updated!');
-            });
-
-        });
+        await User.findOne({ username: currentUser }, function (user) {
+            newWinCount = user.winCount;
+            res.send({ message: newWinCount });
+        })
     })
+
 }
-
-
-
-
-
-//   user.findOneAndUpdate({winCount: newWinCount}
-//     , function (err, doc) {
-//         if (err) {
-//             res.send("update document error");
-//         } else {
-//            res.send("update document success");
-//             res.send(doc);
-//         }
-//     })
-// })
-
