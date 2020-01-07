@@ -67,7 +67,7 @@ module.exports = (app) => {
         
             User.findOne({ username: checkUserName }, function(e, result){
                 if (e) return next(e)
-                res.send(result.winCount)
+                res.send(result)
               })
             })
             // console.log(user);
