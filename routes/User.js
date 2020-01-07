@@ -60,18 +60,33 @@ module.exports = (app) => {
         }
 
     });
-    app.get('/api/user/winCount', async (req, res) => {
+    app.get('/api/user/winCount', function (req, res) {
+        // req.user should be defined here because of the ensureAuth middleware
+        var UserUsername = req.body.username;
+      
+        User.findOne({username: UserUsername}, function (err, user) {
+          if (err) return res.json(400, {message: `user not found.`});
+      
+          // make sure you omit sensitive user information 
+          // on this object before sending it to the client.
+          res.json(user);
+        });
+      });
 
-        User.findOne({ username: req.body.username }, function (err, doc) {
-            // console.log(user);
-            if (err) throw err;
-            if (doc)
-                res.send(doc.winCount)
-            else
-                res.send("Not found");
+    // app.get('/api/user/winCount', async (req, res) => {
 
-        })
-    })
+    //     User.findOne({ username: req.body.username }, function (err, doc) {
+    //         // console.log(user);
+    //         if (err) throw err;
+    //         if (doc)
+    //             res.send(doc.winCount)
+    //         else
+    //             res.send("Not found");
+
+    //     })
+
+    //     res.send(doc.winCount)
+    // })
 
 
 
