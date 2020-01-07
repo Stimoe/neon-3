@@ -64,7 +64,7 @@ module.exports = (app) => {
     app.get('/api/user/winCount', async (req, res) => {
         // res.send(req.params)
         
-        let currentUser=req.req.query.username
+        let currentUser=req.query.username
         res.send(currentUser)
 //         try {
 //             const user = await User.findOne({ username: currentUser });
