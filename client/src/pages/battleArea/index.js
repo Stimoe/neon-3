@@ -142,17 +142,17 @@ console.log(this.state.username)
   
 }
 
-handleLoginFormSubmit = () => {
-  axios.post('/api/user/login', { username: this.state.username, password: this.state.password }).then(res => {
-    console.log("line 26 ", res.data, res.status)
-    if(res.status===200){
-      return  <Redirect  to="/storypage" />
-    }
-  }).catch(err => {
-    console.log(err.response);
-    alert("Username already exists or password could not be validated")
-  })
-  }
+// handleLoginFormSubmit = () => {
+//   axios.post('/api/user/login', { username: this.state.username, password: this.state.password }).then(res => {
+//     console.log("line 26 ", res.data, res.status)
+//     if(res.status===200){
+//       return  <Redirect  to="/storypage" />
+//     }
+//   }).catch(err => {
+//     console.log(err.response);
+//     alert("Username already exists or password could not be validated")
+//   })
+//   }
 
 
 
