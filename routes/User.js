@@ -61,27 +61,30 @@ module.exports = (app) => {
 
     });
 
-    app.get('/api/user/winCount', async (req, res) => {
-       let checkUserName=req.params.username
-res.send(checkUserName)
-        
+    app.get('/api/user/winCount/:keyword', function(req, res, next){
+        User.findOne({userName: req.params.keyword},
+            function (err, post) {
+                       if (err) return next(err);
+                       res.json(post);
+                     });
+                   });
             // User.findOne({ username: checkUserName }, function(e, result){
             //     if (e) return next(e)
             //     res.send(result)
             //   })
-            })
-            // console.log(user);
-
-            // app.get('/name', (req, res) => {
-            //     User(req.body).find().toArray( (err, results) => {
-            //       res.send(results)
-            //     });
-            // });
+            
+       
          
 
         
 
-
+            // .get('/:keyword', function(req, res, next){
+            //     User.findOne({$or:[{userName: req.params.keyword}{userId:req.params.keyword}]},
+            //         function (err, post) {
+            //                    if (err) return next(err);
+            //                    res.json(post);
+            //                  });
+            //                });
 
 
 
