@@ -73,7 +73,7 @@ module.exports = (app) => {
         })
     })
 
-    dventure.findOne({ type: 'iphone' }, 'name', function (err, adventure) {});
+    // dventure.findOne({ type: 'iphone' }, 'name', function (err, adventure) {});
 
 
 
