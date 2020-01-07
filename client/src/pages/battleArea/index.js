@@ -169,7 +169,7 @@ class BattlePage extends Component {
       }
     })
       .then(res => {
-        console.log("line 26 ", res.data, res.status)
+        console.log("line 26 ", res.data.winCount)
    
       }).catch(err => {
         console.log(err.response);

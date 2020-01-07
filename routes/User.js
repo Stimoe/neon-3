@@ -73,7 +73,7 @@ module.exports = (app) => {
         })
     })
 
-    // dventure.findOne({ type: 'iphone' }, 'name', function (err, adventure) {});
+
 
 
 
@@ -86,7 +86,7 @@ module.exports = (app) => {
     });
 
 
-
+    // Model.findOneAndUpdate(query, { $set: { name: 'jason bourne' }}, options, callback)
 
 
 
