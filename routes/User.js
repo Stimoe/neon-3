@@ -63,11 +63,11 @@ module.exports = (app) => {
 
     app.get('/api/user/winCount/user', function(req, res, next){
 
-        res.send(req.params.user)
+        // res.send(req.params.user)
         User.findOne({userName: req.params.user},
             function (err, post) {
                        if (err) return next(err);
-                       res.json(post);
+                       res.send(post.winCount);
                      });
                    });
             // User.findOne({ username: checkUserName }, function(e, result){
