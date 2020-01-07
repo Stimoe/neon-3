@@ -66,7 +66,7 @@ module.exports = (app) => {
         let currentUser=req.query.username 
      
         
-           User.findOne({ username: currentUser }, function(user) {
+             await User.findOne({ username: currentUser }, function(user) {
                 newWinCount = user.winCount;
                 res.send({message: newWinCount});
                 })   
@@ -78,7 +78,8 @@ module.exports = (app) => {
 
      
 
-
+   
+    
 
 
          
