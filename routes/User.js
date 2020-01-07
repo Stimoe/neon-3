@@ -61,9 +61,10 @@ module.exports = (app) => {
 
     });
 
-    app.get('/api/user/winCount/user', async (req, res) => {
+    app.get('/api/user/winCount', async (req, res) => {
         // res.send(req.params)
-        let currentUser=req.config.params.username
+        
+        let currentUser=req.req.query.username
         res.send(currentUser)
 //         try {
 //             const user = await User.findOne({ username: currentUser });
@@ -77,19 +78,11 @@ module.exports = (app) => {
 //                 reason: err.message
 //             })
 //         }
-config.params.username
+
    
     })
 
 
-
-    // res.send(req.params.user)
-    // let checkUserName=req.params.user
-    //       User.findOne({ username: checkUserName }, function(e, result){
-    //           if (e) return next(e)
-    //           res.send(result)
-    //         })
-       
          
 
         
