@@ -139,7 +139,10 @@ getWinCount = ()=> {
 console.log(this.state.username)
 let user=this.state.username
 
-  axios.get('/api/user/winCount/:'+user, ).then(res => {
+axios.get('/api/user/winCount/', {
+  params: {
+    username: user
+  }.then(res => {
     console.log("line 26 ", res.data)
  
   }).catch(err => {
@@ -147,12 +150,20 @@ let user=this.state.username
     console.log("Username already exists or password could not be validated")
   })
   
+})
+  
 }
 
 
 
 
+// axios.get('/api/user/winCount/:'+user, ).then(res => {
+//   console.log("line 26 ", res.data)
 
+// }).catch(err => {
+//   console.log(err.response);
+//   console.log("Username already exists or password could not be validated")
+// })
 
 
 

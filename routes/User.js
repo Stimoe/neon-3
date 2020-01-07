@@ -65,6 +65,7 @@ module.exports = (app) => {
 
         let currentUser=req.params.user
         res.send(currentUser)
+        // res.send(JSON.stringify(currentUser));
         // try {
         //     const user = await User.findOne({ username: req.params.user });
         //     // console.log(user);
