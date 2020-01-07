@@ -62,22 +62,21 @@ module.exports = (app) => {
     });
 
     app.get('/api/user/winCount', async (req, res) => {
-        // res.send(req.params)
   
         let currentUser=req.query.username 
-        res.send(currentUser)
-//         try {
-//             const user = await User.findOne({ username: currentUser });
-//             const userWinCount = await (user.winCount);
-// res.send(userWinCount)
+        // 
+        try {
+            const user = await User.findOne({ username: currentUser });
+            const userWinCount = await (user.winCount);
+res.send(userWinCount)
          
          
-//         } catch (error) {
-//             return res.status(400).send({
-//                 error: true,
-//                 reason: err.message
-//             })
-//         }
+        } catch (error) {
+            return res.status(400).send({
+                error: true,
+                reason: err.message
+            })
+        }
 
    
     })
