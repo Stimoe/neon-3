@@ -63,12 +63,20 @@ module.exports = (app) => {
 
     app.get('/api/user/winCount', async (req, res) => {
        
-            User.findOne({ username: req.body.username }, function(e, result){
-                if (e) return next(e)
-                res.send(result)
-              })
+
+        res.send(req.body)
+            // User.findOne({ username: req.body }, function(e, result){
+            //     if (e) return next(e)
+            //     res.send(result)
+            //   })
             })
             // console.log(user);
+
+            // app.get('/name', (req, res) => {
+            //     User(req.body).find().toArray( (err, results) => {
+            //       res.send(results)
+            //     });
+            // });
          
 
         
