@@ -44,12 +44,15 @@ class BattlePage extends Component {
 
 
   componentDidMount() {
-
+    let currentWinCount= this.props.location.state.winCount
     let currentUser = this.props.location.state.username
     this.setState({
       username: currentUser,
+      winCount: currentWinCount
     }, () => {
       this.getCurrentWinCount()
+      //testing this function
+      
     })
 
 
@@ -88,8 +91,12 @@ class BattlePage extends Component {
   }
 
   getCurrentWinCount = () => {
-    // console.log(this.state.username)
-    this.getWinCount()
+    // this.getWinCount()
+
+
+    //testing this function
+
+    this.updateWinCount()
   }
 
   componentDidUpdate(prevprops, prevState) {
@@ -132,23 +139,6 @@ class BattlePage extends Component {
       alert("Username already exists or password could not be validated")
     })
   }
-
-
-
-
-
-
-
-
-  // axios.post('/api/user/winCount', { username: this.state.username, winCount: this.state.winCount }).then(res => {
-  //   console.log("line 26 ", res.data, res.status)
-  //   if (res.status === 200) {
-     
-  //   }
-  // }).catch(err => {
-  //   console.log(err.response);
-  //   alert("Username already exists or password could not be validated")
-  // })
 
 
 

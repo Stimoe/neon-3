@@ -14,6 +14,7 @@ class Storypage extends Component {
   constructor() {
     super();
     this.state = {
+      winCount: 0,
       username: "",
       password: "",
       loggedInUser: "",
@@ -28,9 +29,46 @@ class Storypage extends Component {
 
     this.setState({
       username: currentUser,
-    });
+    }, () => {
+      this.getCurrentWinCount()
+      //testing this function
+      
+    })
 // console.log(this.state.username)
   }
+
+  getCurrentWinCount = () => {
+    this.getWinCount()
+
+
+  }
+
+  getWinCount = () => {
+    // console.log(this.state.username)
+    let user = this.state.username
+
+    axios.get('/api/user/winCount', {
+      params: {
+        username: user
+      }
+    })
+      .then(res => {
+        console.log("line 26 ", res.data.winCount)
+   let currentUserWinCount=res.data.winCount
+this.setState({
+  winCount: currentUserWinCount
+})
+
+
+      }).catch(err => {
+        console.log(err.response);
+        console.log("Username already exists or password could not be validated")
+      })
+  }
+
+
+
+
 
 
 
@@ -53,7 +91,10 @@ class Storypage extends Component {
     if (redirect) {
       return <Redirect to={{
        pathname: '/battlepage',
-       state: { username: this.state.username }
+       state: { 
+         username: this.state.username,
+        winCount: this.state.winCount
+        }
    }}
    />
     }
