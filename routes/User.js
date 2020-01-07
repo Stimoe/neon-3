@@ -66,16 +66,19 @@ module.exports = (app) => {
         let currentUser=req.query.username 
      
         
-            const user = await User.findOne({ username: currentUser });
-            res.send(user.winCount)
+           User.findOne({ username: currentUser }, function(user) {
+                newWinCount = user.winCount;
+                res.send({message: newWinCount});
+                })   
+              })
+         
 //             const userWinCount = await (user.winCount);
 // res.send(userWinCount)
          
 
      
 
-   
-    })
+
 
 
          
@@ -83,7 +86,12 @@ module.exports = (app) => {
         
 
 
-
+    // try {
+    //     const response = await axios.patch('http://demo0725191.mockable.io/patch_data', { new_name: 'My new cool name!' });
+    //     console.log('👉 Returned data:', response);
+    //   } catch (e) {
+    //     console.log(`😱 Axios request failed: ${e}`);
+    //   }
 
 
 

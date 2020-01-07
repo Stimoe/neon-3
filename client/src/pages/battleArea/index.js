@@ -151,6 +151,9 @@ class BattlePage extends Component {
 
 
 
+
+
+
   getWinCount = () => {
     // console.log(this.state.username)
     let user = this.state.username
