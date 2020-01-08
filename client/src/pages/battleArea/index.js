@@ -6,7 +6,7 @@ import DeckBrain from "../../components/deck-managment";
 import HealthBar from "../../components/plyr-healthbar";
 import EHBar from "../../components/ehealthbar";
 import { Redirect } from 'react-router-dom';
-
+import deckJson from "../../cards.json";
 import FireEm from './fire.gif';
 import IdleEm from './idle.gif';
 import Death from './death.gif';
@@ -63,7 +63,7 @@ class BattlePage extends Component {
       let newEnemyArmorGain = currentEnemy.armorGain;
       this.setState({
         maxEnemyHealth: currentEnemyHealth,
-
+deckRecieved: true,
         currentEnemyHealth: currentEnemyHealth,
         currentEnemyArmor: currentEnemyArmor,
         currentEnemyAbilities: newEnemyAbilities,
@@ -145,11 +145,14 @@ class BattlePage extends Component {
         let currentUserWinCount=res.data.winCount
         console.log(newUserDeck);
         console.log(currentUserWinCount);
+
+        if(newUserDeck.length<=1){
+          newUserDeck=deckJson
+        }
         
         this.setState({
           winCount: currentUserWinCount,
           currentUserDeck: newUserDeck,
-        deckRecieved: true,
         })
       })
   }
