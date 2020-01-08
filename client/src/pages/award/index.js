@@ -59,7 +59,7 @@ class Save extends Component {
 
 
 drawn = (p) => {
-  deck=this.refs.child.newDeck;
+ let deck=this.refs.child.newDeck;
   console.log(deck);
   
   
