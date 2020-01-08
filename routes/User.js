@@ -91,10 +91,10 @@ module.exports = (app) => {
     });
  
     app.patch('/api/user/newDeck', async (req, res) => { 
-        var user = req.body.username
+        var currentUser = req.body.username
         var newDeck=req.body.userDeck
         res.send(newDeck)
-        const user = await User.findOne({username: user})
+        const user = await User.findOne({username: currentUser})
         User.user.userDeck.insert(newDeck, function (err, docs) {
                 if (err){ 
                     return console.error(err);
