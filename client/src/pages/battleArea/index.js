@@ -46,16 +46,12 @@ class BattlePage extends Component {
 
 
   componentDidMount() {
-    let currentWinCount = this.props.location.state.winCount
     let currentUser = this.props.location.state.username
-    // this.getCurrentuser()
 
-    // let currentDeck=this.props.location.state.userDeck
-    // console.log(currentDeck);
 
     this.setState({
       username: currentUser,
-      winCount: currentWinCount,
+
       // currentUserDeck: currentDeck
     }, () => {
       this.getCurrentUser()
@@ -153,30 +149,13 @@ class BattlePage extends Component {
         console.log(newUserDeck);
         console.log(currentUserWinCount);
         
-        // this.setState({
-        //   winCount: currentUserWinCount
-      })
-  }
-
-  getWinCount = () => {
-
-    let user = this.state.username
-
-    axios.get('/api/user/winCount', {
-      params: {
-        username: user
-      }
-    })
-      .then(res => {
-        console.log("line 26 ", res.data.winCount)
-        let currentUserWinCount = res.data.winCount
         this.setState({
-          winCount: currentUserWinCount
+          winCount: currentUserWinCount,
+          currentUserDeck: newUserDeck,
+        deckRecieved: true,
         })
       })
   }
-
-
 
 
   renderRedirectToGameOver = () => {
@@ -446,6 +425,8 @@ class BattlePage extends Component {
 
   render() {
 
+    if(this.state.deckRecieved){
+
     const userTurnOver = this.state.userTurnOver;
     let enemyHealth = this.state.currentEnemyHealth;
 
@@ -505,8 +486,8 @@ class BattlePage extends Component {
           <DeckBrain
             readPlayed={this.handlePlayedCards}
             hasWon={this.state.winCount}
-
-
+            currentDeck={this.state.currentUserDeck}
+          
 
           />
           {this.renderRedirect()}
@@ -514,7 +495,7 @@ class BattlePage extends Component {
       </div>
     );
   }
-
+  }
 }
 export default BattlePage;
 

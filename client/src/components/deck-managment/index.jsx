@@ -17,6 +17,16 @@ class DeckBrain extends Component {
     turnEnded: false
   };
 
+  componentWillReceiveProps(props){
+    let newDeck = this.props.currentDeck
+    
+
+
+    this.setState({deck: newDeck})
+  }
+
+
+
   componentWillMount() {
     let newestDeck = [];
     let newCards = [];
@@ -28,7 +38,7 @@ class DeckBrain extends Component {
     //     newestDeck=[...newCards,...deckJson]
     //   }
     //   else {
-    newestDeck = deckJson;
+    newestDeck = this.state.deck;
 
     // console.log(newestDeck)
     const shuffledDeck = this.shuffleCards(newestDeck);
@@ -44,30 +54,11 @@ class DeckBrain extends Component {
   }
 
 
+  // changeDeck = () => {
+  //   this.setState({
+  //     deck: "Bruce Wayne"
+  //   });
 
-  getCurrentDeck = () => {
-
-    
-  }
-  // }
-
-  // saveCards = deck =>{
-
-  //       const userData = {
-  //   deck:this.state.deck
-  //     };
-  //     Axios.post("/api/users/login", userData)
-  //     .then(data => {
-  //       console.log(data);
-
-  //     })
-  //     .catch(err => {
-  //       console.log(err.response);
-
-  //     });
-
-  //   console.log(userData);
-  // }
 
   componentDidUpdate(prevprops, prevState) {
     const turnEnded = this.state.turnEnded !== prevState.turnEnded;
@@ -141,6 +132,8 @@ class DeckBrain extends Component {
       turnEnded: turn
     });
   };
+
+ 
 
   toHand = index => {
     let tempHand = this.state.hand;
