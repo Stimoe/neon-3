@@ -44,7 +44,7 @@ class BattlePage extends Component {
 
 
   componentDidMount() {
-    let currentWinCount= this.props.location.state.winCount
+    let currentWinCount = this.props.location.state.winCount
     let currentUser = this.props.location.state.username
     this.setState({
       username: currentUser,
@@ -60,7 +60,7 @@ class BattlePage extends Component {
       let newEnemyArmorGain = currentEnemy.armorGain;
       this.setState({
         maxEnemyHealth: currentEnemyHealth,
-  
+
         currentEnemyHealth: currentEnemyHealth,
         currentEnemyArmor: currentEnemyArmor,
         currentEnemyAbilities: newEnemyAbilities,
@@ -84,9 +84,9 @@ class BattlePage extends Component {
       }, () => {
         this.updateWinCount();
         //testing this function
-        
+
       })
-      
+
     }
     if (turnEnded && !frozen) {
       this.firstEnemyAction();
@@ -104,21 +104,21 @@ class BattlePage extends Component {
   }
 
   updateWinCount = () => {
-    axios.patch('/api/user/winCount', { username: this.state.username, winCount: 2 }) .then(res => {
+    axios.patch('/api/user/winCount', { username: this.state.username, winCount: 2 }).then(res => {
       console.log("line 26 ", res.data, res.status)
- 
+
     }).catch(err => {
       console.log(err.response);
       alert("Username already exists or password could not be validated")
       this.setState({
         redirect: true,
       })
-    
-      
+
+
     })
   }
 
- 
+
 
 
 
@@ -138,7 +138,7 @@ class BattlePage extends Component {
   //   })
   //     .then(res => {
   //       console.log("line 26 ", res.data.winCount)
-   
+
   //     }).catch(err => {
   //       console.log(err.response);
   //       console.log("Username already exists or password could not be validated")
@@ -392,11 +392,12 @@ class BattlePage extends Component {
       }, () => {
         this.updateWinCount();
         //testing this function
-        
+
+      }, () => {
+        return (
+          <GameOver />
+        )
       })
-      return (
-        <GameOver />
-      )
     }
 
     if (this.state.winCount === 3) {
@@ -405,7 +406,7 @@ class BattlePage extends Component {
       }, () => {
         this.updateWinCount();
         //testing this function
-        
+
       })
       return (
         <GameWon />
