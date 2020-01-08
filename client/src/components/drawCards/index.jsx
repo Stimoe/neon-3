@@ -89,11 +89,11 @@ showAlert() {
      finalNewCards: tempNewDeck
     }, this.drawNewCards);
     if(this.state.finalNewCards.length === 3){
-      this.props.parentCallback(this.state.finalNewCards);
+      // this.props.parentCallback(this.state.finalNewCards);
       console.log(this.state.finalNewCards)
       // localStorage.setItem('userNewDeck', JSON.stringify(this.state.finalNewCards));
      this.props.drawn(true)
-     
+     this.props.newDeck(this.state.finalNewCards)
     }
     
   };

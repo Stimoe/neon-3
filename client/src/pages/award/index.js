@@ -52,15 +52,18 @@ class Save extends Component {
 
   }
 
+  updateDeck = (deck) => {
 
+    console.log(deck);
+    
+  }
  
 
 
 
 
 drawn = (p) => {
- let deck=this.refs.child.newDeck;
-  console.log(deck);
+
   
   
   if(p){
@@ -132,7 +135,7 @@ renderRedirect = () => {
         newDeck={this.state.finalNewCards}
         readPlayed={this.handlePlayedCards}
       
-        
+        updateDeck={this.newDeck}
         drawn={this.drawn}
         />
         </div>
