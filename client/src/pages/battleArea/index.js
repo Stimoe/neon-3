@@ -138,7 +138,7 @@ class BattlePage extends Component {
   }
 
   getCurrentUser = () => {
-    // console.log(this.state.username)
+ 
     let user = this.state.username
 
     axios.get('/api/user/currentUser', {
@@ -147,15 +147,19 @@ class BattlePage extends Component {
       }
     })
       .then(res => {
-        console.log("line 26 ", res.data)
-        //    let currentUserWinCount=res.data.winCount
+        console.log(res.data)
+        let newUserDeck=res.data.userDeck
+        let currentUserWinCount=res.data.winCount
+        console.log(newUserDeck);
+        console.log(currentUserWinCount);
+        
         // this.setState({
         //   winCount: currentUserWinCount
       })
   }
 
   getWinCount = () => {
-    // console.log(this.state.username)
+
     let user = this.state.username
 
     axios.get('/api/user/winCount', {
