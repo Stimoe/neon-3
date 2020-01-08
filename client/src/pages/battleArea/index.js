@@ -55,21 +55,7 @@ class BattlePage extends Component {
     }, () => {
       this.getCurrentUser()
     }, () => {
-      let currentEnemy = enemies[this.state.winCount];
-      let currentEnemyHealth = currentEnemy.health;
-      let currentEnemyArmor = currentEnemy.armor;
-      let newEnemyAbilities = currentEnemy.actions;
-      let newEnemyAttack = currentEnemy.attack;
-      let newEnemyArmorGain = currentEnemy.armorGain;
-      this.setState({
-        maxEnemyHealth: currentEnemyHealth,
-deckRecieved: true,
-        currentEnemyHealth: currentEnemyHealth,
-        currentEnemyArmor: currentEnemyArmor,
-        currentEnemyAbilities: newEnemyAbilities,
-        currentEnemyAttack: newEnemyAttack,
-        currentEnemyArmorGain: newEnemyArmorGain
-      });
+      
     })
   }
 
@@ -132,6 +118,27 @@ deckRecieved: true,
     })
   }
 
+setUserVariable = () => {
+
+  let currentEnemy = enemies[this.state.winCount];
+  let currentEnemyHealth = currentEnemy.health;
+  let currentEnemyArmor = currentEnemy.armor;
+  let newEnemyAbilities = currentEnemy.actions;
+  let newEnemyAttack = currentEnemy.attack;
+  let newEnemyArmorGain = currentEnemy.armorGain;
+  this.setState({
+    maxEnemyHealth: currentEnemyHealth,
+    currentEnemyHealth: currentEnemyHealth,
+    currentEnemyArmor: currentEnemyArmor,
+    currentEnemyAbilities: newEnemyAbilities,
+    currentEnemyAttack: newEnemyAttack,
+    currentEnemyArmorGain: newEnemyArmorGain
+  });
+}
+
+
+
+
   getCurrentUser = () => {
     let user = this.state.username
     axios.get('/api/user/currentUser', {
@@ -140,7 +147,7 @@ deckRecieved: true,
       }
     })
       .then(res => {
-        console.log(res.data)
+        // console.log(res.data)
         let newUserDeck=res.data.userDeck
         let currentUserWinCount=res.data.winCount
         console.log(newUserDeck.length);
@@ -153,6 +160,11 @@ deckRecieved: true,
         this.setState({
           winCount: currentUserWinCount,
           currentUserDeck: newUserDeck,
+        }, ()=> {
+          console.log(this.state.currentUserDeck);
+          this.setState({
+            deckRecieved: true,
+          })
         })
       }
       })
