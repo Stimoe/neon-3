@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import Cards from "../cards";
 import newCardsFromJson from "../../newCards.json";
-var UserInitialDeck = require('../../cards.json');
+var UserInitialDeck = require("../../cards.json");
 
 class DrawBrain extends Component {
-  constructor(props){
-    super(props)
-    console.log('tessssst');
-    
+  constructor(props) {
+    super(props);
+    console.log("tessssst");
   }
   state = {
     newCards: [],
@@ -15,15 +14,13 @@ class DrawBrain extends Component {
     newDrawnCards: [],
     drawArea: [],
     turnEnded: false,
-    finalNewCards:[],
+    finalNewCards: [],
     currentDeck: UserInitialDeck, //make this an or statement
     deckBuilt: false
   };
 
-
   componentDidMount() {
-
-  console.log('tessssst', this.currentDeck);
+    console.log("tessssst", this.currentDeck);
     const newCardsShuffled = this.shuffleCards(newCardsFromJson);
     console.log(newCardsShuffled);
 
@@ -32,51 +29,44 @@ class DrawBrain extends Component {
         newCards: newCardsShuffled
       },
       this.drawNewCards
-    )
+    );
   }
 
   drawNewCards = () => {
-
     let tempDeck = [...this.state.newCards];
     const tempDraw = [];
-    const shuffledDeck = [...this.shuffleCards(tempDeck)]
-    console.log(tempDeck)
+    const shuffledDeck = [...this.shuffleCards(tempDeck)];
+    console.log(tempDeck);
     while (tempDraw.length < 3) {
-      console.log("draws",tempDraw);
+      console.log("draws", tempDraw);
       let tempCard = shuffledDeck.shift();
       tempDraw.push(tempCard);
     }
     this.setState({
       newDrawnCards: tempDraw
     });
-  
   };
 
+  //   addNewCards = ()=> {
 
+  //       const userData = {
+  //  addedCards:this.state.finalNewCards
+  //     };
+  //     Axios.post("/api/users/login", userData)
+  //     .then(data => {
+  //       console.log(data);
 
+  //     })
+  //     .catch(err => {
+  //       console.log(err.response);
+  //     });
+  //   console.log(userData);
+  //   }
 
-//   addNewCards = ()=> {
+  showAlert() {
+    let finalDeck = this.state.finalNewCards;
+  }
 
-//       const userData = {
-//  addedCards:this.state.finalNewCards
-//     };
-//     Axios.post("/api/users/login", userData)
-//     .then(data => {
-//       console.log(data);
-   
-//     })
-//     .catch(err => {
-//       console.log(err.response);   
-//     });
-//   console.log(userData);
-//   }
-
-showAlert() {
-  let finalDeck = this.state.finalNewCards;
-}
-
-
- 
   toDraw = index => {
     // console.log(this.state.hand);
 
@@ -85,26 +75,27 @@ showAlert() {
     let tempNewDeck = this.state.finalNewCards;
     tempNewDeck.push(card);
 
-    this.setState({
-     finalNewCards: tempNewDeck
-    }, this.drawNewCards);
-    if(this.state.finalNewCards.length === 3){
+    this.setState(
+      {
+        finalNewCards: tempNewDeck
+      },
+      this.drawNewCards
+    );
+    if (this.state.finalNewCards.length === 3) {
       // this.props.parentCallback(this.state.finalNewCards);
-      console.log(this.state.finalNewCards)
+      console.log(this.state.finalNewCards);
       // localStorage.setItem('userNewDeck', JSON.stringify(this.state.finalNewCards));
-      let currentNewDeck=this.state.finalNewCards
-      this.props.newDeck(currentNewDeck)
-     this.props.drawn(true)
+      let currentNewDeck = this.state.finalNewCards;
+      console.log("right before send props ", currentNewDeck);
+      
+      this.props.newDeck(currentNewDeck);
+      // this.props.drawn(true);
     }
-    
   };
 
-//   sendData = () => {
-//     this.props.parentCallback(this.state.finalNewCards);
-// }
-
-
-
+  //   sendData = () => {
+  //     this.props.parentCallback(this.state.finalNewCards);
+  // }
 
   shuffleCards = cards => {
     let randomCardsArray = [];
