@@ -94,8 +94,14 @@ module.exports = (app) => {
         var user = req.body.username
         var newDeck=req.body.userDeck
         res.send(newDeck)
-        // const updatedDeck = await User.findOneAndUpdate({username: user}, { userDeck: newDeck})
-        // res.send(updatedDeck)
+        const user = await User.findOne({username: user})
+        User.user.userDeck.insert(newDeck, function (err, docs) {
+                if (err){ 
+                    return console.error(err);
+                } else {
+                 res.send("updated ", user, "with ", docs)
+                }
+              })
     })
 
 
