@@ -67,14 +67,11 @@ module.exports = (app) => {
         })
     })
 
-    app.get('/api/user/currentDeck', async (req, res) => {
+    app.get('/api/user/currentUser', async (req, res) => {
         let currentUser = req.query.username
-        await User.findOne({ username: currentUser }, 'userDeck', function (err, user) {
+        await User.findOne({ username: currentUser }, function (err, user) {
             res.send(user)
         })
-
-
-
     })
 
 
