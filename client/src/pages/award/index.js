@@ -5,7 +5,7 @@ import "./style.css";
 import DrawBrain from "../../components/drawCards";
 import { Redirect } from 'react-router-dom';
 // import { booleanLiteral } from "@babel/types";
-import { Redirect } from "react-router-dom";
+
 var UserInitialDeck = require("../../cards.json");
 
 
@@ -13,6 +13,7 @@ class Save extends Component {
   constructor() {
     super();
     this.state = {
+      redirect: false,
       username: "",
       userDeck: UserInitialDeck,
       winCount: 0,
@@ -80,7 +81,7 @@ drawn = (p) => {
 }
 
 renderRedirect = () => {
-  if (redirect) {
+  if (this.state.redirect) {
     return <Redirect to={{
      pathname: '/battlepage',
      state: { 
