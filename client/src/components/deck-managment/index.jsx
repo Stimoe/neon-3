@@ -42,6 +42,13 @@ class DeckBrain extends Component {
       this.drawCards
     );
   }
+
+
+
+  getCurrentDeck = () => {
+
+    
+  }
   // }
 
   // saveCards = deck =>{

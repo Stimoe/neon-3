@@ -67,6 +67,23 @@ module.exports = (app) => {
         })
     })
 
+    app.get('/api/user/currentDeck', async (req, res) => {
+        let currentUser = req.query.username
+        await User.findOne({ username: currentUser }, 'userDeck', function (err, user) {
+            res.send(user)
+        })
+
+
+
+    })
+
+
+
+
+
+
+
+
     app.patch('/api/user/winCount/', async (req, res) => { 
         var user = req.body.username
         var newWinCount=req.body.winCount
