@@ -130,9 +130,9 @@ renderRedirect = () => {
         <div>
           <div className="landing6"></div>
           <div className="awardCards">
-        <DrawBrain ref="child"
+        <DrawBrain 
        
-        newDeck={this.state.finalNewCards}
+        newDeck2={this.state.finalNewCards}
         readPlayed={this.handlePlayedCards}
       
         updateDeck={this.newDeck}

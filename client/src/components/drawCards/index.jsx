@@ -63,9 +63,7 @@ class DrawBrain extends Component {
   //   console.log(userData);
   //   }
 
-  showAlert() {
-    let finalDeck = this.state.finalNewCards;
-  }
+ 
 
   toDraw = index => {
     // console.log(this.state.hand);
@@ -88,8 +86,8 @@ class DrawBrain extends Component {
       let currentNewDeck = this.state.finalNewCards;
       console.log("right before send props ", currentNewDeck);
       
-      this.props.newDeck(currentNewDeck);
-      // this.props.drawn(true);
+      // this.props.newDeck(currentNewDeck);
+      this.props.drawn(currentNewDeck);
     }
   };
 
