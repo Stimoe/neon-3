@@ -24,12 +24,12 @@ class Save extends Component {
   componentDidMount() {
 
     let currentUser = this.props.location.state.username
-    let newUserDeck = this.props.location.state.finalNewCards
+    
     console.log("New User Deck ",newUserDeck);
     
     this.setState({
       username: currentUser,
-      userDeck: newUserDeck
+ 
     }, () => {
       // this.getCurrentWinCount()
       //testing this function
@@ -104,6 +104,11 @@ renderRedirect = () => {
  />
   }
 }
+
+callbackFunction = (childData) => {
+  this.setState({userDeck: childData})
+}
+
 
 // onSubmit = e => {
 //     e.preventDefault();
@@ -209,8 +214,10 @@ renderRedirect = () => {
           <div className="landing6"></div>
           <div className="awardCards">
         <DrawBrain
+        parentCallback = {this.callbackFunction}
         readPlayed={this.handlePlayedCards}
         newDeck={this.state.finalNewCards}
+      
         
         drawn={this.drawn}
         />

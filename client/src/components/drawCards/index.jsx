@@ -87,14 +87,21 @@ class DrawBrain extends Component {
      finalNewCards: tempNewDeck
     }, this.drawNewCards);
     if(this.state.finalNewCards.length === 3){
-      // this.addNewCards(this.state.finalNewCards)
+      this.props.parentCallback(this.state.finalNewCards);
       console.log(this.state.finalNewCards)
-      localStorage.setItem('userNewDeck', JSON.stringify(this.state.finalNewCards));
+      // localStorage.setItem('userNewDeck', JSON.stringify(this.state.finalNewCards));
      this.props.drawn(true)
      
     }
     
   };
+
+//   sendData = () => {
+//     this.props.parentCallback(this.state.finalNewCards);
+// }
+
+
+
 
   shuffleCards = cards => {
     let randomCardsArray = [];
