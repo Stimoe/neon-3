@@ -22,21 +22,13 @@ class Save extends Component {
   }
 
   componentDidMount() {
-
     let currentUser = this.props.location.state.username
-    
- 
-    
     this.setState({
       username: currentUser,
- 
     }, () => {
-      this.updateDeck ()
-      console.log(this.state.username);
-      
-      
+
     })
-// console.log(this.state.username)
+
   }
 
 
@@ -53,25 +45,49 @@ class Save extends Component {
 
   }
 
-  updateDeck = (deck) => {
+  addCardsToServer = ()=> {
+    axios.patch('/api/user/newDeck', { username: this.state.username, userDeck: this.state.userDeck }).then(res => {
+      console.log(res.data)
+    }).catch(err => {
+          console.log(err.response);
+          console.log("Username already exists or password could not be validated")
+          // this.setState({
+          //   redirect: true,
+          // })
+    
+    
+        })
 
-    console.log(deck);
+  }
+  // updateWinCount = () => {
+  //   axios.patch('/api/user/winCount', { username: this.state.username, winCount: this.state.winCount }).then(res => {
+  //     console.log("line 26 ", res.data, res.status)
+
+  //   }).catch(err => {
+  //     console.log(err.response);
+  //     console.log("Username already exists or password could not be validated")
+  //     this.setState({
+  //       redirect: true,
+  //     })
+
+
+  //   })
+  // }
+
+
+
+
+drawn = (newDrawnCards) => {
+
+  let currentDeck=this.state.userDeck
+  for (let i = 0; i < newDrawnCards.length; i++) {
+    currentDeck.push(newDrawnCards[i])
     
   }
- 
-
-
-
-
-drawn = (p) => {
-console.log(this.state.userDeck);
-
-  console.log(p);
-  let currentDeck=this.state.userDeck
-  currentDeck.push(p)
   console.log(currentDeck);
+  this.addCardsToServer()
   
-  if(p){
+  if(newDrawnCards){
     this.setState({
       deckDrawn:true
     })
@@ -84,7 +100,6 @@ renderRedirect = () => {
      pathname: '/battlepage',
      state: { 
        username: this.state.username,
-      userDeck: this.state.userDeck
       }
  }}
  />

@@ -399,36 +399,6 @@ class BattlePage extends Component {
     const userTurnOver = this.state.userTurnOver;
     let enemyHealth = this.state.currentEnemyHealth;
 
-
-
-    // if (this.state.userHealth <= 0) {
-    //   this.setState({
-    //     winCount: 0
-    //   }, () => {
-    //     this.updateWinCount();
-    //     //testing this function
-
-    //   }, () => {
-    //     return (
-    //       <GameOver />
-    //     )
-    //   })
-    // }
-
-    // if (this.state.winCount === 3) {
-    //   this.setState({
-    //     winCount: 0
-    //   }, () => {
-    //     this.updateWinCount();
-    //     //testing this function
-
-    //   })
-    //   return (
-    //     <GameWon />
-    //   )
-    // }
-
-
     return (
       <div>
         <div className="landing2"></div>
