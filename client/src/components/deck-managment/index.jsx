@@ -22,7 +22,13 @@ class DeckBrain extends Component {
     
 
 
-    this.setState({deck: newDeck})
+    this.setState(
+      {
+        deck: newDeck
+      }, () => {
+        console.log(this.state.deck);
+        
+      })
   }
 
 
