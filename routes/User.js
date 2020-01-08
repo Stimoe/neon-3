@@ -87,8 +87,8 @@ module.exports = (app) => {
     app.patch('/api/user/winCount/', function (req, res) {
         var WinCountAndUser = req.body; 
         
-        var user = { username: req.body.username };
-        var newWinCount={winCount: req.body.winCount}
+        var user = req.body.username
+        var newWinCount=req.body.winCount
        User.findOneAndUpdate({username: user}, { winCount: newWinCount}).then((newUserWithWinCount) => {
 
         res.send(newUserWithWinCount)
@@ -96,16 +96,7 @@ module.exports = (app) => {
     });
  
 
-    // const filter = { name: 'Jean-Luc Picard' };
-    // const update = { age: 59 };
-    
-    // // `doc` is the document _before_ `update` was applied
-    // let doc = await Character.findOneAndUpdate(filter, update);
-    // doc.name; // 'Jean-Luc Picard'
-    // doc.age; // undefined
-    
-    // doc = await Character.findOne(filter);
-    // doc.age; // 59
+
 
 
 
