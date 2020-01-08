@@ -134,9 +134,7 @@ class BattlePage extends Component {
   }
 
   getCurrentUser = () => {
- 
     let user = this.state.username
-
     axios.get('/api/user/currentUser', {
       params: {
         username: user
