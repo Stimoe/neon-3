@@ -58,7 +58,8 @@ class BattlePage extends Component {
       winCount: currentWinCount,
       // currentUserDeck: currentDeck
     }, () => {
-      this.getCurrentuser()
+      this.getCurrentUser()
+    }, () => {
       let currentEnemy = enemies[this.state.winCount];
       let currentEnemyHealth = currentEnemy.health;
       let currentEnemyArmor = currentEnemy.armor;
