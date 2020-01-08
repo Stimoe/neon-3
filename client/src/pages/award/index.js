@@ -16,15 +16,17 @@ class Save extends Component {
       redirect: false,
       username: "",
       userDeck: UserInitialDeck,
-
+winCount:0,
       deckDrawn: false
     };
   }
 
   componentDidMount() {
+    let currentWinCount = this.props.location.state.winCount
     let currentUser = this.props.location.state.username
     this.setState({
       username: currentUser,
+      winCount: currentWinCount
     }, () => {
 
     })
@@ -84,7 +86,8 @@ renderRedirect = () => {
      pathname: '/battlepage',
      state: { 
        username: this.state.username,
-       userDeck: this.state.userDeck
+       userDeck: this.state.userDeck,
+       winCount: this.state.winCount
       }
  }}
  />
