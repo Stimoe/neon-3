@@ -64,9 +64,12 @@ class Save extends Component {
 
 
 drawn = (p) => {
+console.log(this.state.userDeck);
 
   console.log(p);
-  
+  let currentDeck=this.state.userDeck
+  currentDeck.push(p)
+  console.log(currentDeck);
   
   if(p){
     this.setState({
