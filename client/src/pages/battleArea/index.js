@@ -18,8 +18,7 @@ import EnemyAction from "../../components/enemiesActionModul"
 import EnemyModal from "../../components/enemiesActionModul";
 import { log } from "util";
 
-var newWinCounts;
-var newEnemyObject;
+
 class BattlePage extends Component {
   state = {
     currentUserDeck: [],
@@ -492,6 +491,10 @@ class BattlePage extends Component {
         </div>
       </div>
     );
+  }
+
+  else {
+    return null;
   }
   }
 }

@@ -30,41 +30,41 @@ class Storypage extends Component {
     this.setState({
       username: currentUser,
     }, () => {
-      this.getCurrentWinCount()
+      // this.getCurrentWinCount()
       //testing this function
       
     })
 // console.log(this.state.username)
   }
 
-  getCurrentWinCount = () => {
-    this.getWinCount()
+  // getCurrentWinCount = () => {
+  //   this.getWinCount()
 
 
-  }
+  // }
 
-  getWinCount = () => {
-    // console.log(this.state.username)
-    let user = this.state.username
+//   getWinCount = () => {
+//     // console.log(this.state.username)
+//     let user = this.state.username
 
-    axios.get('/api/user/winCount', {
-      params: {
-        username: user
-      }
-    })
-      .then(res => {
-        console.log("line 26 ", res.data.winCount)
-   let currentUserWinCount=res.data.winCount
-this.setState({
-  winCount: currentUserWinCount
-})
+//     axios.get('/api/user/winCount', {
+//       params: {
+//         username: user
+//       }
+//     })
+//       .then(res => {
+//         console.log("line 26 ", res.data.winCount)
+//    let currentUserWinCount=res.data.winCount
+// this.setState({
+//   winCount: currentUserWinCount
+// })
 
 
-      }).catch(err => {
-        console.log(err.response);
-        console.log("Username already exists or password could not be validated")
-      })
-  }
+  //     }).catch(err => {
+  //       console.log(err.response);
+  //       console.log("Username already exists or password could not be validated")
+  //     })
+  // }
 
 
 
@@ -93,7 +93,6 @@ this.setState({
        pathname: '/battlepage',
        state: { 
          username: this.state.username,
-        winCount: this.state.winCount
         }
    }}
    />
