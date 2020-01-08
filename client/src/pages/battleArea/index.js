@@ -149,12 +149,25 @@ class BattlePage extends Component {
 
 
 
+
+  
+
+
+
+
   renderRedirect = () => {
 
     if (this.state.currentEnemyHealth <= 0) {
 
       // localStorage.setItem('userWinCount', this.state.winCount);
-      return <Redirect to='/award' />;
+      return <Redirect to={{
+        pathname: '/award',
+        state: { 
+          username: this.state.username,
+         winCount: this.state.winCount
+         }
+    }}
+    />
     }
   }
 

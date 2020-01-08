@@ -16,7 +16,7 @@ class Save extends Component {
       redirect: false,
       username: "",
       userDeck: UserInitialDeck,
-      winCount: 0,
+
       deckDrawn: false
     };
   }
@@ -25,6 +25,8 @@ class Save extends Component {
 
     let currentUser = this.props.location.state.username
     let newUserDeck = this.props.location.state.finalNewCards
+    console.log("New User Deck ",newUserDeck);
+    
     this.setState({
       username: currentUser,
       userDeck: newUserDeck
@@ -80,6 +82,8 @@ class Save extends Component {
 
 drawn = (p) => {
   console.log(this.state.userDeck);
+  console.log(p);
+  
   
   if(p){
     this.setState({
@@ -94,7 +98,6 @@ renderRedirect = () => {
      pathname: '/battlepage',
      state: { 
        username: this.state.username,
-      winCount: this.state.winCount,
       userDeck: this.state.userDeck
       }
  }}
