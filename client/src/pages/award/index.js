@@ -81,7 +81,7 @@ class Save extends Component {
 
 
 drawn = (p) => {
-  console.log(this.state.userDeck);
+  console.log(newDeck);
   console.log(p);
   
   
@@ -210,7 +210,8 @@ renderRedirect = () => {
           <div className="awardCards">
         <DrawBrain
         readPlayed={this.handlePlayedCards}
-        // currentDeck={this.userDeck}
+        newDeck={this.state.finalNewCards}
+        
         drawn={this.drawn}
         />
         </div>
@@ -222,3 +223,5 @@ renderRedirect = () => {
 }
 
 export default Save;
+
+
