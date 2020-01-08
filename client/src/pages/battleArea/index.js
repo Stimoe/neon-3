@@ -22,6 +22,7 @@ var newWinCounts;
 var newEnemyObject;
 class BattlePage extends Component {
   state = {
+    currentUserDeck: [],
     username: '',
     winCount: 0,
     userHealth: 100,
@@ -51,7 +52,8 @@ class BattlePage extends Component {
     
     this.setState({
       username: currentUser,
-      winCount: currentWinCount
+      winCount: currentWinCount,
+      // currentUserDeck: currentDeck
     }, () => {
 
       let currentEnemy = enemies[this.state.winCount];

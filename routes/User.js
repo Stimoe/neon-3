@@ -58,31 +58,14 @@ module.exports = (app) => {
                 reason: err.message
             })
         }
-
     });
 
     app.get('/api/user/winCount', async (req, res) => {
-
         let currentUser = req.query.username
-
-
         await User.findOne({ username: currentUser }, 'winCount', function (err, user) {
             res.send(user)
-            // newWinCount = user.winCount; 
-            // res.send({ message: newWinCount });
         })
     })
-
-    // app.post('/api/user/winCount/', function (req, res) {
-    //     var WinCountAndUser = req.body; 
-    //     res.send(WinCountAndUser)
-    //     var query = { username: req.body.username };
-    //     var newWinCount={winCount: req.body.winCount}
-    //    User.findOneAndUpdate(query, { winCount: newWinCount }, options, callback)
-    // });
-
-
-
 
     app.patch('/api/user/winCount/', async (req, res) => { 
         var user = req.body.username

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import deckJson from "../../cards.json";
 import Cards from "../cards";
-import Axios from "axios"
+import Axios from "axios";
 import EnemyModal from "../../components/enemiesActionModul";
 import style from "./style.css";
 // import Modal from 'react-bootstrap/Modal';
@@ -9,10 +9,6 @@ import style from "./style.css";
 
 // var Modal = require('react-bootstrap-modal')
 class DeckBrain extends Component {
-
-  
- 
-
   state = {
     deck: [],
     hand: [],
@@ -21,69 +17,58 @@ class DeckBrain extends Component {
     turnEnded: false
   };
 
-
-
   componentWillMount() {
-    let newestDeck=[]
-    let newCards=[]
-  
-  //   if (localStorage.getItem('userNewDeck')!=null){
-  //  newCards = JSON.parse(localStorage.getItem('userNewDeck'))
-  //   console.log(newCards);
-    
-  //     newestDeck=[...newCards,...deckJson]
-  //   }
-  //   else {
-newestDeck=deckJson
-    
-      // console.log(newestDeck)
+    let newestDeck = [];
+    let newCards = [];
+
+    //   if (localStorage.getItem('userNewDeck')!=null){
+    //  newCards = JSON.parse(localStorage.getItem('userNewDeck'))
+    //   console.log(newCards);
+
+    //     newestDeck=[...newCards,...deckJson]
+    //   }
+    //   else {
+    newestDeck = deckJson;
+
+    // console.log(newestDeck)
     const shuffledDeck = this.shuffleCards(newestDeck);
 
     // console.log(shuffledDeck);
     this.setState(
       {
-        deck: shuffledDeck,
+        deck: shuffledDeck
       },
       // this.saveCards(this.state.deck),
       this.drawCards
     );
   }
-// }
+  // }
 
+  // saveCards = deck =>{
 
-// saveCards = deck =>{
+  //       const userData = {
+  //   deck:this.state.deck
+  //     };
+  //     Axios.post("/api/users/login", userData)
+  //     .then(data => {
+  //       console.log(data);
 
-//       const userData = {
-//   deck:this.state.deck
-//     };
-//     Axios.post("/api/users/login", userData)
-//     .then(data => {
-//       console.log(data);
-   
-//     })
-//     .catch(err => {
-//       console.log(err.response);
-     
-//     });
+  //     })
+  //     .catch(err => {
+  //       console.log(err.response);
 
-//   console.log(userData);
-// }
+  //     });
 
-
-
-
-
-  
+  //   console.log(userData);
+  // }
 
   componentDidUpdate(prevprops, prevState) {
     const turnEnded = this.state.turnEnded !== prevState.turnEnded;
 
     if (turnEnded) {
-
       this.props.readPlayed(this.state.playArea);
       this.discardPlayed();
     }
-
   }
 
   toPlay = index => {
@@ -108,10 +93,13 @@ newestDeck=deckJson
   discardPlayed = () => {
     let tempDiscard = [...this.state.playArea, ...this.state.discard];
     // console.log("playArea", this.state.playArea);
-    this.setState({
-      discard: tempDiscard,
-      playArea: []
-    }, this.drawCards);
+    this.setState(
+      {
+        discard: tempDiscard,
+        playArea: []
+      },
+      this.drawCards
+    );
   };
 
   drawCards = () => {
@@ -140,20 +128,14 @@ newestDeck=deckJson
   };
 
   endTurn = () => {
-    
-    let turn = !this.state.turnEnded
+    let turn = !this.state.turnEnded;
     console.log("ending turn");
     this.setState({
       turnEnded: turn
     });
   };
 
-
-
-
-
-
-  toHand = (index) => {
+  toHand = index => {
     let tempHand = this.state.hand;
     let card = this.state.playArea[index];
     let tempPlay = this.state.playArea;
@@ -166,7 +148,7 @@ newestDeck=deckJson
     });
   };
 
-  shuffleCards = (cards) => {
+  shuffleCards = cards => {
     let randomCardsArray = [];
     let originalCards = cards.slice(0);
 
@@ -179,13 +161,9 @@ newestDeck=deckJson
   };
 
   render() {
-    
     let hand = this.state.hand.map((card, index) => {
       return (
-       
-        
         <div className="handCard row1 d-flex justify-content-center">
-        
           <Cards
             name={card.name}
             image={card.image}
@@ -193,10 +171,7 @@ newestDeck=deckJson
             handleClick={this.toPlay}
             currentIndex={index}
           />
-          
         </div>
-
-
       );
     });
 
@@ -213,63 +188,48 @@ newestDeck=deckJson
         </div>
       );
     });
- 
- 
-
 
     return (
       // <div className="nes-container decks is-rounded">
-      
-        <div id="gameArea stuffs">
-          
-          
 
-          <div className="row d-flex justify-content-center">
-            <button
-              className="nes-pointer buzz  endTurn neon4 mb-3 nes-btn"
-              onClick={this.endTurn}
-            >
-              End Turn
-            </button>
-            <div>
-        
+      <div id="gameArea stuffs">
+        <div className="row d-flex justify-content-center">
+          <button
+            className="nes-pointer buzz  endTurn neon4 mb-3 nes-btn"
+            onClick={this.endTurn}
+          >
+            End Turn
+          </button>
+          <div></div>
         </div>
-          </div>
 
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
 
-          <br/>
-          <br/>
-          <br/>
-          <br/>
-          <br/>
-          <br/>
-  
-          <br/>
-         
-          <br/>
-     
-          <br/>
-        
-          <br/>
-       
-          <br/>
-          <br/>
-          <div className="playArea">{playArea.length ? playArea : null}</div>
-          <br/>
-          <br/>
-          <br/>
-          <br/>
-          <div className="handArea ">{hand.length ? hand : null}</div>
+        <br />
 
-        </div>
+        <br />
+
+        <br />
+
+        <br />
+
+        <br />
+        <br />
+        <div className="playArea">{playArea.length ? playArea : null}</div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <div className="handArea ">{hand.length ? hand : null}</div>
+      </div>
       // </div>
-    )
-    ;}
-
-  
-
+    );
+  }
 }
 
 export default DeckBrain;
-
-

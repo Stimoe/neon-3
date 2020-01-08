@@ -20,9 +20,9 @@ class DrawBrain extends Component {
   };
 
   componentDidMount() {
-    console.log("tessssst", this.currentDeck);
+   
     const newCardsShuffled = this.shuffleCards(newCardsFromJson);
-    console.log(newCardsShuffled);
+  
 
     this.setState(
       {
@@ -36,9 +36,9 @@ class DrawBrain extends Component {
     let tempDeck = [...this.state.newCards];
     const tempDraw = [];
     const shuffledDeck = [...this.shuffleCards(tempDeck)];
-    console.log(tempDeck);
+   
     while (tempDraw.length < 3) {
-      console.log("draws", tempDraw);
+     
       let tempCard = shuffledDeck.shift();
       tempDraw.push(tempCard);
     }
@@ -47,21 +47,6 @@ class DrawBrain extends Component {
     });
   };
 
-  //   addNewCards = ()=> {
-
-  //       const userData = {
-  //  addedCards:this.state.finalNewCards
-  //     };
-  //     Axios.post("/api/users/login", userData)
-  //     .then(data => {
-  //       console.log(data);
-
-  //     })
-  //     .catch(err => {
-  //       console.log(err.response);
-  //     });
-  //   console.log(userData);
-  //   }
 
  
 
@@ -81,10 +66,10 @@ class DrawBrain extends Component {
     );
     if (this.state.finalNewCards.length === 3) {
       // this.props.parentCallback(this.state.finalNewCards);
-      console.log(this.state.finalNewCards);
+     
       // localStorage.setItem('userNewDeck', JSON.stringify(this.state.finalNewCards));
       let currentNewDeck = this.state.finalNewCards;
-      console.log("right before send props ", currentNewDeck);
+    
       
       // this.props.newDeck(currentNewDeck);
       this.props.drawn(currentNewDeck);
