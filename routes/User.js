@@ -73,19 +73,19 @@ module.exports = (app) => {
         })
     })
 
-    app.post('/api/user/winCount/', function (req, res) {
-        var WinCountAndUser = req.body; 
-        res.send(WinCountAndUser)
-        var query = { username: req.body.username };
-        var newWinCount={winCount: req.body.winCount}
-       User.findOneAndUpdate(query, { winCount: newWinCount }, options, callback)
-    });
+    // app.post('/api/user/winCount/', function (req, res) {
+    //     var WinCountAndUser = req.body; 
+    //     res.send(WinCountAndUser)
+    //     var query = { username: req.body.username };
+    //     var newWinCount={winCount: req.body.winCount}
+    //    User.findOneAndUpdate(query, { winCount: newWinCount }, options, callback)
+    // });
 
 
 
 
-    app.patch('/api/user/winCount/', function (req, res) {
-        var WinCountAndUser = req.body; 
+    app.patch('/api/user/winCount/', async (req, res) => {
+        
         
         var user = req.body.username
         var newWinCount=req.body.winCount
