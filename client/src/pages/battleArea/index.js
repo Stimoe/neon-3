@@ -131,7 +131,7 @@ class BattlePage extends Component {
   }
 
   updateWinCount = () => {
-    axios.patch('/api/user/winCount', { username: this.state.username, winCount: this.state.winCount }) .then(res => {
+    axios.patch('/api/user/winCount', { username: this.state.username, winCount: 2 }) .then(res => {
       console.log("line 26 ", res.data, res.status)
  
     }).catch(err => {
@@ -140,7 +140,15 @@ class BattlePage extends Component {
     })
   }
 
-
+  updateWinCount = () => {
+    axios.post('/api/user/winCount', { username: this.state.username, winCount: this.state.winCount }) .then(res => {
+      console.log("line 26 ", res.data, res.status)
+ 
+    }).catch(err => {
+      console.log(err.response);
+      alert("Username already exists or password could not be validated")
+    })
+  }
 
 
 

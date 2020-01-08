@@ -73,20 +73,39 @@ module.exports = (app) => {
         })
     })
 
-
+    app.post('/api/user/winCount/', function (req, res) {
+        var WinCountAndUser = req.body; 
+        res.send(WinCountAndUser)
+        var query = { username: req.body.username };
+        var newWinCount={winCount: req.body.winCount}
+       User.findOneAndUpdate(query, { winCount: newWinCount }, options, callback)
+    });
 
 
 
 
     app.patch('/api/user/winCount/', function (req, res) {
         var WinCountAndUser = req.body; 
-        res.send(WinCountAndUser)
-        // var id = req.params.id;
-        // db.users.update({_id  : ObjectId(id)}, {$set: updateObject});
+        
+        var user = { username: req.body.username };
+        var newWinCount={winCount: req.body.winCount}
+       User.findOneAndUpdate({username: user}, { winCount: newWinCount}).then((newUserWithWinCount) => {
+
+        res.send(newUserWithWinCount)
+       })
     });
+ 
 
-
-    // Model.findOneAndUpdate(query, { $set: { name: 'jason bourne' }}, options, callback)
+    // const filter = { name: 'Jean-Luc Picard' };
+    // const update = { age: 59 };
+    
+    // // `doc` is the document _before_ `update` was applied
+    // let doc = await Character.findOneAndUpdate(filter, update);
+    // doc.name; // 'Jean-Luc Picard'
+    // doc.age; // undefined
+    
+    // doc = await Character.findOne(filter);
+    // doc.age; // 59
 
 
 
