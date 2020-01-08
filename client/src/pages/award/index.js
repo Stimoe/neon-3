@@ -31,8 +31,9 @@ class Save extends Component {
       username: currentUser,
  
     }, () => {
-      // this.getCurrentWinCount()
-      //testing this function
+      this.updateDeck ()
+      console.log(this.state.username);
+      
       
     })
 // console.log(this.state.username)
@@ -64,6 +65,7 @@ class Save extends Component {
 
 drawn = (p) => {
 
+  console.log(p);
   
   
   if(p){
