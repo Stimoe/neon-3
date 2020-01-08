@@ -93,8 +93,9 @@ module.exports = (app) => {
     app.patch('/api/user/newDeck', async (req, res) => { 
         var user = req.body.username
         var newDeck=req.body.userDeck
-        const updatedDeck = await User.findOneAndUpdate({username: user}, { userDeck: newDeck})
-        res.send(updatedDeck)
+        res.send(newDeck)
+        // const updatedDeck = await User.findOneAndUpdate({username: user}, { userDeck: newDeck})
+        // res.send(updatedDeck)
     })
 
 
