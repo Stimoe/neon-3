@@ -143,17 +143,18 @@ deckRecieved: true,
         console.log(res.data)
         let newUserDeck=res.data.userDeck
         let currentUserWinCount=res.data.winCount
-        console.log(newUserDeck);
+        console.log(newUserDeck.length);
         console.log(currentUserWinCount);
 
         if(newUserDeck.length<=1){
           newUserDeck=deckJson
         }
-        
+        else {
         this.setState({
           winCount: currentUserWinCount,
           currentUserDeck: newUserDeck,
         })
+      }
       })
   }
 
