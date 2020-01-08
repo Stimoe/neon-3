@@ -24,8 +24,16 @@ class Save extends Component {
   componentDidMount() {
 
     let currentUser = this.props.location.state.username
-
-
+    let newUserDeck = this.props.location.state.finalNewCards
+    this.setState({
+      username: currentUser,
+      userDeck: newUserDeck
+    }, () => {
+      // this.getCurrentWinCount()
+      //testing this function
+      
+    })
+// console.log(this.state.username)
   }
 
 
