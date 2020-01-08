@@ -92,8 +92,9 @@ showAlert() {
       // this.props.parentCallback(this.state.finalNewCards);
       console.log(this.state.finalNewCards)
       // localStorage.setItem('userNewDeck', JSON.stringify(this.state.finalNewCards));
+      let currentNewDeck=this.state.finalNewCards
+      this.props.newDeck(currentNewDeck)
      this.props.drawn(true)
-     this.props.newDeck(this.state.finalNewCards)
     }
     
   };
