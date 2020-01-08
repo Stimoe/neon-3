@@ -57,16 +57,7 @@ class BattlePage extends Component {
 
 
     // this.getWinCount()
-    let localWins = 0;
-    let tempWins = this.state.winCount
-    // console.log(tempWins)
-    if (!tempWins) {
-      localWins = 0
-    }
-    else {
-      localWins = tempWins
-
-    }
+   
     // console.log(localWins);
 
     // this.atStartOfBattle()
@@ -110,10 +101,12 @@ class BattlePage extends Component {
       tempWins2 = tempWins2 + 1
       this.setState({
         winCount: tempWins2,
-        redirect: true,
-
-      });
-      this.updateWinCount();
+      }, () => {
+        this.updateWinCount();
+        //testing this function
+        
+      })
+      
     }
     if (turnEnded && !frozen) {
       this.firstEnemyAction();
@@ -130,6 +123,20 @@ class BattlePage extends Component {
     }
   }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   updateWinCount = () => {
     axios.patch('/api/user/winCount', { username: this.state.username, winCount: 2 }) .then(res => {
       console.log("line 26 ", res.data, res.status)
@@ -137,6 +144,11 @@ class BattlePage extends Component {
     }).catch(err => {
       console.log(err.response);
       alert("Username already exists or password could not be validated")
+      this.setState({
+        redirect: true,
+      })
+    
+      
     })
   }
 
