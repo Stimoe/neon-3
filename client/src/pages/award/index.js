@@ -25,7 +25,7 @@ class Save extends Component {
 
     let currentUser = this.props.location.state.username
     
-    console.log("New User Deck ",newUserDeck);
+ 
     
     this.setState({
       username: currentUser,
@@ -81,7 +81,7 @@ class Save extends Component {
 
 
 drawn = (p) => {
-  console.log(newDeck);
+  
   console.log(p);
   
   
