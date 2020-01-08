@@ -50,9 +50,23 @@ class BattlePage extends Component {
       username: currentUser,
       winCount: currentWinCount
     }, () => {
-      this.getCurrentWinCount()
+      // this.getCurrentWinCount()
       //testing this function
-      
+      let currentEnemy = enemies[this.state.winCount];
+      let currentEnemyHealth = currentEnemy.health;
+      let currentEnemyArmor = currentEnemy.armor;
+      let newEnemyAbilities = currentEnemy.actions;
+      let newEnemyAttack = currentEnemy.attack;
+      let newEnemyArmorGain = currentEnemy.armorGain;
+      this.setState({
+        maxEnemyHealth: currentEnemyHealth,
+  
+        currentEnemyHealth: currentEnemyHealth,
+        currentEnemyArmor: currentEnemyArmor,
+        currentEnemyAbilities: newEnemyAbilities,
+        currentEnemyAttack: newEnemyAttack,
+        currentEnemyArmorGain: newEnemyArmorGain
+      });
     })
 
 
@@ -61,34 +75,21 @@ class BattlePage extends Component {
     // console.log(localWins);
 
     // this.atStartOfBattle()
-    let currentEnemy = enemies[localWins];
+    
 
 
-    let currentEnemyHealth = currentEnemy.health;
-    let currentEnemyArmor = currentEnemy.armor;
-    let newEnemyAbilities = currentEnemy.actions;
-    let newEnemyAttack = currentEnemy.attack;
-    let newEnemyArmorGain = currentEnemy.armorGain;
-    this.setState({
-      maxEnemyHealth: currentEnemyHealth,
-      winCount: localWins,
-      currentEnemyHealth: currentEnemyHealth,
-      currentEnemyArmor: currentEnemyArmor,
-      currentEnemyAbilities: newEnemyAbilities,
-      currentEnemyAttack: newEnemyAttack,
-      currentEnemyArmorGain: newEnemyArmorGain
-    });
+   
 
   }
 
-  getCurrentWinCount = () => {
-    // this.getWinCount()
+  // getCurrentWinCount = () => {
+  //   // this.getWinCount()
 
 
-    //testing this function
+  //   //testing this function
 
-    this.updateWinCount()
-  }
+  //   this.updateWinCount()
+  // }
 
   componentDidUpdate(prevprops, prevState) {
 
