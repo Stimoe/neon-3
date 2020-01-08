@@ -75,15 +75,26 @@ class BattlePage extends Component {
 
     const turnEnded = this.state.userTurnOver === true;
     const frozen = this.state.frozen;
-
-    if (this.state.currentEnemyHealth <= 0) {
-      let tempWins2 = this.state.winCount
-      tempWins2 = tempWins2 + 1
+    if (this.state.userHealth <= 0) {
+      let tempWins2 = 0
+      // tempWins2 = tempWins2 + 1    
       this.setState({
         winCount: tempWins2,
       }, () => {
         this.updateWinCount();
-        //testing this function
+        this.renderRedirectToGameOver()
+
+      })
+
+    }
+    if (this.state.currentEnemyHealth <= 0) {
+      let tempWins2 = this.state.winCount
+      tempWins2 = tempWins2 + 1    
+      this.setState({
+        winCount: tempWins2,
+      }, () => {
+        this.updateWinCount();
+       this.renderRedirect()
 
       })
 
@@ -118,32 +129,23 @@ class BattlePage extends Component {
     })
   }
 
+  renderRedirectToGameOver = () => {
+    if (this.state.userHealth <= 0) {
 
+      // localStorage.setItem('userWinCount', this.state.winCount);
+      return <Redirect to='/gameLost' />;
+    }
 
+  }
 
+  renderRedirectToGameWon = () => {
+    if (this.state.winCount=== 3) {
 
+      // localStorage.setItem('userWinCount', this.state.winCount);
+      return <Redirect to='/gameWon' />;
+    }
 
-
-
-
-
-  // getWinCount = () => {
-  //   // console.log(this.state.username)
-  //   let user = this.state.username
-
-  //   axios.get('/api/user/winCount', {
-  //     params: {
-  //       username: user
-  //     }
-  //   })
-  //     .then(res => {
-  //       console.log("line 26 ", res.data.winCount)
-
-  //     }).catch(err => {
-  //       console.log(err.response);
-  //       console.log("Username already exists or password could not be validated")
-  //     })
-  // }
+  }
 
 
 
@@ -386,32 +388,32 @@ class BattlePage extends Component {
 
 
 
-    if (this.state.userHealth <= 0) {
-      this.setState({
-        winCount: 0
-      }, () => {
-        this.updateWinCount();
-        //testing this function
+    // if (this.state.userHealth <= 0) {
+    //   this.setState({
+    //     winCount: 0
+    //   }, () => {
+    //     this.updateWinCount();
+    //     //testing this function
 
-      }, () => {
-        return (
-          <GameOver />
-        )
-      })
-    }
+    //   }, () => {
+    //     return (
+    //       <GameOver />
+    //     )
+    //   })
+    // }
 
-    if (this.state.winCount === 3) {
-      this.setState({
-        winCount: 0
-      }, () => {
-        this.updateWinCount();
-        //testing this function
+    // if (this.state.winCount === 3) {
+    //   this.setState({
+    //     winCount: 0
+    //   }, () => {
+    //     this.updateWinCount();
+    //     //testing this function
 
-      })
-      return (
-        <GameWon />
-      )
-    }
+    //   })
+    //   return (
+    //     <GameWon />
+    //   )
+    // }
 
 
     return (

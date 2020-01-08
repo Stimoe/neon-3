@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import Axios from "axios";
+import axios from "axios";
 import "./style.css";
 import DrawBrain from "../../components/drawCards";
 // import { booleanLiteral } from "@babel/types";
 import { Redirect } from "react-router-dom";
-// var UserInitialDeck = require("../../cards.json");
+var UserInitialDeck = require("../../cards.json");
 
 
 class Save extends Component {
@@ -13,11 +13,24 @@ class Save extends Component {
     super();
     this.state = {
       username: "",
-      // userDeck: UserInitialDeck,
+      userDeck: UserInitialDeck,
       winCount: 0,
       deckDrawn: false
     };
   }
+
+  componentDidMount() {
+
+    let currentUser = this.props.location.state.username
+
+
+  }
+
+
+
+
+
+
   onChange = e => {
     this.setState({ [e.target.id]: e.target.value });
     // console.log(this.userDeck);
@@ -25,16 +38,39 @@ class Save extends Component {
 
   handleOnClick = e => {
 
-    Axios.post("/gamestate", this.userDeck).then(data => {
-            console.log(data);
-            this.props.history.push("/battlepage")
-            // .then( Axios.put(`/api/Users/${id}`, body) )
-          }).catch (err=> {
-            console.log(err);    
-          })
+
+    // Axios.post("/gamestate", this.userDeck).then(data => {
+    //         console.log(data);
+    //         this.props.history.push("/battlepage")
+    //         // .then( Axios.put(`/api/Users/${id}`, body) )
+    //       }).catch (err=> {
+    //         console.log(err);    
+    //       })
   }
 
+  // updateWinCount = () => {
+  //   axios.patch('/api/user/winCount', { username: this.state.username, winCount: this.state.winCount }).then(res => {
+  //     console.log("line 26 ", res.data, res.status)
+
+  //   }).catch(err => {
+  //     console.log(err.response);
+  //     console.log("Username already exists or password could not be validated")
+  //     this.setState({
+  //       redirect: true,
+  //     })
+
+
+  //   })
+  // }
+
+ 
+
+
+
+
 drawn = (p) => {
+  console.log(this.state.userDeck);
+  
   if(p){
     this.setState({
       deckDrawn:true
@@ -43,8 +79,16 @@ drawn = (p) => {
 }
 
 renderRedirect = () => {
-  if (this.state.redirect) {
-    return <Redirect to='/battlepage' />
+  if (redirect) {
+    return <Redirect to={{
+     pathname: '/battlepage',
+     state: { 
+       username: this.state.username,
+      winCount: this.state.winCount,
+      userDeck: this.state.userDeck
+      }
+ }}
+ />
   }
 }
 
@@ -129,6 +173,7 @@ renderRedirect = () => {
               <button
                 type="button"
                 className="btn nes-pointer neon1 mb-3 nes-btn"
+                onClick={this.handleOnClick}>
               >
                 Save &amp; Quit
               </button>
