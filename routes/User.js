@@ -89,9 +89,9 @@ module.exports = (app) => {
         
         var user = req.body.username
         var newWinCount=req.body.winCount
-        const user = await User.findOneAndUpdate({username: user}, { winCount: newWinCount})
+        const newUser = await User.findOneAndUpdate({username: user}, { winCount: newWinCount})
 
-        res.send(user)
+        res.send(newUser)
     
     });
  
