@@ -24,7 +24,10 @@ const UserSchema = new Schema({
     },
     winCount: {
         type: Number,
-    }
+    },
+    // userDeck: {
+    //     currentDeck:
+    // }
 });
 const User = mongoose.model('User', UserSchema);
 

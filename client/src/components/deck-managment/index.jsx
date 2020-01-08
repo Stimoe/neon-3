@@ -27,15 +27,15 @@ class DeckBrain extends Component {
     let newestDeck=[]
     let newCards=[]
   
-    if (localStorage.getItem('userNewDeck')!=null){
-   newCards = JSON.parse(localStorage.getItem('userNewDeck'))
-    console.log(newCards);
+  //   if (localStorage.getItem('userNewDeck')!=null){
+  //  newCards = JSON.parse(localStorage.getItem('userNewDeck'))
+  //   console.log(newCards);
     
-      newestDeck=[...newCards,...deckJson]
-    }
-    else {
+  //     newestDeck=[...newCards,...deckJson]
+  //   }
+  //   else {
 newestDeck=deckJson
-    }
+    
       // console.log(newestDeck)
     const shuffledDeck = this.shuffleCards(newestDeck);
 

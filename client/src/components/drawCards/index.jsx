@@ -71,7 +71,9 @@ class DrawBrain extends Component {
 //   console.log(userData);
 //   }
 
-
+showAlert() {
+  let finalDeck = this.state.finalNewCards;
+}
 
 
  

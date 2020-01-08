@@ -50,30 +50,8 @@ class Save extends Component {
 
   handleOnClick = e => {
 
-
-    // Axios.post("/gamestate", this.userDeck).then(data => {
-    //         console.log(data);
-    //         this.props.history.push("/battlepage")
-    //         // .then( Axios.put(`/api/Users/${id}`, body) )
-    //       }).catch (err=> {
-    //         console.log(err);    
-    //       })
   }
 
-  // updateWinCount = () => {
-  //   axios.patch('/api/user/winCount', { username: this.state.username, winCount: this.state.winCount }).then(res => {
-  //     console.log("line 26 ", res.data, res.status)
-
-  //   }).catch(err => {
-  //     console.log(err.response);
-  //     console.log("Username already exists or password could not be validated")
-  //     this.setState({
-  //       redirect: true,
-  //     })
-
-
-  //   })
-  // }
 
  
 
@@ -81,8 +59,8 @@ class Save extends Component {
 
 
 drawn = (p) => {
-  
-  console.log(p);
+  deck=this.refs.child.newDeck;
+  console.log(deck);
   
   
   if(p){
@@ -105,74 +83,10 @@ renderRedirect = () => {
   }
 }
 
-callbackFunction = (childData) => {
-  this.setState({userDeck: childData})
-}
 
 
-// onSubmit = e => {
-//     e.preventDefault();
-
-// const userDeck = {
-//       username: this.state.username,
-//       userDeck: this.state.userDeck,
-//       winCount: this.state.winCount
-//     };
-//     Axios.post("/gamestate", userDeck).then(data => {
-//       console.log(data);
-//       this.props.history.push("/battlepage")
-//     }).catch (err=> {
-//       console.log(err);    
-//     })
-// console.log(userDeck);
-//   };
 
 
-// render() {
-//     if(this.state.deckDrawn){
-//     return (
-      
-//       <div></div>
-//       <div className="d-flex carddeck justify-content-center" >
-          
-//           {this.state.userTurnOver ? "true" : "false"}
-//           <br></br>
-
-//           <br></br>
-        
-//         </div>
-
-
-  // drawn = p => {
-  //   if (p) {
-  //     this.setState({
-  //       deckDrawn: true
-  //     });
-  //   }
-  // };
-
-  // renderRedirect = () => {
-  //   if (this.state.redirect) {
-  //     return <Redirect to="/battlepage" />;
-  //   }
-  // };
-
-  // onSubmit = e => {
-  //     e.preventDefault();
-
-  // const userDeck = {
-  //       username: this.state.username,
-  //       userDeck: this.state.userDeck,
-  //       winCount: this.state.winCount
-  //     };
-  //     Axios.post("/gamestate", userDeck).then(data => {
-  //       console.log(data);
-  //       this.props.history.push("/battlepage")
-  //     }).catch (err=> {
-  //       console.log(err);
-  //     })
-  // console.log(userDeck);
-  //   };
 
   render() {
     if (this.state.deckDrawn) {
@@ -213,10 +127,10 @@ callbackFunction = (childData) => {
         <div>
           <div className="landing6"></div>
           <div className="awardCards">
-        <DrawBrain
-        parentCallback = {this.callbackFunction}
-        readPlayed={this.handlePlayedCards}
+        <DrawBrain ref="child"
+       
         newDeck={this.state.finalNewCards}
+        readPlayed={this.handlePlayedCards}
       
         
         drawn={this.drawn}
