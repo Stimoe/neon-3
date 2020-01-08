@@ -68,28 +68,7 @@ class BattlePage extends Component {
         currentEnemyArmorGain: newEnemyArmorGain
       });
     })
-
-
-    // this.getWinCount()
-   
-    // console.log(localWins);
-
-    // this.atStartOfBattle()
-    
-
-
-   
-
   }
-
-  // getCurrentWinCount = () => {
-  //   // this.getWinCount()
-
-
-  //   //testing this function
-
-  //   this.updateWinCount()
-  // }
 
   componentDidUpdate(prevprops, prevState) {
 
@@ -124,20 +103,6 @@ class BattlePage extends Component {
     }
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   updateWinCount = () => {
     axios.patch('/api/user/winCount', { username: this.state.username, winCount: 2 }) .then(res => {
       console.log("line 26 ", res.data, res.status)
@@ -153,40 +118,32 @@ class BattlePage extends Component {
     })
   }
 
-  // updateWinCount = () => {
-  //   axios.post('/api/user/winCount', { username: this.state.username, winCount: this.state.winCount }) .then(res => {
-  //     console.log("line 26 ", res.data, res.status)
  
-  //   }).catch(err => {
-  //     console.log(err.response);
-  //     alert("Username already exists or password could not be validated")
+
+
+
+
+
+
+
+
+  // getWinCount = () => {
+  //   // console.log(this.state.username)
+  //   let user = this.state.username
+
+  //   axios.get('/api/user/winCount', {
+  //     params: {
+  //       username: user
+  //     }
   //   })
-  // }
-
-
-
-
-
-
-
-
-  getWinCount = () => {
-    // console.log(this.state.username)
-    let user = this.state.username
-
-    axios.get('/api/user/winCount', {
-      params: {
-        username: user
-      }
-    })
-      .then(res => {
-        console.log("line 26 ", res.data.winCount)
+  //     .then(res => {
+  //       console.log("line 26 ", res.data.winCount)
    
-      }).catch(err => {
-        console.log(err.response);
-        console.log("Username already exists or password could not be validated")
-      })
-  }
+  //     }).catch(err => {
+  //       console.log(err.response);
+  //       console.log("Username already exists or password could not be validated")
+  //     })
+  // }
 
 
 
@@ -432,6 +389,10 @@ class BattlePage extends Component {
     if (this.state.userHealth <= 0) {
       this.setState({
         winCount: 0
+      }, () => {
+        this.updateWinCount();
+        //testing this function
+        
       })
       return (
         <GameOver />
@@ -441,6 +402,10 @@ class BattlePage extends Component {
     if (this.state.winCount === 3) {
       this.setState({
         winCount: 0
+      }, () => {
+        this.updateWinCount();
+        //testing this function
+        
       })
       return (
         <GameWon />
