@@ -88,7 +88,7 @@ class Register extends Component {
     const { errors } = this.state;
 
     if (redirect) {
-      return <Redirect to='/storypage'/>;
+      return <Redirect to='/login'/>;
     }
 
 
