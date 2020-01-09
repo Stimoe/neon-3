@@ -19,6 +19,7 @@ class DeckBrain extends Component {
 
   componentWillReceiveProps(props){
     let newDeck = this.props.currentDeck
+    console.log(newDeck);
     
 
 
@@ -33,23 +34,17 @@ class DeckBrain extends Component {
 
 
 
-  componentWillMount() {
+  componentDidMount() {
     let newestDeck = [];
     let newCards = [];
-
-    //   if (localStorage.getItem('userNewDeck')!=null){
-    //  newCards = JSON.parse(localStorage.getItem('userNewDeck'))
-    //   console.log(newCards);
-
-    //     newestDeck=[...newCards,...deckJson]
-    //   }
-    //   else {
+    let newDeck = this.props.currentDeck
+    console.log(newDeck);
+    this.setState(
+      {
+        deck: newDeck
+      }, () => {
     newestDeck = this.state.deck;
-
-    // console.log(newestDeck)
     const shuffledDeck = this.shuffleCards(newestDeck);
-
-    // console.log(shuffledDeck);
     this.setState(
       {
         deck: shuffledDeck
@@ -57,6 +52,8 @@ class DeckBrain extends Component {
       // this.saveCards(this.state.deck),
       this.drawCards
     );
+  })
+  
   }
 
 

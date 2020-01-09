@@ -165,6 +165,7 @@ setUserVariable = () => {
           this.setState({
             deckRecieved: true,
           })
+          this.setUserVariable()
         })
       }
       })
