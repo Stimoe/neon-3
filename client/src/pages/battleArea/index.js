@@ -48,7 +48,7 @@ class BattlePage extends Component {
     let currentUser = this.props.location.state.username
     let userCurrentDeck = this.props.location.state.currentUserDeck
     let currentWinCount = this.props.location.state.winCount
-console.log("here")
+
     this.setState({
       username: currentUser,
       wincount: currentWinCount,
@@ -75,19 +75,16 @@ console.log("here")
 
   componentDidUpdate(prevprops, prevState) {
     let totalEnemies = enemies.length
-    console.log(totalEnemies);
-    
-    if (this.state.currentEnemyHealth <= 0 && this.state.winCount === totalEnemies) {
-
-      this.renderRedirectToGameWon()
-
-    }
-
     const turnEnded = this.state.userTurnOver === true;
     const frozen = this.state.frozen;
+
+    
+    if (this.state.currentEnemyHealth <= 0 && this.state.winCount === totalEnemies) {
+      this.renderRedirectToGameWon()
+    }
+
     if (this.state.userHealth <= 0) {
       this.renderRedirectToGameOver()
-
     }
     if (this.state.currentEnemyHealth <= 0) {
       let tempWins2 = this.state.winCount
@@ -96,8 +93,6 @@ console.log("here")
         winCount: tempWins2,
       }, () => {
         this.updateWinCount();
-
-
       })
 
     }
@@ -120,9 +115,9 @@ console.log("here")
     axios.patch('/api/user/winCount', { username: this.state.username, winCount: this.state.winCount }).then(res => {
       console.log(res.data);
       
+      this.renderRedirectToAward()
       
     }, ()=>{
-      this.renderRedirectToAward()
     }).catch(err => {
       console.log(err.response);
       console.log("Username already exists or password could not be validated")

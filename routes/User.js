@@ -103,7 +103,7 @@ module.exports = (app) => {
     app.patch('/api/user/winCount/', async (req, res) => { 
         var user = req.body.username
         var newWinCount=req.body.winCount
-        const newUser = await User.findOneAndUpdate({username: user}, { winCount: newWinCount})
+        await User.findOneAndUpdate({username: user}, { winCount: newWinCount})
     });
  
     app.patch('/api/user/newDeck', async (req, res) => { 
