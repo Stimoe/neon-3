@@ -39,6 +39,8 @@ class BattlePage extends Component {
     enemyAction: "",
     maxEnemyHealth: 0,
     deckRecieved: false,
+    userLost: false,
+    userWon: false
   };
 
 
@@ -80,15 +82,16 @@ class BattlePage extends Component {
 
 
     if (this.state.currentEnemyHealth <= 0 && this.state.winCount === totalEnemies) {
-      this.renderRedirectToGameWon()
+      this.setState({
+        userWon : true
+      })
     }
 
     if (this.state.userHealth <= 0) {
-      this.renderRedirectToGameOver()
       this.setState({
-        userHealth:1
+        userLost: true
       })
-    }
+    }    
     if (this.state.currentEnemyHealth <= 0) {
       let tempWins2 = this.state.winCount
       tempWins2 = tempWins2 + 1
@@ -96,9 +99,10 @@ class BattlePage extends Component {
 
       this.setState({
         winCount: tempWins2,
-        currentEnemyHealth: 1
-      }, () => {
-        this.updateWinCount();
+        currentEnemyHealth: 1,
+        
+      }, ()=>{
+        this.updateWinCount()
       })
 
     }
@@ -121,28 +125,18 @@ class BattlePage extends Component {
 
     axios.patch('/api/user/winCount', { username: this.state.username, winCount: this.state.winCount }).then(res => {
       console.log(res.data);
-
+this.setState({
+  redirect: true
+})
 
     }).catch(err => {
       console.log(err.response);
       console.log("Username already exists or password could not be validated")
-    }, () => {
-      this.renderRedirectToAward()
     })
   }
 
 
-  if(redirect) {
-    return <Redirect to={{
-      pathname: '/battlepage',
-      state: {
-        username: this.state.username,
-        winCount: this.state.winCount,
-        currentUserDeck: this.state.currentUserDeck
-      }
-    }}
-    />
-  }
+ 
 
 
 
@@ -150,10 +144,8 @@ class BattlePage extends Component {
 
 
   renderRedirectToGameOver = () => {
-    this.setState({
-      redirect: true
-    })
-    if (this.state.redirect) {
+    const { redirect } = this.state;
+    if (redirect) {
       return <Redirect to={{
         pathname: '/gameLost',
         state: {
@@ -166,11 +158,9 @@ class BattlePage extends Component {
   }
 
   renderRedirectToGameWon = () => {
-    this.setState({
-      redirect: true
-    })
+    const { redirect } = this.state;
 
-    if (this.state.redirect) {
+    if (redirect) {
       return <Redirect to={{
         pathname: '/gameWon',
         state: {
@@ -182,10 +172,8 @@ class BattlePage extends Component {
   }
 
   renderRedirectToAward = () => {
-    this.setState({
-      redirect: true
-    })
-    if (this.state.redirect) {
+    const { redirect } = this.state;
+    if (redirect) {
       return <Redirect to={{
         pathname: '/award',
         state: {
@@ -404,6 +392,42 @@ class BattlePage extends Component {
 
 
   render() {
+
+   
+    const { userLost } = this.state;
+    const { userWon } = this.state;
+    const { redirect } = this.state;
+    if (redirect) {
+      return <Redirect to={{
+        pathname: '/award',
+        state: {
+          username: this.state.username,
+          winCount: this.state.winCount,
+          currentUserDeck: this.state.currentUserDeck
+        }
+      }}
+      />
+    }
+if (userWon) {
+      return <Redirect to={{
+        pathname: '/gameWon',
+        state: {
+          username: this.state.username,
+        }
+      }}
+      />
+    }
+
+    if (userLost) {
+      return <Redirect to={{
+        pathname: '/gameLost',
+        state: {
+          username: this.state.username,
+        }
+      }}
+      />
+    }
+
 
     if (this.state.deckRecieved) {
 
