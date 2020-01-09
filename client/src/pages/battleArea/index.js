@@ -260,9 +260,7 @@ console.log("here")
             userArmor: 0,
             userTurnOver: false
           });
-          if (this.state.userHealth <= 0) {
-            this.userLoses()
-          }
+        
         }
         this.setState({
           userTurnOver: false
@@ -283,9 +281,7 @@ console.log("here")
   };
 
 
-  userLoses = () => {
 
-  }
 
 
 

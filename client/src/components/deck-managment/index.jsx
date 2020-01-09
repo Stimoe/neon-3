@@ -18,20 +18,20 @@ class DeckBrain extends Component {
     deckRecieved: false,
   };
 
-  componentWillReceiveProps(props) {
-    let newDeck = this.props.currentDeck;
-    console.log(newDeck);
+  // componentWillReceiveProps(props) {
+  //   let newDeck = this.props.currentDeck;
+  //   console.log(newDeck);
 
-    this.setState(
-      {
-        deck: newDeck,
-        deckRecieved: true
-      },
-      () => {
-        console.log(this.state.deck);
-      }
-    );
-  }
+  //   this.setState(
+  //     {
+  //       deck: newDeck,
+  //       deckRecieved: true
+  //     },
+  //     () => {
+  //       console.log(this.state.deck);
+  //     }
+  //   );
+  // }
 
   componentDidMount() {
     let newestDeck = [];
