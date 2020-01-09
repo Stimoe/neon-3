@@ -4,7 +4,7 @@ import "./style.css";
 import { Redirect } from 'react-router-dom';
 import axios from "axios";
 import deckJson from "../../cards.json";
-
+import enemies from "../../enemy.json";
 
 
 
