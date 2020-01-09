@@ -48,7 +48,7 @@ class BattlePage extends Component {
     let currentUser = this.props.location.state.username
     let userCurrentDeck = this.props.location.state.currentUserDeck
     let currentWinCount = this.props.location.state.winCount
-
+console.log("here")
     this.setState({
       username: currentUser,
       wincount: currentWinCount,
@@ -185,9 +185,6 @@ class BattlePage extends Component {
 
 
   renderRedirectToGameOver = () => {
-    // if (this.state.userHealth <= 0) {
-
-    // localStorage.setItem('userWinCount', this.state.winCount);
     return <Redirect to={{
       pathname: 'gameLost',
       state: {
@@ -200,9 +197,6 @@ class BattlePage extends Component {
   }
 
   renderRedirectToGameWon = () => {
-    // if (this.state.winCount === 3) {
-
-    // localStorage.setItem('userWinCount', this.state.winCount);
 
     return <Redirect to={{
       pathname: 'gameWon',
@@ -210,7 +204,7 @@ class BattlePage extends Component {
         username: this.state.username,
       }
     }}
-    />  // }
+    /> 
 
   }
 
@@ -223,10 +217,6 @@ class BattlePage extends Component {
 
 
   renderRedirect = () => {
-
-    // if (this.state.currentEnemyHealth <= 0) {
-
-    // localStorage.setItem('userWinCount', this.state.winCount);
     return <Redirect to={{
       pathname: '/award',
       state: {

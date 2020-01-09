@@ -105,7 +105,7 @@ class Save extends Component {
         pathname: '/battlepage',
         state: {
           username: this.state.username,
-          userDeck: this.state.userDeck,
+          currentUserDeck: this.state.currentUserDeck,
           winCount: this.state.winCount
         }
       }}
