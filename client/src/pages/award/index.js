@@ -15,7 +15,7 @@ class Save extends Component {
     this.state = {
       redirect: false,
       username: "",
-      userDeck: [],
+      currentUserDeck: [],
       winCount: 0,
       deckDrawn: false
     };
@@ -24,11 +24,13 @@ class Save extends Component {
   componentDidMount() {
     let currentWinCount = this.props.location.state.winCount
     let currentUser = this.props.location.state.username
+    let currentDeck=this.props.location.state.currentUserDeck
     this.setState({
       username: currentUser,
-      winCount: currentWinCount
+      winCount: currentWinCount,
+      currentUserDeck: currentDeck
     }, () => {
-this.getCurrentDeck()
+
     })
 
   }
@@ -49,27 +51,27 @@ this.getCurrentDeck()
     })
   }
 
-  getCurrentDeck = () => {
-    let user = this.state.username
-    axios.get('/api/user/currentUser', {
-      params: {
-        username: user
-      }
-    })
-      .then(res => {
-        console.log(res.data)
-        let newUserDeck=res.data.userDeck
+  // getCurrentDeck = () => {
+  //   let user = this.state.username
+  //   axios.get('/api/user/currentUser', {
+  //     params: {
+  //       username: user
+  //     }
+  //   })
+  //     .then(res => {
+  //       console.log(res.data)
+  //       let newUserDeck=res.data.userDeck
 
-        console.log(newUserDeck);        
-        this.setState({
-          userDeck: newUserDeck,
-        })
-      })
+  //       console.log(newUserDeck);        
+  //       this.setState({
+  //         userDeck: newUserDeck,
+  //       })
+  //     })
 
-  }
+  // }
 
   addCardsToServer = () => {
-    axios.patch('/api/user/newDeck', { username: this.state.username, userDeck: this.state.userDeck }).then(res => {
+    axios.patch('/api/user/newDeck', { username: this.state.username, userDeck: this.state.currentUserDeck }).then(res => {
       console.log(res.data)
     }).catch(err => {
       console.log(err.response);
@@ -78,13 +80,17 @@ this.getCurrentDeck()
   }
   drawn = (newDrawnCards) => {
 
-    let currentDeck = this.state.userDeck
+    let currentDeck = this.state.currentUserDeck
     for (let i = 0; i < newDrawnCards.length; i++) {
       currentDeck.push(newDrawnCards[i])
 
     }
-    console.log(currentDeck);
+  this.setState({
+    currentUserDeck:currentDeck
+  }, ()=>{
     this.addCardsToServer()
+
+  })
 
     if (newDrawnCards) {
       this.setState({

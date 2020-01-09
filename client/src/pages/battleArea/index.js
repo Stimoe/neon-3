@@ -46,14 +46,13 @@ class BattlePage extends Component {
 
   componentDidMount() {
     let currentUser = this.props.location.state.username
-
+    let userCurrentDeck=this.props.location.state.currentUserDeck
+    let currentWinCount=this.props.location.state.winCount
 
     this.setState({
       username: currentUser,
-
-      // currentUserDeck: currentDeck
-    }, () => {
-      this.getCurrentUser()
+wincount: currentWinCount,
+      currentUserDeck: userCurrentDeck
     }, () => {
       
     })
@@ -138,37 +137,37 @@ setUserVariable = () => {
 
 
 
-  getCurrentUser = () => {
-    let user = this.state.username
-    axios.get('/api/user/currentUser', {
-      params: {
-        username: user
-      }
-    })
-      .then(res => {
-        // console.log(res.data)
-        let newUserDeck=res.data.userDeck
-        let currentUserWinCount=res.data.winCount
-        // console.log(newUserDeck.length);
-        // console.log(currentUserWinCount);
+  // getCurrentUser = () => {
+  //   let user = this.state.username
+  //   axios.get('/api/user/currentUser', {
+  //     params: {
+  //       username: user
+  //     }
+  //   })
+  //     .then(res => {
+  //       // console.log(res.data)
+  //       let newUserDeck=res.data.userDeck
+  //       let currentUserWinCount=res.data.winCount
+  //       // console.log(newUserDeck.length);
+  //       // console.log(currentUserWinCount);
 
-        if(newUserDeck.length<=1){
-          newUserDeck=deckJson
-        }
-        else {
-        this.setState({
-          winCount: currentUserWinCount,
-          currentUserDeck: newUserDeck,
-        }, ()=> {
-          // console.log(this.state.currentUserDeck);
-          this.setState({
-            deckRecieved: true,
-          })
-          this.setUserVariable()
-        })
-      }
-      })
-  }
+  //       if(newUserDeck.length<=1){
+  //         newUserDeck=deckJson
+  //       }
+  //       else {
+  //       this.setState({
+  //         winCount: currentUserWinCount,
+  //         currentUserDeck: newUserDeck,
+  //       }, ()=> {
+  //         // console.log(this.state.currentUserDeck);
+  //         this.setState({
+  //           deckRecieved: true,
+  //         })
+  //         this.setUserVariable()
+  //       })
+  //     }
+  //     })
+  // }
 
 
   renderRedirectToGameOver = () => {
@@ -206,7 +205,8 @@ setUserVariable = () => {
         pathname: '/award',
         state: {
           username: this.state.username,
-          winCount: this.state.winCount
+          winCount: this.state.winCount,
+          currentUserDeck: this.state.currentUserDeck
         }
       }}
       />

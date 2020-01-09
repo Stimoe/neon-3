@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import "./style.css";
 import { Redirect } from 'react-router-dom';
 import axios from "axios";
-
+import deckJson from "../../cards.json";
 
 
 
@@ -17,6 +17,7 @@ class Storypage extends Component {
       winCount: 0,
       username: "",
       password: "",
+      currentUserDeck: [],
       loggedInUser: "",
       redirect: false,
       errors: {}
@@ -30,43 +31,41 @@ class Storypage extends Component {
     this.setState({
       username: currentUser,
     }, () => {
-      // this.getCurrentWinCount()
-      //testing this function
+      this.getCurrentUser()
       
     })
-// console.log(this.state.username)
   }
 
-  // getCurrentWinCount = () => {
-  //   this.getWinCount()
+  getCurrentUser = () => {
+    let user = this.state.username
+    axios.get('/api/user/currentUser', {
+      params: {
+        username: user
+      }
+    })
+      .then(res => {
+        let newUserDeck=res.data.userDeck
+        let currentUserWinCount=res.data.winCount
+        // console.log(newUserDeck.length);
+        // console.log(currentUserWinCount);
 
-
-  // }
-
-//   getWinCount = () => {
-//     // console.log(this.state.username)
-//     let user = this.state.username
-
-//     axios.get('/api/user/winCount', {
-//       params: {
-//         username: user
-//       }
-//     })
-//       .then(res => {
-//         console.log("line 26 ", res.data.winCount)
-//    let currentUserWinCount=res.data.winCount
-// this.setState({
-//   winCount: currentUserWinCount
-// })
-
-
-  //     }).catch(err => {
-  //       console.log(err.response);
-  //       console.log("Username already exists or password could not be validated")
-  //     })
-  // }
-
-
+        if(newUserDeck.length<=1){
+          newUserDeck=deckJson
+        }
+        else {
+        this.setState({
+          winCount: currentUserWinCount,
+          currentUserDeck: newUserDeck,
+        }, ()=> {
+          // console.log(this.state.currentUserDeck);
+          this.setState({
+            deckRecieved: true,
+          })
+          this.setUserVariable()
+        })
+      }
+      })
+  }
 
 
 
@@ -93,6 +92,8 @@ class Storypage extends Component {
        pathname: '/battlepage',
        state: { 
          username: this.state.username,
+         winCount: this.state.winCount,
+         currentUserDeck: this.state.currentUserDeck
         }
    }}
    />
