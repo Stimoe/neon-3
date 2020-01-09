@@ -150,7 +150,7 @@ class BattlePage extends Component {
     this.setState({
       redirect: true
     })
-    if (redirect) {
+    if (this.state.redirect) {
       return <Redirect to={{
         pathname: '/gameLost',
         state: {
@@ -167,7 +167,7 @@ class BattlePage extends Component {
       redirect: true
     })
 
-    if (redirect) {
+    if (this.state.redirect) {
       return <Redirect to={{
         pathname: '/gameWon',
         state: {
@@ -182,7 +182,7 @@ class BattlePage extends Component {
     this.setState({
       redirect: true
     })
-    if (redirect) {
+    if (this.state.redirect) {
       return <Redirect to={{
         pathname: '/award',
         state: {
