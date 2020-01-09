@@ -114,7 +114,7 @@ class BattlePage extends Component {
     }
   }
 
-  updateWinCount = (newWinCount) => {
+  updateWinCount = () => {
 
     axios.patch('/api/user/winCount', { username: this.state.username, winCount: this.state.winCount }).then(res => {
       console.log(res.data);
@@ -169,10 +169,7 @@ class BattlePage extends Component {
       }
     }}
     />
-    // }
   }
-
-
 
   userAttack = (damage) => {
     let newArmor = 0;
@@ -278,18 +275,6 @@ class BattlePage extends Component {
     }
 
   };
-
-
-
-
-
-
-
-
-
-
-
-
 
 
   handlePlayedCards = (playedCards) => {
