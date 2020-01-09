@@ -74,7 +74,7 @@ module.exports = (app) => {
         })
     })
 
-    axios.patch('/api/user/reset', async (req, res) => { 
+    app.patch('/api/user/reset', async (req, res) => { 
         var currentUser = req.body.username
         let newDeck=[]
         let newWinCount=0
