@@ -95,22 +95,24 @@ module.exports = (app) => {
           })
     })
 
-    app.patch('/api/user/winCount/', async (req, res) => { 
+    app.patch('/api/user/winCount', async (req, res) => { 
         var currentUser = req.body.username
         var newWinCount=req.body.winCount
-        await User.findOneAndUpdate({username: currentUser}, {winCount: newWinCount})
-        .then((updatedDoc) => {
+        const user = await User.findOneAndUpdate({username: currentUser}, {winCount: newWinCount})
+res.send(user)
+
+        // .then((updatedDoc) => {
         
-            if (err){ 
-                return console.error(err);
-            } else {
-             res.send(updatedDoc)
-            }
-          })
+        //     if (err){ 
+        //         return console.error(err);
+        //     } else {
+        //      res.send(updatedDoc)
+        //     }
+        //   })
          
     })
 
-    // users.findOneAndUpdate({name: 'foo'}, { name: 'bar'}).then((updatedDoc) => {})
+
 
 
     // app.patch('/api/user/winCount/', async (req, res) => { 
@@ -134,15 +136,17 @@ module.exports = (app) => {
         var currentUser = req.body.username
         var newDeck=req.body.userDeck
         // res.send(newDeck)
-        const user = await User.findOne({username: currentUser})
-        User.user.userDeck.insert(newDeck, function (err, docs) {
-                if (err){ 
-                    return console.error(err);
-                } else {
-                 res.send(user)
-                }
-              })
+        await User.findOneAndUpdate({username: currentUser}, {userDeck: newDeck})
+        .then((updatedDoc) => {
+        
+            if (err){ 
+                return console.error(err);
+            } else {
+             res.send(updatedDoc)
+            }
+          })
     })
+
 
 
 
