@@ -54,10 +54,22 @@ class BattlePage extends Component {
       wincount: currentWinCount,
       currentUserDeck: userCurrentDeck
     }, () => {
-      this.setUserVariable()
-      console.log(this.state.username);
-      console.log(this.state.winCount);
-      console.log(this.state.currentUserDeck);
+      let currentEnemy = enemies[this.state.winCount];
+    let currentEnemyHealth = currentEnemy.health;
+    let currentEnemyArmor = currentEnemy.armor;
+    let newEnemyAbilities = currentEnemy.actions;
+    let newEnemyAttack = currentEnemy.attack;
+    let newEnemyArmorGain = currentEnemy.armorGain;
+    this.setState({
+      maxEnemyHealth: currentEnemyHealth,
+      currentEnemyHealth: currentEnemyHealth,
+      currentEnemyArmor: currentEnemyArmor,
+      currentEnemyAbilities: newEnemyAbilities,
+      currentEnemyAttack: newEnemyAttack,
+      currentEnemyArmorGain: newEnemyArmorGain,
+      deckRecieved: true
+    });
+
     })
   }
 
@@ -117,24 +129,24 @@ class BattlePage extends Component {
     })
   }
 
-  setUserVariable = () => {
+  // setUserVariable = () => {
 
-    let currentEnemy = enemies[this.state.winCount];
-    let currentEnemyHealth = currentEnemy.health;
-    let currentEnemyArmor = currentEnemy.armor;
-    let newEnemyAbilities = currentEnemy.actions;
-    let newEnemyAttack = currentEnemy.attack;
-    let newEnemyArmorGain = currentEnemy.armorGain;
-    this.setState({
-      maxEnemyHealth: currentEnemyHealth,
-      currentEnemyHealth: currentEnemyHealth,
-      currentEnemyArmor: currentEnemyArmor,
-      currentEnemyAbilities: newEnemyAbilities,
-      currentEnemyAttack: newEnemyAttack,
-      currentEnemyArmorGain: newEnemyArmorGain,
-      deckRecieved: true
-    });
-  }
+  //   let currentEnemy = enemies[this.state.winCount];
+  //   let currentEnemyHealth = currentEnemy.health;
+  //   let currentEnemyArmor = currentEnemy.armor;
+  //   let newEnemyAbilities = currentEnemy.actions;
+  //   let newEnemyAttack = currentEnemy.attack;
+  //   let newEnemyArmorGain = currentEnemy.armorGain;
+  //   this.setState({
+  //     maxEnemyHealth: currentEnemyHealth,
+  //     currentEnemyHealth: currentEnemyHealth,
+  //     currentEnemyArmor: currentEnemyArmor,
+  //     currentEnemyAbilities: newEnemyAbilities,
+  //     currentEnemyAttack: newEnemyAttack,
+  //     currentEnemyArmorGain: newEnemyArmorGain,
+  //     deckRecieved: true
+  //   });
+  // }
 
 
 
