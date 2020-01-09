@@ -11,7 +11,7 @@ import FireEm from './fire.gif';
 import IdleEm from './idle.gif';
 import Death from './death.gif';
 import Player from './players.png'
-// import Rain from './rain.gif'
+import Rain from './rain.gif'
 import GameWon from "../../components/gameWon"
 import GameOver from "../../components/gameOver"
 import EnemyAction from "../../components/enemiesActionModul"
@@ -46,12 +46,12 @@ class BattlePage extends Component {
 
   componentDidMount() {
     let currentUser = this.props.location.state.username
-    let userCurrentDeck=this.props.location.state.currentUserDeck
-    let currentWinCount=this.props.location.state.winCount
+    let userCurrentDeck = this.props.location.state.currentUserDeck
+    let currentWinCount = this.props.location.state.winCount
 
     this.setState({
       username: currentUser,
-wincount: currentWinCount,
+      wincount: currentWinCount,
       currentUserDeck: userCurrentDeck
     }, () => {
       this.setUserVariable()
@@ -62,9 +62,9 @@ wincount: currentWinCount,
   }
 
   componentDidUpdate(prevprops, prevState) {
-    let totalEnemies=enemies.length
-    if (this.state.currentEnemyHealth <= 0 && this.state.winCount===totalEnemies) {
-   
+    let totalEnemies = enemies.length
+    if (this.state.currentEnemyHealth <= 0 && this.state.winCount === totalEnemies) {
+
       this.renderRedirectToGameWon()
 
     }
@@ -82,7 +82,7 @@ wincount: currentWinCount,
         winCount: tempWins2,
       }, () => {
         this.updateWinCount();
-        
+
 
       })
 
@@ -105,38 +105,36 @@ wincount: currentWinCount,
   updateWinCount = () => {
     axios.patch('/api/user/winCount', { username: this.state.username, winCount: this.state.winCount }).then(res => {
       console.log("line 26 ", res.data, res.status)
-
+      this.renderRedirect()
     }).catch(err => {
       console.log(err.response);
       console.log("Username already exists or password could not be validated")
-      this.setState({
-        redirect: true,
-      },()=>{
-        this.renderRedirect()
-      })
+
+
+
 
 
     })
   }
 
-setUserVariable = () => {
+  setUserVariable = () => {
 
-  let currentEnemy = enemies[this.state.winCount];
-  let currentEnemyHealth = currentEnemy.health;
-  let currentEnemyArmor = currentEnemy.armor;
-  let newEnemyAbilities = currentEnemy.actions;
-  let newEnemyAttack = currentEnemy.attack;
-  let newEnemyArmorGain = currentEnemy.armorGain;
-  this.setState({
-    maxEnemyHealth: currentEnemyHealth,
-    currentEnemyHealth: currentEnemyHealth,
-    currentEnemyArmor: currentEnemyArmor,
-    currentEnemyAbilities: newEnemyAbilities,
-    currentEnemyAttack: newEnemyAttack,
-    currentEnemyArmorGain: newEnemyArmorGain,
-    deckRecieved: true
-  });
-}
+    let currentEnemy = enemies[this.state.winCount];
+    let currentEnemyHealth = currentEnemy.health;
+    let currentEnemyArmor = currentEnemy.armor;
+    let newEnemyAbilities = currentEnemy.actions;
+    let newEnemyAttack = currentEnemy.attack;
+    let newEnemyArmorGain = currentEnemy.armorGain;
+    this.setState({
+      maxEnemyHealth: currentEnemyHealth,
+      currentEnemyHealth: currentEnemyHealth,
+      currentEnemyArmor: currentEnemyArmor,
+      currentEnemyAbilities: newEnemyAbilities,
+      currentEnemyAttack: newEnemyAttack,
+      currentEnemyArmorGain: newEnemyArmorGain,
+      deckRecieved: true
+    });
+  }
 
 
 
@@ -177,8 +175,14 @@ setUserVariable = () => {
   renderRedirectToGameOver = () => {
     // if (this.state.userHealth <= 0) {
 
-      // localStorage.setItem('userWinCount', this.state.winCount);
-      return <Redirect to='/gameLost' />;
+    // localStorage.setItem('userWinCount', this.state.winCount);
+    return <Redirect to={{
+      pathname: 'gameLost',
+      state: {
+        username: this.state.username,
+      }
+    }}
+    />
     // }
 
   }
@@ -186,9 +190,15 @@ setUserVariable = () => {
   renderRedirectToGameWon = () => {
     // if (this.state.winCount === 3) {
 
-      // localStorage.setItem('userWinCount', this.state.winCount);
-      return <Redirect to='/gameWon' />;
-    // }
+    // localStorage.setItem('userWinCount', this.state.winCount);
+
+    return <Redirect to={{
+      pathname: 'gameWon',
+      state: {
+        username: this.state.username,
+      }
+    }}
+    />  // }
 
   }
 
@@ -204,16 +214,16 @@ setUserVariable = () => {
 
     // if (this.state.currentEnemyHealth <= 0) {
 
-      // localStorage.setItem('userWinCount', this.state.winCount);
-      return <Redirect to={{
-        pathname: '/award',
-        state: {
-          username: this.state.username,
-          winCount: this.state.winCount,
-          currentUserDeck: this.state.currentUserDeck
-        }
-      }}
-      />
+    // localStorage.setItem('userWinCount', this.state.winCount);
+    return <Redirect to={{
+      pathname: '/award',
+      state: {
+        username: this.state.username,
+        winCount: this.state.winCount,
+        currentUserDeck: this.state.currentUserDeck
+      }
+    }}
+    />
     // }
   }
 
@@ -442,80 +452,80 @@ setUserVariable = () => {
 
   render() {
 
-    if(this.state.deckRecieved){
+    if (this.state.deckRecieved) {
 
-    const userTurnOver = this.state.userTurnOver;
-    let enemyHealth = this.state.currentEnemyHealth;
+      const userTurnOver = this.state.userTurnOver;
+      let enemyHealth = this.state.currentEnemyHealth;
 
-    return (
-      <div>
-        <div className="landing2"></div>
-        <div className="rain"></div>
-        <div className="row bars">
-          <div className="health col-md-6">
-            <div>
-              <progress
-                className="nes-progress health is-error"
-                value={this.state.userHealth}
-                max="100"
-              ></progress>
-            </div>
-            <p className="hb">Player:{this.state.userHealth}</p>
-            <p className="hb">Armor:{this.state.userArmor}</p>
-            <img className="player" src={Player}></img>
-
-          </div>
-          <div className="emhealth col-md-6">
-            <div>
-              <progress
-                className="nes-progress emhealth is-error"
-                value={this.state.currentEnemyHealth}
-                max={this.state.maxEnemyHealth}
-              ></progress>
-            </div>
-            <p className="em">Enemy:{this.state.currentEnemyHealth}</p>
-            <p className="em">Armor:{this.state.currentEnemyArmor}</p>
-          </div>
-
-          <div>
-
-            {/* <EnemyModal turnEnded = {this.state.userTurnOver}/> */}
-          </div>
-
-
-        </div>
+      return (
         <div>
-          <div>
-            {userTurnOver ? (
-              <img className="emm1" src={FireEm} ></img>
-            ) : (
-                <img className="emm" src={IdleEm}></img>
-              )}
-            {
-              (this.state.currentEnemyHealth <= 0)
-                ? <img className="emm1" src={Death} ></img>
-                : null
-            }
+          <div className="landing2"></div>
+          <div className="rain"></div>
+          <div className="row bars">
+            <div className="health col-md-6">
+              <div>
+                <progress
+                  className="nes-progress health is-error"
+                  value={this.state.userHealth}
+                  max="100"
+                ></progress>
+              </div>
+              <p className="hb">Player:{this.state.userHealth}</p>
+              <p className="hb">Armor:{this.state.userArmor}</p>
+              <img className="player" src={Player}></img>
+
+            </div>
+            <div className="emhealth col-md-6">
+              <div>
+                <progress
+                  className="nes-progress emhealth is-error"
+                  value={this.state.currentEnemyHealth}
+                  max={this.state.maxEnemyHealth}
+                ></progress>
+              </div>
+              <p className="em">Enemy:{this.state.currentEnemyHealth}</p>
+              <p className="em">Armor:{this.state.currentEnemyArmor}</p>
+            </div>
+
+            <div>
+
+              {/* <EnemyModal turnEnded = {this.state.userTurnOver}/> */}
+            </div>
+
 
           </div>
-        </div>
-        <div className="d-flex carddeck justify-content-center">
-          <DeckBrain
-            readPlayed={this.handlePlayedCards}
-            hasWon={this.state.winCount}
-            currentDeck={this.state.currentUserDeck}
-          
+          <div>
+            <div>
+              {userTurnOver ? (
+                <img className="emm1" src={FireEm} ></img>
+              ) : (
+                  <img className="emm" src={IdleEm}></img>
+                )}
+              {
+                (this.state.currentEnemyHealth <= 0)
+                  ? <img className="emm1" src={Death} ></img>
+                  : null
+              }
 
-          />
-          {this.renderRedirect()}
-        </div>
-      </div>
-    );
-  }
+            </div>
+          </div>
+          <div className="d-flex carddeck justify-content-center">
+            <DeckBrain
+              readPlayed={this.handlePlayedCards}
+              hasWon={this.state.winCount}
+              currentDeck={this.state.currentUserDeck}
 
-  else {
-    return null;
-  }
+
+            />
+            {this.renderRedirect()}
+          </div>
+        </div>
+      );
+    }
+
+    else {
+      return null;
+    }
   }
 }
 export default BattlePage;
