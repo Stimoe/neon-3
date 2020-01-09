@@ -95,26 +95,39 @@ module.exports = (app) => {
           })
     })
 
-
-
-
-
-
     app.patch('/api/user/winCount/', async (req, res) => { 
         var currentUser = req.body.username
         var newWinCount=req.body.winCount
-        const user = await User.findOne({username: currentUser})
-        res.send(user, "newSWinCount ",newWinCount)
-        // User.user.winCount.insert(newWinCount, function (err,  docs) {
-        //     if (err){ 
-        //         return console.error(err);
-        //     } else {
-        //      res.send(user)
-        //     }
-        //   })
+        await User.findOneAndUpdate({username: currentUser}, {winCount: newWinCount})
+        .then((updatedDoc) => {
+        
+            if (err){ 
+                return console.error(err);
+            } else {
+             res.send(updatedDoc)
+            }
+          })
          
     })
 
+    // users.findOneAndUpdate({name: 'foo'}, { name: 'bar'}).then((updatedDoc) => {})
+
+
+    // app.patch('/api/user/winCount/', async (req, res) => { 
+    //     var currentUser = req.body.username
+    //     var newWinCount=req.body.winCount
+    //     const user = await User.findOne({username: currentUser})
+    //     res.send(user, "newSWinCount ",newWinCount)
+    //     User.user.findOneAndUpdat(winCount, newWinCount, function (err,  docs) {
+    //         if (err){ 
+    //             return console.error(err);
+    //         } else {
+    //          res.send(user)
+    //         }
+    //       })
+         
+    // })
+   
  
  
     app.patch('/api/user/newDeck', async (req, res) => { 
