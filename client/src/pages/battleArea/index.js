@@ -120,9 +120,6 @@ class BattlePage extends Component {
       console.log(res.data);
       
       
-    }, ()=>{
-      
-      this.renderRedirectToAward()
     }).catch(err => {
       console.log(err.response);
       console.log("Username already exists or password could not be validated")
@@ -131,6 +128,8 @@ class BattlePage extends Component {
 
 
 
+    }, ()=>{
+      this.renderRedirectToAward()
     })
   }
 
