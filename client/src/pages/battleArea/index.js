@@ -119,9 +119,10 @@ class BattlePage extends Component {
     axios.patch('/api/user/winCount', { username: this.state.username, winCount: this.state.winCount }).then(res => {
       console.log(res.data);
       
-      this.renderRedirectToAward()
       
     }, ()=>{
+      
+      this.renderRedirectToAward()
     }).catch(err => {
       console.log(err.response);
       console.log("Username already exists or password could not be validated")
@@ -136,8 +137,10 @@ class BattlePage extends Component {
 
 
   renderRedirectToGameOver = () => {
+    
+    
     return <Redirect to={{
-      pathname: 'gameLost',
+      pathname: '/gameLost',
       state: {
         username: this.state.username,
       }
@@ -150,7 +153,7 @@ class BattlePage extends Component {
   renderRedirectToGameWon = () => {
 
     return <Redirect to={{
-      pathname: 'gameWon',
+      pathname: '/gameWon',
       state: {
         username: this.state.username,
       }
@@ -160,6 +163,7 @@ class BattlePage extends Component {
   }
 
   renderRedirectToAward = () => {
+    console.log("here");
     return <Redirect to={{
       pathname: '/award',
       state: {
