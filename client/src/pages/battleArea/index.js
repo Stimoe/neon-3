@@ -123,11 +123,6 @@ class BattlePage extends Component {
     }).catch(err => {
       console.log(err.response);
       console.log("Username already exists or password could not be validated")
-
-
-
-
-
     }, ()=>{
       this.renderRedirectToAward()
     })
@@ -137,6 +132,7 @@ class BattlePage extends Component {
 
   renderRedirectToGameOver = () => {
     
+    console.log("here");
     
     return <Redirect to={{
       pathname: '/gameLost',
@@ -150,6 +146,7 @@ class BattlePage extends Component {
   }
 
   renderRedirectToGameWon = () => {
+console.log("here");
 
     return <Redirect to={{
       pathname: '/gameWon',

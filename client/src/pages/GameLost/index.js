@@ -35,7 +35,7 @@ class GameLost extends Component {
     })
   }
   resetDatabase = () => {
-    // console.log(this.state.username)
+    console.log(this.state.username)
     let user = this.state.username
 
     axios.patch('/api/user/reset', {
