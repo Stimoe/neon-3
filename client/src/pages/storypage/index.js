@@ -65,7 +65,23 @@ class Storypage extends Component {
       })
   }
 
+  setUserVariable = () => {
 
+    let currentEnemy = enemies[this.state.winCount];
+    let currentEnemyHealth = currentEnemy.health;
+    let currentEnemyArmor = currentEnemy.armor;
+    let newEnemyAbilities = currentEnemy.actions;
+    let newEnemyAttack = currentEnemy.attack;
+    let newEnemyArmorGain = currentEnemy.armorGain;
+    this.setState({
+      maxEnemyHealth: currentEnemyHealth,
+      currentEnemyHealth: currentEnemyHealth,
+      currentEnemyArmor: currentEnemyArmor,
+      currentEnemyAbilities: newEnemyAbilities,
+      currentEnemyAttack: newEnemyAttack,
+      currentEnemyArmorGain: newEnemyArmorGain
+    });
+  }
 
 
 
