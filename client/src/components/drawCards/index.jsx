@@ -6,7 +6,7 @@ var UserInitialDeck = require("../../cards.json");
 class DrawBrain extends Component {
   constructor(props) {
     super(props);
-    console.log("tessssst");
+
   }
   state = {
     newCards: [],
@@ -20,7 +20,7 @@ class DrawBrain extends Component {
   };
 
   componentDidMount() {
-    console.log("tessssst", this.currentDeck);
+
     const newCardsShuffled = this.shuffleCards(newCardsFromJson);
   
 
