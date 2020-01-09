@@ -89,6 +89,8 @@ class BattlePage extends Component {
     if (this.state.currentEnemyHealth <= 0) {
       let tempWins2 = this.state.winCount
       tempWins2 = tempWins2 + 1
+      console.log(tempWins2);
+      
       this.setState({
         winCount: tempWins2,
       }, () => {
