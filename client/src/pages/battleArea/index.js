@@ -85,6 +85,9 @@ class BattlePage extends Component {
 
     if (this.state.userHealth <= 0) {
       this.renderRedirectToGameOver()
+      this.setState({
+        userHealth:1
+      })
     }
     if (this.state.currentEnemyHealth <= 0) {
       let tempWins2 = this.state.winCount
