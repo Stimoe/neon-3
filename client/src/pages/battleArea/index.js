@@ -62,28 +62,15 @@ class BattlePage extends Component {
   componentDidUpdate(prevprops, prevState) {
     let totalEnemies=enemies.length
     if (this.state.currentEnemyHealth <= 0 && this.state.winCount===totalEnemies) {
-      let tempWins2 = 0
-      // tempWins2 = tempWins2 + 1    
-      this.setState({
-        winCount: tempWins2,
-      }, () => {
-        this.renderRedirectToGameWon()
-
-      })
+   
+      this.renderRedirectToGameWon()
 
     }
 
     const turnEnded = this.state.userTurnOver === true;
     const frozen = this.state.frozen;
     if (this.state.userHealth <= 0) {
-      let tempWins2 = 0
-      // tempWins2 = tempWins2 + 1    
-      this.setState({
-        winCount: tempWins2,
-      }, () => {
-        this.renderRedirectToGameOver()
-
-      })
+      this.renderRedirectToGameOver()
 
     }
     if (this.state.currentEnemyHealth <= 0) {
@@ -93,7 +80,7 @@ class BattlePage extends Component {
         winCount: tempWins2,
       }, () => {
         this.updateWinCount();
-        this.renderRedirect()
+        
 
       })
 
@@ -122,6 +109,8 @@ class BattlePage extends Component {
       console.log("Username already exists or password could not be validated")
       this.setState({
         redirect: true,
+      },()=>{
+        this.renderRedirect()
       })
 
 
@@ -183,20 +172,20 @@ setUserVariable = () => {
 
 
   renderRedirectToGameOver = () => {
-    if (this.state.userHealth <= 0) {
+    // if (this.state.userHealth <= 0) {
 
       // localStorage.setItem('userWinCount', this.state.winCount);
       return <Redirect to='/gameLost' />;
-    }
+    // }
 
   }
 
   renderRedirectToGameWon = () => {
-    if (this.state.winCount === 3) {
+    // if (this.state.winCount === 3) {
 
       // localStorage.setItem('userWinCount', this.state.winCount);
       return <Redirect to='/gameWon' />;
-    }
+    // }
 
   }
 
@@ -210,7 +199,7 @@ setUserVariable = () => {
 
   renderRedirect = () => {
 
-    if (this.state.currentEnemyHealth <= 0) {
+    // if (this.state.currentEnemyHealth <= 0) {
 
       // localStorage.setItem('userWinCount', this.state.winCount);
       return <Redirect to={{
@@ -221,7 +210,7 @@ setUserVariable = () => {
         }
       }}
       />
-    }
+    // }
   }
 
 
