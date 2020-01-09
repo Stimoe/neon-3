@@ -1,18 +1,18 @@
 import React, { Component } from "react";
 import "./style.css";
 import enemies from "../../enemy.json";
-import Axios from "axios";
+import axios from "axios";
 import DeckBrain from "../../components/deck-managment";
 import HealthBar from "../../components/plyr-healthbar";
 import EHBar from "../../components/ehealthbar";
+import { Redirect } from 'react-router-dom';
 
-import { Redirect } from "react-router-dom";
 import FireEm from './fire.gif';
 import IdleEm from './idle.gif';
 import Death from './death.gif';
 import Player from './players.png'
 // import Rain from './rain.gif'
-
+import GameWon from "../../components/gameWon"
 import GameOver from "../../components/gameOver"
 import EnemyAction from "../../components/enemiesActionModul"
 import EnemyModal from "../../components/enemiesActionModul";
@@ -20,9 +20,9 @@ import { log } from "util";
 
 var newWinCounts;
 var newEnemyObject;
-
 class BattlePage extends Component {
   state = {
+    username: '',
     winCount: 0,
     userHealth: 100,
     userArmor: 0,
@@ -37,55 +37,67 @@ class BattlePage extends Component {
     frozen: false,
     redirect: false,
     enemyAction: "",
-    maxEnemyHealth:0
+    maxEnemyHealth: 0
   };
 
-  componentDidMount() {
 
-    let localWins = 0;
-    let tempWins = parseInt(localStorage.getItem('userWinCount'))
-    console.log(tempWins)
-    if (!tempWins){
-      localWins = 0
-  }
-    else {
-      localWins = tempWins
-      
-    }
-    console.log(localWins);
-    
-    // this.atStartOfBattle()
-    let currentEnemy = enemies[localWins];
-    
-    
-    let currentEnemyHealth = currentEnemy.health;
-    let currentEnemyArmor = currentEnemy.armor;
-    let newEnemyAbilities = currentEnemy.actions;
-    let newEnemyAttack = currentEnemy.attack;
-    let newEnemyArmorGain = currentEnemy.armorGain;
+
+
+  componentDidMount() {
+    let currentWinCount = this.props.location.state.winCount
+    let currentUser = this.props.location.state.username
     this.setState({
-      maxEnemyHealth:currentEnemyHealth,
-      winCount: localWins,
-      currentEnemyHealth: currentEnemyHealth,
-      currentEnemyArmor: currentEnemyArmor,
-      currentEnemyAbilities: newEnemyAbilities,
-      currentEnemyAttack: newEnemyAttack,
-      currentEnemyArmorGain: newEnemyArmorGain
-    });
+      username: currentUser,
+      winCount: currentWinCount
+    }, () => {
+      // this.getCurrentWinCount()
+      //testing this function
+      let currentEnemy = enemies[this.state.winCount];
+      let currentEnemyHealth = currentEnemy.health;
+      let currentEnemyArmor = currentEnemy.armor;
+      let newEnemyAbilities = currentEnemy.actions;
+      let newEnemyAttack = currentEnemy.attack;
+      let newEnemyArmorGain = currentEnemy.armorGain;
+      this.setState({
+        maxEnemyHealth: currentEnemyHealth,
+
+        currentEnemyHealth: currentEnemyHealth,
+        currentEnemyArmor: currentEnemyArmor,
+        currentEnemyAbilities: newEnemyAbilities,
+        currentEnemyAttack: newEnemyAttack,
+        currentEnemyArmorGain: newEnemyArmorGain
+      });
+    })
   }
 
   componentDidUpdate(prevprops, prevState) {
-    
-    
-    const turnEnded = this.state.userTurnOver ===true;
-    const frozen = this.state.frozen;
 
-    if (this.state.currentEnemyHealth <= 0) {
-      // this.saveState(this.state.winCount)
+
+    const turnEnded = this.state.userTurnOver === true;
+    const frozen = this.state.frozen;
+    if (this.state.userHealth <= 0) {
+      let tempWins2 = 0
+      // tempWins2 = tempWins2 + 1    
       this.setState({
-        redirect: true
-      });
-      this.renderRedirect();
+        winCount: tempWins2,
+      }, () => {
+        this.updateWinCount();
+        this.renderRedirectToGameOver()
+
+      })
+
+    }
+    if (this.state.currentEnemyHealth <= 0) {
+      let tempWins2 = this.state.winCount
+      tempWins2 = tempWins2 + 1    
+      this.setState({
+        winCount: tempWins2,
+      }, () => {
+        this.updateWinCount();
+       this.renderRedirect()
+
+      })
+
     }
     if (turnEnded && !frozen) {
       this.firstEnemyAction();
@@ -94,19 +106,68 @@ class BattlePage extends Component {
         frozen: false
       });
     }
-    if(this.state.userTurnOver==true) {
+    if (this.state.userTurnOver === true) {
 
-      setTimeout(function(){
-           this.setState({userTurnOver:false});
-      }.bind(this),2000); 
- }
+      setTimeout(function () {
+        this.setState({ userTurnOver: false });
+      }.bind(this), 2000);
+    }
   }
-  renderRedirect = () => {
-    
-    if (this.state.currentEnemyHealth <= 0){
 
-      localStorage.setItem('userWinCount', this.state.winCount);
-      return <Redirect to='/award' />
+  updateWinCount = () => {
+    axios.patch('/api/user/winCount', { username: this.state.username, winCount: this.state.winCount }).then(res => {
+      console.log("line 26 ", res.data, res.status)
+
+    }).catch(err => {
+      console.log(err.response);
+      console.log("Username already exists or password could not be validated")
+      this.setState({
+        redirect: true,
+      })
+
+
+    })
+  }
+
+  renderRedirectToGameOver = () => {
+    if (this.state.userHealth <= 0) {
+
+      // localStorage.setItem('userWinCount', this.state.winCount);
+      return <Redirect to='/gameLost' />;
+    }
+
+  }
+
+  renderRedirectToGameWon = () => {
+    if (this.state.winCount=== 3) {
+
+      // localStorage.setItem('userWinCount', this.state.winCount);
+      return <Redirect to='/gameWon' />;
+    }
+
+  }
+
+
+
+
+  
+
+
+
+
+  renderRedirect = () => {
+
+    if (this.state.currentEnemyHealth <= 0) {
+
+      // localStorage.setItem('userWinCount', this.state.winCount);
+      return <Redirect to={{
+        pathname: '/award',
+        state: { 
+          username: this.state.username,
+         winCount: this.state.winCount
+         }
+    }}
+    />
     }
   }
 
@@ -116,14 +177,14 @@ class BattlePage extends Component {
     let newArmor = 0;
     let gameWon = false;
     let newHealth;
-    let newCurrentEnemyHealth=this.state.currentEnemyHealth
-    let newCurrentEnemyArmor=this.state.currentEnemyArmor
-  console.log("Here is damage ",damage)
-  console.log("armor ",newCurrentEnemyArmor)
+    let newCurrentEnemyHealth = this.state.currentEnemyHealth
+    let newCurrentEnemyArmor = this.state.currentEnemyArmor
+    console.log("Here is damage ", damage)
+    console.log("armor ", newCurrentEnemyArmor)
     if (newCurrentEnemyArmor >= damage) {
       let tempArmor = this.state.currentEnemyArmor;
       newArmor = tempArmor - damage;
-      newHealth=newCurrentEnemyHealth
+      newHealth = newCurrentEnemyHealth
       console.log(newArmor)
       // this.setState({
       //   currentEnemyArmor:newArmor
@@ -132,33 +193,34 @@ class BattlePage extends Component {
         newArmor,
         newHealth
       }
-    } 
+    }
     else {
       let newDamage = damage - newCurrentEnemyArmor;
       let tempHealth = this.state.currentEnemyHealth;
       newHealth = tempHealth - newDamage;
-      newArmor=0
+      newArmor = 0
       if (newHealth <= 0) {
         let tempWins2 = this.state.winCount
         console.log(tempWins2);
-        
-        tempWins2 = tempWins2 +1
+
+        tempWins2 = tempWins2 + 1
         console.log(tempWins2)
         this.setState({
           winCount: tempWins2
         })
       }
- return{
-   newHealth,
-   newArmor
- }
+      return {
+        newHealth,
+        newArmor,
+        gameWon
+      }
     }
-console.log(newArmor,newHealth)
-    return {
-      newArmor,
-      newHealth,
-      gameWon
-    };
+    // console.log(newArmor, newHealth)
+    // return {
+    //   newArmor,
+    //   newHealth,
+    //   gameWon
+    // };
   };
 
   firstEnemyAction = () => {
@@ -169,10 +231,10 @@ console.log(newArmor,newHealth)
     let newUserHealth = this.state.userHealth;
     let newUserArmor = this.state.userArmor;
     // console.log(possibleEnemyActions.length + 1);
-    
+
     let randomAction = Math.floor(Math.random() * possibleEnemyActions.length + 1
     );
-    console.log("The action the enemy did ",randomAction);
+    console.log("The action the enemy did ", randomAction);
 
     switch (randomAction) {
       case 1:
@@ -183,25 +245,25 @@ console.log(newArmor,newHealth)
           this.setState({
             userArmor: newArmor,
             enemyAction: newEnemyAttackAction,
-            userTurnOver:false
+            userTurnOver: false
           });
-        } 
-       
-        
+        }
+
+
         else {
           let newAttack = newEnemyAttack - newUserArmor;
           let newHealth = newUserHealth - newAttack;
           this.setState({
             userHealth: newHealth,
             userArmor: 0,
-           userTurnOver:false
+            userTurnOver: false
           });
           if (this.state.userHealth <= 0) {
             this.userLoses()
           }
         }
         this.setState({
-          userTurnOver:false
+          userTurnOver: false
         })
         break;
       case 2:
@@ -211,7 +273,7 @@ console.log(newArmor,newHealth)
         this.setState({
           currentEnemyArmor: newArmor,
           enemyAction: newEnemyAction,
-          userTurnOver:false
+          userTurnOver: false
         });
         return;
     }
@@ -234,7 +296,7 @@ console.log(newArmor,newHealth)
 
 
   handlePlayedCards = (playedCards) => {
-// console.log("cards array ",playedCards);
+    // console.log("cards array ",playedCards);
 
     let damage = 0;
     // let currentArmor = this.state.userArmor;
@@ -243,29 +305,29 @@ console.log(newArmor,newHealth)
     let newEnemyArmor;
     let userHealValue = 0;
     let newHealth = 0;
-    let multiplier=1
-    let newDamage=0
+    let multiplier = 1
+    // let newDamage = 0
     let armor = this.state.userArmor;
     playedCards.forEach(card => {
-      
-    // console.log(card);
-    
-      
+
+      // console.log(card);
+
+
       switch (card.id) {
-      
+
         case 1:
-        // newDamage= multiplier * card.damage
-        // console.log(multiplier, newDamage);
-        //   newDamage=card.damage
-        //   console.log(newDamage);
-          damage +=card.damage *multiplier
+          // newDamage= multiplier * card.damage
+          // console.log(multiplier, newDamage);
+          //   newDamage=card.damage
+          //   console.log(newDamage);
+          damage += card.damage * multiplier
           // damage = newDamage;
-    console.log(damage);
-    
+          console.log(damage);
+
           break;
 
         case 2:
-            armor += card.armor;
+          armor += card.armor;
 
           break;
         case 3:
@@ -273,11 +335,11 @@ console.log(newArmor,newHealth)
           selfDamage += card.selfDamage;
           break;
         case 4:
-          multiplier=card.multiplier
-        console.log(multiplier);
-        damage= damage * multiplier
-        console.log(damage);
-          
+          multiplier = card.multiplier
+          console.log(multiplier);
+          damage = damage * multiplier
+          console.log(damage);
+
           break;
         case 5:
           newEnemyArmor = 0;
@@ -309,7 +371,7 @@ console.log(newArmor,newHealth)
           winCount: tempWin
         });
       }
-      console.log(newArmor,newHealth)
+      console.log(newArmor, newHealth)
       this.setState({
         currentEnemyArmor: newArmor,
         currentEnemyHealth: newHealth,
@@ -317,17 +379,17 @@ console.log(newArmor,newHealth)
         // userArmor: armor,
         userHealth: tempHealth
       });
-    } 
+    }
     else {
 
-   
+
       this.setState({
         // userTurnOver: turnOver,
         userArmor: armor
       });
     }
     this.setState({
-      userTurnOver:true
+      userTurnOver: true
     })
   };
 
@@ -337,18 +399,34 @@ console.log(newArmor,newHealth)
     const userTurnOver = this.state.userTurnOver;
     let enemyHealth = this.state.currentEnemyHealth;
 
-    
-
-    if (this.state.userHealth <= 0) {
-      this.setState({
-        winCount:0
-      })
-      return (
-        <GameOver />
-      )
-    }
 
 
+    // if (this.state.userHealth <= 0) {
+    //   this.setState({
+    //     winCount: 0
+    //   }, () => {
+    //     this.updateWinCount();
+    //     //testing this function
+
+    //   }, () => {
+    //     return (
+    //       <GameOver />
+    //     )
+    //   })
+    // }
+
+    // if (this.state.winCount === 3) {
+    //   this.setState({
+    //     winCount: 0
+    //   }, () => {
+    //     this.updateWinCount();
+    //     //testing this function
+
+    //   })
+    //   return (
+    //     <GameWon />
+    //   )
+    // }
 
 
     return (
@@ -366,8 +444,8 @@ console.log(newArmor,newHealth)
             </div>
             <p className="hb">Player:{this.state.userHealth}</p>
             <p className="hb">Armor:{this.state.userArmor}</p>
-            <img  className="player" src={Player}></img>
-            
+            <img className="player" src={Player}></img>
+
           </div>
           <div className="emhealth col-md-6">
             <div>
@@ -383,26 +461,26 @@ console.log(newArmor,newHealth)
 
           <div>
 
-          <EnemyModal turnEnded = {this.state.userTurnOver}/>
+            {/* <EnemyModal turnEnded = {this.state.userTurnOver}/> */}
           </div>
 
 
         </div>
+        <div>
           <div>
-            <div>
-              {userTurnOver ? (
-                <img className="emm1" src={FireEm} ></img>
-                ) : (
-                  <img className="emm" src={IdleEm}></img>
-                  )}
-                    {
-                (this.state.currentEnemyHealth <= 0)
-                  ? <img className="emm1" src={Death} ></img>
-                  : null
-              }
-              
-            </div>
+            {userTurnOver ? (
+              <img className="emm1" src={FireEm} ></img>
+            ) : (
+                <img className="emm" src={IdleEm}></img>
+              )}
+            {
+              (this.state.currentEnemyHealth <= 0)
+                ? <img className="emm1" src={Death} ></img>
+                : null
+            }
+
           </div>
+        </div>
         <div className="d-flex carddeck justify-content-center">
           <DeckBrain
             readPlayed={this.handlePlayedCards}
@@ -416,6 +494,7 @@ console.log(newArmor,newHealth)
       </div>
     );
   }
+
 }
 export default BattlePage;
 

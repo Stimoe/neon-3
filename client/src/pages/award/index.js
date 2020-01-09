@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import Axios from "axios";
+import axios from "axios";
 import "./style.css";
 import DrawBrain from "../../components/drawCards";
-import { booleanLiteral } from "@babel/types";
-import { Redirect } from "react-router-dom";
+import { Redirect } from 'react-router-dom';
+// import { booleanLiteral } from "@babel/types";
+
 var UserInitialDeck = require("../../cards.json");
 
 
@@ -12,12 +13,37 @@ class Save extends Component {
   constructor() {
     super();
     this.state = {
+      redirect: false,
       username: "",
-      // userDeck: UserInitialDeck,
-      winCount: 0,
+      userDeck: UserInitialDeck,
+
       deckDrawn: false
     };
   }
+
+  componentDidMount() {
+
+    let currentUser = this.props.location.state.username
+    
+ 
+    
+    this.setState({
+      username: currentUser,
+ 
+    }, () => {
+      this.updateDeck ()
+      console.log(this.state.username);
+      
+      
+    })
+// console.log(this.state.username)
+  }
+
+
+
+
+
+
   onChange = e => {
     this.setState({ [e.target.id]: e.target.value });
     // console.log(this.userDeck);
@@ -25,16 +51,23 @@ class Save extends Component {
 
   handleOnClick = e => {
 
-    Axios.post("/gamestate", this.userDeck).then(data => {
-            console.log(data);
-            this.props.history.push("/battlepage")
-            // .then( Axios.put(`/api/Users/${id}`, body) )
-          }).catch (err=> {
-            console.log(err);    
-          })
   }
 
+  updateDeck = (deck) => {
+
+    console.log(deck);
+    
+  }
+ 
+
+
+
+
 drawn = (p) => {
+
+  console.log(p);
+  
+  
   if(p){
     this.setState({
       deckDrawn:true
@@ -44,73 +77,21 @@ drawn = (p) => {
 
 renderRedirect = () => {
   if (this.state.redirect) {
-    return <Redirect to='/battlepage' />
+    return <Redirect to={{
+     pathname: '/battlepage',
+     state: { 
+       username: this.state.username,
+      userDeck: this.state.userDeck
+      }
+ }}
+ />
   }
 }
 
-// onSubmit = e => {
-//     e.preventDefault();
-
-// const userDeck = {
-//       username: this.state.username,
-//       userDeck: this.state.userDeck,
-//       winCount: this.state.winCount
-//     };
-//     Axios.post("/gamestate", userDeck).then(data => {
-//       console.log(data);
-//       this.props.history.push("/battlepage")
-//     }).catch (err=> {
-//       console.log(err);    
-//     })
-// console.log(userDeck);
-//   };
 
 
-// render() {
-//     if(this.state.deckDrawn){
-//     return (
-      
-//       <div></div>
-//       <div className="d-flex carddeck justify-content-center" >
-          
-//           {this.state.userTurnOver ? "true" : "false"}
-//           <br></br>
-
-//           <br></br>
-        
-//         </div>
 
 
-  // drawn = p => {
-  //   if (p) {
-  //     this.setState({
-  //       deckDrawn: true
-  //     });
-  //   }
-  // };
-
-  // renderRedirect = () => {
-  //   if (this.state.redirect) {
-  //     return <Redirect to="/battlepage" />;
-  //   }
-  // };
-
-  // onSubmit = e => {
-  //     e.preventDefault();
-
-  // const userDeck = {
-  //       username: this.state.username,
-  //       userDeck: this.state.userDeck,
-  //       winCount: this.state.winCount
-  //     };
-  //     Axios.post("/gamestate", userDeck).then(data => {
-  //       console.log(data);
-  //       this.props.history.push("/battlepage")
-  //     }).catch (err=> {
-  //       console.log(err);
-  //     })
-  // console.log(userDeck);
-  //   };
 
   render() {
     if (this.state.deckDrawn) {
@@ -129,6 +110,7 @@ renderRedirect = () => {
               <button
                 type="button"
                 className="btn nes-pointer neon1 mb-3 nes-btn"
+                onClick={this.handleOnClick}>
               >
                 Save &amp; Quit
               </button>
@@ -150,9 +132,12 @@ renderRedirect = () => {
         <div>
           <div className="landing6"></div>
           <div className="awardCards">
-        <DrawBrain
+        <DrawBrain 
+       
+        newDeck2={this.state.finalNewCards}
         readPlayed={this.handlePlayedCards}
-        // currentDeck={this.userDeck}
+      
+        updateDeck={this.newDeck}
         drawn={this.drawn}
         />
         </div>
@@ -164,3 +149,5 @@ renderRedirect = () => {
 }
 
 export default Save;
+
+

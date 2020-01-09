@@ -1,11 +1,36 @@
 const mongoose = require('mongoose');
 
-const {Schema} = mongoose;
+// const mongouri = require('../config/mongodb');
 
-const userSchema = new Schema({
-    username: String,
-    password: String,
-})
+const Schema = mongoose.Schema;
+const UserSchema = new Schema({
+    username: {
+        type: String,
+        required: true,
+        minlength: 5,
+        maxlength: 50
+    },
+    password: {
+        type: String,
+        required: true,
+        minlength: 5,
+        maxlength: 1024
+    },
+    hash: {
+        type: String,
+        required: true,
+        minlength: 5,
+        maxlength: 1024
+    },
+    winCount: {
+        type: Number,
+    },
+    // userDeck: {
+    //     currentDeck:
+    // }
+});
+const User = mongoose.model('User', UserSchema);
 
-mongoose.model('users', userSchema);
+module.exports = User;
+
 

@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import Axios from "axios";
+import {Redirect} from 'react-router-dom';
+import axios from "axios";
 import "./style.css";
+
 
 
 class Login extends Component {
@@ -11,6 +13,7 @@ class Login extends Component {
       username: "",
       password: "",
       loggedInUser:"",
+      redirect: false,
       // url:"https://stimoe.github.io/expressNeonRainServer",
       // url:"http://localhost:8080",
       // url:"https://neon-rain-express-server.herokuapp.com",
@@ -20,80 +23,64 @@ class Login extends Component {
   }
 
 
-
-
-
-
-
-
-
-
-
-  handleSignupFormSubmit = event=>{
-    event.preventDefault();
-    Axios.post(`${this.state.url}/api/users/register`,{username:this.state.username,password:this.state.password},{withCredentials:true}).then(res=>{
-      console.log(res.data,res.status)
-      this.handleLoginFormSubmit();
-    }).catch(err=>{
-      console.log(err.response);
-    })
-  }
-
-
-
-
-
-
-  handleLoginFormSubmit = event=>{
-    if(event){
-
-      event.preventDefault();
-    }
-    Axios.post(`${this.state.url}/api/users/login`,{username:this.state.username,password:this.state.password},{withCredentials:true}).then(res=>{
-      console.log(res.data,res.status)
-      this.setState({
-        username:"",
-        password:"",
-        loggedInUser:res.data.user
-      });
-      this.props.history.push("/storypage")
-    }).catch(err=>{
-      console.log(err.response);
-      this.setState({
-        username:"",
-        password:"",
-        loggedInUser:""
-      })
-    })
-  }
-
-componentDidMount(){
-    this.readSessions();
-  }
-
-  handleChange= event=>{
-      console.log("change")
-    const {username,value}=event.target;
-    this.setState({
-      [username]:value
-    })
-  }
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  readSessions = ()=>{
-    Axios.get(`${this.state.url}/api/users/readsessions`,{withCredentials:true}).then(res=>{
-      console.log(res.data)
-      this.setState({loggedInUser:res.data.user})
-    })
-  }
+
+
+
+  // handleChange = event => {
+  //   console.log("change")
+  //   const { name, value } = event.target;
+  //   this.setState({
+  //     [name]: value
+  //   })
+  // }
+
+
+
+    handleLoginFormSubmit = event => {
+      event.preventDefault();
+      axios.post('/api/user/login', { username: this.state.username, password: this.state.password }).then(res => {
+        let newStatus= (res.status)
+      if(newStatus===200){
+          this.setState({ redirect: true })
+          // console.log(this.state.redirect)
+      }
+       
+      }).catch(err => {
+        console.log(err.response);
+        alert("Username already exists or password could not be validated")
+      })
+      }
+    
+
+
+
+
 
   
   
   
   render() {
+    const { redirect } = this.state;
     const { errors } = this.state;
+
+    // if (redirect) {
+    //   return <Redirect to='/storypage'/>;
+    // }
+
+ if (redirect) {
+   return <Redirect to={{
+    pathname: '/storypage',
+    state: { username: this.state.username }
+}}
+/>
+ }
+
+
+
     return (
       
       <div className="container inputS">

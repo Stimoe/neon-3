@@ -1,5 +1,5 @@
 import React from "react";
-import card from "../../cards.json";
+// import card from "../../cards.json";
 import "./style.css";
 
 function Cards(props) {
@@ -12,9 +12,9 @@ function Cards(props) {
       className={`card grow raise col-md-${props.colSize}`}
     >
       <div className="card-body flip-card-inner nes-pointer">
-        <div class="flip-card-front">
+        <div className="flip-card-front">
         </div>
-        <div class="flip-card-back">
+        <div className="flip-card-back">
           <h5 className="card-title">{props.name}</h5>
           <p className="card-text">{props.text}</p>
         </div>
