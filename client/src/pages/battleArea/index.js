@@ -117,7 +117,7 @@ console.log("here")
   updateWinCount = () => {
     axios.patch('/api/user/winCount', { username: this.state.username, winCount: this.state.winCount }).then(res => {
       console.log("line 26 ", res.data, res.status)
-      this.renderRedirect()
+      // this.renderRedirect()
     }).catch(err => {
       console.log(err.response);
       console.log("Username already exists or password could not be validated")
