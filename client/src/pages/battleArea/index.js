@@ -75,6 +75,8 @@ console.log("here")
 
   componentDidUpdate(prevprops, prevState) {
     let totalEnemies = enemies.length
+    console.log(totalEnemies);
+    
     if (this.state.currentEnemyHealth <= 0 && this.state.winCount === totalEnemies) {
 
       this.renderRedirectToGameWon()
@@ -116,7 +118,6 @@ console.log("here")
 
   updateWinCount = () => {
     axios.patch('/api/user/winCount', { username: this.state.username, winCount: this.state.winCount }).then(res => {
-      console.log("line 26 ", res.data, res.status)
       // this.renderRedirect()
     }).catch(err => {
       console.log(err.response);
@@ -129,59 +130,6 @@ console.log("here")
     })
   }
 
-  // setUserVariable = () => {
-
-  //   let currentEnemy = enemies[this.state.winCount];
-  //   let currentEnemyHealth = currentEnemy.health;
-  //   let currentEnemyArmor = currentEnemy.armor;
-  //   let newEnemyAbilities = currentEnemy.actions;
-  //   let newEnemyAttack = currentEnemy.attack;
-  //   let newEnemyArmorGain = currentEnemy.armorGain;
-  //   this.setState({
-  //     maxEnemyHealth: currentEnemyHealth,
-  //     currentEnemyHealth: currentEnemyHealth,
-  //     currentEnemyArmor: currentEnemyArmor,
-  //     currentEnemyAbilities: newEnemyAbilities,
-  //     currentEnemyAttack: newEnemyAttack,
-  //     currentEnemyArmorGain: newEnemyArmorGain,
-  //     deckRecieved: true
-  //   });
-  // }
-
-
-
-
-  // getCurrentUser = () => {
-  //   let user = this.state.username
-  //   axios.get('/api/user/currentUser', {
-  //     params: {
-  //       username: user
-  //     }
-  //   })
-  //     .then(res => {
-  //       // console.log(res.data)
-  //       let newUserDeck=res.data.userDeck
-  //       let currentUserWinCount=res.data.winCount
-  //       // console.log(newUserDeck.length);
-  //       // console.log(currentUserWinCount);
-
-  //       if(newUserDeck.length<=1){
-  //         newUserDeck=deckJson
-  //       }
-  //       else {
-  //       this.setState({
-  //         winCount: currentUserWinCount,
-  //         currentUserDeck: newUserDeck,
-  //       }, ()=> {
-  //         // console.log(this.state.currentUserDeck);
-  //         this.setState({
-  //           deckRecieved: true,
-  //         })
-  //         this.setUserVariable()
-  //       })
-  //     }
-  //     })
-  // }
 
 
   renderRedirectToGameOver = () => {
@@ -207,14 +155,6 @@ console.log("here")
     /> 
 
   }
-
-
-
-
-
-
-
-
 
   renderRedirect = () => {
     return <Redirect to={{
@@ -519,7 +459,7 @@ console.log("here")
 
 
             />
-            {this.renderRedirect()}
+
           </div>
         </div>
       );
