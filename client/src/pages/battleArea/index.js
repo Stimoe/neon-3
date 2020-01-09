@@ -54,7 +54,7 @@ class BattlePage extends Component {
 wincount: currentWinCount,
       currentUserDeck: userCurrentDeck
     }, () => {
-      
+      this.setUserVariable()
     })
   }
 
