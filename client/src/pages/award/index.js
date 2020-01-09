@@ -74,13 +74,7 @@ this.getCurrentDeck()
     }).catch(err => {
       console.log(err.response);
       console.log("Username already exists or password could not be validated")
-      // this.setState({
-      //   redirect: true,
-      // })
-
-
     })
-
   }
   drawn = (newDrawnCards) => {
 

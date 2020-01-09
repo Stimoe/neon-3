@@ -60,7 +60,18 @@ class BattlePage extends Component {
   }
 
   componentDidUpdate(prevprops, prevState) {
+    let totalEnemies=enemies.length
+    if (this.state.currentEnemyHealth <= 0 && this.state.winCount===totalEnemies) {
+      let tempWins2 = 0
+      // tempWins2 = tempWins2 + 1    
+      this.setState({
+        winCount: tempWins2,
+      }, () => {
+        this.renderRedirectToGameWon()
 
+      })
+
+    }
 
     const turnEnded = this.state.userTurnOver === true;
     const frozen = this.state.frozen;
@@ -70,7 +81,6 @@ class BattlePage extends Component {
       this.setState({
         winCount: tempWins2,
       }, () => {
-        this.updateWinCount();
         this.renderRedirectToGameOver()
 
       })
@@ -150,8 +160,8 @@ setUserVariable = () => {
         // console.log(res.data)
         let newUserDeck=res.data.userDeck
         let currentUserWinCount=res.data.winCount
-        console.log(newUserDeck.length);
-        console.log(currentUserWinCount);
+        // console.log(newUserDeck.length);
+        // console.log(currentUserWinCount);
 
         if(newUserDeck.length<=1){
           newUserDeck=deckJson
@@ -161,7 +171,7 @@ setUserVariable = () => {
           winCount: currentUserWinCount,
           currentUserDeck: newUserDeck,
         }, ()=> {
-          console.log(this.state.currentUserDeck);
+          // console.log(this.state.currentUserDeck);
           this.setState({
             deckRecieved: true,
           })

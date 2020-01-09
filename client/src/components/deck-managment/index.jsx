@@ -15,7 +15,7 @@ class DeckBrain extends Component {
     discard: [],
     playArea: [],
     turnEnded: false,
-    deckRecieved: false
+    deckRecieved: false,
   };
 
   componentWillReceiveProps(props) {
@@ -35,9 +35,7 @@ class DeckBrain extends Component {
 
   componentDidMount() {
     let newestDeck = [];
-    let newCards = [];
     let newDeck = this.props.currentDeck;
-    console.log(newDeck);
     this.setState(
       {
         deck: newDeck
@@ -56,12 +54,6 @@ class DeckBrain extends Component {
       }
     );
   }
-
-  // changeDeck = () => {
-  //   this.setState({
-  //     deck: "Bruce Wayne"
-  //   });
-
   componentDidUpdate(prevprops, prevState) {
     const turnEnded = this.state.turnEnded !== prevState.turnEnded;
 
@@ -129,7 +121,7 @@ class DeckBrain extends Component {
 
   endTurn = () => {
     let turn = !this.state.turnEnded;
-    console.log("ending turn");
+  
     this.setState({
       turnEnded: turn
     });
