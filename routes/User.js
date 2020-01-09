@@ -103,10 +103,8 @@ module.exports = (app) => {
     app.patch('/api/user/winCount/', async (req, res) => { 
         var currentUser = req.body.username
         var newWinCount=req.body.winCount
-        
-        
         const user = await User.findOne({username: currentUser})
-        res.send(user)
+
         User.user.winCount.insert(newWinCount, function (err, docs) {
             if (err){ 
                 return console.error(err);
