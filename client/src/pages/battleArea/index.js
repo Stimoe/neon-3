@@ -118,7 +118,11 @@ console.log("here")
 
   updateWinCount = () => {
     axios.patch('/api/user/winCount', { username: this.state.username, winCount: this.state.winCount }).then(res => {
-      // this.renderRedirect()
+      console.log(res.data);
+      
+      
+    }, ()=>{
+      this.renderRedirectToAward()
     }).catch(err => {
       console.log(err.response);
       console.log("Username already exists or password could not be validated")
@@ -156,7 +160,7 @@ console.log("here")
 
   }
 
-  renderRedirect = () => {
+  renderRedirectToAward = () => {
     return <Redirect to={{
       pathname: '/award',
       state: {
