@@ -90,12 +90,13 @@ class BattlePage extends Component {
       let tempWins2 = this.state.winCount
       tempWins2 = tempWins2 + 1
       console.log(tempWins2);
-      this.updateWinCount(tempWins2);
-      // this.setState({
-      //   winCount: tempWins2,
-      // }, () => {
-      //   this.updateWinCount();
-      // })
+      
+      this.setState({
+        winCount: tempWins2,
+        currentEnemyHealth: 1
+      }, () => {
+        this.updateWinCount();
+      })
 
     }
     if (turnEnded && !frozen) {
@@ -115,7 +116,7 @@ class BattlePage extends Component {
 
   updateWinCount = (newWinCount) => {
 
-    axios.patch('/api/user/winCount', { username: this.state.username, winCount: newWinCount }).then(res => {
+    axios.patch('/api/user/winCount', { username: this.state.username, winCount: this.state.winCount }).then(res => {
       console.log(res.data);
       
       this.renderRedirectToAward()
