@@ -58,9 +58,7 @@ class Storypage extends Component {
           currentUserDeck: newUserDeck,
         }, ()=> {
           // console.log(this.state.currentUserDeck);
-          this.setState({
-            deckRecieved: true,
-          })
+         
           this.setUserVariable()
         })
       }
