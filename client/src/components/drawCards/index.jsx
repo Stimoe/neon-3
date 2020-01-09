@@ -20,7 +20,7 @@ class DrawBrain extends Component {
   };
 
   componentDidMount() {
-   
+    console.log("tessssst", this.currentDeck);
     const newCardsShuffled = this.shuffleCards(newCardsFromJson);
   
 

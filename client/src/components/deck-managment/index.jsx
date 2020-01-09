@@ -14,54 +14,53 @@ class DeckBrain extends Component {
     hand: [],
     discard: [],
     playArea: [],
-    turnEnded: false
+    turnEnded: false,
+    deckRecieved: false
   };
 
-  componentWillReceiveProps(props){
-    let newDeck = this.props.currentDeck
+  componentWillReceiveProps(props) {
+    let newDeck = this.props.currentDeck;
     console.log(newDeck);
-    
-
 
     this.setState(
       {
-        deck: newDeck
-      }, () => {
+        deck: newDeck,
+        deckRecieved: true
+      },
+      () => {
         console.log(this.state.deck);
-        
-      })
+      }
+    );
   }
-
-
 
   componentDidMount() {
     let newestDeck = [];
     let newCards = [];
-    let newDeck = this.props.currentDeck
+    let newDeck = this.props.currentDeck;
     console.log(newDeck);
     this.setState(
       {
         deck: newDeck
-      }, () => {
-    newestDeck = this.state.deck;
-    const shuffledDeck = this.shuffleCards(newestDeck);
-    this.setState(
-      {
-        deck: shuffledDeck
       },
-      // this.saveCards(this.state.deck),
-      this.drawCards
+      () => {
+        newestDeck = this.state.deck;
+        const shuffledDeck = this.shuffleCards(newestDeck);
+        this.setState(
+          {
+            deck: shuffledDeck,
+            deckRecieved: true
+          },
+          // this.saveCards(this.state.deck),
+          this.drawCards
+        );
+      }
     );
-  })
-  
   }
-
 
   // changeDeck = () => {
   //   this.setState({
   //     deck: "Bruce Wayne"
   //   });
-
 
   componentDidUpdate(prevprops, prevState) {
     const turnEnded = this.state.turnEnded !== prevState.turnEnded;
@@ -136,8 +135,6 @@ class DeckBrain extends Component {
     });
   };
 
- 
-
   toHand = index => {
     let tempHand = this.state.hand;
     let card = this.state.playArea[index];
@@ -164,74 +161,78 @@ class DeckBrain extends Component {
   };
 
   render() {
-    let hand = this.state.hand.map((card, index) => {
+    if (this.state.deckRecieved) {
+      let hand = this.state.hand.map((card, index) => {
+        return (
+          <div className="handCard row1 d-flex justify-content-center">
+            <Cards
+              name={card.name}
+              image={card.image}
+              text={card.text}
+              handleClick={this.toPlay}
+              currentIndex={index}
+            />
+          </div>
+        );
+      });
+
+      let playArea = this.state.playArea.map((card, index) => {
+        return (
+          <div className="playCard row2 d-flex justify-content-center">
+            <Cards
+              name={card.name}
+              image={card.image}
+              text={card.text}
+              handleClick={this.toHand}
+              currentIndex={index}
+            />
+          </div>
+        );
+      });
+
       return (
-        <div className="handCard row1 d-flex justify-content-center">
-          <Cards
-            name={card.name}
-            image={card.image}
-            text={card.text}
-            handleClick={this.toPlay}
-            currentIndex={index}
-          />
+        // <div className="nes-container decks is-rounded">
+
+        <div id="gameArea stuffs">
+          <div className="row d-flex justify-content-center">
+            <button
+              className="nes-pointer buzz  endTurn neon4 mb-3 nes-btn"
+              onClick={this.endTurn}
+            >
+              End Turn
+            </button>
+            <div></div>
+          </div>
+
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+
+          <br />
+
+          <br />
+
+          <br />
+
+          <br />
+
+          <br />
+          <br />
+          <div className="playArea">{playArea.length ? playArea : null}</div>
+          <br />
+          <br />
+          <br />
+          <br />
+          <div className="handArea ">{hand.length ? hand : null}</div>
         </div>
+        // </div>
       );
-    });
-
-    let playArea = this.state.playArea.map((card, index) => {
-      return (
-        <div className="playCard row2 d-flex justify-content-center">
-          <Cards
-            name={card.name}
-            image={card.image}
-            text={card.text}
-            handleClick={this.toHand}
-            currentIndex={index}
-          />
-        </div>
-      );
-    });
-
-    return (
-      // <div className="nes-container decks is-rounded">
-
-      <div id="gameArea stuffs">
-        <div className="row d-flex justify-content-center">
-          <button
-            className="nes-pointer buzz  endTurn neon4 mb-3 nes-btn"
-            onClick={this.endTurn}
-          >
-            End Turn
-          </button>
-          <div></div>
-        </div>
-
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-
-        <br />
-
-        <br />
-
-        <br />
-
-        <br />
-
-        <br />
-        <br />
-        <div className="playArea">{playArea.length ? playArea : null}</div>
-        <br />
-        <br />
-        <br />
-        <br />
-        <div className="handArea ">{hand.length ? hand : null}</div>
-      </div>
-      // </div>
-    );
+    } else {
+      return null;
+    }
   }
 }
 
