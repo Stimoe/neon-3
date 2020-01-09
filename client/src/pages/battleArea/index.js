@@ -55,6 +55,9 @@ wincount: currentWinCount,
       currentUserDeck: userCurrentDeck
     }, () => {
       this.setUserVariable()
+      console.log(this.state.username);
+      console.log(this.state.winCount);
+      console.log(this.state.currentUserDeck);
     })
   }
 
@@ -130,7 +133,8 @@ setUserVariable = () => {
     currentEnemyArmor: currentEnemyArmor,
     currentEnemyAbilities: newEnemyAbilities,
     currentEnemyAttack: newEnemyAttack,
-    currentEnemyArmorGain: newEnemyArmorGain
+    currentEnemyArmorGain: newEnemyArmorGain,
+    deckRecieved: true
   });
 }
 
