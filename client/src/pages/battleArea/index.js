@@ -51,7 +51,7 @@ class BattlePage extends Component {
 
     this.setState({
       username: currentUser,
-      wincount: currentWinCount,
+      winCount: currentWinCount,
       currentUserDeck: userCurrentDeck
     }, () => {
       let currentEnemy = enemies[this.state.winCount];
