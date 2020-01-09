@@ -107,13 +107,13 @@ module.exports = (app) => {
         
         const user = await User.findOne({username: currentUser})
         res.send(user)
-        // User.user.winCount.insert(newWinCount, function (err, docs) {
-        //     if (err){ 
-        //         return console.error(err);
-        //     } else {
-        //      res.send("updated ", user, "with ", docs)
-        //     }
-        //   })
+        User.user.winCount.insert(newWinCount, function (err, docs) {
+            if (err){ 
+                return console.error(err);
+            } else {
+             res.send(user)
+            }
+          })
          
     })
 
