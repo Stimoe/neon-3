@@ -55,20 +55,20 @@ class BattlePage extends Component {
       currentUserDeck: userCurrentDeck
     }, () => {
       let currentEnemy = enemies[this.state.winCount];
-    let currentEnemyHealth = currentEnemy.health;
-    let currentEnemyArmor = currentEnemy.armor;
-    let newEnemyAbilities = currentEnemy.actions;
-    let newEnemyAttack = currentEnemy.attack;
-    let newEnemyArmorGain = currentEnemy.armorGain;
-    this.setState({
-      maxEnemyHealth: currentEnemyHealth,
-      currentEnemyHealth: currentEnemyHealth,
-      currentEnemyArmor: currentEnemyArmor,
-      currentEnemyAbilities: newEnemyAbilities,
-      currentEnemyAttack: newEnemyAttack,
-      currentEnemyArmorGain: newEnemyArmorGain,
-      deckRecieved: true
-    });
+      let currentEnemyHealth = currentEnemy.health;
+      let currentEnemyArmor = currentEnemy.armor;
+      let newEnemyAbilities = currentEnemy.actions;
+      let newEnemyAttack = currentEnemy.attack;
+      let newEnemyArmorGain = currentEnemy.armorGain;
+      this.setState({
+        maxEnemyHealth: currentEnemyHealth,
+        currentEnemyHealth: currentEnemyHealth,
+        currentEnemyArmor: currentEnemyArmor,
+        currentEnemyAbilities: newEnemyAbilities,
+        currentEnemyAttack: newEnemyAttack,
+        currentEnemyArmorGain: newEnemyArmorGain,
+        deckRecieved: true
+      });
 
     })
   }
@@ -78,7 +78,7 @@ class BattlePage extends Component {
     const turnEnded = this.state.userTurnOver === true;
     const frozen = this.state.frozen;
 
-    
+
     if (this.state.currentEnemyHealth <= 0 && this.state.winCount === totalEnemies) {
       this.renderRedirectToGameWon()
     }
@@ -90,7 +90,7 @@ class BattlePage extends Component {
       let tempWins2 = this.state.winCount
       tempWins2 = tempWins2 + 1
       console.log(tempWins2);
-      
+
       this.setState({
         winCount: tempWins2,
         currentEnemyHealth: 1
@@ -118,50 +118,20 @@ class BattlePage extends Component {
 
     axios.patch('/api/user/winCount', { username: this.state.username, winCount: this.state.winCount }).then(res => {
       console.log(res.data);
-      
-      
+
+
     }).catch(err => {
       console.log(err.response);
       console.log("Username already exists or password could not be validated")
-    }, ()=>{
+    }, () => {
       this.renderRedirectToAward()
     })
   }
 
 
-
-  renderRedirectToGameOver = () => {
-    
-    console.log("here");
-    
+  if(redirect) {
     return <Redirect to={{
-      pathname: '/gameLost',
-      state: {
-        username: this.state.username,
-      }
-    }}
-    />
-    // }
-
-  }
-
-  renderRedirectToGameWon = () => {
-console.log("here");
-
-    return <Redirect to={{
-      pathname: '/gameWon',
-      state: {
-        username: this.state.username,
-      }
-    }}
-    /> 
-
-  }
-
-  renderRedirectToAward = () => {
-    console.log("here");
-    return <Redirect to={{
-      pathname: '/award',
+      pathname: '/battlepage',
       state: {
         username: this.state.username,
         winCount: this.state.winCount,
@@ -169,6 +139,60 @@ console.log("here");
       }
     }}
     />
+  }
+
+
+
+
+
+
+  renderRedirectToGameOver = () => {
+    this.setState({
+      redirect: true
+    })
+    if (redirect) {
+      return <Redirect to={{
+        pathname: '/gameLost',
+        state: {
+          username: this.state.username,
+        }
+      }}
+      />
+    }
+
+  }
+
+  renderRedirectToGameWon = () => {
+    this.setState({
+      redirect: true
+    })
+
+    if (redirect) {
+      return <Redirect to={{
+        pathname: '/gameWon',
+        state: {
+          username: this.state.username,
+        }
+      }}
+      />
+    }
+  }
+
+  renderRedirectToAward = () => {
+    this.setState({
+      redirect: true
+    })
+    if (redirect) {
+      return <Redirect to={{
+        pathname: '/award',
+        state: {
+          username: this.state.username,
+          winCount: this.state.winCount,
+          currentUserDeck: this.state.currentUserDeck
+        }
+      }}
+      />
+    }
   }
 
   userAttack = (damage) => {
@@ -256,7 +280,7 @@ console.log("here");
             userArmor: 0,
             userTurnOver: false
           });
-        
+
         }
         this.setState({
           userTurnOver: false
