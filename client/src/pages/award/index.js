@@ -71,13 +71,49 @@ class Save extends Component {
   // }
 
   addCardsToServer = () => {
-    axios.patch('/api/user/newDeck', { username: this.state.username, userDeck: this.state.currentUserDeck }).then(res => {
+    axios.post('/api/user/newDeck', { 
+      params: {
+        username: this.state.username, 
+        userDeck: this.state.currentUserDeck 
+      }
+      }).then(res => {
       console.log(res.data)
     }).catch(err => {
       console.log(err.response);
       console.log("Username already exists or password could not be validated")
     })
   }
+
+
+
+
+
+
+
+  // updateWinCount = () => {
+
+  //   axios.post('/api/user/winCount', {
+  //   params:{ 
+  //     username: this.state.username, 
+  //     winCount: this.state.winCount 
+  //   }
+  //   }).then(res => {
+  //     console.log(res.data);
+  //     this.setState({
+  //       redirect: true
+  //     })
+
+  //   }).catch(err => {
+  //     console.log(err.response);
+  //     console.log("Username already exists or password could not be validated")
+  //   })
+  // }
+
+
+
+
+
+
   drawn = (newDrawnCards) => {
 
     let currentDeck = this.state.currentUserDeck
@@ -100,7 +136,8 @@ class Save extends Component {
   }
 
   renderRedirect = () => {
-    if (this.state.redirect) {
+    const { redirect} = this.state
+    if (redirect) {
       return <Redirect to={{
         pathname: '/battlepage',
         state: {

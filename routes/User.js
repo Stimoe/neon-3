@@ -143,12 +143,17 @@ module.exports = (app) => {
 // res.send(user)      
 //     })
  
-    app.patch('/api/user/newDeck', async (req, res) => { 
-        var currentUser = req.body.username
-        var newDeck=req.body.userDeck
-        // res.send(newDeck)
-        const user = await User.findOneAndUpdate({username: currentUser}, {userDeck: newDeck})
-        res.send(user)
+    app.post('/api/user/newDeck', async (req, res) => { 
+        var currentUser = req.body.params.username
+        var newUserDeck=req.body.params.userDeck
+        User.findOneAndUpdate({ "username": currentUser }, { "$set": { "userDeck": newUserDeck}}).exec(function(err, user){
+            if(err) {
+                console.log(err);
+                res.status(500).send(err);
+            } else {
+                     res.status(200).send(user);
+            }
+         });
     })
 
 
