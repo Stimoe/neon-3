@@ -71,7 +71,7 @@ class Save extends Component {
   // }
 
   addCardsToServer = () => {
-    axios.post('/api/user/newDeck', { 
+    axios.patch('/api/user/newDeck', { 
       params: {
         username: this.state.username, 
         userDeck: this.state.currentUserDeck 

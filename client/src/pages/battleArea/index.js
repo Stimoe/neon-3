@@ -152,7 +152,7 @@ class BattlePage extends Component {
   updateWinCount = () => {
 console.log("here");
 
-    axios.post('/api/user/winCount', {
+    axios.patch('/api/user/winCount', {
     params:{ 
       username: this.state.username, 
       winCount: this.state.winCount 
