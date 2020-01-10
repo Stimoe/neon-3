@@ -74,18 +74,37 @@ module.exports = (app) => {
         })
     })
 
+    // app.patch('/api/user/reset', async (req, res) => { 
+    //     var currentUser = req.body.username
+    //     let newDeck=[]
+    //     let newWinCount=0 
+    //     const filter = { username: currentUser };
+    //     const update = {userDeck: newDeck, winCount: newWinCount};
+    //     const opts = { new: true };
+    //     let user = await User.findOneAndUpdate(filter, update, {upsert: true}, function(err, doc) {
+    //         if (err) return res.send(500, {error: err});
+    //         return res.send('Succesfully saved.');
+    //     });
+    // })
+
     app.patch('/api/user/reset', async (req, res) => { 
         var currentUser = req.body.username
         let newDeck=[]
         let newWinCount=0 
-        const filter = { username: currentUser };
-        const update = {userDeck: newDeck, winCount: newWinCount};
-        const opts = { new: true };
-        let user = await User.findOneAndUpdate(filter, update, {upsert: true}, function(err, doc) {
-            if (err) return res.send(500, {error: err});
-            return res.send('Succesfully saved.');
+        User.findOne({username: currentUser}, function (err, user) {
+      
+            user.userDeck = newDeck;
+            user.winCount = newWinCount;
+        
+            user.save(function (err) {
+                if(err) {
+                    console.error('ERROR!');
+                }
+            });
         });
     })
+
+
 
   
 
