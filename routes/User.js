@@ -79,29 +79,13 @@ module.exports = (app) => {
         let newDeck=[]
         let newWinCount=0 
         const filter = { username: currentUser };
-        const update = {userDeck: newDeck, winCount, newWinCount};
+        const update = {userDeck: newDeck, winCount: newWinCount};
         const opts = { new: true };
         let user = await User.findOneAndUpdate(filter, update, opts)
         // const user = await User.findOne({username: currentUser})
         res.send(user)
      
     })
-
-
-    // const filter = { name: 'Luke Skywalker' };
-    // const update = { rank: 'Jedi Knight' };
-    // const opts = { new: true };
-    
-    // let doc = await Character.findOneAndUpdate(filter, update, opts);
-    // doc.name; // 'Luke Skywalker'
-    // doc.rank; // 'Jedi Knight'
-
-
-
-
-
-
-
 
 
     app.patch('/api/user/winCount', async (req, res) => { 

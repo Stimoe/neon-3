@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import deckJson from "../../cards.json";
 import Cards from "../cards";
-// import Axios from "axios";
-// import EnemyModal from "../../components/enemiesActionModul";
+import Axios from "axios";
+import EnemyModal from "../../components/enemiesActionModul";
 import style from "./style.css";
-// import Modal from 'react-bootstrap/Modal';
-// import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 
-// var Modal = require('react-bootstrap-modal')
+var Modal = require('react-bootstrap-modal')
 class DeckBrain extends Component {
   state = {
     deck: [],
