@@ -106,14 +106,16 @@ module.exports = (app) => {
     app.post('/api/user/winCount', async (req, res) => { 
         var currentUser = req.body.params.username
         var newWinCount=req.body.params.winCount
-        User.findOneAndUpdate({ "username": currentUser }, { "$set": { "winCount": newWinCount}}).exec(function(err, user){
-            if(err) {
-                console.log(err);
-                res.status(500).send(err);
-            } else {
-                     res.status(200).send(user);
-            }
-         });
+        currentUser = JSON.stringify(currentUser);
+        res.send(currentUser)
+        // User.findOneAndUpdate({ "username": currentUser }, { "$set": { "winCount": newWinCount}}).exec(function(err, user){
+        //     if(err) {
+        //         console.log(err);
+        //         res.status(500).send(err);
+        //     } else {
+        //              res.status(200).send(user);
+        //     }
+        //  });
     
    
     })
