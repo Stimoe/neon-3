@@ -43,7 +43,7 @@ class BattlePage extends Component {
     userWon: false
   };
 
- 
+
 
 
   componentDidMount() {
@@ -425,6 +425,7 @@ class BattlePage extends Component {
     const { userLost } = this.state;
     const { userWon } = this.state;
     const { redirect } = this.state;
+    const { deckRecieved } = this.state;
     if (redirect) {
       return <Redirect to={{
         pathname: '/award',
@@ -457,12 +458,20 @@ class BattlePage extends Component {
     }
 
 
-    if (this.state.deckRecieved) {
-
+    if (deckRecieved) {
       const userTurnOver = this.state.userTurnOver;
       let enemyHealth = this.state.currentEnemyHealth;
 
       return (
+        <div>
+
+          <DeckBrain currentDeck={this.state.currentUserDeck}
+          />
+        
+
+
+
+
         <div>
           <div className="landing2"></div>
           <div className="rain"></div>
@@ -518,14 +527,15 @@ class BattlePage extends Component {
             <DeckBrain
               readPlayed={this.handlePlayedCards}
               hasWon={this.state.winCount}
-              currentDeck={this.state.currentUserDeck}
+
 
 
             />
 
           </div>
         </div>
-      );
+        </div>
+      )
     }
 
     else {

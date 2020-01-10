@@ -87,7 +87,7 @@ module.exports = (app) => {
     //     });
     // })
 
-    app.patch('/api/user/reset', async (req, res) => { 
+    app.post('/api/user/reset', async (req, res) => { 
         var currentUser = req.body.username
         let newDeck=[]
         let newWinCount=0 

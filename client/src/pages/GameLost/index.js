@@ -38,7 +38,7 @@ class GameLost extends Component {
     console.log(this.state.username)
     let user = this.state.username
 
-    axios.patch('/api/user/reset', {
+    axios.post('/api/user/reset', {
       params: {
         username: user
       }
