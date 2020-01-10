@@ -7,7 +7,7 @@ import style from "./style.css";
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
-var Modal = require('react-bootstrap-modal')
+// var Modal = require('react-bootstrap-modal')
 class DeckBrain extends Component {
   state = {
     deck: [],
@@ -77,7 +77,7 @@ shuffleDeck = () =>{
       deck: shuffledDeck,
       deckRecieved: true
     }, () => {
-      console.log(this.state.deck);
+      // console.log(this.state.deck);
     });
 }
 
