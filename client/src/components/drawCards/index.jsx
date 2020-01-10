@@ -16,7 +16,8 @@ class DrawBrain extends Component {
     turnEnded: false,
     finalNewCards: [],
     currentDeck: UserInitialDeck, //make this an or statement
-    deckBuilt: false
+    deckBuilt: false,
+    deckRecieved: false
   };
 
   componentDidMount() {
@@ -26,7 +27,8 @@ class DrawBrain extends Component {
 
     this.setState(
       {
-        newCards: newCardsShuffled
+        newCards: newCardsShuffled,
+        deckRecieved: true
       },
       this.drawNewCards
     );
@@ -93,6 +95,8 @@ class DrawBrain extends Component {
   };
 
   render() {
+    const { deckRecieved } = this.state;
+    if (deckRecieved) {
     let newDrawnCards = this.state.newDrawnCards.map((card, index) => {
       return (
         <div className="handCard row d-flex justify-content-center">
@@ -119,5 +123,6 @@ class DrawBrain extends Component {
       // </div>
     );
   }
+}
 }
 export default DrawBrain;

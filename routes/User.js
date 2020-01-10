@@ -87,13 +87,25 @@ module.exports = (app) => {
      
     })
 
-
     app.patch('/api/user/winCount', async (req, res) => { 
         var currentUser = req.body.username
         var newWinCount=req.body.winCount
-        const user = await User.findOneAndUpdate({username: currentUser}, {winCount: newWinCount})
+        const filter = { username: currentUser };
+        const update = { winCount: newWinCount };
+        const opts = { new: true };
+        const user = await User.findOneAndUpdate(filter, update, opts)
 res.send(user)      
     })
+
+
+
+
+//     app.patch('/api/user/winCount', async (req, res) => { 
+//         var currentUser = req.body.username
+//         var newWinCount=req.body.winCount
+//         const user = await User.findOneAndUpdate({username: currentUser}, {winCount: newWinCount})
+// res.send(user)      
+//     })
  
     app.patch('/api/user/newDeck', async (req, res) => { 
         var currentUser = req.body.username
