@@ -4,7 +4,7 @@ import {Redirect} from 'react-router-dom';
 import axios from "axios";
 import "./style.css";
 const mongoose = require('mongoose');
-const User = mongoose.model('users');
+// const User = mongoose.model('users');
 // const bcrypt = require("bcryptjs");
 
 class Register extends Component {

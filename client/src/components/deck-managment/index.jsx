@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import deckJson from "../../cards.json";
 import Cards from "../cards";
-import Axios from "axios";
-import EnemyModal from "../../components/enemiesActionModul";
+// import Axios from "axios";
+// import EnemyModal from "../../components/enemiesActionModul";
 import style from "./style.css";
 // import Modal from 'react-bootstrap/Modal';
 // import Button from 'react-bootstrap/Button';
@@ -18,20 +18,20 @@ class DeckBrain extends Component {
     deckRecieved: false
   };
 
-  // componentWillReceiveProps(props) {
-  //   let newDeck = this.props.currentDeck;
-  //   console.log(newDeck);
+  componentWillReceiveProps(props) {
+    let newDeck = this.props.currentDeck;
+    console.log(newDeck);
 
-  //   this.setState(
-  //     {
-  //       deck: newDeck,
-  //       deckRecieved: true
-  //     },
-  //     () => {
-  //       console.log(this.state.deck);
-  //     }
-  //   );
-  // }
+    this.setState(
+      {
+        deck: newDeck,
+        deckRecieved: true
+      },
+      () => {
+        console.log(this.state.deck);
+      }
+    );
+  }
 
   componentDidMount() {
     let startingDeck = [];

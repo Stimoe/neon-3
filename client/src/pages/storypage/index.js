@@ -50,9 +50,11 @@ class Storypage extends Component {
         // console.log(currentUserWinCount);
 
         if(newUserDeck.length<=1){
-          let newDeck = deckJson
+          let basicDeck = deckJson
           this.setState({
-            currentUserDeck: newDeck
+            currentUserDeck: basicDeck,
+          },()=>{
+            console.log(this.state.currentUserDeck);
           })
         }
         else {
@@ -60,7 +62,7 @@ class Storypage extends Component {
           winCount: currentUserWinCount,
           currentUserDeck: newUserDeck,
         }, ()=> {
-          // console.log(this.state.currentUserDeck);
+          console.log(this.state.currentUserDeck);
          
         
         })
@@ -68,23 +70,6 @@ class Storypage extends Component {
       })
   }
 
-  // setUserVariable = () => {
-
-  //   let currentEnemy = enemies[this.state.winCount];
-  //   let currentEnemyHealth = currentEnemy.health;
-  //   let currentEnemyArmor = currentEnemy.armor;
-  //   let newEnemyAbilities = currentEnemy.actions;
-  //   let newEnemyAttack = currentEnemy.attack;
-  //   let newEnemyArmorGain = currentEnemy.armorGain;
-  //   this.setState({
-  //     maxEnemyHealth: currentEnemyHealth,
-  //     currentEnemyHealth: currentEnemyHealth,
-  //     currentEnemyArmor: currentEnemyArmor,
-  //     currentEnemyAbilities: newEnemyAbilities,
-  //     currentEnemyAttack: newEnemyAttack,
-  //     currentEnemyArmorGain: newEnemyArmorGain
-  //   });
-  // }
 
 
 
