@@ -44,6 +44,14 @@ class DeckBrain extends Component {
       this.setState(
         {
           deck: basicDeck
+        }, () => {
+          let newestDeck = this.state.deck;
+          const shuffledDeck = this.shuffleCards(newestDeck);
+          this.setState(
+            {
+              deck: shuffledDeck,
+              deckRecieved: true
+            });
         })
 
     }
@@ -59,13 +67,12 @@ class DeckBrain extends Component {
             {
               deck: shuffledDeck,
               deckRecieved: true
-            },
-            // this.saveCards(this.state.deck),
-            this.drawCards
-          );
+            });
         }
       );
     }
+    console.log(deck);
+    
   }
   componentDidUpdate(prevprops, prevState) {
     const turnEnded = this.state.turnEnded !== prevState.turnEnded;
