@@ -151,7 +151,12 @@ class BattlePage extends Component {
 
   updateWinCount = () => {
 
-    axios.patch('/api/user/winCount', { username: this.state.username, winCount: this.state.winCount }).then(res => {
+    axios.post('/api/user/winCount', {
+    params:{ 
+      username: this.state.username, 
+      winCount: this.state.winCount 
+    }
+    }).then(res => {
       console.log(res.data);
       this.setState({
         redirect: true
@@ -162,7 +167,6 @@ class BattlePage extends Component {
       console.log("Username already exists or password could not be validated")
     })
   }
-
 
 
 

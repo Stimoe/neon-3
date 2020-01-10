@@ -103,31 +103,35 @@ module.exports = (app) => {
     })
 
 
+    app.post('/api/user/winCount', async (req, res) => { 
+        var currentUser = req.body.params.username
+        var newWinCount=req.body.params.winCount
+        User.findOneAndUpdate({ "username": currentUser }, { "$set": { "winCount": newWinCount}}).exec(function(err, user){
+            if(err) {
+                console.log(err);
+                res.status(500).send(err);
+            } else {
+                     res.status(200).send(user);
+            }
+         });
+    
+   
+    })
 
- 
 
-
-
-
-
-
-
-
-
-
-    app.patch('/api/user/winCount', async (req, res) => { 
-        var currentUser = req.body.username
-        var newWinCount=req.body.winCount
-        const filter = { username: currentUser };
-        const update = { winCount: newWinCount };
-        const opts = { new: true };
-        const user = await User.findOneAndUpdate(filter, update, opts)
+//     app.patch('/api/user/winCount', async (req, res) => { 
+//         var currentUser = req.body.username
+//         var newWinCount=req.body.winCount
+//         const filter = { username: currentUser };
+//         const update = { winCount: newWinCount };
+//         const opts = { new: true };
+//         const user = await User.findOneAndUpdate(filter, update, opts)
     
 
 
 
-res.send(User.currentUser.update)      
-    })
+// res.send(User.currentUser.update)      
+//     })
 
 
 
