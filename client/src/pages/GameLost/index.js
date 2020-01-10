@@ -97,7 +97,7 @@ class GameLost extends Component {
           <div className=" neon26 nes">
 
 
-          <h1>Game over!!!</h1>
+          <h1 className="neon3 head">Game over!!!</h1>
 
           </div>
           <br></br>

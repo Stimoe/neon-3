@@ -78,23 +78,10 @@ module.exports = (app) => {
         var currentUser = req.body.username
         let newDeck=[]
         let newWinCount=0
-        const user = await User.findOneAndUpdate({username: currentUser}, {userDeck: newDeck}, {winCount: newWinCount})
+        await User.findOneAndUpdate({username: currentUser}, {userDeck: newDeck, winCount, newWinCount}).exec(function(err, user){
         // const user = await User.findOne({username: currentUser})
         res.send(user)
-        // User.user.userDeck.insert(newDeck, function (err, docs) {
-        //     if (err){ 
-        //         return console.error(err);
-        //     } else {
-        //      res.send("updated ", user, "with ", docs)
-        //     }
-        //   })
-        //   User.user.winCount.insert(newWinCount, function (err, docs) {
-        //     if (err){ 
-        //         return console.error(err);
-        //     } else {
-        //      res.send("updated ", user, "with ", docs)
-        //     }
-        //   })
+        })
     })
 
     app.patch('/api/user/winCount', async (req, res) => { 
