@@ -50,29 +50,37 @@ class BattlePage extends Component {
     let currentUser = this.props.location.state.username
     let userCurrentDeck = this.props.location.state.currentUserDeck
     let currentWinCount = this.props.location.state.winCount
-
-    this.setState({
-      username: currentUser,
-      winCount: currentWinCount,
-      currentUserDeck: userCurrentDeck
-    }, () => {
-      let currentEnemy = enemies[this.state.winCount];
-      let currentEnemyHealth = currentEnemy.health;
-      let currentEnemyArmor = currentEnemy.armor;
-      let newEnemyAbilities = currentEnemy.actions;
-      let newEnemyAttack = currentEnemy.attack;
-      let newEnemyArmorGain = currentEnemy.armorGain;
+    if (userCurrentDeck < 2) {
+      let basicDeck = deckJson
       this.setState({
-        maxEnemyHealth: currentEnemyHealth,
-        currentEnemyHealth: currentEnemyHealth,
-        currentEnemyArmor: currentEnemyArmor,
-        currentEnemyAbilities: newEnemyAbilities,
-        currentEnemyAttack: newEnemyAttack,
-        currentEnemyArmorGain: newEnemyArmorGain,
-        deckRecieved: true
-      });
+        currentUserDeck: basicDeck
+      })
+    }
 
-    })
+    else {
+      this.setState({
+        username: currentUser,
+        winCount: currentWinCount,
+        currentUserDeck: userCurrentDeck
+      }, () => {
+        let currentEnemy = enemies[this.state.winCount];
+        let currentEnemyHealth = currentEnemy.health;
+        let currentEnemyArmor = currentEnemy.armor;
+        let newEnemyAbilities = currentEnemy.actions;
+        let newEnemyAttack = currentEnemy.attack;
+        let newEnemyArmorGain = currentEnemy.armorGain;
+        this.setState({
+          maxEnemyHealth: currentEnemyHealth,
+          currentEnemyHealth: currentEnemyHealth,
+          currentEnemyArmor: currentEnemyArmor,
+          currentEnemyAbilities: newEnemyAbilities,
+          currentEnemyAttack: newEnemyAttack,
+          currentEnemyArmorGain: newEnemyArmorGain,
+          deckRecieved: true
+        });
+
+      })
+    }
   }
 
   componentDidUpdate(prevprops, prevState) {
@@ -83,7 +91,7 @@ class BattlePage extends Component {
 
     if (this.state.currentEnemyHealth <= 0 && this.state.winCount === totalEnemies) {
       this.setState({
-        userWon : true
+        userWon: true
       })
     }
 
@@ -91,7 +99,7 @@ class BattlePage extends Component {
       this.setState({
         userLost: true
       })
-    }    
+    }
     if (this.state.currentEnemyHealth <= 0) {
       let tempWins2 = this.state.winCount
       tempWins2 = tempWins2 + 1
@@ -100,8 +108,8 @@ class BattlePage extends Component {
       this.setState({
         winCount: tempWins2,
         currentEnemyHealth: 1,
-        
-      }, ()=>{
+
+      }, () => {
         this.updateWinCount()
       })
 
@@ -125,9 +133,9 @@ class BattlePage extends Component {
 
     axios.patch('/api/user/winCount', { username: this.state.username, winCount: this.state.winCount }).then(res => {
       console.log(res.data);
-this.setState({
-  redirect: true
-})
+      this.setState({
+        redirect: true
+      })
 
     }).catch(err => {
       console.log(err.response);
@@ -136,7 +144,7 @@ this.setState({
   }
 
 
- 
+
 
 
 
@@ -393,7 +401,7 @@ this.setState({
 
   render() {
 
-   
+
     const { userLost } = this.state;
     const { userWon } = this.state;
     const { redirect } = this.state;
@@ -408,7 +416,7 @@ this.setState({
       }}
       />
     }
-if (userWon) {
+    if (userWon) {
       return <Redirect to={{
         pathname: '/gameWon',
         state: {
