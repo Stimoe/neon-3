@@ -46,9 +46,9 @@ class Storypage extends Component {
       .then(res => {
         let newUserDeck=res.data.userDeck
         let currentUserWinCount=res.data.winCount
+        console.log(newUserDeck);
         console.log(newUserDeck.length);
-        // console.log(currentUserWinCount);
-
+        console.log(newUserDeck);
         if(newUserDeck===undefined){
           let basicDeck = deckJson
           this.setState({
