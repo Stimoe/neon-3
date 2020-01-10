@@ -54,6 +54,23 @@ class BattlePage extends Component {
       let basicDeck = deckJson
       this.setState({
         currentUserDeck: basicDeck
+      }, () => {
+        let currentEnemy = enemies[this.state.winCount];
+        let currentEnemyHealth = currentEnemy.health;
+        let currentEnemyArmor = currentEnemy.armor;
+        let newEnemyAbilities = currentEnemy.actions;
+        let newEnemyAttack = currentEnemy.attack;
+        let newEnemyArmorGain = currentEnemy.armorGain;
+        this.setState({
+          maxEnemyHealth: currentEnemyHealth,
+          currentEnemyHealth: currentEnemyHealth,
+          currentEnemyArmor: currentEnemyArmor,
+          currentEnemyAbilities: newEnemyAbilities,
+          currentEnemyAttack: newEnemyAttack,
+          currentEnemyArmorGain: newEnemyArmorGain,
+          deckRecieved: true
+        });
+
       })
     }
 
