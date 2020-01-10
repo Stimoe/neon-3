@@ -41,7 +41,7 @@ class DeckBrain extends Component {
         deck: newDeck
       },
       () => {
-        newestDeck = this.state.deck;
+        let newestDeck = this.state.deck;
         const shuffledDeck = this.shuffleCards(newestDeck);
         this.setState(
           {
