@@ -71,7 +71,7 @@ class DeckBrain extends Component {
         }
       );
     }
-    console.log(deck);
+    console.log(this.state.deck);
     
   }
   componentDidUpdate(prevprops, prevState) {
