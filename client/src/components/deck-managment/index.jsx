@@ -22,15 +22,26 @@ class DeckBrain extends Component {
     let newDeck = this.props.currentDeck;
     console.log(newDeck);
 
-    this.setState(
-      {
-        deck: newDeck,
-        deckRecieved: true
-      },
-      () => {
-        console.log(this.state.deck);
-      }
-    );
+    if (newDeck === undefined || newDeck.length == 0) {
+      let basicDeck = deckJson;
+       this.setState(
+         {
+           deck: basicDeck
+         }, () => {
+           this.shuffleDeck()
+         })
+ 
+     }
+      else {
+       this.setState(
+         {
+           deck: newDeck
+         },
+         () => {
+     this.shuffleDeck()
+         }
+       );
+     }
   }
 
 
