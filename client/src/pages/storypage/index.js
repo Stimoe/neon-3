@@ -58,17 +58,15 @@ if(newUserDeck.length){
        
 })
 }
-else {
-          let basicDeck = deckJson
-          this.setState({
-            currentUserDeck: basicDeck,
-          },()=>{
-            console.log(this.state.currentUserDeck);
-          })
-        
+
+if (newUserDeck === undefined || newUserDeck.length == 0) {
+  let basicDeck = deckJson
+  this.setState({
+    currentUserDeck: basicDeck,
+  },()=>{
+    console.log(this.state.currentUserDeck);
+  })
 }
-
-
 
 
 

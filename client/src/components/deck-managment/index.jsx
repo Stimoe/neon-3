@@ -33,13 +33,19 @@ class DeckBrain extends Component {
   //   );
   // }
 
+
+
+
+
+
+
+
   componentDidMount() {
-    let newDeck = this.props.currentDeck;
-console.log(newDeck.length);
-console.log(deckJson);
+    let newUserDeck = this.props.currentDeck;
 
 
-    if (newDeck=== undefined) {
+
+    if (newUserDeck === undefined || newUserDeck.length == 0) {
      let basicDeck = deckJson;
       this.setState(
         {
@@ -52,7 +58,7 @@ console.log(deckJson);
      else {
       this.setState(
         {
-          deck: newDeck
+          deck: newUserDeck
         },
         () => {
     this.shuffleDeck()

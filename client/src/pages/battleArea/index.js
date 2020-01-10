@@ -43,14 +43,17 @@ class BattlePage extends Component {
     userWon: false
   };
 
-
+ 
 
 
   componentDidMount() {
     let currentUser = this.props.location.state.username
     let userCurrentDeck = this.props.location.state.currentUserDeck
     let currentWinCount = this.props.location.state.winCount
-    if (userCurrentDeck === undefined) {
+
+
+
+    if (userCurrentDeck === undefined || userCurrentDeck.length == 0) {
       let basicDeck = deckJson
       this.setState({
         currentUserDeck: basicDeck
