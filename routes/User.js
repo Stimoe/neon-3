@@ -88,20 +88,21 @@ module.exports = (app) => {
     // })
 
     app.post('/api/user/reset', async (req, res) => { 
-        var currentUser = req.body.username
+        let currentUser = req.query.username
         let newDeck=[]
         let newWinCount=0 
-        User.findOne({username: currentUser}, function (err, user) {
+        res.send(currentUser)
+        // User.findOne({username: currentUser}, function (err, user) {
       
-            user.userDeck = newDeck;
-            user.winCount = newWinCount;
+        //     user.userDeck = newDeck;
+        //     user.winCount = newWinCount;
         
-            user.save(function (err) {
-                if(err) {
-                    console.error('ERROR!');
-                }
-            });
-        });
+        //     user.save(function (err) {
+        //         if(err) {
+        //             console.error('ERROR!');
+        //         }
+        //     });
+        // });
     })
 
 
