@@ -520,7 +520,7 @@ class BattlePage extends Component {
             <DeckBrain
               readPlayed={this.handlePlayedCards}
               hasWon={this.state.winCount}
-
+              currentDeck= { this.state.currentUserDeck}
 
 
             />
