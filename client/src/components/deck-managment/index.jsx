@@ -173,7 +173,8 @@ class DeckBrain extends Component {
   };
 
   render() {
-    if (this.state.deckRecieved) {
+    const { deckRecieved } = this.state;
+    if (deckRecieved) {
       let hand = this.state.hand.map((card, index) => {
         return (
           <div className="handCard row1 d-flex justify-content-center">
