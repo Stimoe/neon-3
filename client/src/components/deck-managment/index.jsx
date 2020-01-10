@@ -40,8 +40,14 @@ class DeckBrain extends Component {
     console.log(newDeck);
 
     if (newDeck.length < 2) {
-      newDeck = deckJson;
-    } else {
+     let basicDeck = deckJson;
+      this.setState(
+        {
+          deck: basicDeck
+        })
+
+    }
+     else {
       this.setState(
         {
           deck: newDeck
