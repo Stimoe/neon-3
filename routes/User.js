@@ -78,10 +78,10 @@ module.exports = (app) => {
         var currentUser = req.body.username
         let newDeck=[]
         let newWinCount=0
-        await User.findOneAndUpdate({username: currentUser}, {userDeck: newDeck, winCount, newWinCount}).exec(function(err, user){
+        user = await User.findOneAndUpdate({username: currentUser}, {userDeck: newDeck, winCount, newWinCount})
         // const user = await User.findOne({username: currentUser})
         res.send(user)
-        })
+     
     })
 
     app.patch('/api/user/winCount', async (req, res) => { 
