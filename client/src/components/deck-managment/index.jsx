@@ -34,7 +34,7 @@ class DeckBrain extends Component {
   // }
 
   componentDidMount() {
-    let newestDeck = [];
+    let startingDeck = [];
     let newDeck = this.props.currentDeck;
     this.setState(
       {

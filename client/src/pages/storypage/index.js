@@ -50,7 +50,10 @@ class Storypage extends Component {
         // console.log(currentUserWinCount);
 
         if(newUserDeck.length<=1){
-          newUserDeck=deckJson
+          let newDeck = deckJson
+          this.setState({
+            currentUserDeck: newDeck
+          })
         }
         else {
         this.setState({
