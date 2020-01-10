@@ -77,7 +77,7 @@ class Save extends Component {
         userDeck: this.state.currentUserDeck 
       }
       }).then(res => {
-      console.log(res.data)
+      console.log(res)
     }).catch(err => {
       console.log(err.response);
       console.log("Username already exists or password could not be validated")

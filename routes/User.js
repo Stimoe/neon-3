@@ -129,17 +129,17 @@ module.exports = (app) => {
 
 
     app.patch('/api/user/winCount', async (req, res) => { 
-        var currentUser = req.body.username
-        var newWinCount=req.body.winCount
-        const filter = { username: currentUser };
-        const update = { winCount: newWinCount };
-        const opts = { new: true };
-        const user = await User.findOneAndUpdate(filter, update, opts)
+        var currentUser = req.params.username
+        var newWinCount=req.params.winCount
+        // const filter = { username: currentUser };
+        // const update = { winCount: newWinCount };
+        // const opts = { new: true };
+        // const user = await User.findOneAndUpdate(filter, update, opts)
     
 
 
 
-res.send(user)      
+res.send(currentUser)      
     })
 
 
@@ -153,24 +153,15 @@ res.send(user)
 //     })
  
     app.patch('/api/user/newDeck', async (req, res) => { 
-        var currentUser = req.body.params.username
-        var newUserDeck=req.body.params.userDeck
+        var currentUser = req.params.username
+        var newUserDeck=req.params.userDeck
         const filter = { username: currentUser };
         const update = { userDeck: newUserDeck };
         const opts = { new: true };
-        const user = await User.findOneAndUpdate(filter, update, opts)
-    
-
-
+        User.findOneAndUpdate(filter, update, opts)
 
 res.send(user)      
     })
 
-
-
-
-
-
 }
-
 
