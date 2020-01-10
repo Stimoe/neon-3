@@ -88,7 +88,7 @@ module.exports = (app) => {
     // })
 
     app.post('/api/user/reset', async (req, res) => { 
-        let currentUser = req.query.username
+        let currentUser = req.body.username
         let newDeck=[]
         let newWinCount=0 
         res.send(currentUser)

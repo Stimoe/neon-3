@@ -50,6 +50,22 @@ class GameLost extends Component {
         console.log("Username already exists or password could not be validated")
       })
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   handleStart= event => {
     // console.log(this.state.username)
     event.preventDefault();
