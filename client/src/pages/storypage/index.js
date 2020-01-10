@@ -49,7 +49,7 @@ class Storypage extends Component {
         console.log(newUserDeck.length);
         // console.log(currentUserWinCount);
 
-        if(newUserDeck.length<=1){
+        if(newUserDeck===undefined){
           let basicDeck = deckJson
           this.setState({
             currentUserDeck: basicDeck,
