@@ -39,7 +39,7 @@ console.log(newDeck.length);
 console.log(deckJson);
 
 
-    if (newDeck.length < 2) {
+    if (newDeck=== undefined) {
      let basicDeck = deckJson;
       this.setState(
         {
