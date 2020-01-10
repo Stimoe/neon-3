@@ -56,9 +56,9 @@ class BattlePage extends Component {
     if (userCurrentDeck === undefined || userCurrentDeck.length == 0) {
       let basicDeck = deckJson
       this.setState({
+        winCount: currentWinCount,
         currentUserDeck: basicDeck,
         username: currentUser,
-        winCount, currentWinCount
       }, () => {
         let currentEnemy = enemies[this.state.winCount];
         let currentEnemyHealth = currentEnemy.health;
