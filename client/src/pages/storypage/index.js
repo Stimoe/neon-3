@@ -49,24 +49,47 @@ class Storypage extends Component {
         console.log(newUserDeck);
         console.log(newUserDeck.length);
         console.log(newUserDeck);
-        if(newUserDeck===undefined){
+if(newUserDeck.length){
+  this.setState({
+        winCount: currentUserWinCount,
+        currentUserDeck: newUserDeck,
+      }, ()=> {
+        console.log(this.state.currentUserDeck);
+       
+})
+}
+else {
           let basicDeck = deckJson
           this.setState({
             currentUserDeck: basicDeck,
           },()=>{
             console.log(this.state.currentUserDeck);
           })
-        }
-        else {
-        this.setState({
-          winCount: currentUserWinCount,
-          currentUserDeck: newUserDeck,
-        }, ()=> {
-          console.log(this.state.currentUserDeck);
+        
+}
+
+
+
+
+
+      //   if(newUserDeck===undefined){
+      //     let basicDeck = deckJson
+      //     this.setState({
+      //       currentUserDeck: basicDeck,
+      //     },()=>{
+      //       console.log(this.state.currentUserDeck);
+      //     })
+      //   }
+      //   else {
+      //   this.setState({
+      //     winCount: currentUserWinCount,
+      //     currentUserDeck: newUserDeck,
+      //   }, ()=> {
+      //     console.log(this.state.currentUserDeck);
          
         
-        })
-      }
+      //   })
+      // }
       })
   }
 
