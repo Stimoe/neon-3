@@ -16,8 +16,7 @@ class DrawBrain extends Component {
     turnEnded: false,
     finalNewCards: [],
     currentDeck: UserInitialDeck, //make this an or statement
-    deckBuilt: false,
-    deckRecieved: false
+    deckBuilt: false
   };
 
   componentDidMount() {
@@ -27,8 +26,7 @@ class DrawBrain extends Component {
 
     this.setState(
       {
-        newCards: newCardsShuffled,
-        deckRecieved: true
+        newCards: newCardsShuffled
       },
       this.drawNewCards
     );
@@ -95,8 +93,7 @@ class DrawBrain extends Component {
   };
 
   render() {
-    const { deckRecieved } = this.state;
-
+    
     let newDrawnCards = this.state.newDrawnCards.map((card, index) => {
       return (
         <div className="handCard row d-flex justify-content-center">
@@ -110,8 +107,7 @@ class DrawBrain extends Component {
         </div>
       );
     });
-    const { deckRecieved } = this.state;
-    if (deckRecieved) {
+
     return (
       // <div className="nes-container decks is-rounded">
       <div id="gameArea">
@@ -124,6 +120,5 @@ class DrawBrain extends Component {
       // </div>
     );
   }
-}
 }
 export default DrawBrain;
