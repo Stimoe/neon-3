@@ -35,8 +35,9 @@ class DeckBrain extends Component {
 
   componentDidMount() {
     let newDeck = this.props.currentDeck;
-    console.log(deckJson);
-    console.log(newDeck);
+console.log(newDeck.length);
+console.log(deckJson);
+
 
     if (newDeck.length < 2) {
      let basicDeck = deckJson;
