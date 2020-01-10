@@ -26,8 +26,11 @@ class DeckBrain extends Component {
       let basicDeck = deckJson;
        this.setState(
          {
-           deck: basicDeck
+           deck: basicDeck,
+           deckRecieved: true
          }, () => {
+           console.log(this.state.deck);
+           
            this.shuffleDeck()
          })
  
@@ -35,9 +38,11 @@ class DeckBrain extends Component {
       else {
        this.setState(
          {
-           deck: newDeck
+           deck: newDeck,
+           deckRecieved: true
          },
          () => {
+          console.log(this.state.deck);
      this.shuffleDeck()
          }
        );
