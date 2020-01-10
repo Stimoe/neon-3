@@ -107,7 +107,8 @@ module.exports = (app) => {
         var currentUser = req.body.params.username
         var newWinCount=req.body.params.winCount
       
-        res.send(JSON.stringify(currentUser))
+       
+        res.json(currentUser)
         // User.findOneAndUpdate({ "username": currentUser }, { "$set": { "winCount": newWinCount}}).exec(function(err, user){
         //     if(err) {
         //         console.log(err);
