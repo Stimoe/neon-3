@@ -81,11 +81,22 @@ module.exports = (app) => {
         const filter = { username: currentUser };
         const update = {userDeck: newDeck, winCount: newWinCount};
         const opts = { new: true };
-        let user = await User.findOneAndUpdate(filter, update, opts)
-        // const user = await User.findOne({username: currentUser})
-        res.send(user)
-     
+        let user = await User.findOneAndUpdate(filter, update, {upsert: true}, function(err, doc) {
+            if (err) return res.send(500, {error: err});
+            return res.send('Succesfully saved.');
+        });
     })
+
+  
+
+
+
+
+
+
+
+
+
 
     app.patch('/api/user/winCount', async (req, res) => { 
         var currentUser = req.body.username
@@ -94,7 +105,11 @@ module.exports = (app) => {
         const update = { winCount: newWinCount };
         const opts = { new: true };
         const user = await User.findOneAndUpdate(filter, update, opts)
-res.send(user)      
+    
+
+
+
+res.send(User.currentUser.update)      
     })
 
 

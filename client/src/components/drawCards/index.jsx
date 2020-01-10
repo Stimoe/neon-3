@@ -96,7 +96,7 @@ class DrawBrain extends Component {
 
   render() {
     const { deckRecieved } = this.state;
-    if (deckRecieved) {
+
     let newDrawnCards = this.state.newDrawnCards.map((card, index) => {
       return (
         <div className="handCard row d-flex justify-content-center">
@@ -110,7 +110,8 @@ class DrawBrain extends Component {
         </div>
       );
     });
-
+    const { deckRecieved } = this.state;
+    if (deckRecieved) {
     return (
       // <div className="nes-container decks is-rounded">
       <div id="gameArea">
