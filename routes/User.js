@@ -129,7 +129,7 @@ module.exports = (app) => {
 
 
     app.patch('/api/user/winCount', async (req, res) => { 
-        var currentUser = req.params.username
+        var currentUser = req.body
         var newWinCount=req.params.winCount
         // const filter = { username: currentUser };
         // const update = { winCount: newWinCount };
