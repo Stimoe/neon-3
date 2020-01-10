@@ -34,7 +34,6 @@ class DeckBrain extends Component {
   }
 
   componentDidMount() {
-    let startingDeck = [];
     let newDeck = this.props.currentDeck;
     console.log(deckJson);
     console.log(newDeck);
@@ -45,13 +44,7 @@ class DeckBrain extends Component {
         {
           deck: basicDeck
         }, () => {
-          let newestDeck = this.state.deck;
-          const shuffledDeck = this.shuffleCards(newestDeck);
-          this.setState(
-            {
-              deck: shuffledDeck,
-              deckRecieved: true
-            });
+          this.shuffleDeck()
         })
 
     }
@@ -61,19 +54,28 @@ class DeckBrain extends Component {
           deck: newDeck
         },
         () => {
-          let newestDeck = this.state.deck;
-          const shuffledDeck = this.shuffleCards(newestDeck);
-          this.setState(
-            {
-              deck: shuffledDeck,
-              deckRecieved: true
-            });
+    this.shuffleDeck()
         }
       );
     }
-    console.log(this.state.deck);
+   
     
   }
+
+shuffleDeck = () =>{
+  let newestDeck = this.state.deck;
+  const shuffledDeck = this.shuffleCards(newestDeck);
+  this.setState(
+    {
+      deck: shuffledDeck,
+      deckRecieved: true
+    }, () => {
+      console.log(this.state.deck);
+    });
+}
+
+
+
   componentDidUpdate(prevprops, prevState) {
     const turnEnded = this.state.turnEnded !== prevState.turnEnded;
 
