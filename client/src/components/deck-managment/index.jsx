@@ -20,7 +20,7 @@ class DeckBrain extends Component {
 
   componentWillReceiveProps() {
     let newDeck = this.props.currentDeck;
-    console.log(newDeck);
+    // console.log(newDeck);
 
     if (newDeck === undefined || newDeck.length == 0) {
       let basicDeck = deckJson;
@@ -42,7 +42,7 @@ class DeckBrain extends Component {
            deckRecieved: true
          },
          () => {
-          console.log(this.state.deck);
+          // console.log(this.state.deck);
      this.shuffleDeck()
          }
        );
@@ -200,8 +200,8 @@ shuffleDeck = () =>{
   };
 
   render() {
-    const { deckRecieved } = this.state;
-    if (deckRecieved) {
+    // const { deckRecieved } = this.state;
+    // if (deckRecieved) {
       let hand = this.state.hand.map((card, index) => {
         return (
           <div className="handCard row1 d-flex justify-content-center">
@@ -270,10 +270,10 @@ shuffleDeck = () =>{
         </div>
         // </div>
       );
-    } else {
-      return null;
-    }
-  }
+    // } else {
+    //   return null;
+    // }
+      }
 }
 
 export default DeckBrain;
