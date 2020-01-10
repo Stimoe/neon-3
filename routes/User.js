@@ -92,17 +92,17 @@ module.exports = (app) => {
         let newDeck=[]
         let newWinCount=0 
         res.send(currentUser)
-        // User.findOne({username: currentUser}, function (err, user) {
+        User.findOne({username: currentUser}, function (err, user) {
       
-        //     user.userDeck = newDeck;
-        //     user.winCount = newWinCount;
+            user.userDeck = newDeck;
+            user.winCount = newWinCount;
         
-        //     user.save(function (err) {
-        //         if(err) {
-        //             console.error('ERROR!');
-        //         }
-        //     });
-        // });
+            user.save(function (err) {
+                if(err) {
+                    console.error('ERROR!');
+                }
+            });
+        });
     })
 
 
