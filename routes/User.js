@@ -92,25 +92,19 @@ module.exports = (app) => {
         let newDeck=[]
         let newWinCount=0 
   
-       await User.findOne({username: currentUser}, function (err, user) {
-    
-            user.userDeck = newDeck;
-            user.winCount = newWinCount;
-       
-            user.save(function (err) {
-                if(err) {
-                    console.error('ERROR!');
-                }
-                
-            }, ()=> {
-            });
-        });
-        res.send(user)
+        User.findOneAndUpdate({ "username": currentUser }, { "$set": { "userDeck": newDeck, "winCount": newWinCount}}).exec(function(err, user){
+            if(err) {
+                console.log(err);
+                res.status(500).send(err);
+            } else {
+                     res.status(200).send(user);
+            }
+         });
     })
 
 
 
-  
+ 
 
 
 
