@@ -463,15 +463,8 @@ class BattlePage extends Component {
       let enemyHealth = this.state.currentEnemyHealth;
 
       return (
-        <div>
-
-          <DeckBrain currentDeck={this.state.currentUserDeck}
-          />
-        
-
-
-
-
+      
+   
         <div>
           <div className="landing2"></div>
           <div className="rain"></div>
@@ -534,7 +527,7 @@ class BattlePage extends Component {
 
           </div>
         </div>
-        </div>
+        
       )
     }
 
