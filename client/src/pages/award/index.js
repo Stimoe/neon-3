@@ -117,7 +117,7 @@ class Save extends Component {
           </div>
 
           <div className="caption text-center nes-pointer">
-            <Link to="/">
+     
               <button
                 type="button"
                 className="btn nes-pointer neon1 mb-3 nes-btn"
@@ -125,8 +125,7 @@ class Save extends Component {
                 >
                   Save &amp; Quit
               </button>
-            </Link>
-            <Link to="/battlepage">
+     
               <button
                 type="button"
                 className="btn mb-3 neon1 nes-pointer nes-btn"
@@ -134,7 +133,7 @@ class Save extends Component {
                 Save &amp; Continue
 
               </button>
-            </Link>
+         
           </div>
         </div>
       );
