@@ -27,9 +27,8 @@ class DeckBrain extends Component {
        this.setState(
          {
            deck: basicDeck,
-           deckRecieved: true
          }, () => {
-           console.log(this.state.deck);
+
            
            this.shuffleDeck()
          })
@@ -39,7 +38,6 @@ class DeckBrain extends Component {
        this.setState(
          {
            deck: newDeck,
-           deckRecieved: true
          },
          () => {
           // console.log(this.state.deck);
@@ -66,7 +64,6 @@ class DeckBrain extends Component {
       this.setState(
         {
           deck: basicDeck,
-          deckRecieved: true
         }, () => {
           this.shuffleDeck()
         })
@@ -76,7 +73,6 @@ class DeckBrain extends Component {
       this.setState(
         {
           deck: newUserDeck,
-          deckRecieved: true
         },
         () => {
     this.shuffleDeck()
