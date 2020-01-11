@@ -107,11 +107,11 @@ class Register extends Component {
         <div className="nes-container is-rounded is-dark">
           <div style={{ marginTop: "4rem" }} className="row">
             <div className="col s8 offset-s2">
-              <div className="col s12 neon1" style={{ paddingLeft: "11.250px" }}>
+              <div className="col s12" style={{ paddingLeft: "11.250px" }}>
                 <h4>
                   <b>Register</b> below
                 </h4>
-                <p className="grey-text text-darken-1 neon1">
+                <p className="grey-text text-darken-1">
                   Already have an account? <Link className="login" to="/login">Log in</Link>
                 </p>
               </div>
