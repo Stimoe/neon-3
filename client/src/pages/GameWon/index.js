@@ -24,9 +24,7 @@ class GameWon extends Component {
   }
 
   componentDidMount() {
-
     let currentUser = this.props.location.state.username
-
     this.setState({
       username: currentUser,
     }, () => {
@@ -34,13 +32,9 @@ class GameWon extends Component {
       //testing this function
 
     })
-    // console.log(this.state.username)
   }
-
- 
-
   resetDatabase = () => {
-    // console.log(this.state.username)
+
     let user = this.state.username
 
     axios.patch('/api/user/reset', {
@@ -49,17 +43,11 @@ class GameWon extends Component {
       }
     })
       .then(res => {
-        console.log("line 26 ", res.data)
       }).catch(err => {
         console.log(err.response);
         console.log("Username already exists or password could not be validated")
       })
   }
-
-
-
-
-
   handleStart = event => {
     // console.log(this.state.username)
     event.preventDefault();
@@ -81,7 +69,6 @@ class GameWon extends Component {
         pathname: '/storypage',
         state: {
           username: this.state.username,
-          winCount: this.state.winCount
         }
       }}
       />
