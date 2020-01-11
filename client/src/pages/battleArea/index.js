@@ -47,6 +47,7 @@ class BattlePage extends Component {
 
 
   componentDidMount() {
+
     let currentUser = this.props.location.state.username
     let userCurrentDeck = this.props.location.state.currentUserDeck
     let currentWinCount = this.props.location.state.winCount
@@ -129,9 +130,9 @@ class BattlePage extends Component {
 
       this.setState({
         winCount: tempWins2,
-        currentEnemyHealth: 1,
-
       }, () => {
+        console.log(this.state.winCount);
+        
         this.updateWinCount()
       })
 
@@ -152,13 +153,13 @@ class BattlePage extends Component {
   }
 
   updateWinCount = () => {
-console.log("here");
+    console.log("here");
 
     axios.patch('/api/user/winCount', {
-    params:{ 
-      username: this.state.username, 
-      winCount: this.state.winCount 
-    }
+      params: {
+        username: this.state.username,
+        winCount: this.state.winCount
+      }
     }).then(res => {
       console.log(res.data);
       this.setState({
@@ -282,7 +283,7 @@ console.log("here");
 
     let randomAction = Math.floor(Math.random() * possibleEnemyActions.length + 1
     );
-    console.log("The action the enemy did ", randomAction);
+    // console.log("The action the enemy did ", randomAction);
 
     switch (randomAction) {
       case 1:
@@ -397,12 +398,12 @@ console.log("here");
       let { newArmor, newHealth, gameWon } = this.userAttack(damage);
       // let turnOver = !this.state.userTurnOver;
       let tempHealth = health - selfDamage;
-      if (gameWon) {
-        let tempWin = this.state.winCount + 1;
-        this.setState({
-          winCount: tempWin
-        });
-      }
+      // if (gameWon) {
+      //   let tempWin = this.state.winCount + 1;
+      //   this.setState({
+      //     winCount: tempWin
+      //   });
+      // }
       console.log(newArmor, newHealth)
       this.setState({
         currentEnemyArmor: newArmor,
@@ -470,8 +471,8 @@ console.log("here");
       let enemyHealth = this.state.currentEnemyHealth;
 
       return (
-      
-   
+
+
         <div>
           <div className="landing2"></div>
           <div className="rain"></div>
@@ -527,14 +528,14 @@ console.log("here");
             <DeckBrain
               readPlayed={this.handlePlayedCards}
               hasWon={this.state.winCount}
-              currentDeck= { this.state.currentUserDeck}
+              currentDeck={this.state.currentUserDeck}
 
 
             />
 
           </div>
         </div>
-        
+
       )
     }
 

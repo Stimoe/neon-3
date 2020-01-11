@@ -74,43 +74,36 @@ module.exports = (app) => {
         })
     })
 
-    app.patch('/api/user/reset', async (req, res) => { 
+    app.patch('/api/user/reset', async (req, res) => {
         var currentUser = req.body.params.username
-        let newDeck=[]
-        let newWinCount=0 
+        let newDeck = []
+        let newWinCount = 0
         const filter = { username: currentUser };
-        const update = {userDeck: newDeck, winCount: newWinCount};
+        const update = { userDeck: newDeck, winCount: newWinCount };
         const opts = { new: true };
         const user = await User.findOneAndUpdate(filter, update, opts)
-        res.send(user)      
-            })
- 
+        res.send(user)
+    })
 
- 
-
-
-
-
-    app.patch('/api/user/winCount', async (req, res) => { 
+    app.patch('/api/user/winCount', async (req, res) => {
         var currentUser = req.body.params.username
-        var newWinCount=req.body.params.winCount
+        var newWinCount = req.body.params.winCount
         const filter = { username: currentUser };
         const update = { winCount: newWinCount };
         const opts = { new: true };
         const user = await User.findOneAndUpdate(filter, update, opts)
-res.send(user)      
+        res.send(user)
     })
 
- 
-    app.patch('/api/user/newDeck', async (req, res) => { 
+    app.patch('/api/user/newDeck', async (req, res) => {
         var currentUser = req.body.params.username
-        var newUserDeck=req.body.params.userDeck
+        var newUserDeck = req.body.params.userDeck
         const filter = { username: currentUser };
         const update = { userDeck: newUserDeck };
         const opts = { new: true };
         const user = await User.findOneAndUpdate(filter, update, opts)
 
-res.send(user)      
+        res.send(user)
     })
 
 }
