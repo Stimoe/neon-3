@@ -38,7 +38,7 @@ class GameLost extends Component {
     console.log(this.state.username)
     let user = this.state.username
 
-    axios.post('/api/user/reset', {
+    axios.patch('/api/user/reset', {
       params: {
         username: user
       }
@@ -50,6 +50,8 @@ class GameLost extends Component {
         console.log("Username already exists or password could not be validated")
       })
   }
+
+ 
 
 
 

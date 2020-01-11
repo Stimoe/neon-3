@@ -74,56 +74,19 @@ module.exports = (app) => {
         })
     })
 
-    // app.patch('/api/user/reset', async (req, res) => { 
-    //     var currentUser = req.body.username
-    //     let newDeck=[]
-    //     let newWinCount=0 
-    //     const filter = { username: currentUser };
-    //     const update = {userDeck: newDeck, winCount: newWinCount};
-    //     const opts = { new: true };
-    //     let user = await User.findOneAndUpdate(filter, update, {upsert: true}, function(err, doc) {
-    //         if (err) return res.send(500, {error: err});
-    //         return res.send('Succesfully saved.');
-    //     });
-    // })
-
-    app.post('/api/user/reset', async (req, res) => { 
-        let currentUser = req.body.params.username
+    app.patch('/api/user/reset', async (req, res) => { 
+        var currentUser = req.body.params.username
         let newDeck=[]
         let newWinCount=0 
-  
-        User.findOneAndUpdate({ "username": currentUser }, { "$set": { "userDeck": newDeck, "winCount": newWinCount}}).exec(function(err, user){
-            if(err) {
-                console.log(err);
-                res.status(500).send(err);
-            } else {
-                     res.status(200).send(user);
-            }
-         });
-    })
+        const filter = { username: currentUser };
+        const update = {userDeck: newDeck, winCount: newWinCount};
+        const opts = { new: true };
+        const user = await User.findOneAndUpdate(filter, update, opts)
+        res.send(user)      
+            })
+ 
 
-
-    // app.post('/api/user/winCount', async (req, res) => { 
-    //     var currentUser = req.body.params.username
-    //     var newWinCount=req.body.params.winCount
-    //   currentUser=JSON.stringify(currentUser)
-       
-    //     res.json(currentUser)
-    //     // User.findOneAndUpdate({ "username": currentUser }, { "$set": { "winCount": newWinCount}}).exec(function(err, user){
-    //     //     if(err) {
-    //     //         console.log(err);
-    //     //         res.status(500).send(err);
-    //     //     } else {
-    //     //              res.status(200).send(user);
-    //     //     }
-    //     //  });
-    
-   
-    // })
-
-
-
-
+ 
 
 
 
@@ -135,22 +98,9 @@ module.exports = (app) => {
         const update = { winCount: newWinCount };
         const opts = { new: true };
         const user = await User.findOneAndUpdate(filter, update, opts)
-    
-
-
-
 res.send(user)      
     })
 
-
-
-
-//     app.patch('/api/user/winCount', async (req, res) => { 
-//         var currentUser = req.body.username
-//         var newWinCount=req.body.winCount
-//         const user = await User.findOneAndUpdate({username: currentUser}, {winCount: newWinCount})
-// res.send(user)      
-//     })
  
     app.patch('/api/user/newDeck', async (req, res) => { 
         var currentUser = req.body.params.username
