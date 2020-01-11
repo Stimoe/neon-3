@@ -88,7 +88,11 @@ class Register extends Component {
     const { errors } = this.state;
 
     if (redirect) {
-      return <Redirect to='/login'/>;
+      return <Redirect to={{
+       pathname: '/storypage',
+       state: { username: this.state.username }
+   }}
+   />
     }
 
 
