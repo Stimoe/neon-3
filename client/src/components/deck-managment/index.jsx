@@ -89,9 +89,9 @@ shuffleDeck = () =>{
   this.setState(
     {
       deck: shuffledDeck,
-      deckRecieved: true
+     
     }, () => {
-      // console.log(this.state.deck);
+     this.drawCards()
     });
 }
 
@@ -159,6 +159,10 @@ shuffleDeck = () =>{
     this.setState({
       hand: tempHand,
       deck: tempDeck
+    }, ()=>{
+      this.setState({
+       deckRecieved: true 
+      })
     });
   };
 
