@@ -130,6 +130,7 @@ class BattlePage extends Component {
 
       this.setState({
         winCount: tempWins2,
+        currentEnemyHealth: 1
       }, () => {
         console.log(this.state.winCount);
         
