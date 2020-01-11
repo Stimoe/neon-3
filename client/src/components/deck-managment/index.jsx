@@ -200,8 +200,8 @@ shuffleDeck = () =>{
   };
 
   render() {
-    // const { deckRecieved } = this.state;
-    // if (deckRecieved) {
+    const { deckRecieved } = this.state;
+    if (deckRecieved) {
       let hand = this.state.hand.map((card, index) => {
         return (
           <div className="handCard row1 d-flex justify-content-center">
@@ -270,9 +270,9 @@ shuffleDeck = () =>{
         </div>
         // </div>
       );
-    // } else {
-    //   return null;
-    // }
+    } else {
+      return null;
+    }
       }
 }
 
