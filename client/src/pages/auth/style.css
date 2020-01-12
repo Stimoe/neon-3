@@ -7,3 +7,15 @@ a{
   h4 {
     color: violet;
   }
+  label {
+    color: violet;
+  }
+b {
+  color: violet;
+}
+.label {
+  margin: 0px
+}
+.input-box {
+  margin: 0px
+}

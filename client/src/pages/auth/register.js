@@ -117,25 +117,25 @@ class Register extends Component {
               </div>
               <form>
                 <div className="nes-field is-inline col s12">
-                  <label htmlFor="username">Username</label>
+                  <label className="label" htmlFor="username">Username</label>
                   <input
                     onChange={this.onChange}
                     value={this.state.username}
                     error={errors.username}
                     name="username"
                     type="text"
-                    className="nes-input nes-pointer neon1"
+                    className="nes-input nes-pointer neon1 input-box"
                   />
                 </div>
                 <div className="nes-field is-inline col s12">
-                  <label htmlFor="password">Password</label>
+                  <label className="label" htmlFor="password">Password</label>
                   <input
                     onChange={this.onChange}
                     value={this.state.password}
                     error={errors.password}
                     name="password"
                     type="password"
-                    className="nes-input nes-pointer neon1"
+                    className="nes-input nes-pointer neon1 input-box"
                   />
                 </div>
                 <div className="col s12" style={{ paddingLeft: "11.250px" }}>
