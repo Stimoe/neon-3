@@ -24,54 +24,30 @@ class GameWon extends Component {
   }
 
   componentDidMount() {
-
     let currentUser = this.props.location.state.username
-
     this.setState({
       username: currentUser,
     }, () => {
-      this.getCurrentWinCount()
+      this.resetDatabase()
       //testing this function
 
     })
-    // console.log(this.state.username)
   }
+  resetDatabase = () => {
 
-  // getCurrentWinCount = () => {
-  //   this.getWinCount()
+    let user = this.state.username
 
-
-  // }
-
-  // getWinCount = () => {
-  //   // console.log(this.state.username)
-  //   let user = this.state.username
-
-  //   axios.get('/api/user/winCount', {
-  //     params: {
-  //       username: user
-  //     }
-  //   })
-  //     .then(res => {
-  //       console.log("line 26 ", res.data.winCount)
-  //       let currentUserWinCount = res.data.winCount
-  //       this.setState({
-  //         winCount: currentUserWinCount
-  //       })
-
-
-  //     }).catch(err => {
-  //       console.log(err.response);
-  //       console.log("Username already exists or password could not be validated")
-  //     })
-  // }
-
-
-
-
-
-
-
+    axios.patch('/api/user/reset', {
+      params: {
+        username: user
+      }
+    })
+      .then(res => {
+      }).catch(err => {
+        console.log(err.response);
+        console.log("Username already exists or password could not be validated")
+      })
+  }
   handleStart = event => {
     // console.log(this.state.username)
     event.preventDefault();
@@ -93,7 +69,6 @@ class GameWon extends Component {
         pathname: '/storypage',
         state: {
           username: this.state.username,
-          winCount: this.state.winCount
         }
       }}
       />

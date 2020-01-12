@@ -58,47 +58,53 @@ module.exports = (app) => {
                 reason: err.message
             })
         }
-
     });
 
     app.get('/api/user/winCount', async (req, res) => {
-
         let currentUser = req.query.username
-
-
         await User.findOne({ username: currentUser }, 'winCount', function (err, user) {
             res.send(user)
-            // newWinCount = user.winCount; 
-            // res.send({ message: newWinCount });
         })
     })
 
-    // app.post('/api/user/winCount/', function (req, res) {
-    //     var WinCountAndUser = req.body; 
-    //     res.send(WinCountAndUser)
-    //     var query = { username: req.body.username };
-    //     var newWinCount={winCount: req.body.winCount}
-    //    User.findOneAndUpdate(query, { winCount: newWinCount }, options, callback)
-    // });
+    app.get('/api/user/currentUser', async (req, res) => {
+        let currentUser = req.query.username
+        await User.findOne({ username: currentUser }, function (err, user) {
+            res.send(user)
+        })
+    })
 
+    app.patch('/api/user/reset', async (req, res) => {
+        var currentUser = req.body.params.username
+        let newDeck = []
+        let newWinCount = 0
+        const filter = { username: currentUser };
+        const update = { userDeck: newDeck, winCount: newWinCount };
+        const opts = { new: true };
+        const user = await User.findOneAndUpdate(filter, update, opts)
+        res.send(user)
+    })
 
+    app.patch('/api/user/winCount', async (req, res) => {
+        var currentUser = req.body.params.username
+        var newWinCount = req.body.params.winCount
+        const filter = { username: currentUser };
+        const update = { winCount: newWinCount };
+        const opts = { new: true };
+        const user = await User.findOneAndUpdate(filter, update, opts)
+        res.send(user)
+    })
 
+    app.patch('/api/user/newDeck', async (req, res) => {
+        var currentUser = req.body.params.username
+        var newUserDeck = req.body.params.userDeck
+        const filter = { username: currentUser };
+        const update = { userDeck: newUserDeck };
+        const opts = { new: true };
+        const user = await User.findOneAndUpdate(filter, update, opts)
 
-    app.patch('/api/user/winCount/', async (req, res) => {
-        
-        
-        var user = req.body.username
-        var newWinCount=req.body.winCount
-        const newUser = await User.findOneAndUpdate({username: user}, { winCount: newWinCount})
-
-        // res.send(newUser)
-    
-    });
- 
-
-
-
-
-
+        res.send(user)
+    })
 
 }
+

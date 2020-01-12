@@ -25,12 +25,15 @@ const UserSchema = new Schema({
     winCount: {
         type: Number,
     },
-    // userDeck: {
-    //     currentDeck:
-    // }
+    userDeck: {
+        currentDeck:  [{}]
+    }
 });
 const User = mongoose.model('User', UserSchema);
 
 module.exports = User;
+
+
+
 
 

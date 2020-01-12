@@ -6,7 +6,7 @@ import DrawBrain from "../../components/drawCards";
 import { Redirect } from 'react-router-dom';
 // import { booleanLiteral } from "@babel/types";
 
-var UserInitialDeck = require("../../cards.json");
+
 
 
 class Save extends Component {
@@ -15,28 +15,24 @@ class Save extends Component {
     this.state = {
       redirect: false,
       username: "",
-      userDeck: UserInitialDeck,
-
+      currentUserDeck: [],
+      winCount: 0,
       deckDrawn: false
     };
   }
 
   componentDidMount() {
-
+    let currentWinCount = this.props.location.state.winCount
     let currentUser = this.props.location.state.username
-    
- 
-    
+    let currentDeck=this.props.location.state.currentUserDeck
     this.setState({
       username: currentUser,
- 
+      winCount: currentWinCount,
+      currentUserDeck: currentDeck
     }, () => {
-      this.updateDeck ()
-      console.log(this.state.username);
-      
-      
+
     })
-// console.log(this.state.username)
+
   }
 
 
@@ -50,50 +46,65 @@ class Save extends Component {
   };
 
   handleOnClick = e => {
-
-  }
-
-  updateDeck = (deck) => {
-
-    console.log(deck);
-    
-  }
- 
-
-
-
-
-drawn = (p) => {
-
-  console.log(p);
-  
-  
-  if(p){
     this.setState({
-      deckDrawn:true
+      redirect: true
     })
   }
-}
 
-renderRedirect = () => {
-  if (this.state.redirect) {
-    return <Redirect to={{
-     pathname: '/battlepage',
-     state: { 
-       username: this.state.username,
-      userDeck: this.state.userDeck
+
+
+  addCardsToServer = () => {
+    axios.patch('/api/user/newDeck', { 
+      params: {
+        username: this.state.username, 
+        userDeck: this.state.currentUserDeck 
       }
- }}
- />
+      }).then(res => {
+      console.log(res.data)
+    }).catch(err => {
+      console.log(err.response);
+      console.log("Username already exists or password could not be validated")
+    })
   }
-}
 
 
+  drawn = (newDrawnCards) => {
 
+    let currentDeck = this.state.currentUserDeck
+    for (let i = 0; i < newDrawnCards.length; i++) {
+      currentDeck.push(newDrawnCards[i])
+
+    }
+  this.setState({
+    currentUserDeck:currentDeck
+  }, ()=>{
+    this.addCardsToServer()
+
+  })
+
+    if (newDrawnCards) {
+      this.setState({
+        deckDrawn: true
+      })
+    }
+  }
 
 
 
   render() {
+    const { redirect} = this.state
+    if (redirect) {
+      return <Redirect to={{
+        pathname: '/battlepage',
+        state: {
+          username: this.state.username,
+          currentUserDeck: this.state.currentUserDeck,
+          winCount: this.state.winCount
+        }
+      }}
+      />
+    }
+
     if (this.state.deckDrawn) {
       return (
         <div>
@@ -106,24 +117,23 @@ renderRedirect = () => {
           </div>
 
           <div className="caption text-center nes-pointer">
-            <Link to="/">
+     
               <button
                 type="button"
                 className="btn nes-pointer neon1 mb-3 nes-btn"
                 onClick={this.handleOnClick}>
-              >
-                Save &amp; Quit
+                >
+                  Save &amp; Quit
               </button>
-            </Link>
-            <Link to="/battlepage">
+     
               <button
                 type="button"
                 className="btn mb-3 neon1 nes-pointer nes-btn"
                 onClick={this.handleOnClick}>
                 Save &amp; Continue
-                
+
               </button>
-            </Link>
+         
           </div>
         </div>
       );
@@ -132,18 +142,18 @@ renderRedirect = () => {
         <div>
           <div className="landing6"></div>
           <div className="awardCards">
-        <DrawBrain 
-       
-        newDeck2={this.state.finalNewCards}
-        readPlayed={this.handlePlayedCards}
-      
-        updateDeck={this.newDeck}
-        drawn={this.drawn}
-        />
-        </div>
+            <DrawBrain
+
+              newDeck2={this.state.finalNewCards}
+              readPlayed={this.handlePlayedCards}
+
+              updateDeck={this.newDeck}
+              drawn={this.drawn}
+            />
+          </div>
         </div>
 
-        );
+      );
     }
   }
 }
