@@ -101,6 +101,7 @@ shuffleDeck = () =>{
 
   componentDidUpdate(prevprops, prevState) {
     const turnEnded = this.state.turnEnded !== prevState.turnEnded;
+console.log(this.state.showEnemyActionModal);
 
     if (turnEnded) {
       this.props.readPlayed(this.state.playArea);
@@ -169,11 +170,20 @@ shuffleDeck = () =>{
   };
 
   endTurn = () => {
+    switchTurn = () =>{
     let turn = !this.state.turnEnded;
 
     this.setState({
       turnEnded: turn
     });
+  }
+renderModal = () =>{
+this.setState({
+  EnemyActionModal: true
+})
+
+}
+
   };
 
   toHand = index => {
@@ -241,7 +251,7 @@ shuffleDeck = () =>{
           <div className="row d-flex justify-content-center">
             <button
               className="nes-pointer buzz  endTurn neon4 mb-3 nes-btn"
-              onClick={() => this.setState({showEnemyActionModal: true}), this.endTurn}
+              onClick={this.endTurn}
             >
               End Turn
             </button>
