@@ -171,7 +171,11 @@ shuffleDeck = () =>{
   };
 
 
-
+  showModal = e => {
+    this.setState({
+      showModal: !this.state.showModal
+    });
+  };
 
 
 
@@ -263,7 +267,8 @@ shuffleDeck = () =>{
             <div></div>
           </div>
     
-          <EnemyModal show={this.state.show}>Message in Modal</EnemyModal>
+          <EnemyModal onClose={this.showModal} show={this.state.show}>
+          Message in Modal</EnemyModal>
           <br />
           <br />
           <br />
