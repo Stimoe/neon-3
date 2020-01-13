@@ -524,9 +524,9 @@ class BattlePage extends Component {
             />
 
           </div>
-          {/* <div>
+          <div>
         <EnemyActionModal initialModalState={true} />
-      </div> */}
+      </div>
         </div>
 
       )
