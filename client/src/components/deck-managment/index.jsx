@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import deckJson from "../../cards.json";
 import Cards from "../cards";
-// import EnemyActionModal from "../enemiesActionModul/index"
+
 import Axios from "axios";
 import EnemyModal from "../modalCombiner/ModalCombiner";
 import style from "./style.css";
@@ -18,7 +18,7 @@ class DeckBrain extends Component {
     turnEnded: false,
     deckRecieved: false,
     showEnemyActionModal: false,
-    showModal: false
+    show: false
   };
 
   componentWillReceiveProps() {
@@ -173,7 +173,7 @@ shuffleDeck = () =>{
 
   showModal = e => {
     this.setState({
-      showModal: !this.state.showModal
+      show: !this.state.show
     });
   };
 
@@ -185,9 +185,9 @@ shuffleDeck = () =>{
 
     this.setState({
       turnEnded: turn,
-      showModal: true
+      show: true
     },()=>{
-      console.log(this.state.showModal);
+      console.log(this.state.show);
       
     });
   
@@ -267,11 +267,10 @@ shuffleDeck = () =>{
             <div></div>
           </div>
     
-          <EnemyModal 
-          size="sm"
-          onClose={this.showModal} 
-          show={this.state.showModal}>
+          <EnemyModal onClose={this.showModal} show={this.state.show}>
           Message in Modal</EnemyModal>
+
+    
           <br />
           <br />
           <br />
