@@ -21,7 +21,7 @@ import { log } from "util";
 
 class BattlePage extends Component {
   
-  constructor() {
+  constructor(props) {
     super(props);
   this.state = {
     currentUserDeck: [],
