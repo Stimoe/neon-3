@@ -170,7 +170,7 @@ console.log(this.state.showEnemyActionModal);
   };
 
   endTurn = () => {
-    switchTurn = () =>{
+
     let turn = !this.state.turnEnded;
 
     this.setState({
@@ -184,7 +184,7 @@ this.setState({
 
 }
 
-  };
+
 
   toHand = index => {
     let tempHand = this.state.hand;
