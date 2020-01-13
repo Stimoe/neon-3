@@ -249,28 +249,14 @@ class BattlePage extends Component {
       let tempHealth = this.state.currentEnemyHealth;
       newHealth = tempHealth - newDamage;
       newArmor = 0
-      // if (newHealth <= 0) {
-      //   let tempWins2 = this.state.winCount
-      //   console.log(tempWins2);
-
-      //   tempWins2 = tempWins2 + 1
-      //   console.log(tempWins2)
-      //   this.setState({
-      //     winCount: tempWins2
-      //   })
-      // }
+    
       return {
         newHealth,
         newArmor,
         gameWon
       }
     }
-    // console.log(newArmor, newHealth)
-    // return {
-    //   newArmor,
-    //   newHealth,
-    //   gameWon
-    // };
+
   };
 
   firstEnemyAction = () => {
@@ -534,6 +520,11 @@ class BattlePage extends Component {
 
             />
 
+          </div>
+         <div>
+          <EnemyModal 
+           handleClick={this.toShow}
+           />
           </div>
         </div>
 
