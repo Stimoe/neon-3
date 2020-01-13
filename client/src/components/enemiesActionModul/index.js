@@ -1,40 +1,67 @@
-import React, { useState, Component } from 'react';
+import React, { useState, Component } from "react";
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+
+
+
 
 class EnemyActionModal extends Component {
+
   constructor(props) {
     super(props);
+
+    this.addWorkLog = this.addWorkLog.bind(this);       
+    this.onOpenModal = this.onOpenModal.bind(this);
+    this.onCloseModal = this.onCloseModal.bind(this);
     this.state = {
-      modal: props.initialModalState
-    };
+         open:true
 
-    this.toggle = this.toggle.bind(this);
+       };
   }
 
-  toggle() {
-    this.setState({
-      modal: !this.state.modal
-    });
-  }
-
-  render() {
-    return (
-      <div>
-         <Button color="danger" onClick={this.toggle}>TOGGLE</Button>
-        <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-          <ModalHeader toggle={this.toggle}>Enemy action</ModalHeader>
-          <ModalBody>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut 
-          </ModalBody>
-          <ModalFooter>
-            <Button color="primary" onClick={this.toggle}>Do Something</Button>{' '}
-            <Button color="secondary" onClick={this.toggle}>Cancel</Button>
-          </ModalFooter>
-        </Modal>
-      </div>
-    );
-  }
+onOpenModal() {
+ this.setState({open: this.props.openModal});
 }
 
-export default EnemyActionModal;
+onCloseModal() {
+ this.setState({open:false});
+}
+
+addWorkLog() {
+
+}
+
+
+
+render() {
+  const bstyle = {
+     backgroundColor: 'green',
+     textAlign:"left",
+     paddingLeft: '0px',
+     color: 'white'
+};
+const {open} = this.state;
+   return (
+       <div>
+            <Modal
+                size="sm"
+                show={smShow}
+                onHide={() => setSmShow(false)}
+                aria-labelledby="example-modal-sizes-title-sm"
+
+            open={open} onClose={this.onCloseModal} little>
+            <Modal.Header closeButton>
+          <Modal.Title id="example-modal-sizes-title-sm">
+            Small Modal
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>...</Modal.Body>
+      </Modal>
+        </div>
+   );
+}
+}
+  
+  export default  EnemyActionModal;
+
