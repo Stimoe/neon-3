@@ -17,7 +17,8 @@ class DeckBrain extends Component {
     playArea: [],
     turnEnded: false,
     deckRecieved: false,
-    showEnemyActionModal: false
+    showEnemyActionModal: false,
+    showModal: false
   };
 
   componentWillReceiveProps() {
@@ -257,6 +258,7 @@ shuffleDeck = () =>{
             <div></div>
           </div>
           <EnemyActionModal open={this.state.showEnemyActionModal}>...</EnemyActionModal>
+          {/* <Modal open={this.state.showModal}>...</Modal> */}
           <br />
           <br />
           <br />

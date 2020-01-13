@@ -7,7 +7,6 @@ import Button from 'react-bootstrap/Button';
 
 
 class EnemyActionModal extends Component {
-
   constructor(props) {
     super(props);
 
@@ -15,7 +14,7 @@ class EnemyActionModal extends Component {
     this.onOpenModal = this.onOpenModal.bind(this);
     this.onCloseModal = this.onCloseModal.bind(this);
     this.state = {
-         open:true
+         open:false
 
        };
   }
@@ -44,18 +43,11 @@ render() {
 const {open} = this.state;
    return (
        <div>
-            <Modal
-                size="sm"
-                aria-labelledby="example-modal-sizes-title-sm"
+            <Modal open={open} onClose={this.onCloseModal} little>
+            <h3>hi gi</h3>
 
-            open={open} onClose={this.onCloseModal} little>
-            <Modal.Header closeButton>
-          <Modal.Title id="example-modal-sizes-title-sm">
-            Small Modal
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>...</Modal.Body>
-      </Modal>
+             <Button bsStyle="success" bsSize="small" onClick ={(ev) => {console.log(ev)} }> Save </Button>
+             </Modal>
         </div>
    );
 }
