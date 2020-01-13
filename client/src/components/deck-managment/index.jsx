@@ -267,7 +267,10 @@ shuffleDeck = () =>{
             <div></div>
           </div>
     
-          <EnemyModal onClose={this.showModal} show={this.state.showModal}>
+          <EnemyModal 
+          size="sm"
+          onClose={this.showModal} 
+          show={this.state.showModal}>
           Message in Modal</EnemyModal>
           <br />
           <br />

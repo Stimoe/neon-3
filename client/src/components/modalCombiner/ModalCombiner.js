@@ -1,5 +1,5 @@
 import React from "react";
-
+import style from "./style.css";
 export default class EnemyModal extends React.Component {
   onClose = e => {
     this.props.onClose && this.props.onClose(e);
@@ -9,11 +9,11 @@ export default class EnemyModal extends React.Component {
       return null;
     }
     return (
-      <div class="modal" id="modal">
+      <div className="modal" id="modal">
         <h2>Modal Window</h2>
-        <div class="content">{this.props.children}</div>
-        <div class="actions">
-          <button class="toggle-button" onClick={this.onClose}>
+        <div className="content">{this.props.children}</div>
+        <div className="actions">
+          <button className="toggle-button" onClick={this.onClose}>
             close
           </button>
         </div>
