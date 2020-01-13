@@ -14,13 +14,16 @@ import Player from './players.png'
 import Rain from './rain.gif'
 import GameWon from "../../components/gameWon"
 import GameOver from "../../components/gameOver"
-import EnemyAction from "../../components/enemiesActionModul"
-import EnemyModal from "../../components/enemiesActionModul";
+import EnemyActionModal from "../../components/enemiesActionModul/index"
+import EnemyModal from "../../components/enemiesActionModul/index3";
 import { log } from "util";
 
 
 class BattlePage extends Component {
-  state = {
+  
+  constructor() {
+    super(props);
+  this.state = {
     currentUserDeck: [],
     username: '',
     winCount: 0,
@@ -42,7 +45,7 @@ class BattlePage extends Component {
     userLost: false,
     userWon: false
   };
-
+}
 
 
 
@@ -521,11 +524,9 @@ class BattlePage extends Component {
             />
 
           </div>
-         <div>
-          <EnemyModal 
-           handleClick={this.toShow}
-           />
-          </div>
+          {/* <div>
+        <EnemyActionModal initialModalState={true} />
+      </div> */}
         </div>
 
       )
