@@ -46,8 +46,6 @@ const {open} = this.state;
        <div>
             <Modal
                 size="sm"
-                show={smShow}
-                onHide={() => setSmShow(false)}
                 aria-labelledby="example-modal-sizes-title-sm"
 
             open={open} onClose={this.onCloseModal} little>
