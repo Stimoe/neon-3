@@ -101,7 +101,7 @@ shuffleDeck = () =>{
 
   componentDidUpdate(prevprops, prevState) {
     const turnEnded = this.state.turnEnded !== prevState.turnEnded;
-console.log(this.state.showEnemyActionModal);
+
 
     if (turnEnded) {
       this.props.readPlayed(this.state.playArea);
@@ -174,15 +174,11 @@ console.log(this.state.showEnemyActionModal);
     let turn = !this.state.turnEnded;
 
     this.setState({
-      turnEnded: turn
+      turnEnded: turn,
+      EnemyActionModal: true
     });
+  
   }
-renderModal = () =>{
-this.setState({
-  EnemyActionModal: true
-})
-
-}
 
 
 
