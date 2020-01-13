@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import deckJson from "../../cards.json";
 import Cards from "../cards";
-import EnemyActionModal from "../enemiesActionModul/index"
+// import EnemyActionModal from "../enemiesActionModul/index"
 import Axios from "axios";
-import EnemyModal from "../enemiesActionModul";
+import EnemyModal from "../modalCombiner/ModalCombiner";
 import style from "./style.css";
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-
+// import EnemyAction from '../enemiesActionModul/enemyAction'
 // var Modal = require('react-bootstrap-modal')
 class DeckBrain extends Component {
   state = {
@@ -170,15 +170,20 @@ shuffleDeck = () =>{
     });
   };
 
-  endTurn = () => {
+
+
+
+
+
+  endTurn = e => {
 
     let turn = !this.state.turnEnded;
 
     this.setState({
       turnEnded: turn,
-      showEnemyActionModal: true
+      showModal: true
     },()=>{
-      console.log(this.state.showEnemyActionModal);
+      console.log(this.state.showModal);
       
     });
   
@@ -257,8 +262,8 @@ shuffleDeck = () =>{
             </button>
             <div></div>
           </div>
-          <EnemyActionModal open={this.state.showEnemyActionModal}>...</EnemyActionModal>
-          {/* <Modal open={this.state.showModal}>...</Modal> */}
+    
+          <EnemyModal show={this.state.show}>Message in Modal</EnemyModal>
           <br />
           <br />
           <br />
