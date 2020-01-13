@@ -14,8 +14,6 @@ import Player from './players.png'
 import Rain from './rain.gif'
 import GameWon from "../../components/gameWon"
 import GameOver from "../../components/gameOver"
-import EnemyActionModal from "../../components/enemiesActionModul/index"
-import EnemyModal from "../../components/enemiesActionModul/index3";
 import { log } from "util";
 
 
@@ -424,6 +422,7 @@ class BattlePage extends Component {
     const { userWon } = this.state;
     const { redirect } = this.state;
     const { deckRecieved } = this.state;
+    const { userTurnOver } = this.state;
     if (redirect) {
       return <Redirect to={{
         pathname: '/award',
@@ -524,12 +523,15 @@ class BattlePage extends Component {
             />
 
           </div>
-          <div>
-        <EnemyActionModal initialModalState={true} />
-      </div>
+    
         </div>
 
-      )
+)
+
+             
+
+
+
     }
 
     else {

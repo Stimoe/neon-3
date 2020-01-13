@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import deckJson from "../../cards.json";
 import Cards from "../cards";
+import EnemyActionModal from "../enemiesActionModul/index3"
 import Axios from "axios";
 import EnemyModal from "../enemiesActionModul/index3";
 import style from "./style.css";
@@ -15,7 +16,8 @@ class DeckBrain extends Component {
     discard: [],
     playArea: [],
     turnEnded: false,
-    deckRecieved: false
+    deckRecieved: false,
+    showEnemyActionModal: false
   };
 
   componentWillReceiveProps() {
@@ -230,6 +232,8 @@ shuffleDeck = () =>{
         );
       });
 
+
+
       return (
         // <div className="nes-container decks is-rounded">
 
@@ -237,13 +241,13 @@ shuffleDeck = () =>{
           <div className="row d-flex justify-content-center">
             <button
               className="nes-pointer buzz  endTurn neon4 mb-3 nes-btn"
-              onClick={this.endTurn}
+              onClick={() => this.setState({showEnemyActionModal: true}), this.endTurn}
             >
               End Turn
             </button>
             <div></div>
           </div>
-
+          <EnemyActionModal open={this.state.showEnemyActionModal}>...</EnemyActionModal>
           <br />
           <br />
           <br />
