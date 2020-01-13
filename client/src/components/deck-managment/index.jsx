@@ -175,7 +175,10 @@ shuffleDeck = () =>{
 
     this.setState({
       turnEnded: turn,
-      EnemyActionModal: true
+      showEnemyActionModal: true
+    },()=>{
+      console.log(this.state.showEnemyActionModal);
+      
     });
   
   }
