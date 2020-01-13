@@ -185,9 +185,9 @@ shuffleDeck = () =>{
 
     this.setState({
       turnEnded: turn,
-      show: true
+
     },()=>{
-      console.log(this.state.show);
+
       
     });
   
