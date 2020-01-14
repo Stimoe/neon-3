@@ -49,10 +49,11 @@
   right: 0; */
 }
 
-.enemyModal {
+.open-modal-btn {
+  margin-top: 0px;
+  top: 450px;
+ 
+  margin-top: 0%;
   display: flex;
   justify-content: center;
-  top: 10%;
-  margin: 0;
-  bottom: 0% !important;
 }
