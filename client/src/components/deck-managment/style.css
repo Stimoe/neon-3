@@ -53,5 +53,6 @@
 top: 100%;
 }
 .modal-div {
-  margin-top: 300px;
+  position: absolute;
+  float: right;
 }

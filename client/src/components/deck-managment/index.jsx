@@ -295,25 +295,25 @@ class DeckBrain extends Component {
           <br />
           <br />
           <br />
+      
+          <br />
+
+          <br />
+
+          <br />
+
+          <br />
+
+          <br />
           <div className="modal-div">
               <Modal
                 className="modal"
                 show={this.state.isShowing}
                 close={this.closeModalHandler}
               >
-                Maybe aircrafts fly very high because they don't want to be seen
-                in plane sight?
+               Enemy Damage
               </Modal>
             </div>
-          <br />
-
-          <br />
-
-          <br />
-
-          <br />
-
-          <br />
           <br />
           <div className="playArea">{playArea.length ? playArea : null}</div>
           <br />
