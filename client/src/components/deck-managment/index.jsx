@@ -253,10 +253,10 @@ class DeckBrain extends Component {
             </button>
             <div>
               <Modal
-                className="test-class" //this will completely overwrite the default css completely
-                style={{ background: "red" }} //overwrites the default background
-                containerStyle={{ background: "blue" }} //changes styling on the inner content area
-                containerClassName="test"
+                // className="test-class" //this will completely overwrite the default css completely
+                // style={{ background: "red" }} //overwrites the default background
+                // containerStyle={{ background: "blue" }} //changes styling on the inner content area
+                // containerClassName="test"
                 closeOnOuterClick={true}
                 show={this.state.show}
                 onClose={this.close.bind(this)}
