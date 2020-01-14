@@ -283,7 +283,7 @@ class DeckBrain extends Component {
                 className="open-modal-btn nes-pointer buzz  endTurn neon4 mb-3 nes-btn"
                 onClick={this.openModalHandler}
               >
-                Open Modal
+                End Turn
               </button>
 
               <Modal
