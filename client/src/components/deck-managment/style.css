@@ -48,3 +48,11 @@
   /* left: 0;
   right: 0; */
 }
+
+.enemyModal {
+  display: flex;
+  justify-content: center;
+  top: 10%;
+  margin: 0;
+  bottom: 0% !important;
+}
