@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import deckJson from "../../cards.json";
 import Cards from "../cards";
-import Modal, {closeStyle} from 'simple-react-modal'
+// import Modal, { closeStyle } from "simple-react-modal";
 import Axios from "axios";
 import EnemyModal from "../modalCombiner/ModalCombiner";
 import style from "./style.css";
-// import Modal from "react-bootstrap/Modal";
+import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 // import EnemyAction from '../enemiesActionModul/enemyAction'
 // var Modal = require('react-bootstrap-modal')
@@ -166,11 +166,11 @@ class DeckBrain extends Component {
 
   endTurn = e => {
     let turn = !this.state.turnEnded;
-
+    setShow(true);
     this.setState(
       {
         turnEnded: turn,
-        show: true
+
       },
       () => {}
     );
@@ -210,6 +210,10 @@ class DeckBrain extends Component {
   };
 
   render() {
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+ 
     const { deckRecieved } = this.state;
     if (deckRecieved) {
       let hand = this.state.hand.map((card, index) => {
@@ -241,31 +245,33 @@ class DeckBrain extends Component {
       });
 
       return (
+       
         // <div className="nes-container decks is-rounded">
 
         <div id="gameArea stuffs">
           <div className="row d-flex justify-content-center">
             <button
               className="nes-pointer buzz  endTurn neon4 mb-3 nes-btn"
-              onClick={this.endTurn.bind(this)}
+              onClick={this.endTurn}
             >
               End Turn
             </button>
             <div>
-              <Modal
-                className="enemyModal" //this will completely overwrite the default css completely
-                // style={{ background: "red" }} //overwrites the default background
-                // containerStyle={{ background: "blue" }} //changes styling on the inner content area
-                // containerClassName="test"
-                closeOnOuterClick={true}
-                show={this.state.show}
-                onClose={this.close.bind(this)}
-              >
-                <a style={closeStyle} onClick={this.close.bind(this)}>
-                  X
-                </a>
-                <div>hey</div>
-              </Modal>
+            <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Modal heading</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    
             </div>
           </div>
 
