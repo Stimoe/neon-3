@@ -165,31 +165,33 @@ class DeckBrain extends Component {
   //   });
   // };
 
-  endTurn = e => {
-    // const [show, setShow] = useState(false);
+  // endTurn = e => {
+  //   // const [show, setShow] = useState(false);
 
-    const handleClose = () => {
-      this.setState({
-        show: false
-      });
-    };
-    const handleShow = () => {
-      this.setState({
-        show: true
-      });
-    };
-    let turn = !this.state.turnEnded;
-    this.setState(
-      {
-        turnEnded: turn
-      },
-      () => {}
-    );
-  };
+  //   const handleClose = () => {
+  //     this.setState({
+  //       show: false
+  //     });
+  //   };
+  //   const handleShow = () => {
+  //     this.setState({
+  //       show: true
+  //     });
+  //   };
+  //   let turn = !this.state.turnEnded;
+  //   this.setState(
+  //     {
+  //       turnEnded: turn
+  //     },
+  //     () => {}
+  //   );
+  // };
 
   openModalHandler = () => {
+    let turn = !this.state.turnEnded;
     this.setState({
-      isShowing: true
+      isShowing: true,
+      turnEnded: turn
     });
   };
 
@@ -225,16 +227,7 @@ class DeckBrain extends Component {
   };
 
   render() {
-    const handleClose = () => {
-      this.setState({
-        show: false
-      });
-    };
-    const handleShow = () => {
-      this.setState({
-        show: true
-      });
-    };
+   
 
     const { deckRecieved } = this.state;
     if (deckRecieved) {
