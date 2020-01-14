@@ -5,7 +5,7 @@ import Modal, {closeStyle} from 'simple-react-modal'
 import Axios from "axios";
 import EnemyModal from "../modalCombiner/ModalCombiner";
 import style from "./style.css";
-import Modal from "react-bootstrap/Modal";
+// import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 // import EnemyAction from '../enemiesActionModul/enemyAction'
 // var Modal = require('react-bootstrap-modal')
