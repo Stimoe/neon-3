@@ -301,10 +301,6 @@ class DeckBrain extends Component {
           <br />
 
           <br />
-
-          <br />
-
-          <br />
           <div className="modal-div">
               <Modal
                 className="modal"
@@ -314,6 +310,10 @@ class DeckBrain extends Component {
                Enemy Damage
               </Modal>
             </div>
+          <br />
+
+          <br />
+     
           <br />
           <div className="playArea">{playArea.length ? playArea : null}</div>
           <br />

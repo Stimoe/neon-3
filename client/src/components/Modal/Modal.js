@@ -11,7 +11,7 @@ const modal = (props) => {
                     opacity: props.show ? '1' : '0'
                 }}>
                 <div className="modal-header">
-                    <h3>Enemy Action</h3>
+                    <h1>Enemy Action</h1>
                     <span className="close-modal-btn" onClick={props.close}>×</span>
                 </div>
                 <div className="modal-body">
