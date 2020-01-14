@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import deckJson from "../../cards.json";
 import Cards from "../cards";
-
+import Modal, {closeStyle} from 'simple-react-modal'
 import Axios from "axios";
 import EnemyModal from "../modalCombiner/ModalCombiner";
 import style from "./style.css";
-import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
 // import EnemyAction from '../enemiesActionModul/enemyAction'
 // var Modal = require('react-bootstrap-modal')
 class DeckBrain extends Component {
@@ -27,82 +27,67 @@ class DeckBrain extends Component {
 
     if (newDeck === undefined || newDeck.length == 0) {
       let basicDeck = deckJson;
-       this.setState(
-         {
-           deck: basicDeck,
-         }, () => {
-
-           
-           this.shuffleDeck()
-         })
- 
-     }
-      else {
-       this.setState(
-         {
-           deck: newDeck,
-         },
-         () => {
+      this.setState(
+        {
+          deck: basicDeck
+        },
+        () => {
+          this.shuffleDeck();
+        }
+      );
+    } else {
+      this.setState(
+        {
+          deck: newDeck
+        },
+        () => {
           // console.log(this.state.deck);
-     this.shuffleDeck()
-         }
-       );
-     }
+          this.shuffleDeck();
+        }
+      );
+    }
   }
-
-
-
-
-
-
-
 
   componentDidMount() {
     let newUserDeck = this.props.currentDeck;
 
-
-
     if (newUserDeck === undefined || newUserDeck.length == 0) {
-     let basicDeck = deckJson;
+      let basicDeck = deckJson;
       this.setState(
         {
-          deck: basicDeck,
-        }, () => {
-          this.shuffleDeck()
-        })
-
-    }
-     else {
-      this.setState(
-        {
-          deck: newUserDeck,
+          deck: basicDeck
         },
         () => {
-    this.shuffleDeck()
+          this.shuffleDeck();
+        }
+      );
+    } else {
+      this.setState(
+        {
+          deck: newUserDeck
+        },
+        () => {
+          this.shuffleDeck();
         }
       );
     }
-   
-    
   }
 
-shuffleDeck = () =>{
-  let newestDeck = this.state.deck;
-  const shuffledDeck = this.shuffleCards(newestDeck);
-  this.setState(
-    {
-      deck: shuffledDeck,
-     
-    }, () => {
-     this.drawCards()
-    });
-}
-
-
+  shuffleDeck = () => {
+    let newestDeck = this.state.deck;
+    const shuffledDeck = this.shuffleCards(newestDeck);
+    this.setState(
+      {
+        deck: shuffledDeck
+      },
+      () => {
+        this.drawCards();
+      }
+    );
+  };
 
   componentDidUpdate(prevprops, prevState) {
     const turnEnded = this.state.turnEnded !== prevState.turnEnded;
-
 
     if (turnEnded) {
       this.props.readPlayed(this.state.playArea);
@@ -160,16 +145,18 @@ shuffleDeck = () =>{
     }
     // console.log(tempHand);
 
-    this.setState({
-      hand: tempHand,
-      deck: tempDeck
-    }, ()=>{
-      this.setState({
-       deckRecieved: true 
-      })
-    });
+    this.setState(
+      {
+        hand: tempHand,
+        deck: tempDeck
+      },
+      () => {
+        this.setState({
+          deckRecieved: true
+        });
+      }
+    );
   };
-
 
   showModal = e => {
     this.setState({
@@ -177,23 +164,25 @@ shuffleDeck = () =>{
     });
   };
 
-
-
   endTurn = e => {
-
     let turn = !this.state.turnEnded;
 
-    this.setState({
-      turnEnded: turn,
+    this.setState(
+      {
+        turnEnded: turn,
+        show: true
+      },
+      () => {}
+    );
+  };
 
-    },()=>{
+  // show(){
+  //   this.setState({show: true})
+  // }
 
-      
-    });
-  
+  close() {
+    this.setState({ show: false });
   }
-
-
 
   toHand = index => {
     let tempHand = this.state.hand;
@@ -251,8 +240,6 @@ shuffleDeck = () =>{
         );
       });
 
-
-
       return (
         // <div className="nes-container decks is-rounded">
 
@@ -260,17 +247,28 @@ shuffleDeck = () =>{
           <div className="row d-flex justify-content-center">
             <button
               className="nes-pointer buzz  endTurn neon4 mb-3 nes-btn"
-              onClick={this.endTurn}
+              onClick={this.endTurn.bind(this)}
             >
               End Turn
             </button>
-            <div></div>
+            <div>
+              <Modal
+                className="test-class" //this will completely overwrite the default css completely
+                style={{ background: "red" }} //overwrites the default background
+                containerStyle={{ background: "blue" }} //changes styling on the inner content area
+                containerClassName="test"
+                closeOnOuterClick={true}
+                show={this.state.show}
+                onClose={this.close.bind(this)}
+              >
+                <a style={closeStyle} onClick={this.close.bind(this)}>
+                  X
+                </a>
+                <div>hey</div>
+              </Modal>
+            </div>
           </div>
-    
-          <EnemyModal onClose={this.showModal} show={this.state.show}>
-          Message in Modal</EnemyModal>
 
-    
           <br />
           <br />
           <br />
@@ -300,7 +298,7 @@ shuffleDeck = () =>{
     } else {
       return null;
     }
-      }
+  }
 }
 
 export default DeckBrain;
