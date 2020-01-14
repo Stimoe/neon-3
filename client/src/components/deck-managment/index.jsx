@@ -18,7 +18,7 @@ class DeckBrain extends Component {
     turnEnded: false,
     deckRecieved: false,
     showEnemyActionModal: false,
-    show: false,
+    show: false
   };
 
   componentWillReceiveProps() {
@@ -170,18 +170,17 @@ class DeckBrain extends Component {
     const handleClose = () => {
       this.setState({
         show: false
-      })
-    }
+      });
+    };
     const handleShow = () => {
       this.setState({
-show: true
-      })
-    }
+        show: true
+      });
+    };
     let turn = !this.state.turnEnded;
     this.setState(
       {
-        turnEnded: turn,
-
+        turnEnded: turn
       },
       () => {}
     );
@@ -224,14 +223,14 @@ show: true
     const handleClose = () => {
       this.setState({
         show: false
-      })
-    }
+      });
+    };
     const handleShow = () => {
       this.setState({
-show: true
-      })
-    }
- 
+        show: true
+      });
+    };
+
     const { deckRecieved } = this.state;
     if (deckRecieved) {
       let hand = this.state.hand.map((card, index) => {
@@ -263,7 +262,6 @@ show: true
       });
 
       return (
-       
         // <div className="nes-container decks is-rounded">
 
         <div id="gameArea stuffs">
@@ -275,21 +273,22 @@ show: true
               End Turn
             </button>
             <div>
-            <Modal show={this.state.show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    
+              <Modal show={this.state.show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                  <Modal.Title>Modal heading</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  Woohoo, you're reading this text in a modal!
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button variant="secondary" onClick={handleClose}>
+                    Close
+                  </Button>
+                  <Button variant="primary" onClick={handleClose}>
+                    Save Changes
+                  </Button>
+                </Modal.Footer>
+              </Modal>
             </div>
           </div>
 
