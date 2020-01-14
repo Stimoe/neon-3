@@ -18,7 +18,7 @@ class DeckBrain extends Component {
     turnEnded: false,
     deckRecieved: false,
     showEnemyActionModal: false,
-    show: false
+    show: false,
   };
 
   componentWillReceiveProps() {
@@ -158,15 +158,26 @@ class DeckBrain extends Component {
     );
   };
 
-  showModal = e => {
-    this.setState({
-      show: !this.state.show
-    });
-  };
+  // showModal = e => {
+  //   this.setState({
+  //     show: !this.state.show
+  //   });
+  // };
 
   endTurn = e => {
+    // const [show, setShow] = useState(false);
+
+    const handleClose = () => {
+      this.setState({
+        show: false
+      })
+    }
+    const handleShow = () => {
+      this.setState({
+show: true
+      })
+    }
     let turn = !this.state.turnEnded;
-    setShow(true);
     this.setState(
       {
         turnEnded: turn,
@@ -210,9 +221,16 @@ class DeckBrain extends Component {
   };
 
   render() {
-    const [show, setShow] = useState(false);
-
-    const handleClose = () => setShow(false);
+    const handleClose = () => {
+      this.setState({
+        show: false
+      })
+    }
+    const handleShow = () => {
+      this.setState({
+show: true
+      })
+    }
  
     const { deckRecieved } = this.state;
     if (deckRecieved) {
@@ -257,7 +275,7 @@ class DeckBrain extends Component {
               End Turn
             </button>
             <div>
-            <Modal show={show} onHide={handleClose}>
+            <Modal show={this.state.show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Modal heading</Modal.Title>
         </Modal.Header>
