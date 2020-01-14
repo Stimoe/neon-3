@@ -5,7 +5,7 @@ import Cards from "../cards";
 import Axios from "axios";
 import EnemyModal from "../modalCombiner/ModalCombiner";
 import style from "./style.css";
-import Modal from "react-bootstrap/Modal";
+import Example from "../enemiesActionModul/enemyAction"
 import Button from "react-bootstrap/Button";
 // import EnemyAction from '../enemiesActionModul/enemyAction'
 // var Modal = require('react-bootstrap-modal')
@@ -266,30 +266,14 @@ class DeckBrain extends Component {
 
         <div id="gameArea stuffs">
           <div className="row d-flex justify-content-center">
-            <button
+            <Example/>
+            {/* <button
               className="nes-pointer buzz  endTurn neon4 mb-3 nes-btn"
               onClick={this.endTurn}
             >
               End Turn
-            </button>
-            <div>
-              <Modal show={this.state.show} onHide={handleClose}>
-                <Modal.Header closeButton>
-                  <Modal.Title>Modal heading</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                  Woohoo, you're reading this text in a modal!
-                </Modal.Body>
-                <Modal.Footer>
-                  <Button variant="secondary" onClick={handleClose}>
-                    Close
-                  </Button>
-                  <Button variant="primary" onClick={handleClose}>
-                    Save Changes
-                  </Button>
-                </Modal.Footer>
-              </Modal>
-            </div>
+            </button> */}
+       
           </div>
 
           <br />
