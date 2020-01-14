@@ -4,9 +4,9 @@ import Cards from "../cards";
 // import Modal, { closeStyle } from "simple-react-modal";
 import Axios from "axios";
 import EnemyModal from "../modalCombiner/ModalCombiner";
-import Modal from '../Modal/Modal';
+import Modal from "../Modal/Modal";
 import style from "./style.css";
-import Example from "../enemiesActionModul/enemyAction"
+import Example from "../enemiesActionModul/enemyAction";
 import Button from "react-bootstrap/Button";
 // import EnemyAction from '../enemiesActionModul/enemyAction'
 // var Modal = require('react-bootstrap-modal')
@@ -189,15 +189,15 @@ class DeckBrain extends Component {
 
   openModalHandler = () => {
     this.setState({
-        isShowing: true
+      isShowing: true
     });
-}
+  };
 
-closeModalHandler = () => {
+  closeModalHandler = () => {
     this.setState({
-        isShowing: false
+      isShowing: false
     });
-}
+  };
 
   toHand = index => {
     let tempHand = this.state.hand;
@@ -271,19 +271,37 @@ closeModalHandler = () => {
 
         <div id="gameArea stuffs">
           <div className="row d-flex justify-content-center">
-          <div>
-                { this.state.isShowing ? <div onClick={this.closeModalHandler} className="back-drop"></div> : null }
+            <div className="row d-flex justify-content-center">
+              {this.state.isShowing ? (
+                <div
+                  onClick={this.closeModalHandler}
+                  className="back-drop"
+                ></div>
+              ) : null}
 
-                <button className="open-modal-btn" onClick={this.openModalHandler}>Open Modal</button>
+              <button
+                className="open-modal-btn nes-pointer buzz  endTurn neon4 mb-3 nes-btn"
+                onClick={this.openModalHandler}
+              >
+                Open Modal
+              </button>
 
-                <Modal
-                    className="modal"
-                    show={this.state.isShowing}
-                    close={this.closeModalHandler}>
-                        Maybe aircrafts fly very high because they don't want to be seen in plane sight?
-                </Modal>
+              <Modal
+                className="modal"
+                show={this.state.isShowing}
+                close={this.closeModalHandler}
+              >
+                Maybe aircrafts fly very high because they don't want to be seen
+                in plane sight?
+              </Modal>
             </div>
-       
+
+            {/* <button
+              className="nes-pointer buzz  endTurn neon4 mb-3 nes-btn"
+              onClick={this.endTurn}
+            >
+              End Turn
+            </button> */}
           </div>
 
           <br />
