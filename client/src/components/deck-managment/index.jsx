@@ -227,8 +227,6 @@ class DeckBrain extends Component {
   };
 
   render() {
-   
-
     const { deckRecieved } = this.state;
     if (deckRecieved) {
       let hand = this.state.hand.map((card, index) => {
@@ -264,7 +262,7 @@ class DeckBrain extends Component {
 
         <div id="gameArea stuffs">
           <div className="row d-flex justify-content-center">
-            <div className="row d-flex justify-content-center">
+            <div>
               {this.state.isShowing ? (
                 <div
                   onClick={this.closeModalHandler}
