@@ -281,12 +281,12 @@ class DeckBrain extends Component {
 
             </div>
 
-            <button
+            {/* <button
               className="nes-pointer buzz  endTurn neon4 mb-3 nes-btn"
               onClick={this.endTurn}
             >
               End Turn
-            </button>
+            </button> */}
           </div>
 
           <br />
@@ -305,7 +305,7 @@ class DeckBrain extends Component {
           <br />
 
           <br />
-          {/* <div className="modal-div">
+          <div className="modal-div">
               <Modal
                 className="modal"
                 show={this.state.isShowing}
@@ -313,7 +313,7 @@ class DeckBrain extends Component {
               >
                Enemy Damage
               </Modal>
-            </div> */}
+            </div>
           <br />
           <div className="playArea">{playArea.length ? playArea : null}</div>
           <br />

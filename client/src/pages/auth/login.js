@@ -42,7 +42,7 @@ class Login extends Component {
 
     handleLoginFormSubmit = event => {
       event.preventDefault();
-      axios.post('http://localhost:5000/api/user/login', { username: this.state.username, password: this.state.password }).then(res => {
+      axios.post('/api/user/login', { username: this.state.username, password: this.state.password }).then(res => {
         let newStatus= (res.status)
       if(newStatus===200){
           this.setState({ redirect: true })
