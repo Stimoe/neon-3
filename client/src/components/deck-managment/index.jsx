@@ -278,7 +278,7 @@ class DeckBrain extends Component {
               >
                 End Turn
               </button>
-
+<div className="modal-div">
               <Modal
                 className="modal"
                 show={this.state.isShowing}
@@ -287,6 +287,7 @@ class DeckBrain extends Component {
                 Maybe aircrafts fly very high because they don't want to be seen
                 in plane sight?
               </Modal>
+            </div>
             </div>
 
             {/* <button
