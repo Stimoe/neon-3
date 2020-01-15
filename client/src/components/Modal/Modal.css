@@ -4,7 +4,7 @@
     box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2), 0 7px 20px 0 rgba(0,0,0,0.17);
     /* margin: 100px auto 0; */
     transition: all .8s;
-    width: 80%;
+    width: 100%;
     /* overflow: visible; */
 }
 
@@ -17,11 +17,12 @@
     /* overflow: visible; */
 }
 
-.modal-header h3 {
+.modal-header h1 {
     color: white;
     float: right;
     margin: 0;
     padding: 0;
+    font-size: 1.0rem;
     /* overflow: visible; */
 }
 
@@ -29,6 +30,9 @@
     padding: 10px 15px;
     text-align: center;
     overflow: visible;
+}
+.modal-body p {
+    padding-bottom: 0;
 }
 
 .modal-footer {
@@ -40,7 +44,7 @@
 .close-modal-btn {
     color: white;
     float: right;
-    font-size: 30px;
+    font-size: 20px;
     margin: 0;
 }
 
