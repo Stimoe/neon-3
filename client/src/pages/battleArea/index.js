@@ -269,6 +269,8 @@ class BattlePage extends Component {
   };
 
   firstEnemyAction = (action) => {
+    console.log(action);
+    
     let possibleEnemyActions = this.state.currentEnemyAbilities;
     let newEnemyAttack = this.state.currentEnemyAttack;
     let currentEnemyAttackPower = this.state.currentEnemyAttack;
