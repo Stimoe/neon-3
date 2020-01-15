@@ -111,6 +111,7 @@ class BattlePage extends Component {
     let totalEnemies = enemies.length
     const turnEnded = this.state.userTurnOver === true;
     const frozen = this.state.frozen;
+console.log(this.state.roundEnemyAction);
 
 
     if (this.state.currentEnemyHealth <= 0 && this.state.winCount === totalEnemies) {
@@ -272,13 +273,15 @@ class BattlePage extends Component {
 
     let randomAction = Math.floor(Math.random() * possibleEnemyActions.length + 1
     );
-    // console.log("The action the enemy did ", randomAction);
+    console.log("The action the enemy did ", randomAction);
 
     switch (randomAction) {
       case 1:
         if (newUserArmor >= newEnemyAttack) {
           let newArmor = newUserArmor - newEnemyAttack;
           let newEnemyAttackAction = ("Enemy Attacked for " + currentEnemyAttackPower)
+          console.log(newEnemyAttackAction);
+          
           this.setState({
             userArmor: newArmor,
             enemyAction: newEnemyAttackAction,
@@ -305,6 +308,8 @@ class BattlePage extends Component {
         //enemy gains armor
         let newArmor = newEnemyArmor + newEnemyArmorGain;
         let newEnemyAction = ("Enemy Gained Armor for " + newEnemyArmorGain)
+        console.log(newEnemyAction);
+        
         this.setState({
           currentEnemyArmor: newArmor,
           enemyAction: newEnemyAction,
