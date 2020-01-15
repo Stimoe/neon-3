@@ -178,7 +178,7 @@ console.log(newEnemyAction);
     }, ()=>{
       setTimeout(function(){
         this.setState({isShowing:false});
-   }.bind(this),2000);  // wait 2 seconds, then reset to false
+   }.bind(this),5000);  // wait 5 seconds, then reset to false
     });
   };
 
