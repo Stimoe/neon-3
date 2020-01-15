@@ -60,6 +60,8 @@ class DeckBrain extends Component {
   componentDidMount() {
     let newUserDeck = this.props.currentDeck;
 
+
+
     if (newUserDeck === undefined || newUserDeck.length == 0) {
       let basicDeck = deckJson;
       this.setState(
@@ -171,7 +173,7 @@ class DeckBrain extends Component {
     let turn = !this.state.turnEnded;
         setTimeout(function(){
         this.setState({isShowing:true});
-   }.bind(this),2000); 
+   }.bind(this),1000); 
     this.setState({
       turnEnded: turn
     }, ()=>{
