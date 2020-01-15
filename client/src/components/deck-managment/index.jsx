@@ -179,7 +179,7 @@ class DeckBrain extends Component {
     }, ()=>{
       setTimeout(function(){
         this.setState({isShowing:false});
-   }.bind(this),5000);  // wait 5 seconds, then reset to false
+   }.bind(this),4000);  // wait 5 seconds, then reset to false
     });
   };
 

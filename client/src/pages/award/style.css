@@ -92,7 +92,7 @@ bottom:0;
     font-size: 1.0em !important;
     width: 90%;
   padding: 2%;
-    top: 100%;
+    /* top: 100%; */
     font-size: 1.3em;
     background-color: #b6379e;
     text-shadow: 2px 2px #52c0da;
