@@ -334,12 +334,13 @@ console.log(this.state.roundEnemyAction);
           });
           break;
           case 4:
-          let newCurrentEnemyArmor=this.state.currentEnemyArmorGain
-          let messageOfArmorGain=("Enemy gained " + newCurrentEnemyArmorGain + " everytime it gains armor")
-          newCurrentEnemyArmor = (newCurrentEnemyArmor + newBonusEnemyArmor)
+          let enemyArmorGainBonus=newBonusEnemyArmor
+          let enemyArmorGain=newEnemyArmorGain
+          let messageOfArmorGain=("Enemy gained " + enemyArmorGainBonus + " everytime it gains armor")
+          enemyArmorGain = (enemyArmorGain + enemyArmorGainBonus)
           this.setState({
             enemyAction: messageOfArmorGain,
-            currentEnemyArmorGain: newCurrentEnemyArmor,
+            currentEnemyArmorGain: enemyArmorGain,
             userTurnOver: false
           })
         return;
