@@ -175,6 +175,10 @@ console.log(newEnemyAction);
     this.setState({
       isShowing: true,
       turnEnded: turn
+    }, ()=>{
+      setTimeout(function(){
+        this.setState({isShowing:false});
+   }.bind(this),2000);  // wait 2 seconds, then reset to false
     });
   };
 
