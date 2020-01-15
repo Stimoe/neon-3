@@ -140,7 +140,11 @@ class Save extends Component {
     } else {
       return (
         <div>
-          <div className="landing6"></div>
+          <div className="landing6">
+<h1>You Have Defeated the enemy!!!</h1>
+<h2>Choose 1 new Card to add to your deck for the next fight </h2>
+<h2>You add 3 new cards total to your deck</h2>
+          </div>
           <div className="awardCards">
             <DrawBrain
 

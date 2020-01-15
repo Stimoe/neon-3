@@ -93,6 +93,8 @@ class DrawBrain extends Component {
   };
 
   render() {
+
+    
     
     let newDrawnCards = this.state.newDrawnCards.map((card, index) => {
       return (
