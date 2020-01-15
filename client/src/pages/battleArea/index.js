@@ -70,7 +70,8 @@ class BattlePage extends Component {
         let newEnemyAbilities = currentEnemy.actions;
         let newEnemyAttack = currentEnemy.attack;
         let newEnemyArmorGain = currentEnemy.armorGain;
-        let newEnemyAttackGain = currentEnemy.attackGain
+        let newEnemyAttackGain = currentEnemy.attackGain;
+        let newEnemyAdditionalArmorGain=currentEnemy.additionalArmorGain
         this.setState({
           maxEnemyHealth: currentEnemyHealth,
           currentEnemyHealth: currentEnemyHealth,
@@ -79,6 +80,7 @@ class BattlePage extends Component {
           currentEnemyAttack: newEnemyAttack,
           currentEnemyArmorGain: newEnemyArmorGain,
           currentEnemyAttackGain: newEnemyAttackGain,
+          currentBonusEnemyArmorGain: newEnemyAdditionalArmorGain,
           deckRecieved: true
         });
 
@@ -97,6 +99,7 @@ class BattlePage extends Component {
         let newEnemyAbilities = currentEnemy.actions;
         let newEnemyAttack = currentEnemy.attack;
         let newEnemyArmorGain = currentEnemy.armorGain;
+        let newEnemyAttackGain = currentEnemy.attackGain;
         let newEnemyAdditionalArmorGain=currentEnemy.additionalArmorGain
         this.setState({
           maxEnemyHealth: currentEnemyHealth,
@@ -106,6 +109,7 @@ class BattlePage extends Component {
           currentEnemyAttack: newEnemyAttack,
           currentEnemyArmorGain: newEnemyArmorGain,
           currentBonusEnemyArmorGain: newEnemyAdditionalArmorGain,
+          currentEnemyAttackGain: newEnemyAttackGain,
           deckRecieved: true
         });
 
@@ -363,44 +367,32 @@ console.log(this.state.roundEnemyAction);
     // let newDamage = 0
     let armor = this.state.userArmor;
     playedCards.forEach(card => {
-
-      // console.log(card);
-
-
       switch (card.id) {
-
         case 1:
-          // newDamage= multiplier * card.damage
-          // console.log(multiplier, newDamage);
-          //   newDamage=card.damage
-          //   console.log(newDamage);
           damage += card.damage * multiplier
-          // damage = newDamage;
-          console.log(damage);
-
           break;
 
         case 2:
           armor += card.armor;
-
           break;
+
         case 3:
           damage += card.damage;
           selfDamage += card.selfDamage;
           break;
+
         case 4:
           multiplier = card.multiplier
-          console.log(multiplier);
           damage = damage * multiplier
-          console.log(damage);
-
           break;
+
         case 5:
           newEnemyArmor = 0;
           this.setState({
             currentEnemyArmor: newEnemyArmor
           });
           break;
+
         case 6:
           userHealValue = card.healValue;
           newHealth = this.state.userHealth;
@@ -409,6 +401,7 @@ console.log(this.state.roundEnemyAction);
             userHealth: newHealth
           });
           break;
+
         case 7:
           this.setState({
             frozen: true
@@ -418,28 +411,15 @@ console.log(this.state.roundEnemyAction);
     });
     if (damage) {
       let { newArmor, newHealth, gameWon } = this.userAttack(damage);
-      // let turnOver = !this.state.userTurnOver;
       let tempHealth = health - selfDamage;
-      // if (gameWon) {
-      //   let tempWin = this.state.winCount + 1;
-      //   this.setState({
-      //     winCount: tempWin
-      //   });
-      // }
-      console.log(newArmor, newHealth)
       this.setState({
         currentEnemyArmor: newArmor,
         currentEnemyHealth: newHealth,
-        // userTurnOver: turnOver,
-        // userArmor: armor,
         userHealth: tempHealth
       });
     }
     else {
-
-
       this.setState({
-        // userTurnOver: turnOver,
         userArmor: armor
       });
     }
