@@ -20,17 +20,18 @@ class DeckBrain extends Component {
     deckRecieved: false,
     isShowing: false,
     show: false,
-    enemyAction: ''
+    enemyAction: ""
   };
 
   componentWillReceiveProps() {
     let newDeck = this.props.currentDeck;
     // console.log(newDeck);
-    let newEnemyAction = this.props.roundEnemyAction
+    let newEnemyAction = this.props.roundEnemyAction;
+console.log(newEnemyAction);
 
-this.setState({
-  enemyAction: newEnemyAction
-})
+    this.setState({
+      enemyAction: newEnemyAction
+    });
 
     if (newDeck === undefined || newDeck.length == 0) {
       let basicDeck = deckJson;
@@ -95,13 +96,12 @@ this.setState({
 
   componentDidUpdate(prevprops, prevState) {
     const turnEnded = this.state.turnEnded !== prevState.turnEnded;
-let currentEnemyAction=this.props.roundEnemyAction
-console.log(currentEnemyAction);
-this.setState({
-  enemyAction: currentEnemyAction
-})
+    let currentEnemyAction = this.props.roundEnemyAction;
+    console.log(currentEnemyAction);
+    // this.setState({
+    //   enemyAction: currentEnemyAction
+    // });
     if (turnEnded) {
-    
       this.props.readPlayed(this.state.playArea);
       this.discardPlayed();
     }
@@ -170,8 +170,6 @@ this.setState({
     );
   };
 
-
-
   openModalHandler = () => {
     let turn = !this.state.turnEnded;
     this.setState({
@@ -212,8 +210,6 @@ this.setState({
   };
 
   render() {
-   
-
     const { deckRecieved } = this.state;
     if (deckRecieved) {
       let hand = this.state.hand.map((card, index) => {
@@ -263,7 +259,6 @@ this.setState({
               >
                 End Turn
               </button>
-
             </div>
 
             {/* <button
@@ -280,25 +275,25 @@ this.setState({
           <br />
           <br />
           <br />
-      
+
           <br />
 
           <br />
 
           <br />
           <div className="modal-div">
-              <Modal
-                className="modal"
-                show={this.state.isShowing}
-                close={this.closeModalHandler}
-              >
+            <Modal
+              className="modal"
+              show={this.state.isShowing}
+              close={this.closeModalHandler}
+            >
               {this.state.enemyAction}
-              </Modal>
-            </div>
+            </Modal>
+          </div>
           <br />
 
           <br />
-     
+
           <br />
           <div className="playArea">{playArea.length ? playArea : null}</div>
           <br />
