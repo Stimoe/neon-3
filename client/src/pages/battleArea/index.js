@@ -237,16 +237,13 @@ console.log(this.state.roundEnemyAction);
     let newHealth;
     let newCurrentEnemyHealth = this.state.currentEnemyHealth
     let newCurrentEnemyArmor = this.state.currentEnemyArmor
-    console.log("Here is damage ", damage)
-    console.log("armor ", newCurrentEnemyArmor)
+
     if (newCurrentEnemyArmor >= damage) {
       let tempArmor = this.state.currentEnemyArmor;
       newArmor = tempArmor - damage;
       newHealth = newCurrentEnemyHealth
-      console.log(newArmor)
-      // this.setState({
-      //   currentEnemyArmor:newArmor
-      // })
+
+
       return {
         newArmor,
         newHealth
@@ -405,7 +402,8 @@ console.log(this.state.roundEnemyAction);
           break;
         case 6:
           userHealValue = card.healValue;
-          newHealth = this.state.userHealth + userHealValue;
+          newHealth = this.state.userHealth;
+          newHealth=newHealth + userHealValue
           this.setState({
             userHealth: newHealth
           });
