@@ -32,7 +32,9 @@ class BattlePage extends Component {
     currentEnemyArmor: 0,
     currentEnemyAbilities: [],
     currentEnemyAttack: 0,
+    currentEnemyAttackGain: 0,
     currentEnemyArmorGain: 0,
+    currentBonusEnemyArmorGain: 0,
     playedCards: [],
     userTurnOver: false,
     frozen: false,
@@ -68,6 +70,7 @@ class BattlePage extends Component {
         let newEnemyAbilities = currentEnemy.actions;
         let newEnemyAttack = currentEnemy.attack;
         let newEnemyArmorGain = currentEnemy.armorGain;
+        let newEnemyAttackGain = currentEnemy.attackGain
         this.setState({
           maxEnemyHealth: currentEnemyHealth,
           currentEnemyHealth: currentEnemyHealth,
@@ -75,6 +78,7 @@ class BattlePage extends Component {
           currentEnemyAbilities: newEnemyAbilities,
           currentEnemyAttack: newEnemyAttack,
           currentEnemyArmorGain: newEnemyArmorGain,
+          currentEnemyAttackGain: newEnemyAttackGain,
           deckRecieved: true
         });
 
@@ -93,6 +97,7 @@ class BattlePage extends Component {
         let newEnemyAbilities = currentEnemy.actions;
         let newEnemyAttack = currentEnemy.attack;
         let newEnemyArmorGain = currentEnemy.armorGain;
+        let newEnemyAdditionalArmorGain=currentEnemy.additionalArmorGain
         this.setState({
           maxEnemyHealth: currentEnemyHealth,
           currentEnemyHealth: currentEnemyHealth,
@@ -100,6 +105,7 @@ class BattlePage extends Component {
           currentEnemyAbilities: newEnemyAbilities,
           currentEnemyAttack: newEnemyAttack,
           currentEnemyArmorGain: newEnemyArmorGain,
+          currentBonusEnemyArmorGain: newEnemyAdditionalArmorGain,
           deckRecieved: true
         });
 
@@ -264,11 +270,13 @@ console.log(this.state.roundEnemyAction);
   firstEnemyAction = () => {
     let possibleEnemyActions = this.state.currentEnemyAbilities;
     let newEnemyAttack = this.state.currentEnemyAttack;
-    let currentEnemyAttackPower=this.state.currentEnemyAttack
+    let currentEnemyAttackPower=this.state.currentEnemyAttack;
+    let newEnemyAttackGain=this.state.currentEnemyAttackGain;
     let newEnemyArmor = this.state.currentEnemyArmor;
     let newEnemyArmorGain = this.state.currentEnemyArmorGain;
     let newUserHealth = this.state.userHealth;
     let newUserArmor = this.state.userArmor;
+    let newBonusEnemyArmor=this.state.currentBonusEnemyArmorGain
     // console.log(possibleEnemyActions.length + 1);
 
     let randomAction = Math.floor(Math.random() * possibleEnemyActions.length + 1
@@ -317,6 +325,26 @@ console.log(this.state.roundEnemyAction);
           enemyAction: newEnemyAction,
           userTurnOver: false
         });
+        break;
+        case 3:
+          let newEnemyAttackPower=this.state.currentEnemyAttack
+          let newEnemyAttackBonus= ("Enemy gained " + newEnemyAttackGain + " attack damage everytime it attacks")
+          newEnemyAttackPower=(newEnemyAttackPower+newEnemyAttackGain)
+          this.setState({
+            enemyAction: newEnemyAttackBonus,
+            currentEnemyAttack: newEnemyAttackPower,
+            userTurnOver: false
+          });
+          break;
+          case 4:
+          let newCurrentEnemyArmor=this.state.currentEnemyArmorGain
+          let messageOfArmorGain=("Enemy gained " + newCurrentEnemyArmorGain + " everytime it gains armor")
+          newCurrentEnemyArmor = (newCurrentEnemyArmor + newBonusEnemyArmor)
+          this.setState({
+            enemyAction: messageOfArmorGain,
+            currentEnemyArmorGain: newCurrentEnemyArmor,
+            userTurnOver: false
+          })
         return;
     }
 
@@ -498,10 +526,7 @@ console.log(this.state.roundEnemyAction);
               <p className="em">Armor:{this.state.currentEnemyArmor}</p>
             </div>
 
-            <div>
 
-              {/* <EnemyModal turnEnded = {this.state.userTurnOver}/> */}
-            </div>
 
 
           </div>
