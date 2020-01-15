@@ -277,14 +277,16 @@ console.log(this.state.roundEnemyAction);
 
     switch (randomAction) {
       case 1:
+        let newEnemyAttackAction = ("Enemy Attacked for " + currentEnemyAttackPower)
+        console.log(newEnemyAttackAction);
+        this.setState({
+          enemyAction: newEnemyAttackAction,
+        })
         if (newUserArmor >= newEnemyAttack) {
           let newArmor = newUserArmor - newEnemyAttack;
-          let newEnemyAttackAction = ("Enemy Attacked for " + currentEnemyAttackPower)
-          console.log(newEnemyAttackAction);
           
           this.setState({
             userArmor: newArmor,
-            enemyAction: newEnemyAttackAction,
             userTurnOver: false
           });
         }
