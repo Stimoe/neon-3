@@ -1,0 +1,88 @@
+.modal-wrapper {
+    background: white;
+    border: 1px solid #d0cccc;
+    box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2), 0 7px 20px 0 rgba(0,0,0,0.17);
+    /* margin: 100px auto 0; */
+    transition: all .8s;
+    width: 100%;
+    /* overflow: visible; */
+}
+
+.modal-header {
+    background: #263238;
+    /* height: 40px; */
+    /* line-height: 40px; */
+    padding: 5px 20px;
+    text-align: right;
+    /* overflow: visible; */
+}
+
+.modal-header h1 {
+    color: white;
+    float: right;
+    margin: 0;
+    padding: 0;
+    font-size: 1.0rem;
+    /* overflow: visible; */
+}
+
+.modal-body {
+    padding: 5px 5px;
+    text-align: center;
+    overflow: visible;
+}
+.modal-body-text {
+    font-size : 1.1rem;
+    padding-bottom : 0px; 
+}
+
+.modal-footer {
+    background: #263238;
+    height: 35px;
+    padding: 15px;
+}
+
+.close-modal-btn {
+    color: white;
+    float: right;
+    font-size: 18px;
+    margin: 0;
+}
+
+.close-modal-btn:hover {
+    color: black;
+}
+
+.btn-cancel, .btn-continue {
+    background: coral;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    outline: none;
+    padding: 10px;
+}
+
+.btn-cancel {
+    background-color: #b71c1c;
+    float: left;
+}
+
+.btn-continue {
+    background-color: #1b5e20;
+    float: right;
+}
+
+.back-drop {
+    background-color: rgba(48, 49, 48, 0.42);
+    height: 100%;
+    position: fixed;
+    transition: all 1.3s;
+    width: 100%;
+}
+
+.open-modal-btn {
+    margin: 15px;
+    padding: 10px;
+    font-weight: bold;
+}

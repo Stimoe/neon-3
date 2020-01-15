@@ -14,13 +14,14 @@ import Player from './players.png'
 import Rain from './rain.gif'
 import GameWon from "../../components/gameWon"
 import GameOver from "../../components/gameOver"
-import EnemyAction from "../../components/enemiesActionModul"
-import EnemyModal from "../../components/enemiesActionModul";
 import { log } from "util";
 
 
 class BattlePage extends Component {
-  state = {
+  
+  constructor(props) {
+    super(props);
+  this.state = {
     currentUserDeck: [],
     username: '',
     winCount: 0,
@@ -42,7 +43,7 @@ class BattlePage extends Component {
     userLost: false,
     userWon: false
   };
-
+}
 
 
 
@@ -110,6 +111,7 @@ class BattlePage extends Component {
     let totalEnemies = enemies.length
     const turnEnded = this.state.userTurnOver === true;
     const frozen = this.state.frozen;
+console.log(this.state.roundEnemyAction);
 
 
     if (this.state.currentEnemyHealth <= 0 && this.state.winCount === totalEnemies) {
@@ -249,33 +251,20 @@ class BattlePage extends Component {
       let tempHealth = this.state.currentEnemyHealth;
       newHealth = tempHealth - newDamage;
       newArmor = 0
-      // if (newHealth <= 0) {
-      //   let tempWins2 = this.state.winCount
-      //   console.log(tempWins2);
-
-      //   tempWins2 = tempWins2 + 1
-      //   console.log(tempWins2)
-      //   this.setState({
-      //     winCount: tempWins2
-      //   })
-      // }
+    
       return {
         newHealth,
         newArmor,
         gameWon
       }
     }
-    // console.log(newArmor, newHealth)
-    // return {
-    //   newArmor,
-    //   newHealth,
-    //   gameWon
-    // };
+
   };
 
   firstEnemyAction = () => {
     let possibleEnemyActions = this.state.currentEnemyAbilities;
     let newEnemyAttack = this.state.currentEnemyAttack;
+    let currentEnemyAttackPower=this.state.currentEnemyAttack
     let newEnemyArmor = this.state.currentEnemyArmor;
     let newEnemyArmorGain = this.state.currentEnemyArmorGain;
     let newUserHealth = this.state.userHealth;
@@ -284,17 +273,20 @@ class BattlePage extends Component {
 
     let randomAction = Math.floor(Math.random() * possibleEnemyActions.length + 1
     );
-    // console.log("The action the enemy did ", randomAction);
+    console.log("The action the enemy did ", randomAction);
 
     switch (randomAction) {
       case 1:
-        //enemy attacks!!
+        let newEnemyAttackAction = ("Enemy Attacked for " + currentEnemyAttackPower)
+        console.log(newEnemyAttackAction);
+        this.setState({
+          enemyAction: newEnemyAttackAction,
+        })
         if (newUserArmor >= newEnemyAttack) {
           let newArmor = newUserArmor - newEnemyAttack;
-          let newEnemyAttackAction = ("Enemy Attacked for " + newEnemyAttack)
+          
           this.setState({
             userArmor: newArmor,
-            enemyAction: newEnemyAttackAction,
             userTurnOver: false
           });
         }
@@ -318,6 +310,8 @@ class BattlePage extends Component {
         //enemy gains armor
         let newArmor = newEnemyArmor + newEnemyArmorGain;
         let newEnemyAction = ("Enemy Gained Armor for " + newEnemyArmorGain)
+        console.log(newEnemyAction);
+        
         this.setState({
           currentEnemyArmor: newArmor,
           enemyAction: newEnemyAction,
@@ -435,6 +429,7 @@ class BattlePage extends Component {
     const { userWon } = this.state;
     const { redirect } = this.state;
     const { deckRecieved } = this.state;
+    const { userTurnOver } = this.state;
     if (redirect) {
       return <Redirect to={{
         pathname: '/award',
@@ -530,14 +525,20 @@ class BattlePage extends Component {
               readPlayed={this.handlePlayedCards}
               hasWon={this.state.winCount}
               currentDeck={this.state.currentUserDeck}
-
+              roundEnemyAction={this.state.enemyAction}
 
             />
 
           </div>
+    
         </div>
 
-      )
+)
+
+             
+
+
+
     }
 
     else {

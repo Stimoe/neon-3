@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import deckJson from "../../cards.json";
 import Cards from "../cards";
+// import Modal, { closeStyle } from "simple-react-modal";
 import Axios from "axios";
-import EnemyModal from "../../components/enemiesActionModul";
+// import EnemyModal from "../modalCombiner/ModalCombiner";
+import Modal from "../Modal/Modal";
 import style from "./style.css";
-import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
-
+// import Example from "../enemiesActionModul/enemyAction";
+import Button from "react-bootstrap/Button";
+// import EnemyAction from '../enemiesActionModul/enemyAction'
 // var Modal = require('react-bootstrap-modal')
 class DeckBrain extends Component {
   state = {
@@ -15,46 +17,45 @@ class DeckBrain extends Component {
     discard: [],
     playArea: [],
     turnEnded: false,
-    deckRecieved: false
+    deckRecieved: false,
+    isShowing: false,
+    show: false,
+    enemyAction: ""
   };
+
+
 
   componentWillReceiveProps() {
     let newDeck = this.props.currentDeck;
     // console.log(newDeck);
+    let newEnemyAction = this.props.roundEnemyAction;
+
+    this.setState({
+      enemyAction: newEnemyAction
+    });
 
     if (newDeck === undefined || newDeck.length == 0) {
       let basicDeck = deckJson;
-       this.setState(
-         {
-           deck: basicDeck,
-           deckRecieved: true
-         }, () => {
-           console.log(this.state.deck);
-           
-           this.shuffleDeck()
-         })
- 
-     }
-      else {
-       this.setState(
-         {
-           deck: newDeck,
-           deckRecieved: true
-         },
-         () => {
+      this.setState(
+        {
+          deck: basicDeck
+        },
+        () => {
+          this.shuffleDeck();
+        }
+      );
+    } else {
+      this.setState(
+        {
+          deck: newDeck
+        },
+        () => {
           // console.log(this.state.deck);
-     this.shuffleDeck()
-         }
-       );
-     }
+          this.shuffleDeck();
+        }
+      );
+    }
   }
-
-
-
-
-
-
-
 
   componentDidMount() {
     let newUserDeck = this.props.currentDeck;
@@ -62,44 +63,39 @@ class DeckBrain extends Component {
 
 
     if (newUserDeck === undefined || newUserDeck.length == 0) {
-     let basicDeck = deckJson;
+      let basicDeck = deckJson;
       this.setState(
         {
-          deck: basicDeck,
-          deckRecieved: true
-        }, () => {
-          this.shuffleDeck()
-        })
-
-    }
-     else {
-      this.setState(
-        {
-          deck: newUserDeck,
-          deckRecieved: true
+          deck: basicDeck
         },
         () => {
-    this.shuffleDeck()
+          this.shuffleDeck();
+        }
+      );
+    } else {
+      this.setState(
+        {
+          deck: newUserDeck
+        },
+        () => {
+          this.shuffleDeck();
         }
       );
     }
-   
-    
   }
 
-shuffleDeck = () =>{
-  let newestDeck = this.state.deck;
-  const shuffledDeck = this.shuffleCards(newestDeck);
-  this.setState(
-    {
-      deck: shuffledDeck,
-      deckRecieved: true
-    }, () => {
-      // console.log(this.state.deck);
-    });
-}
-
-
+  shuffleDeck = () => {
+    let newestDeck = this.state.deck;
+    const shuffledDeck = this.shuffleCards(newestDeck);
+    this.setState(
+      {
+        deck: shuffledDeck
+      },
+      () => {
+        this.drawCards();
+      }
+    );
+  };
 
   componentDidUpdate(prevprops, prevState) {
     const turnEnded = this.state.turnEnded !== prevState.turnEnded;
@@ -160,17 +156,36 @@ shuffleDeck = () =>{
     }
     // console.log(tempHand);
 
+    this.setState(
+      {
+        hand: tempHand,
+        deck: tempDeck
+      },
+      () => {
+        this.setState({
+          deckRecieved: true
+        });
+      }
+    );
+  };
+
+  openModalHandler = () => {
+    let turn = !this.state.turnEnded;
+        setTimeout(function(){
+        this.setState({isShowing:true});
+   }.bind(this),1000); 
     this.setState({
-      hand: tempHand,
-      deck: tempDeck
+      turnEnded: turn
+    }, ()=>{
+      setTimeout(function(){
+        this.setState({isShowing:false});
+   }.bind(this),5000);  // wait 5 seconds, then reset to false
     });
   };
 
-  endTurn = () => {
-    let turn = !this.state.turnEnded;
-
+  closeModalHandler = () => {
     this.setState({
-      turnEnded: turn
+      isShowing: false
     });
   };
 
@@ -200,8 +215,8 @@ shuffleDeck = () =>{
   };
 
   render() {
-    // const { deckRecieved } = this.state;
-    // if (deckRecieved) {
+    const { deckRecieved } = this.state;
+    if (deckRecieved) {
       let hand = this.state.hand.map((card, index) => {
         return (
           <div className="handCard row1 d-flex justify-content-center">
@@ -235,13 +250,28 @@ shuffleDeck = () =>{
 
         <div id="gameArea stuffs">
           <div className="row d-flex justify-content-center">
-            <button
+            <div className="row d-flex justify-content-center">
+              {this.state.isShowing ? (
+                <div
+                  onClick={this.closeModalHandler}
+                  className="back-drop"
+                ></div>
+              ) : null}
+
+              <button
+                className="open-modal-btn nes-pointer buzz  endTurn neon4 mb-3 nes-btn"
+                onClick={this.openModalHandler}
+              >
+                End Turn
+              </button>
+            </div>
+
+            {/* <button
               className="nes-pointer buzz  endTurn neon4 mb-3 nes-btn"
               onClick={this.endTurn}
             >
               End Turn
-            </button>
-            <div></div>
+            </button> */}
           </div>
 
           <br />
@@ -250,7 +280,17 @@ shuffleDeck = () =>{
           <br />
           <br />
           <br />
+          <div className="modal-div">
+            <Modal
+              className="modal"
+              show={this.state.isShowing}
+              close={this.closeModalHandler}
+            >
+              {this.state.enemyAction}
+            </Modal>
+          </div>
 
+          <br />
           <br />
 
           <br />
@@ -259,7 +299,6 @@ shuffleDeck = () =>{
 
           <br />
 
-          <br />
           <br />
           <div className="playArea">{playArea.length ? playArea : null}</div>
           <br />
@@ -270,10 +309,10 @@ shuffleDeck = () =>{
         </div>
         // </div>
       );
-    // } else {
-    //   return null;
-    // }
-      }
+    } else {
+      return null;
+    }
+  }
 }
 
 export default DeckBrain;
