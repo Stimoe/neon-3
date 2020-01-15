@@ -3,10 +3,10 @@ import deckJson from "../../cards.json";
 import Cards from "../cards";
 // import Modal, { closeStyle } from "simple-react-modal";
 import Axios from "axios";
-import EnemyModal from "../modalCombiner/ModalCombiner";
+// import EnemyModal from "../modalCombiner/ModalCombiner";
 import Modal from "../Modal/Modal";
 import style from "./style.css";
-import Example from "../enemiesActionModul/enemyAction";
+// import Example from "../enemiesActionModul/enemyAction";
 import Button from "react-bootstrap/Button";
 // import EnemyAction from '../enemiesActionModul/enemyAction'
 // var Modal = require('react-bootstrap-modal')
