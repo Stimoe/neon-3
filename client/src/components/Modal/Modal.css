@@ -31,8 +31,9 @@
     text-align: center;
     overflow: visible;
 }
-.modal-body p {
-    padding-bottom: 0;
+.modal-body-text {
+    font-size : 1.1rem;
+    padding-bottom : 0px; 
 }
 
 .modal-footer {

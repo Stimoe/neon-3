@@ -15,7 +15,7 @@ const modal = (props) => {
                     <span className="close-modal-btn" onClick={props.close}>×</span>
                 </div>
                 <div className="modal-body">
-                    <p>
+                    <p className = "modal-body-text">
                         {props.children}
                     </p>
                 </div>

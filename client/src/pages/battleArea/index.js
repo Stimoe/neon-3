@@ -263,6 +263,7 @@ class BattlePage extends Component {
   firstEnemyAction = () => {
     let possibleEnemyActions = this.state.currentEnemyAbilities;
     let newEnemyAttack = this.state.currentEnemyAttack;
+    let currentEnemyAttackPower=this.state.currentEnemyAttack
     let newEnemyArmor = this.state.currentEnemyArmor;
     let newEnemyArmorGain = this.state.currentEnemyArmorGain;
     let newUserHealth = this.state.userHealth;
@@ -277,7 +278,7 @@ class BattlePage extends Component {
       case 1:
         if (newUserArmor >= newEnemyAttack) {
           let newArmor = newUserArmor - newEnemyAttack;
-          let newEnemyAttackAction = ("Enemy Attacked for " + newEnemyAttack)
+          let newEnemyAttackAction = ("Enemy Attacked for " + currentEnemyAttackPower)
           this.setState({
             userArmor: newArmor,
             enemyAction: newEnemyAttackAction,
