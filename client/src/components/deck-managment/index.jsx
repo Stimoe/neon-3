@@ -96,10 +96,12 @@ this.setState({
   componentDidUpdate(prevprops, prevState) {
     const turnEnded = this.state.turnEnded !== prevState.turnEnded;
 let currentEnemyAction=this.props.roundEnemyAction
+console.log(currentEnemyAction);
+this.setState({
+  enemyAction: currentEnemyAction
+})
     if (turnEnded) {
-      this.setState({
-        enemyAction: currentEnemyAction
-      })
+    
       this.props.readPlayed(this.state.playArea);
       this.discardPlayed();
     }
