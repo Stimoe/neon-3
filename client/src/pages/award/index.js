@@ -141,9 +141,11 @@ class Save extends Component {
       return (
         <div>
           <div className="landing6">
+            <div className=" neon26 message">
 <h1>You Have Defeated the enemy!!!</h1>
 <h2>Choose 1 new Card to add to your deck for the next fight </h2>
 <h2>You add 3 new cards total to your deck</h2>
+</div>
           </div>
           <div className="awardCards">
             <DrawBrain
