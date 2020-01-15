@@ -18,34 +18,34 @@ import { log } from "util";
 
 
 class BattlePage extends Component {
-  
+
   constructor(props) {
     super(props);
-  this.state = {
-    currentUserDeck: [],
-    username: '',
-    winCount: 0,
-    userHealth: 100,
-    userArmor: 0,
-    enemies,
-    currentEnemyHealth: 1,
-    currentEnemyArmor: 0,
-    currentEnemyAbilities: [],
-    currentEnemyAttack: 0,
-    currentEnemyAttackGain: 0,
-    currentEnemyArmorGain: 0,
-    currentBonusEnemyArmorGain: 0,
-    playedCards: [],
-    userTurnOver: false,
-    frozen: false,
-    redirect: false,
-    enemyAction: "",
-    maxEnemyHealth: 0,
-    deckRecieved: false,
-    userLost: false,
-    userWon: false
-  };
-}
+    this.state = {
+      currentUserDeck: [],
+      username: '',
+      winCount: 0,
+      userHealth: 100,
+      userArmor: 0,
+      enemies,
+      currentEnemyHealth: 1,
+      currentEnemyArmor: 0,
+      currentEnemyAbilities: [],
+      currentEnemyAttack: 0,
+      currentEnemyAttackGain: 0,
+      currentEnemyArmorGain: 0,
+      currentBonusEnemyArmorGain: 0,
+      playedCards: [],
+      userTurnOver: false,
+      frozen: false,
+      redirect: false,
+      enemyAction: "",
+      maxEnemyHealth: 0,
+      deckRecieved: false,
+      userLost: false,
+      userWon: false
+    };
+  }
 
 
 
@@ -71,7 +71,7 @@ class BattlePage extends Component {
         let newEnemyAttack = currentEnemy.attack;
         let newEnemyArmorGain = currentEnemy.armorGain;
         let newEnemyAttackGain = currentEnemy.attackGain;
-        let newEnemyAdditionalArmorGain=currentEnemy.additionalArmorGain
+        let newEnemyAdditionalArmorGain = currentEnemy.additionalArmorGain
         this.setState({
           maxEnemyHealth: currentEnemyHealth,
           currentEnemyHealth: currentEnemyHealth,
@@ -100,7 +100,7 @@ class BattlePage extends Component {
         let newEnemyAttack = currentEnemy.attack;
         let newEnemyArmorGain = currentEnemy.armorGain;
         let newEnemyAttackGain = currentEnemy.attackGain;
-        let newEnemyAdditionalArmorGain=currentEnemy.additionalArmorGain
+        let newEnemyAdditionalArmorGain = currentEnemy.additionalArmorGain
         this.setState({
           maxEnemyHealth: currentEnemyHealth,
           currentEnemyHealth: currentEnemyHealth,
@@ -121,7 +121,7 @@ class BattlePage extends Component {
     let totalEnemies = enemies.length
     const turnEnded = this.state.userTurnOver === true;
     const frozen = this.state.frozen;
-console.log(this.state.roundEnemyAction);
+    console.log(this.state.roundEnemyAction);
 
 
     if (this.state.currentEnemyHealth <= 0 && this.state.winCount === totalEnemies) {
@@ -145,13 +145,13 @@ console.log(this.state.roundEnemyAction);
         currentEnemyHealth: 1
       }, () => {
         console.log(this.state.winCount);
-        
+
         this.updateWinCount()
       })
 
     }
     if (turnEnded && !frozen) {
-      this.firstEnemyAction();
+      this.enemyChoice();
     } else if (turnEnded && frozen) {
       this.setState({
         frozen: false
@@ -258,7 +258,7 @@ console.log(this.state.roundEnemyAction);
       let tempHealth = this.state.currentEnemyHealth;
       newHealth = tempHealth - newDamage;
       newArmor = 0
-    
+
       return {
         newHealth,
         newArmor,
@@ -268,20 +268,21 @@ console.log(this.state.roundEnemyAction);
 
   };
 
-  firstEnemyAction = () => {
+  firstEnemyAction = (action) => {
     let possibleEnemyActions = this.state.currentEnemyAbilities;
     let newEnemyAttack = this.state.currentEnemyAttack;
-    let currentEnemyAttackPower=this.state.currentEnemyAttack;
-    let newEnemyAttackGain=this.state.currentEnemyAttackGain;
+    let currentEnemyAttackPower = this.state.currentEnemyAttack;
+    let newEnemyAttackGain = this.state.currentEnemyAttackGain;
     let newEnemyArmor = this.state.currentEnemyArmor;
     let newEnemyArmorGain = this.state.currentEnemyArmorGain;
     let newUserHealth = this.state.userHealth;
     let newUserArmor = this.state.userArmor;
-    let newBonusEnemyArmor=this.state.currentBonusEnemyArmorGain
+    let newBonusEnemyArmor = this.state.currentBonusEnemyArmorGain
     // console.log(possibleEnemyActions.length + 1);
 
-    let randomAction = Math.floor(Math.random() * possibleEnemyActions.length + 1
-    );
+    // let randomAction = Math.floor(Math.random() * possibleEnemyActions.length + 1
+    // );
+    let randomAction=action
     console.log("The action the enemy did ", randomAction);
 
     switch (randomAction) {
@@ -293,7 +294,7 @@ console.log(this.state.roundEnemyAction);
         })
         if (newUserArmor >= newEnemyAttack) {
           let newArmor = newUserArmor - newEnemyAttack;
-          
+
           this.setState({
             userArmor: newArmor,
             userTurnOver: false
@@ -320,33 +321,33 @@ console.log(this.state.roundEnemyAction);
         let newArmor = newEnemyArmor + newEnemyArmorGain;
         let newEnemyAction = ("Enemy Gained Armor for " + newEnemyArmorGain)
         console.log(newEnemyAction);
-        
+
         this.setState({
           currentEnemyArmor: newArmor,
           enemyAction: newEnemyAction,
           userTurnOver: false
         });
         break;
-        case 3:
-          let newEnemyAttackPower=this.state.currentEnemyAttack
-          let newEnemyAttackBonus= ("Enemy gained " + newEnemyAttackGain + " attack damage everytime it attacks")
-          newEnemyAttackPower=(newEnemyAttackPower+newEnemyAttackGain)
-          this.setState({
-            enemyAction: newEnemyAttackBonus,
-            currentEnemyAttack: newEnemyAttackPower,
-            userTurnOver: false
-          });
-          break;
-          case 4:
-          let enemyArmorGainBonus=newBonusEnemyArmor
-          let enemyArmorGain=newEnemyArmorGain
-          let messageOfArmorGain=("Enemy gained " + enemyArmorGainBonus + " everytime it gains armor")
-          enemyArmorGain = (enemyArmorGain + enemyArmorGainBonus)
-          this.setState({
-            enemyAction: messageOfArmorGain,
-            currentEnemyArmorGain: enemyArmorGain,
-            userTurnOver: false
-          })
+      case 3:
+        let newEnemyAttackPower = this.state.currentEnemyAttack
+        let newEnemyAttackBonus = ("Enemy gained " + newEnemyAttackGain + " attack damage everytime it attacks")
+        newEnemyAttackPower = (newEnemyAttackPower + newEnemyAttackGain)
+        this.setState({
+          enemyAction: newEnemyAttackBonus,
+          currentEnemyAttack: newEnemyAttackPower,
+          userTurnOver: false
+        });
+        break;
+      case 4:
+        let enemyArmorGainBonus = newBonusEnemyArmor
+        let enemyArmorGain = newEnemyArmorGain
+        let messageOfArmorGain = ("Enemy gained " + enemyArmorGainBonus + " everytime it gains armor")
+        enemyArmorGain = (enemyArmorGain + enemyArmorGainBonus)
+        this.setState({
+          enemyAction: messageOfArmorGain,
+          currentEnemyArmorGain: enemyArmorGain,
+          userTurnOver: false
+        })
         return;
     }
 
@@ -396,7 +397,7 @@ console.log(this.state.roundEnemyAction);
         case 6:
           userHealValue = card.healValue;
           newHealth = this.state.userHealth;
-          newHealth=newHealth + userHealValue
+          newHealth = newHealth + userHealValue
           this.setState({
             userHealth: newHealth
           });
@@ -427,6 +428,55 @@ console.log(this.state.roundEnemyAction);
       userTurnOver: true
     })
   };
+
+
+
+
+  enemyChoice = () => {
+    let enemyChoiceAction = 0
+    let randomAction = Math.floor(Math.random() * 100 + 1
+    );
+    console.log("The action the enemy did ", randomAction);
+
+    if (possibleEnemyActions.length === 2) {
+      if (randomAction <= 50) {
+        enemyChoiceAction = 1
+      }
+      else {
+        enemyChoiceAction = 2
+      }
+      this.firstEnemyAction(enemyChoiceAction)
+    }
+    else if (possibleEnemyActions.length === 3) {
+      if (randomAction <= 15) {
+        enemyChoiceAction = 3
+      }
+      else if (randomAction >= 16 <= 65) {
+        enemyChoiceAction = 1
+      }
+      else {
+        enemyChoiceAction = 2
+      }
+      this.firstEnemyAction(enemyChoiceAction)
+    }
+    else if (possibleEnemyActions.length === 4) {
+      if (randomAction <= 15) {
+        enemyChoiceAction = 3
+      }
+      else if (randomAction >= 16 <= 30) {
+        enemyChoiceAction = 4
+      }
+      else if (randomAction >= 31 <= 65) {
+        enemyChoiceAction = 1
+      }
+      else {
+        enemyChoiceAction = 2
+      }
+      this.firstEnemyAction(enemyChoiceAction)
+    }
+
+
+  }
 
 
   render() {
@@ -534,12 +584,12 @@ console.log(this.state.roundEnemyAction);
             />
 
           </div>
-    
+
         </div>
 
-)
+      )
 
-             
+
 
 
 

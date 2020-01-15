@@ -147,9 +147,9 @@ class Save extends Component {
 <h1>You Have Defeated the enemy!!!</h1>
 <br></br>
 <br></br>
-<h2>Choose 1 new Card to add to your deck for the next fight </h2>
+<h2>Choose a card to add to your deck</h2>
 <br></br>
-<h2>You add 3 new cards total to your deck</h2>
+
 </div>
           </div>
           <div className="awardCards">
