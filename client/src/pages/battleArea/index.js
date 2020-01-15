@@ -275,7 +275,6 @@ class BattlePage extends Component {
 
     switch (randomAction) {
       case 1:
-        //enemy attacks!!
         if (newUserArmor >= newEnemyAttack) {
           let newArmor = newUserArmor - newEnemyAttack;
           let newEnemyAttackAction = ("Enemy Attacked for " + newEnemyAttack)
@@ -518,7 +517,7 @@ class BattlePage extends Component {
               readPlayed={this.handlePlayedCards}
               hasWon={this.state.winCount}
               currentDeck={this.state.currentUserDeck}
-
+              roundEnemyAction={this.state.enemyAction}
 
             />
 

@@ -19,7 +19,8 @@ class DeckBrain extends Component {
     turnEnded: false,
     deckRecieved: false,
     isShowing: false,
-    show: false
+    show: false,
+    enemyAction: ''
   };
 
   componentWillReceiveProps() {
@@ -89,8 +90,11 @@ class DeckBrain extends Component {
 
   componentDidUpdate(prevprops, prevState) {
     const turnEnded = this.state.turnEnded !== prevState.turnEnded;
-
+let currentEnemyAction=this.props.roundEnemyAction
     if (turnEnded) {
+      this.setState({
+        enemyAction: currentEnemyAction
+      })
       this.props.readPlayed(this.state.playArea);
       this.discardPlayed();
     }
@@ -159,33 +163,7 @@ class DeckBrain extends Component {
     );
   };
 
-  // showModal = e => {
-  //   this.setState({
-  //     show: !this.state.show
-  //   });
-  // };
 
-  // endTurn = e => {
-  //   // const [show, setShow] = useState(false);
-
-  //   const handleClose = () => {
-  //     this.setState({
-  //       show: false
-  //     });
-  //   };
-  //   const handleShow = () => {
-  //     this.setState({
-  //       show: true
-  //     });
-  //   };
-  //   let turn = !this.state.turnEnded;
-  //   this.setState(
-  //     {
-  //       turnEnded: turn
-  //     },
-  //     () => {}
-  //   );
-  // };
 
   openModalHandler = () => {
     let turn = !this.state.turnEnded;
@@ -307,7 +285,7 @@ class DeckBrain extends Component {
                 show={this.state.isShowing}
                 close={this.closeModalHandler}
               >
-               Enemy Damage
+              {this.state.enemyAction}
               </Modal>
             </div>
           <br />
