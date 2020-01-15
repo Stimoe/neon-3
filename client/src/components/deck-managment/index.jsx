@@ -23,11 +23,12 @@ class DeckBrain extends Component {
     enemyAction: ""
   };
 
+
+
   componentWillReceiveProps() {
     let newDeck = this.props.currentDeck;
     // console.log(newDeck);
     let newEnemyAction = this.props.roundEnemyAction;
-console.log(newEnemyAction);
 
     this.setState({
       enemyAction: newEnemyAction
@@ -96,11 +97,7 @@ console.log(newEnemyAction);
 
   componentDidUpdate(prevprops, prevState) {
     const turnEnded = this.state.turnEnded !== prevState.turnEnded;
-    let currentEnemyAction = this.props.roundEnemyAction;
-    console.log(currentEnemyAction);
-    // this.setState({
-    //   enemyAction: currentEnemyAction
-    // });
+
     if (turnEnded) {
       this.props.readPlayed(this.state.playArea);
       this.discardPlayed();
@@ -172,8 +169,10 @@ console.log(newEnemyAction);
 
   openModalHandler = () => {
     let turn = !this.state.turnEnded;
+        setTimeout(function(){
+        this.setState({isShowing:true});
+   }.bind(this),2000); 
     this.setState({
-      isShowing: true,
       turnEnded: turn
     }, ()=>{
       setTimeout(function(){
