@@ -280,8 +280,6 @@ class DeckBrain extends Component {
           <br />
           <br />
           <br />
-
-          <br />
           <div className="modal-div">
             <Modal
               className="modal"
@@ -291,18 +289,12 @@ class DeckBrain extends Component {
               {this.state.enemyAction}
             </Modal>
           </div>
+
+          <br />
           <br />
 
           <br />
-          {/* <div className="modal-div">
-            <Modal
-              className="modal"
-              show={this.state.isShowing}
-              close={this.closeModalHandler}
-            >
-              {this.state.enemyAction}
-            </Modal>
-          </div> */}
+
           <br />
 
           <br />
