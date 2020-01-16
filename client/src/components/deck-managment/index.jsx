@@ -13,11 +13,9 @@ import Button from "react-bootstrap/Button";
 class DeckBrain extends Component {
   state = {
     deck: [],
-    mounted: false,
     hand: [],
     discard: [],
     playArea: [],
-    drawPile: [],
     turnEnded: false,
     deckRecieved: false,
     isShowing: false,
@@ -29,20 +27,18 @@ class DeckBrain extends Component {
 
   componentWillReceiveProps() {
     let newDeck = this.props.currentDeck;
-    // console.log(newDeck);
+    console.log(newDeck);
     let newEnemyAction = this.props.roundEnemyAction;
-    let stateDeckRecieved=this.state.deckRecieved
+
     this.setState({
       enemyAction: newEnemyAction
     });
-    
- 
+
     if (newDeck === undefined || newDeck.length == 0) {
       let basicDeck = deckJson;
       this.setState(
         {
-          deck: basicDeck,
-          stateDeckRecieved: true,
+          deck: basicDeck
         },
         () => {
           this.shuffleDeck();
@@ -51,29 +47,26 @@ class DeckBrain extends Component {
     } else {
       this.setState(
         {
-          deck: newDeck,
-          stateDeckRecieved: true,
+          deck: newDeck
         },
         () => {
           // console.log(this.state.deck);
           this.shuffleDeck();
         }
       );
-    
-  }
+    }
   }
 
   componentDidMount() {
     let newUserDeck = this.props.currentDeck;
-    let stateDeckRecieved=this.state.deckRecieved
 
-    
+
+
     if (newUserDeck === undefined || newUserDeck.length == 0) {
       let basicDeck = deckJson;
       this.setState(
         {
-          deck: basicDeck,
-          stateDeckRecieved: true,
+          deck: basicDeck
         },
         () => {
           this.shuffleDeck();
@@ -82,26 +75,21 @@ class DeckBrain extends Component {
     } else {
       this.setState(
         {
-          deck: newUserDeck,
-          stateDeckRecieved: true,
+          deck: newUserDeck
         },
         () => {
           this.shuffleDeck();
         }
       );
-    
-  }
+    }
   }
 
   shuffleDeck = () => {
     let newestDeck = this.state.deck;
-    let currentDrawPile=this.state.drawPile
-    let shuffledDrawPile=this.shuffleCards(currentDrawPile)
     const shuffledDeck = this.shuffleCards(newestDeck);
     this.setState(
       {
-        deck: shuffledDeck,
-        drawPile: shuffledDrawPile,
+        deck: shuffledDeck
       },
       () => {
         this.drawCards();
@@ -150,7 +138,7 @@ class DeckBrain extends Component {
   };
 
   drawCards = () => {
-    let tempDeck = [...this.state.drawPile];
+    let tempDeck = [...this.state.deck];
     const tempHand = [...this.state.hand];
     let tempDiscard = [...this.state.discard];
     while (tempHand.length < 5) {
@@ -160,7 +148,7 @@ class DeckBrain extends Component {
         tempDeck = [...tempDeck, ...shuffled.splice(0)];
         tempDiscard = shuffled;
         this.setState({
-          discard: []
+          discard: tempDiscard
         });
       }
       let tempCard = tempDeck.shift();
@@ -171,8 +159,7 @@ class DeckBrain extends Component {
     this.setState(
       {
         hand: tempHand,
-        deck: tempDeck,
-        drawPile: tempDeck
+        deck: tempDeck
       },
       () => {
         this.setState({
