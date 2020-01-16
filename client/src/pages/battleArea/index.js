@@ -166,7 +166,7 @@ class BattlePage extends Component {
   }
 
   updateWinCount = () => {
-    console.log("here");
+    // console.log("here");
 
     axios.patch('/api/user/winCount', {
       params: {
@@ -174,7 +174,7 @@ class BattlePage extends Component {
         winCount: this.state.winCount
       }
     }).then(res => {
-      console.log(res.data);
+      // console.log(res.data);
       this.setState({
         redirect: true
       })
@@ -269,9 +269,6 @@ class BattlePage extends Component {
   };
 
   firstEnemyAction = (action) => {
-    console.log(action);
-    
-    let possibleEnemyActions = this.state.currentEnemyAbilities;
     let newEnemyAttack = this.state.currentEnemyAttack;
     let currentEnemyAttackPower = this.state.currentEnemyAttack;
     let newEnemyAttackGain = this.state.currentEnemyAttackGain;
@@ -289,14 +286,11 @@ class BattlePage extends Component {
         })
         if (newUserArmor >= newEnemyAttack) {
           let newArmor = newUserArmor - newEnemyAttack;
-
           this.setState({
             userArmor: newArmor,
             userTurnOver: false
           });
         }
-
-
         else {
           let newAttack = newEnemyAttack - newUserArmor;
           let newHealth = newUserHealth - newAttack;
@@ -473,8 +467,6 @@ class BattlePage extends Component {
 
 
   render() {
-
-
     const { userLost } = this.state;
     const { userWon } = this.state;
     const { redirect } = this.state;
@@ -500,7 +492,6 @@ class BattlePage extends Component {
       }}
       />
     }
-
     if (userLost) {
       return <Redirect to={{
         pathname: '/gameLost',
@@ -510,15 +501,10 @@ class BattlePage extends Component {
       }}
       />
     }
-
-
     if (deckRecieved) {
       const userTurnOver = this.state.userTurnOver;
       let enemyHealth = this.state.currentEnemyHealth;
-
       return (
-
-
         <div>
           <div className="landing2"></div>
           <div className="rain"></div>
@@ -534,7 +520,6 @@ class BattlePage extends Component {
               <p className="hb">Player:{this.state.userHealth}</p>
               <p className="hb">Armor:{this.state.userArmor}</p>
               <img className="player" src={Player}></img>
-
             </div>
             <div className="emhealth col-md-6">
               <div>
@@ -547,10 +532,6 @@ class BattlePage extends Component {
               <p className="em">Enemy:{this.state.currentEnemyHealth}</p>
               <p className="em">Armor:{this.state.currentEnemyArmor}</p>
             </div>
-
-
-
-
           </div>
           <div>
             <div>
@@ -564,7 +545,6 @@ class BattlePage extends Component {
                   ? <img className="emm1" src={Death} ></img>
                   : null
               }
-
             </div>
           </div>
           <div className="d-flex carddeck justify-content-center">
@@ -573,21 +553,11 @@ class BattlePage extends Component {
               hasWon={this.state.winCount}
               currentDeck={this.state.currentUserDeck}
               roundEnemyAction={this.state.enemyAction}
-
             />
-
           </div>
-
         </div>
-
       )
-
-
-
-
-
     }
-
     else {
       return null;
     }

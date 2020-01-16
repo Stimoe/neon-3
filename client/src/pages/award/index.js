@@ -144,14 +144,14 @@ class Save extends Component {
             <div className="message">
               <br></br>
               <br></br>
-<h3 className="message"> 
+<h1 className="message"> 
 You Have Defeated the enemy!!
-</h3>
+</h1>
 <br></br>
 <br></br>
-<h5 className="message">
+<h3 className="message">
   Choose a card to add to your deck
-  </h5>
+  </h3>
 <br></br>
 
 </div>
