@@ -151,18 +151,18 @@ console.log(userCurrentDeck);
       })
 
     }
-    if (turnEnded && !frozen) {
-      console.log("frozen and turn over");
+    // if (turnEnded && !frozen) {
+    //   console.log("frozen and turn over");
       
-      this.enemyChoice();
-    } 
+    //   this.enemyChoice();
+    // } 
     // else if (turnEnded && frozen) {
     //   this.setState({
     //     frozen: false
     //   });
     // }
     if (turnEnded) {
-
+      this.enemyChoice();
       setTimeout(function () {
         this.setState({ userTurnOver: false });
       }.bind(this), 2000);
@@ -354,18 +354,13 @@ console.log(userCurrentDeck);
 
 
   handlePlayedCards = (playedCards) => {
-    // console.log("cards array ",playedCards);
-
     let damage = 0;
-    // let currentArmor = this.state.userArmor;
     let selfDamage = 0;
     let health = this.state.userHealth;
     let newEnemyArmor;
     let userHealValue = 0;
     let newHealth = 0;
     let multiplier = 1;
-    let enemyFrozen=false;
-    // let newDamage = 0
     let armor = this.state.userArmor;
     playedCards.forEach(card => {
       switch (card.id) {
