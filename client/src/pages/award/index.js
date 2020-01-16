@@ -141,13 +141,13 @@ class Save extends Component {
       return (
         <div>
           <div className="landing6">
-            <div className=" neon26 message">
+            <div className="message">
               <br></br>
               <br></br>
-<h1>You Have Defeated the enemy!!!</h1>
+<h3>You Have Defeated the enemy!!!</h3>
 <br></br>
 <br></br>
-<h2>Choose a card to add to your deck</h2>
+<h5>Choose a card to add to your deck</h5>
 <br></br>
 
 </div>

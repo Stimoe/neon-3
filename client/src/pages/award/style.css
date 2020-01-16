@@ -101,15 +101,16 @@ bottom:0;
     margin-right: auto;
     
   }
-  /* .message {
-    display: flex;
-    flex-direction: column;
+  .message {
+    font-size: 1.0em !important;
+    width: 90%;
+  padding: 2%;
+    /* top: 100%; */
+    font-size: 1.3em;
+    color: #b6379e;
+    text-shadow: 2px 2px #52c0da;
+    box-shadow: -4px -4px #52c0da;
     margin-left: auto;
     margin-right: auto;
-    justify-content: space-around;
-    max-width: 100%;
-    position: absolute;
-    top: 5%;
-    align-items: center;
-    justify-content: center;
-  } */
+    background-color: transparent
+  }
