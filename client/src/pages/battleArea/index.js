@@ -421,9 +421,9 @@ console.log(userCurrentDeck);
         userTurnOver: true
       });
     }
-    // this.setState({
-    //   userTurnOver: true
-    // })
+    this.setState({
+      userTurnOver: true
+    })
   };
 
 

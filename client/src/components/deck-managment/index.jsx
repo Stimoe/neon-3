@@ -16,6 +16,7 @@ class DeckBrain extends Component {
     hand: [],
     discard: [],
     playArea: [],
+    drawPile: [],
     turnEnded: false,
     deckRecieved: false,
     isShowing: false,
@@ -57,32 +58,32 @@ class DeckBrain extends Component {
     }
   }
 
-  componentDidMount() {
-    let newUserDeck = this.props.currentDeck;
+  // componentDidMount() {
+  //   let newUserDeck = this.props.currentDeck;
 
 
 
-    if (newUserDeck === undefined || newUserDeck.length == 0) {
-      let basicDeck = deckJson;
-      this.setState(
-        {
-          deck: basicDeck
-        },
-        () => {
-          this.shuffleDeck();
-        }
-      );
-    } else {
-      this.setState(
-        {
-          deck: newUserDeck
-        },
-        () => {
-          this.shuffleDeck();
-        }
-      );
-    }
-  }
+  //   if (newUserDeck === undefined || newUserDeck.length == 0) {
+  //     let basicDeck = deckJson;
+  //     this.setState(
+  //       {
+  //         deck: basicDeck
+  //       },
+  //       () => {
+  //         this.shuffleDeck();
+  //       }
+  //     );
+  //   } else {
+  //     this.setState(
+  //       {
+  //         deck: newUserDeck
+  //       },
+  //       () => {
+  //         this.shuffleDeck();
+  //       }
+  //     );
+  //   }
+  // }
 
   shuffleDeck = () => {
     let newestDeck = this.state.deck;
