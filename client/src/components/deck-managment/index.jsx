@@ -27,7 +27,7 @@ class DeckBrain extends Component {
 
   componentWillReceiveProps() {
     let newDeck = this.props.currentDeck;
-    // console.log(newDeck);
+    console.log(newDeck);
     let newEnemyAction = this.props.roundEnemyAction;
 
     this.setState({

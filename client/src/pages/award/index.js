@@ -61,6 +61,9 @@ class Save extends Component {
       }
       }).then(res => {
       console.log(res.data)
+      this.setState({
+        deckDrawn: true
+      })
     }).catch(err => {
       console.log(err.response);
       console.log("Username already exists or password could not be validated")
@@ -82,11 +85,11 @@ class Save extends Component {
 
   })
 
-    if (newDrawnCards) {
-      this.setState({
-        deckDrawn: true
-      })
-    }
+    // if (newDrawnCards) {
+    //   this.setState({
+    //     deckDrawn: true
+    //   })
+    // }
   }
 
 
