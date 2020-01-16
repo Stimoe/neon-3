@@ -120,7 +120,7 @@ console.log(userCurrentDeck);
 
   componentDidUpdate(prevprops, prevState) {
     let totalEnemies = enemies.length
-    const turnEnded = this.state.userTurnOver === true;
+    const turnEnded = this.state.userTurnOver;
     const frozen = this.state.frozen;
 
 
@@ -139,26 +139,29 @@ console.log(userCurrentDeck);
     if (this.state.currentEnemyHealth <= 0) {
       let tempWins2 = this.state.winCount
       tempWins2 = tempWins2 + 1
-      console.log(tempWins2);
+      // console.log(tempWins2);
 
       this.setState({
         winCount: tempWins2,
-        currentEnemyHealth: 1
+        // currentEnemyHealth: 1
       }, () => {
-        console.log(this.state.winCount);
+        // console.log(this.state.winCount);
 
         this.updateWinCount()
       })
 
     }
     if (turnEnded && !frozen) {
+      console.log("frozen and turn over");
+      
       this.enemyChoice();
-    } else if (turnEnded && frozen) {
-      this.setState({
-        frozen: false
-      });
-    }
-    if (this.state.userTurnOver === true) {
+    } 
+    // else if (turnEnded && frozen) {
+    //   this.setState({
+    //     frozen: false
+    //   });
+    // }
+    if (turnEnded) {
 
       setTimeout(function () {
         this.setState({ userTurnOver: false });
@@ -335,6 +338,15 @@ console.log(userCurrentDeck);
           currentEnemyArmorGain: enemyArmorGain,
           userTurnOver: false
         })
+        break;
+        case 5:
+          let messageOfSkippedTurn=("Enemy is frozen, does nothing this turn")
+          this.setState({
+            enemyAction: messageOfSkippedTurn,
+            frozen: false,
+            userTurnOver: false
+
+          })
         return;
     }
 
@@ -351,7 +363,8 @@ console.log(userCurrentDeck);
     let newEnemyArmor;
     let userHealValue = 0;
     let newHealth = 0;
-    let multiplier = 1
+    let multiplier = 1;
+    let enemyFrozen=false;
     // let newDamage = 0
     let armor = this.state.userArmor;
     playedCards.forEach(card => {
@@ -403,23 +416,26 @@ console.log(userCurrentDeck);
       this.setState({
         currentEnemyArmor: newArmor,
         currentEnemyHealth: newHealth,
-        userHealth: tempHealth
+        userHealth: tempHealth,
+        userTurnOver: true
       });
     }
     else {
       this.setState({
-        userArmor: armor
+        userArmor: armor,
+        userTurnOver: true
       });
     }
-    this.setState({
-      userTurnOver: true
-    })
+    // this.setState({
+    //   userTurnOver: true
+    // })
   };
 
 
 
 
   enemyChoice = () => {
+    let enemyFrozen=this.state.frozen
     let enemyChoiceAction = 0
     let possibleEnemyActions= this.state.currentEnemyAbilities
     let randomAction = Math.floor(Math.random() * 100 + 1
@@ -433,9 +449,11 @@ console.log(userCurrentDeck);
       else {
         enemyChoiceAction = 2
       }
+      if (!enemyFrozen){
       this.firstEnemyAction(enemyChoiceAction)
+      }
     }
-    else if (possibleEnemyActions.length === 3) {
+    else if (possibleEnemyActions.length === 3 ) {
       if (randomAction <= 15) {
         enemyChoiceAction = 3
       }
@@ -445,7 +463,9 @@ console.log(userCurrentDeck);
       else {
         enemyChoiceAction = 2
       }
-      this.firstEnemyAction(enemyChoiceAction)
+      if (!enemyFrozen){
+        this.firstEnemyAction(enemyChoiceAction)
+        }
     }
     else if (possibleEnemyActions.length === 4) {
       if (randomAction <= 15) {
@@ -459,7 +479,13 @@ console.log(userCurrentDeck);
       }
       else {
         enemyChoiceAction = 2
+    }
+    if (!enemyFrozen){
+      this.firstEnemyAction(enemyChoiceAction)
       }
+    }
+    if(enemyFrozen){
+      enemyChoiceAction=5
       this.firstEnemyAction(enemyChoiceAction)
     }
 
