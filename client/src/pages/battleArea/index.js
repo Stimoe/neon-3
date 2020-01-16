@@ -407,15 +407,20 @@ console.log(userCurrentDeck);
       console.log(randomAction);
       
       if (randomAction <= 15) {
+        console.log("3");
+        
         enemyChoiceAction = 3
       }
       else if (randomAction >= 16 <= 30) {
+        console.log("4");
         enemyChoiceAction = 4
       }
-      else if (randomAction >= 31 <= 65) {
+      else if (randomAction >= 31 <= 75) {
+        console.log("1");
         enemyChoiceAction = 1
       }
       else {
+        console.log("2");
         enemyChoiceAction = 2
     }
     if (!enemyFrozen){
