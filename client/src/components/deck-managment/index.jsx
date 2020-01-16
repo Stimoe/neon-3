@@ -89,7 +89,8 @@ class DeckBrain extends Component {
 
   shuffleDeck = () => {
     let newestDeck = this.state.deck;
-    let shuffledDrawPile=this.shuffleCards(drawPile)
+    let currentDrawPile=this.state.drawPile
+    let shuffledDrawPile=this.shuffleCards(currentDrawPile)
     const shuffledDeck = this.shuffleCards(newestDeck);
     this.setState(
       {
@@ -153,7 +154,7 @@ class DeckBrain extends Component {
         tempDeck = [...tempDeck, ...shuffled.splice(0)];
         tempDiscard = shuffled;
         this.setState({
-          discard: tempDiscard
+          discard: []
         });
       }
       let tempCard = tempDeck.shift();
