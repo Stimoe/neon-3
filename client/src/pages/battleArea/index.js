@@ -148,11 +148,11 @@ console.log(userCurrentDeck);
     }
     if (this.state.userTurnOver === true) {	
       this.enemyChoice();
-      setTimeout(function () {	      setTimeout(function () {
+      setTimeout(function () {	     
         this.setState({ userTurnOver: false });	        
       }.bind(this), 2000);
-    })
-  }
+    }
+  
    
   }
 
@@ -412,6 +412,8 @@ console.log(userCurrentDeck);
         }
     }
     else if (possibleEnemyActions.length === 4) {
+      console.log(randomAction);
+      
       if (randomAction <= 15) {
         enemyChoiceAction = 3
       }
