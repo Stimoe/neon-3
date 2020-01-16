@@ -13,6 +13,7 @@ import Button from "react-bootstrap/Button";
 class DeckBrain extends Component {
   state = {
     deck: [],
+    mounted: false,
     hand: [],
     discard: [],
     playArea: [],
@@ -40,7 +41,8 @@ class DeckBrain extends Component {
       let basicDeck = deckJson;
       this.setState(
         {
-          deck: basicDeck
+          deck: basicDeck,
+          stateDeckRecieved: true,
         },
         () => {
           this.shuffleDeck();
@@ -49,7 +51,8 @@ class DeckBrain extends Component {
     } else {
       this.setState(
         {
-          deck: newDeck
+          deck: newDeck,
+          stateDeckRecieved: true,
         },
         () => {
           // console.log(this.state.deck);
