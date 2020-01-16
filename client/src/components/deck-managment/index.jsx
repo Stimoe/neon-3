@@ -266,12 +266,6 @@ class DeckBrain extends Component {
               </button>
             </div>
 
-            {/* <button
-              className="nes-pointer buzz  endTurn neon4 mb-3 nes-btn"
-              onClick={this.endTurn}
-            >
-              End Turn
-            </button> */}
           </div>
 
           <br />

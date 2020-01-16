@@ -280,17 +280,10 @@ class BattlePage extends Component {
     let newUserHealth = this.state.userHealth;
     let newUserArmor = this.state.userArmor;
     let newBonusEnemyArmor = this.state.currentBonusEnemyArmorGain
-    // console.log(possibleEnemyActions.length + 1);
-
-    // let randomAction = Math.floor(Math.random() * possibleEnemyActions.length + 1
-    // );
     let randomAction=action
-    console.log("The action the enemy did ", randomAction);
-
     switch (randomAction) {
       case 1:
         let newEnemyAttackAction = ("Enemy Attacked for " + currentEnemyAttackPower)
-        console.log(newEnemyAttackAction);
         this.setState({
           enemyAction: newEnemyAttackAction,
         })
@@ -312,7 +305,6 @@ class BattlePage extends Component {
             userArmor: 0,
             userTurnOver: false
           });
-
         }
         this.setState({
           userTurnOver: false
@@ -322,8 +314,6 @@ class BattlePage extends Component {
         //enemy gains armor
         let newArmor = newEnemyArmor + newEnemyArmorGain;
         let newEnemyAction = ("Enemy Gained Armor for " + newEnemyArmorGain)
-        console.log(newEnemyAction);
-
         this.setState({
           currentEnemyArmor: newArmor,
           enemyAction: newEnemyAction,
@@ -439,7 +429,7 @@ class BattlePage extends Component {
     let possibleEnemyActions= this.state.currentEnemyAbilities
     let randomAction = Math.floor(Math.random() * 100 + 1
     );
-    console.log("The action the enemy did ", randomAction);
+    // console.log("The action the enemy did ", randomAction);
 
     if (possibleEnemyActions.length === 2) {
       if (randomAction <= 50) {
