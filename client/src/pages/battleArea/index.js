@@ -157,14 +157,6 @@ console.log(userCurrentDeck);
   }
 
 
-  
-
-
-
-
-
-
-
   updateWinCount = () => {
     // console.log("here");
 
