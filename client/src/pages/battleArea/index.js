@@ -146,7 +146,7 @@ console.log(this.state.winCount);
 
       this.setState({
         winCount: tempWins2,
-        // currentEnemyHealth: 1
+        currentEnemyHealth: 1
       }, () => {
         // console.log(this.state.winCount);
 
