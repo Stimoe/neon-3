@@ -122,9 +122,6 @@ console.log(userCurrentDeck);
     let totalEnemies = enemies.length
     const turnEnded = this.state.userTurnOver;
     const frozen = this.state.frozen;
-
-
-
     if (this.state.currentEnemyHealth <= 0 && this.state.winCount === totalEnemies) {
       this.setState({
         userWon: true
@@ -197,8 +194,8 @@ console.log(userCurrentDeck);
 
 
   renderRedirectToGameOver = () => {
-    const { redirect } = this.state;
-    if (redirect) {
+    const { userLost } = this.state;
+    if (userLost) {
       return <Redirect to={{
         pathname: '/gameLost',
         state: {
@@ -211,9 +208,9 @@ console.log(userCurrentDeck);
   }
 
   renderRedirectToGameWon = () => {
-    const { redirect } = this.state;
+    const { userWon } = this.state;
 
-    if (redirect) {
+    if (userWon) {
       return <Redirect to={{
         pathname: '/gameWon',
         state: {

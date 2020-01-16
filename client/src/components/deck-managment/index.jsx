@@ -20,7 +20,8 @@ class DeckBrain extends Component {
     deckRecieved: false,
     isShowing: false,
     show: false,
-    enemyAction: ""
+    enemyAction: "",
+    propsRecieved: false,
   };
 
 
@@ -29,16 +30,17 @@ class DeckBrain extends Component {
     let newDeck = this.props.currentDeck;
     console.log(newDeck);
     let newEnemyAction = this.props.roundEnemyAction;
-
+let stateOfProps=this.state.propsRecieved
     this.setState({
       enemyAction: newEnemyAction
     });
-
+if (!stateOfProps){
     if (newDeck === undefined || newDeck.length == 0) {
       let basicDeck = deckJson;
       this.setState(
         {
-          deck: basicDeck
+          deck: basicDeck,
+          propsRecieved: true
         },
         () => {
           this.shuffleDeck();
@@ -47,7 +49,8 @@ class DeckBrain extends Component {
     } else {
       this.setState(
         {
-          deck: newDeck
+          deck: newDeck,
+          propsRecieved: true
         },
         () => {
           // console.log(this.state.deck);
@@ -55,6 +58,7 @@ class DeckBrain extends Component {
         }
       );
     }
+  }
   }
 
   componentDidMount() {
