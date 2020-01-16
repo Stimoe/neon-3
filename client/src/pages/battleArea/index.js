@@ -142,20 +142,28 @@ console.log(userCurrentDeck);
         winCount: tempWins2,
         currentEnemyHealth: 1
       }, () => {
-        // console.log(this.state.winCount);
-
         this.updateWinCount()
       })
 
     }
-    else {
+    if (this.state.userTurnOver === true) {	
       this.enemyChoice();
-      setTimeout(function () {
-        this.setState({ userTurnOver: false });
+      setTimeout(function () {	      setTimeout(function () {
+        this.setState({ userTurnOver: false });	        
       }.bind(this), 2000);
-    }
+    })
+  }
    
   }
+
+
+  
+
+
+
+
+
+
 
   updateWinCount = () => {
     // console.log("here");
