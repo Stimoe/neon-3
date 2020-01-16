@@ -393,7 +393,7 @@ console.log(userCurrentDeck);
       if (randomAction <= 15) {
         enemyChoiceAction = 3
       }
-      else if (16<=randomAction<= 65) {
+      else if (randomAction >= 16 && randomAction<= 65) {
         enemyChoiceAction = 1
       }
       else {
@@ -411,11 +411,11 @@ console.log(userCurrentDeck);
         
         enemyChoiceAction = 3
       }
-      else if ( 16<=randomAction<= 30) {
+      else if (randomAction>= 16 && randomAction<= 30) {
         console.log("4");
         enemyChoiceAction = 4
       }
-      else if (31<=randomAction<= 75) {
+      else if (randomAction >=30 && randomAction <= 75) {
         console.log("1");
         enemyChoiceAction = 1
       }
