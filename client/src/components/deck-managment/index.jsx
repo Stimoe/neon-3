@@ -36,7 +36,7 @@ class DeckBrain extends Component {
       enemyAction: newEnemyAction
     });
     
-    if (!stateDeckRecieved){
+ 
     if (newDeck === undefined || newDeck.length == 0) {
       let basicDeck = deckJson;
       this.setState(
@@ -59,7 +59,7 @@ class DeckBrain extends Component {
           this.shuffleDeck();
         }
       );
-    }
+    
   }
   }
 
@@ -67,7 +67,7 @@ class DeckBrain extends Component {
     let newUserDeck = this.props.currentDeck;
     let stateDeckRecieved=this.state.deckRecieved
 
-    if (!stateDeckRecieved){
+    
     if (newUserDeck === undefined || newUserDeck.length == 0) {
       let basicDeck = deckJson;
       this.setState(
@@ -89,7 +89,7 @@ class DeckBrain extends Component {
           this.shuffleDeck();
         }
       );
-    }
+    
   }
   }
 
