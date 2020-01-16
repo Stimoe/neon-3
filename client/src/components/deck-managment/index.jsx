@@ -58,39 +58,40 @@ class DeckBrain extends Component {
     }
   }
 
-  // componentDidMount() {
-  //   let newUserDeck = this.props.currentDeck;
+  componentDidMount() {
+    let newUserDeck = this.props.currentDeck;
 
 
 
-  //   if (newUserDeck === undefined || newUserDeck.length == 0) {
-  //     let basicDeck = deckJson;
-  //     this.setState(
-  //       {
-  //         deck: basicDeck
-  //       },
-  //       () => {
-  //         this.shuffleDeck();
-  //       }
-  //     );
-  //   } else {
-  //     this.setState(
-  //       {
-  //         deck: newUserDeck
-  //       },
-  //       () => {
-  //         this.shuffleDeck();
-  //       }
-  //     );
-  //   }
-  // }
+    if (newUserDeck === undefined || newUserDeck.length == 0) {
+      let basicDeck = deckJson;
+      this.setState(
+        {
+          deck: basicDeck
+        },
+        () => {
+          this.shuffleDeck();
+        }
+      );
+    } else {
+      this.setState(
+        {
+          deck: newUserDeck
+        },
+        () => {
+          this.shuffleDeck();
+        }
+      );
+    }
+  }
 
   shuffleDeck = () => {
     let newestDeck = this.state.deck;
     const shuffledDeck = this.shuffleCards(newestDeck);
     this.setState(
       {
-        deck: shuffledDeck
+        deck: shuffledDeck,
+        drawPile: shuffledDeck,
       },
       () => {
         this.drawCards();
@@ -139,7 +140,7 @@ class DeckBrain extends Component {
   };
 
   drawCards = () => {
-    let tempDeck = [...this.state.deck];
+    let tempDeck = [...this.state.drawPile];
     const tempHand = [...this.state.hand];
     let tempDiscard = [...this.state.discard];
     while (tempHand.length < 5) {
