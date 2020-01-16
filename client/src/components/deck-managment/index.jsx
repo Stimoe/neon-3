@@ -14,7 +14,6 @@ class DeckBrain extends Component {
   state = {
     deck: [],
     hand: [],
-    drawpile: [],
     discard: [],
     playArea: [],
     turnEnded: false,

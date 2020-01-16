@@ -193,48 +193,48 @@ console.log(userCurrentDeck);
 
 
 
-  renderRedirectToGameOver = () => {
-    const { userLost } = this.state;
-    if (userLost) {
-      return <Redirect to={{
-        pathname: '/gameLost',
-        state: {
-          username: this.state.username,
-        }
-      }}
-      />
-    }
+  // renderRedirectToGameOver = () => {
+  //   const { userLost } = this.state;
+  //   if (userLost) {
+  //     return <Redirect to={{
+  //       pathname: '/gameLost',
+  //       state: {
+  //         username: this.state.username,
+  //       }
+  //     }}
+  //     />
+  //   }
 
-  }
+  // }
 
-  renderRedirectToGameWon = () => {
-    const { userWon } = this.state;
+  // renderRedirectToGameWon = () => {
+  //   const { userWon } = this.state;
 
-    if (userWon) {
-      return <Redirect to={{
-        pathname: '/gameWon',
-        state: {
-          username: this.state.username,
-        }
-      }}
-      />
-    }
-  }
+  //   if (userWon) {
+  //     return <Redirect to={{
+  //       pathname: '/gameWon',
+  //       state: {
+  //         username: this.state.username,
+  //       }
+  //     }}
+  //     />
+  //   }
+  // }
 
-  renderRedirectToAward = () => {
-    const { redirect } = this.state;
-    if (redirect) {
-      return <Redirect to={{
-        pathname: '/award',
-        state: {
-          username: this.state.username,
-          winCount: this.state.winCount,
-          currentUserDeck: this.state.currentUserDeck
-        }
-      }}
-      />
-    }
-  }
+  // renderRedirectToAward = () => {
+  //   const { redirect } = this.state;
+  //   if (redirect) {
+  //     return <Redirect to={{
+  //       pathname: '/award',
+  //       state: {
+  //         username: this.state.username,
+  //         winCount: this.state.winCount,
+  //         currentUserDeck: this.state.currentUserDeck
+  //       }
+  //     }}
+  //     />
+  //   }
+  // }
 
   userAttack = (damage) => {
     let newArmor = 0;
