@@ -121,7 +121,7 @@ class BattlePage extends Component {
     let totalEnemies = enemies.length
     const turnEnded = this.state.userTurnOver === true;
     const frozen = this.state.frozen;
-    console.log(this.state.roundEnemyAction);
+
 
 
     if (this.state.currentEnemyHealth <= 0 && this.state.winCount === totalEnemies) {

@@ -103,6 +103,7 @@ bottom:0;
   }
   .message {
     font-size: 1.0em !important;
+    text-align: center;
     width: 90%;
   padding: 2%;
     /* top: 100%; */
