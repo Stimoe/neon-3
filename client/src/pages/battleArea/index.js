@@ -122,6 +122,12 @@ console.log(userCurrentDeck);
     let totalEnemies = enemies.length
     const turnEnded = this.state.userTurnOver;
     const frozen = this.state.frozen;
+console.log(totalEnemies);
+console.log(this.state.winCount);
+
+
+
+
     if (this.state.currentEnemyHealth <= 0 && this.state.winCount === totalEnemies) {
       this.setState({
         userWon: true
@@ -497,7 +503,7 @@ console.log(userCurrentDeck);
         state: {
           username: this.state.username,
           winCount: this.state.winCount,
-          currentUserDeck: this.state.currentUserDeck
+          currentUserDeck: this.state.currentUserDeck,
         }
       }}
       />
