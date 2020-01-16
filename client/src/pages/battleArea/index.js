@@ -436,6 +436,7 @@ class BattlePage extends Component {
 
   enemyChoice = () => {
     let enemyChoiceAction = 0
+    let possibleEnemyActions= this.state.currentEnemyAbilities
     let randomAction = Math.floor(Math.random() * 100 + 1
     );
     console.log("The action the enemy did ", randomAction);
