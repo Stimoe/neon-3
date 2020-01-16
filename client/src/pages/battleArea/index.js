@@ -221,7 +221,6 @@ console.log(userCurrentDeck);
     let newUserArmor = this.state.userArmor;
     let newBonusEnemyArmor = this.state.currentBonusEnemyArmorGain
     let randomAction=action
-    console.log(randomAction);
     
     switch (randomAction) {
       case 1:
@@ -393,7 +392,7 @@ console.log(userCurrentDeck);
       if (randomAction <= 15) {
         enemyChoiceAction = 3
       }
-      else if (randomAction >= 16 && randomAction<= 65) {
+      else if (randomAction >= 16 && randomAction <= 65) {
         enemyChoiceAction = 1
       }
       else {
@@ -403,24 +402,17 @@ console.log(userCurrentDeck);
         this.firstEnemyAction(enemyChoiceAction)
         }
     }
-    else if (possibleEnemyActions.length === 4) {
-      console.log(randomAction);
-      
+    else if (possibleEnemyActions.length === 4) {     
       if (randomAction <= 15) {
-        console.log("3");
-        
         enemyChoiceAction = 3
       }
-      else if (randomAction>= 16 && randomAction<= 30) {
-        console.log("4");
+      else if (randomAction >= 16 && randomAction <= 30) {
         enemyChoiceAction = 4
       }
       else if (randomAction >=30 && randomAction <= 75) {
-        console.log("1");
         enemyChoiceAction = 1
       }
       else {
-        console.log("2");
         enemyChoiceAction = 2
     }
     if (!enemyFrozen){
