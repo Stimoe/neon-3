@@ -122,12 +122,6 @@ console.log(userCurrentDeck);
     let totalEnemies = enemies.length
     const turnEnded = this.state.userTurnOver;
     const frozen = this.state.frozen;
-console.log(totalEnemies);
-console.log(this.state.winCount);
-
-
-
-
     if (this.state.currentEnemyHealth <= 0 && this.state.winCount === totalEnemies) {
       this.setState({
         userWon: true
@@ -154,22 +148,13 @@ console.log(this.state.winCount);
       })
 
     }
-    // if (turnEnded && !frozen) {
-    //   console.log("frozen and turn over");
-      
-    //   this.enemyChoice();
-    // } 
-    // else if (turnEnded && frozen) {
-    //   this.setState({
-    //     frozen: false
-    //   });
-    // }
-    if (turnEnded) {
+    else {
       this.enemyChoice();
       setTimeout(function () {
         this.setState({ userTurnOver: false });
       }.bind(this), 2000);
     }
+   
   }
 
   updateWinCount = () => {
@@ -192,55 +177,6 @@ console.log(this.state.winCount);
     })
   }
 
-
-
-
-
-
-
-
-  // renderRedirectToGameOver = () => {
-  //   const { userLost } = this.state;
-  //   if (userLost) {
-  //     return <Redirect to={{
-  //       pathname: '/gameLost',
-  //       state: {
-  //         username: this.state.username,
-  //       }
-  //     }}
-  //     />
-  //   }
-
-  // }
-
-  // renderRedirectToGameWon = () => {
-  //   const { userWon } = this.state;
-
-  //   if (userWon) {
-  //     return <Redirect to={{
-  //       pathname: '/gameWon',
-  //       state: {
-  //         username: this.state.username,
-  //       }
-  //     }}
-  //     />
-  //   }
-  // }
-
-  // renderRedirectToAward = () => {
-  //   const { redirect } = this.state;
-  //   if (redirect) {
-  //     return <Redirect to={{
-  //       pathname: '/award',
-  //       state: {
-  //         username: this.state.username,
-  //         winCount: this.state.winCount,
-  //         currentUserDeck: this.state.currentUserDeck
-  //       }
-  //     }}
-  //     />
-  //   }
-  // }
 
   userAttack = (damage) => {
     let newArmor = 0;
@@ -285,6 +221,8 @@ console.log(this.state.winCount);
     let newUserArmor = this.state.userArmor;
     let newBonusEnemyArmor = this.state.currentBonusEnemyArmorGain
     let randomAction=action
+    console.log(randomAction);
+    
     switch (randomAction) {
       case 1:
         let newEnemyAttackAction = ("Enemy Attacked for " + currentEnemyAttackPower)
