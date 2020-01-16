@@ -85,11 +85,6 @@ class Save extends Component {
 
   })
 
-    // if (newDrawnCards) {
-    //   this.setState({
-    //     deckDrawn: true
-    //   })
-    // }
   }
 
 
