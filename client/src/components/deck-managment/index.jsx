@@ -65,14 +65,15 @@ class DeckBrain extends Component {
 
   componentDidMount() {
     let newUserDeck = this.props.currentDeck;
+    let stateDeckRecieved=this.state.deckRecieved
 
-
-
+    if (!stateDeckRecieved){
     if (newUserDeck === undefined || newUserDeck.length == 0) {
       let basicDeck = deckJson;
       this.setState(
         {
-          deck: basicDeck
+          deck: basicDeck,
+          stateDeckRecieved: true,
         },
         () => {
           this.shuffleDeck();
@@ -81,13 +82,15 @@ class DeckBrain extends Component {
     } else {
       this.setState(
         {
-          deck: newUserDeck
+          deck: newUserDeck,
+          stateDeckRecieved: true,
         },
         () => {
           this.shuffleDeck();
         }
       );
     }
+  }
   }
 
   shuffleDeck = () => {
