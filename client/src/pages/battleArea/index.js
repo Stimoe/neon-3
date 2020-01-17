@@ -323,15 +323,19 @@ class BattlePage extends Component {
           break;
 
         case 3:
+          let previousCardDamage = damage
           let basicDamage = card.damage + damageMultiplier
           let newBasicDamage = basicDamage * multiplier
+          newBasicDamage=newBasicDamage+previousCardDamage
           damage = newBasicDamage
           selfDamage += card.selfDamage;
           break;
 
         case 4:
           multiplier = card.multiplier
+
           let basicCurrentDamage = card.damage + damageMultiplier
+
           let newMultipliedDamage = basicCurrentDamage * multiplier
           damage = newMultipliedDamage
           break;

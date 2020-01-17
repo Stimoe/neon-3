@@ -159,7 +159,7 @@ class Save extends Component {
 
             </div>
           </div>
-          <div className="awardCards">
+          <div className="awardCards cards">
             <DrawBrain
 
               newDeck2={this.state.finalNewCards}

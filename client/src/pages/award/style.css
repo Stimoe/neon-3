@@ -101,6 +101,9 @@ bottom:0;
     margin-right: auto;
     
   }
+  .cards {
+    margin-top: 300px;
+  }
   .message {
     /* font-size: 1.0em !important; */
     text-align: center;
