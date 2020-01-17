@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Cards from "../cards";
 import newCardsFromJson from "../../newCards.json";
+import legendaryCards from "../../legendaryCards.json"
 var UserInitialDeck = require("../../cards.json");
 
 class DrawBrain extends Component {
@@ -9,8 +10,11 @@ class DrawBrain extends Component {
 
   }
   state = {
+    legendaryCards : [],
     newCards: [],
     tempHand: [],
+    randomLegendary: [],
+    legendaryChosen: false,
     newDrawnCards: [],
     drawArea: [],
     turnEnded: false,
@@ -20,17 +24,33 @@ class DrawBrain extends Component {
   };
 
   componentDidMount() {
-
+    const newLegendaryCards = this.shuffleCards(legendaryCards)
     const newCardsShuffled = this.shuffleCards(newCardsFromJson);
   
 
     this.setState(
       {
-        newCards: newCardsShuffled
+        newCards: newCardsShuffled,
+        legendaryCards: newLegendaryCards
       },
       this.drawNewCards
     );
   }
+
+  // componentDidMount() {
+  //   const newLegendaryCards = this.shuffleCards(legendaryCards)
+  //   const newCardsShuffled = this.shuffleCards(newCardsFromJson);
+  
+
+  //   this.setState(
+  //     {
+  //       newCards: newCardsShuffled,
+  //       legendaryCards: newLegendaryCards
+  //     },
+  //     this.getLegendary
+  //   );
+  // }
+
 
   drawNewCards = () => {
     let tempDeck = [...this.state.newCards];
@@ -46,6 +66,30 @@ class DrawBrain extends Component {
       newDrawnCards: tempDraw
     });
   };
+
+  // getLegendary = () => {
+  //   let tempDeck = [...this.state.legendaryCards];
+  //   const tempDraw = [];
+  //   let tempCard = tempDeck.shift();
+  //   tempDraw.push(tempCard)
+  //   this.setState({
+  //     randomLegendary: tempDraw
+  //   }, () =>{
+  //     this.drawNewCards()
+  //   })
+  // }
+
+//   legendaryToDeck = (card) => {
+// let randomCard = card
+// let tempDeck = this.state.finalNewCards;
+// tempDeck.push(randomCard)
+// this.setState({
+//   finalNewCards: tempDeck,
+//   legendaryChosen: true
+// })
+//   }
+
+
 
 
  
@@ -65,13 +109,8 @@ class DrawBrain extends Component {
       this.drawNewCards
     );
     if (this.state.finalNewCards.length === 3) {
-      // this.props.parentCallback(this.state.finalNewCards);
-     
-      // localStorage.setItem('userNewDeck', JSON.stringify(this.state.finalNewCards));
+
       let currentNewDeck = this.state.finalNewCards;
-    
-      
-      // this.props.newDeck(currentNewDeck);
       this.props.drawn(currentNewDeck);
     }
   };
@@ -93,9 +132,23 @@ class DrawBrain extends Component {
   };
 
   render() {
-
-    
-    
+    const { legendaryChosen } = this.state;
+    // if (!legendaryChosen){
+    //   let randomLegendary = this.state.randomLegendary.map((card, index) => {
+    //     return (
+    //       <div className="handCard row d-flex justify-content-center">
+    //         <Cards
+    //           name={card.name}
+    //           image={card.image}
+    //           text={card.text}
+    //           handleClick={this.legendaryToDeck}
+    //           currentIndex={index}
+    //         />
+    //       </div>
+    //     );
+    //   });
+    // }
+    // else {
     let newDrawnCards = this.state.newDrawnCards.map((card, index) => {
       return (
         <div className="handCard row d-flex justify-content-center">
@@ -123,4 +176,5 @@ class DrawBrain extends Component {
     );
   }
 }
+
 export default DrawBrain;

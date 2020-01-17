@@ -20,7 +20,8 @@ class DeckBrain extends Component {
     deckRecieved: false,
     isShowing: false,
     show: false,
-    enemyAction: ""
+    enemyAction: "",
+    propsRecieved: false,
   };
 
 
@@ -29,16 +30,17 @@ class DeckBrain extends Component {
     let newDeck = this.props.currentDeck;
     // console.log(newDeck);
     let newEnemyAction = this.props.roundEnemyAction;
-
+let stateOfProps=this.state.propsRecieved
     this.setState({
       enemyAction: newEnemyAction
     });
-
+if (!stateOfProps){
     if (newDeck === undefined || newDeck.length == 0) {
       let basicDeck = deckJson;
       this.setState(
         {
-          deck: basicDeck
+          deck: basicDeck,
+          propsRecieved: true
         },
         () => {
           this.shuffleDeck();
@@ -47,7 +49,8 @@ class DeckBrain extends Component {
     } else {
       this.setState(
         {
-          deck: newDeck
+          deck: newDeck,
+          propsRecieved: true
         },
         () => {
           // console.log(this.state.deck);
@@ -56,17 +59,19 @@ class DeckBrain extends Component {
       );
     }
   }
+  }
 
   componentDidMount() {
     let newUserDeck = this.props.currentDeck;
+    let stateOfProps=this.state.propsRecieved
 
-
-
+    if (!stateOfProps){
     if (newUserDeck === undefined || newUserDeck.length == 0) {
       let basicDeck = deckJson;
       this.setState(
         {
-          deck: basicDeck
+          deck: basicDeck,
+          propsRecieved: true
         },
         () => {
           this.shuffleDeck();
@@ -75,13 +80,15 @@ class DeckBrain extends Component {
     } else {
       this.setState(
         {
-          deck: newUserDeck
+          deck: newUserDeck,
+          propsRecieved: true
         },
         () => {
           this.shuffleDeck();
         }
       );
     }
+  }
   }
 
   shuffleDeck = () => {
@@ -179,7 +186,7 @@ class DeckBrain extends Component {
     }, ()=>{
       setTimeout(function(){
         this.setState({isShowing:false});
-   }.bind(this),5000);  // wait 5 seconds, then reset to false
+   }.bind(this),4000);  // wait 5 seconds, then reset to false
     });
   };
 
@@ -266,12 +273,6 @@ class DeckBrain extends Component {
               </button>
             </div>
 
-            {/* <button
-              className="nes-pointer buzz  endTurn neon4 mb-3 nes-btn"
-              onClick={this.endTurn}
-            >
-              End Turn
-            </button> */}
           </div>
 
           <br />

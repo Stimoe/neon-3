@@ -44,27 +44,12 @@ class GameLost extends Component {
       }
     })
       .then(res => {
-        console.log("line 26 ", res.data)
+        // console.log("line 26 ", res.data)
       }).catch(err => {
         console.log(err.response);
         console.log("Username already exists or password could not be validated")
       })
   }
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

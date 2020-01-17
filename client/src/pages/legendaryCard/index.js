@@ -2,14 +2,14 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import "./style.css";
-import DrawBrain from "../../components/drawCards";
+import LegendaryBrain from "../../components/getLegendaryCard";
 import { Redirect } from 'react-router-dom';
 // import { booleanLiteral } from "@babel/types";
 
 
 
 
-class Save extends Component {
+class Legendary extends Component {
   constructor() {
     super();
     this.state = {
@@ -98,7 +98,7 @@ class Save extends Component {
     const { redirect } = this.state
     if (redirect) {
       return <Redirect to={{
-        pathname: '/battlepage',
+        pathname: '/award',
         state: {
           username: this.state.username,
           currentUserDeck: this.state.currentUserDeck,
@@ -126,16 +126,16 @@ class Save extends Component {
               className="btn nes-pointer neon1 mb-3 nes-btn"
               onClick={this.handleOnClick}>
               >
-                Save &amp; Quit
+                Continue
               </button>
 
-            <button
+            {/* <button
               type="button"
               className="btn mb-3 neon1 nes-pointer nes-btn"
               onClick={this.handleOnClick}>
               Save &amp; Continue
 
-              </button>
+              </button> */}
 
           </div>
         </div>
@@ -148,19 +148,19 @@ class Save extends Component {
               <br></br>
               <br></br>
               <h1 className="message">
-                You Have Defeated the enemy!!
+                You get 1 random Legendary Card!!!
 </h1>
               <br></br>
               <br></br>
-              <h3 className="message">
+              {/* <h3 className="message">
                 Choose a card to add to your deck
-  </h3>
+  </h3> */}
               <br></br>
 
             </div>
           </div>
-          <div className="awardCards cards">
-            <DrawBrain
+          <div className="awardCards">
+            <LegendaryBrain
 
               newDeck2={this.state.finalNewCards}
               readPlayed={this.handlePlayedCards}
@@ -176,6 +176,6 @@ class Save extends Component {
   }
 }
 
-export default Save;
+export default Legendary;
 
 

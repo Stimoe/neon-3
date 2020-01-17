@@ -14,23 +14,39 @@
         "id": 1,
         "name": "B@m",
         "health":100,
-        "actions":[1,2],
-        "attack": 12,
+        "actions":[1,2,3],
+        "attack": 10,
+        "attackGain": 1,
         "armor": 0,
-        "armorGain":5,
+        "armorGain":6,
         "image": "TBD",
         "text": "This enemy is the second challenger"
     },
     {
         "id": 2,
         "name": "$yber",
-        "health":175,
-        "actions":[1,2],
-        "attack": 17,
+        "health":150,
+        "actions":[1,2,3,4],
+        "attack": 13,
+        "attackGain": 2,
+        "additionalArmorGain": 2,
         "armor": 0,
-        "armorGain":8,
+        "armorGain":9,
         "image": "TBD",
-        "text": "This enemy is the second challenger"
+        "text": "This enemy is the third challenger"
+    },
+    {
+        "id": 3,
+        "name": "$pam",
+        "health":200,
+        "actions":[1,2,3,4],
+        "attack": 15,
+        "attackGain": 3,
+        "additionalArmorGain": 3,
+        "armor": 0,
+        "armorGain":10,
+        "image": "TBD",
+        "text": "This enemy is the fourth challenger"
     }
 
 
