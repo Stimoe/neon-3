@@ -23,20 +23,6 @@ class DrawBrain extends Component {
     deckBuilt: false
   };
 
-  // componentDidMount() {
-  //   const newLegendaryCards = this.shuffleCards(legendaryCards)
-  //   const newCardsShuffled = this.shuffleCards(newCardsFromJson);
-  
-
-  //   this.setState(
-  //     {
-  //       newCards: newCardsShuffled,
-  //       legendaryCards: newLegendaryCards
-  //     },
-  //     this.drawNewCards
-  //   );
-  // }
-
   componentDidMount() {
     const newLegendaryCards = this.shuffleCards(legendaryCards)
     const newCardsShuffled = this.shuffleCards(newCardsFromJson);
@@ -47,9 +33,23 @@ class DrawBrain extends Component {
         newCards: newCardsShuffled,
         legendaryCards: newLegendaryCards
       },
-      this.getLegendary
+      this.drawNewCards
     );
   }
+
+  // componentDidMount() {
+  //   const newLegendaryCards = this.shuffleCards(legendaryCards)
+  //   const newCardsShuffled = this.shuffleCards(newCardsFromJson);
+  
+
+  //   this.setState(
+  //     {
+  //       newCards: newCardsShuffled,
+  //       legendaryCards: newLegendaryCards
+  //     },
+  //     this.getLegendary
+  //   );
+  // }
 
 
   drawNewCards = () => {
@@ -67,27 +67,27 @@ class DrawBrain extends Component {
     });
   };
 
-  getLegendary = () => {
-    let tempDeck = [...this.state.legendaryCards];
-    const tempDraw = [];
-    let tempCard = tempDeck.shift();
-    tempDraw.push(tempCard)
-    this.setState({
-      randomLegendary: tempDraw
-    }, () =>{
-      this.drawNewCards()
-    })
-  }
+  // getLegendary = () => {
+  //   let tempDeck = [...this.state.legendaryCards];
+  //   const tempDraw = [];
+  //   let tempCard = tempDeck.shift();
+  //   tempDraw.push(tempCard)
+  //   this.setState({
+  //     randomLegendary: tempDraw
+  //   }, () =>{
+  //     this.drawNewCards()
+  //   })
+  // }
 
-  legendaryToDeck = (card) => {
-let randomCard = card
-let tempDeck = this.state.finalNewCards;
-tempDeck.push(randomCard)
-this.setState({
-  finalNewCards: tempDeck,
-  legendaryChosen: true
-})
-  }
+//   legendaryToDeck = (card) => {
+// let randomCard = card
+// let tempDeck = this.state.finalNewCards;
+// tempDeck.push(randomCard)
+// this.setState({
+//   finalNewCards: tempDeck,
+//   legendaryChosen: true
+// })
+//   }
 
 
 
@@ -133,22 +133,22 @@ this.setState({
 
   render() {
     const { legendaryChosen } = this.state;
-    if (!legendaryChosen){
-      let randomLegendary = this.state.randomLegendary.map((card, index) => {
-        return (
-          <div className="handCard row d-flex justify-content-center">
-            <Cards
-              name={card.name}
-              image={card.image}
-              text={card.text}
-              handleClick={this.legendaryToDeck}
-              currentIndex={index}
-            />
-          </div>
-        );
-      });
-    }
-    else {
+    // if (!legendaryChosen){
+    //   let randomLegendary = this.state.randomLegendary.map((card, index) => {
+    //     return (
+    //       <div className="handCard row d-flex justify-content-center">
+    //         <Cards
+    //           name={card.name}
+    //           image={card.image}
+    //           text={card.text}
+    //           handleClick={this.legendaryToDeck}
+    //           currentIndex={index}
+    //         />
+    //       </div>
+    //     );
+    //   });
+    // }
+    // else {
     let newDrawnCards = this.state.newDrawnCards.map((card, index) => {
       return (
         <div className="handCard row d-flex justify-content-center">
@@ -176,5 +176,5 @@ this.setState({
     );
   }
 }
-}
+
 export default DrawBrain;

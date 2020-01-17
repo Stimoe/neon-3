@@ -54,7 +54,7 @@ class BattlePage extends Component {
     let currentUser = this.props.location.state.username
     let userCurrentDeck = this.props.location.state.currentUserDeck
     let currentWinCount = this.props.location.state.winCount
-console.log(userCurrentDeck);
+    console.log(userCurrentDeck);
 
 
 
@@ -146,14 +146,14 @@ console.log(userCurrentDeck);
       })
 
     }
-    if (this.state.userTurnOver === true) {	
+    if (this.state.userTurnOver === true) {
       this.enemyChoice();
-      setTimeout(function () {	     
-        this.setState({ userTurnOver: false });	        
+      setTimeout(function () {
+        this.setState({ userTurnOver: false });
       }.bind(this), 2000);
     }
-  
-   
+
+
   }
 
 
@@ -220,8 +220,8 @@ console.log(userCurrentDeck);
     let newUserHealth = this.state.userHealth;
     let newUserArmor = this.state.userArmor;
     let newBonusEnemyArmor = this.state.currentBonusEnemyArmorGain
-    let randomAction=action
-    
+    let randomAction = action
+
     switch (randomAction) {
       case 1:
         let newEnemyAttackAction = ("Enemy Attacked for " + currentEnemyAttackPower)
@@ -279,14 +279,14 @@ console.log(userCurrentDeck);
           userTurnOver: false
         })
         break;
-        case 5:
-          let messageOfSkippedTurn=("Enemy is frozen, does nothing this turn")
-          this.setState({
-            enemyAction: messageOfSkippedTurn,
-            frozen: false,
-            userTurnOver: false
+      case 5:
+        let messageOfSkippedTurn = ("Enemy is frozen, does nothing this turn")
+        this.setState({
+          enemyAction: messageOfSkippedTurn,
+          frozen: false,
+          userTurnOver: false
 
-          })
+        })
         return;
     }
 
@@ -295,7 +295,7 @@ console.log(userCurrentDeck);
 
   handlePlayedCards = (playedCards) => {
     let damage = 0;
-    let damageMultiplier=0;
+    let damageMultiplier = 0;
     let selfDamage = 0;
     let health = this.state.userHealth;
     let newEnemyArmor;
@@ -306,8 +306,8 @@ console.log(userCurrentDeck);
     playedCards.forEach(card => {
       switch (card.id) {
         case 1:
-          let currentDamage= card.damage + damageMultiplier
-          let newDamage=currentDamage * multiplier
+          let currentDamage = card.damage + damageMultiplier
+          let newDamage = currentDamage * multiplier
           damage = newDamage
           break;
 
@@ -316,16 +316,16 @@ console.log(userCurrentDeck);
           break;
 
         case 3:
-          let basicDamage= card.damage + damageMultiplier
-          let newBasicDamage=basicDamage * multiplier
+          let basicDamage = card.damage + damageMultiplier
+          let newBasicDamage = basicDamage * multiplier
           damage = newBasicDamage
           selfDamage += card.selfDamage;
           break;
 
         case 4:
           multiplier = card.multiplier
-          let basicCurrentDamage= card.damage + damageMultiplier
-          let newMultipliedDamage=basicCurrentDamage * multiplier
+          let basicCurrentDamage = card.damage + damageMultiplier
+          let newMultipliedDamage = basicCurrentDamage * multiplier
           damage = newMultipliedDamage
           break;
 
@@ -350,9 +350,9 @@ console.log(userCurrentDeck);
             frozen: true
           });
           break;
-          case 8:
-let newDamageMultiplier = card.damageMultiplier
-damageMultiplier = (damageMultiplier + newDamageMultiplier)
+        case 8:
+          let newDamageMultiplier = card.damageMultiplier
+          damageMultiplier = (damageMultiplier + newDamageMultiplier)
           return;
       }
     });
@@ -381,9 +381,9 @@ damageMultiplier = (damageMultiplier + newDamageMultiplier)
 
 
   enemyChoice = () => {
-    let enemyFrozen=this.state.frozen
+    let enemyFrozen = this.state.frozen
     let enemyChoiceAction = 0
-    let possibleEnemyActions= this.state.currentEnemyAbilities
+    let possibleEnemyActions = this.state.currentEnemyAbilities
     let randomAction = Math.floor(Math.random() * 100 + 1
     );
     // console.log("The action the enemy did ", randomAction);
@@ -395,11 +395,11 @@ damageMultiplier = (damageMultiplier + newDamageMultiplier)
       else {
         enemyChoiceAction = 2
       }
-      if (!enemyFrozen){
-      this.firstEnemyAction(enemyChoiceAction)
+      if (!enemyFrozen) {
+        this.firstEnemyAction(enemyChoiceAction)
       }
     }
-    else if (possibleEnemyActions.length === 3 ) {
+    else if (possibleEnemyActions.length === 3) {
       if (randomAction <= 15) {
         enemyChoiceAction = 3
       }
@@ -409,29 +409,29 @@ damageMultiplier = (damageMultiplier + newDamageMultiplier)
       else {
         enemyChoiceAction = 2
       }
-      if (!enemyFrozen){
+      if (!enemyFrozen) {
         this.firstEnemyAction(enemyChoiceAction)
-        }
+      }
     }
-    else if (possibleEnemyActions.length === 4) {     
+    else if (possibleEnemyActions.length === 4) {
       if (randomAction <= 15) {
         enemyChoiceAction = 3
       }
       else if (randomAction >= 16 && randomAction <= 30) {
         enemyChoiceAction = 4
       }
-      else if (randomAction >=30 && randomAction <= 75) {
+      else if (randomAction >= 30 && randomAction <= 75) {
         enemyChoiceAction = 1
       }
       else {
         enemyChoiceAction = 2
-    }
-    if (!enemyFrozen){
-      this.firstEnemyAction(enemyChoiceAction)
+      }
+      if (!enemyFrozen) {
+        this.firstEnemyAction(enemyChoiceAction)
       }
     }
-    if(enemyFrozen){
-      enemyChoiceAction=5
+    if (enemyFrozen) {
+      enemyChoiceAction = 5
       this.firstEnemyAction(enemyChoiceAction)
     }
 

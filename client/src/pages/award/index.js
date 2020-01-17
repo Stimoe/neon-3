@@ -24,7 +24,7 @@ class Save extends Component {
   componentDidMount() {
     let currentWinCount = this.props.location.state.winCount
     let currentUser = this.props.location.state.username
-    let currentDeck=this.props.location.state.currentUserDeck
+    let currentDeck = this.props.location.state.currentUserDeck
     this.setState({
       username: currentUser,
       winCount: currentWinCount,
@@ -51,20 +51,20 @@ class Save extends Component {
     })
   }
 
-// legendaryCard = () => {
+  // legendaryCard = () => {
 
-// }
+  // }
 
 
 
 
   addCardsToServer = () => {
-    axios.patch('/api/user/newDeck', { 
+    axios.patch('/api/user/newDeck', {
       params: {
-        username: this.state.username, 
-        userDeck: this.state.currentUserDeck 
+        username: this.state.username,
+        userDeck: this.state.currentUserDeck
       }
-      }).then(res => {
+    }).then(res => {
       console.log(res.data)
       this.setState({
         deckDrawn: true
@@ -83,19 +83,19 @@ class Save extends Component {
       currentDeck.push(newDrawnCards[i])
 
     }
-  this.setState({
-    currentUserDeck:currentDeck
-  }, ()=>{
-    this.addCardsToServer()
+    this.setState({
+      currentUserDeck: currentDeck
+    }, () => {
+      this.addCardsToServer()
 
-  })
+    })
 
   }
 
 
 
   render() {
-    const { redirect} = this.state
+    const { redirect } = this.state
     if (redirect) {
       return <Redirect to={{
         pathname: '/battlepage',
@@ -120,23 +120,23 @@ class Save extends Component {
           </div>
 
           <div className="caption text-center nes-pointer">
-     
-              <button
-                type="button"
-                className="btn nes-pointer neon1 mb-3 nes-btn"
-                onClick={this.handleOnClick}>
-                >
-                  Save &amp; Quit
+
+            <button
+              type="button"
+              className="btn nes-pointer neon1 mb-3 nes-btn"
+              onClick={this.handleOnClick}>
+              >
+                Save &amp; Quit
               </button>
-     
-              <button
-                type="button"
-                className="btn mb-3 neon1 nes-pointer nes-btn"
-                onClick={this.handleOnClick}>
-                Save &amp; Continue
+
+            <button
+              type="button"
+              className="btn mb-3 neon1 nes-pointer nes-btn"
+              onClick={this.handleOnClick}>
+              Save &amp; Continue
 
               </button>
-         
+
           </div>
         </div>
       );
@@ -147,17 +147,17 @@ class Save extends Component {
             <div className="message">
               <br></br>
               <br></br>
-<h1 className="message"> 
-You Have Defeated the enemy!!
+              <h1 className="message">
+                You Have Defeated the enemy!!
 </h1>
-<br></br>
-<br></br>
-<h3 className="message">
-  Choose a card to add to your deck
+              <br></br>
+              <br></br>
+              <h3 className="message">
+                Choose a card to add to your deck
   </h3>
-<br></br>
+              <br></br>
 
-</div>
+            </div>
           </div>
           <div className="awardCards">
             <DrawBrain
