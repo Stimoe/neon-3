@@ -308,9 +308,14 @@ class BattlePage extends Component {
     playedCards.forEach(card => {
       switch (card.id) {
         case 1:
+          let previousDamage = damage
           let currentDamage = card.damage + damageMultiplier
           let newDamage = currentDamage * multiplier
+          newDamage = newDamage + previousDamage
           damage = newDamage
+
+
+
           break;
 
         case 2:
