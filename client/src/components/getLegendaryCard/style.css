@@ -1,6 +1,6 @@
-/* .row {
+.row {
     margin: 0%;
-  } */
+  }
   .playArea {
     display: flex;
     justify-content: center;
@@ -12,12 +12,10 @@
   .handArea {
     display: flex;
     justify-content: center;
-    margin-top: 300px
   }
   
   .handCard {
     width: 20%;
-    height: 120%;
     padding: 10px;
     transform: scale(0.7);
   }
