@@ -84,7 +84,7 @@
   /* .grow:hover { transform: scale(2.1); } */
 
   .awardCards{
-position: fixed;
+position: relative;
 bottom:0;
   }
 

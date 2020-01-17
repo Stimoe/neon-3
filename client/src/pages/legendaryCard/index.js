@@ -148,13 +148,13 @@ class Legendary extends Component {
               <br></br>
               <br></br>
               <h1 className="message">
-                You Have Defeated the enemy!!
+                You get 1 random Legendary Card!!!
 </h1>
               <br></br>
               <br></br>
-              <h3 className="message">
+              {/* <h3 className="message">
                 Choose a card to add to your deck
-  </h3>
+  </h3> */}
               <br></br>
 
             </div>
