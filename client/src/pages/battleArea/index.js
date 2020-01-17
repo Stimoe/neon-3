@@ -300,7 +300,7 @@ class BattlePage extends Component {
     let damageMultiplier = 0;
     let selfDamage = 0;
     let health = this.state.userHealth;
-    let newEnemyArmor;
+    let newEnemyArmor = 0
     let userHealValue = 0;
     let newHealth = 0;
     let multiplier = 1;
@@ -309,11 +309,13 @@ class BattlePage extends Component {
       switch (card.id) {
         case 1:
           let previousDamage = damage
-          let currentDamage = card.damage + damageMultiplier
-          console.log(currentDamage);
+          let currentDamage = (card.damage + damageMultiplier)
+          console.log("card damage plus multiplier " , currentDamage);
+          console.log("multiplierv ", damageMultiplier);
           
-          let newDamage = currentDamage * multiplier
-          newDamage = newDamage + previousDamage
+          
+          let newDamage = (currentDamage * multiplier)
+          newDamage = (newDamage + previousDamage)
           damage = newDamage
 
 
@@ -326,9 +328,9 @@ class BattlePage extends Component {
 
         case 3:
           let previousCardDamage = damage
-          let basicDamage = card.damage + damageMultiplier
-          let newBasicDamage = basicDamage * multiplier
-          newBasicDamage=newBasicDamage+previousCardDamage
+          let basicDamage = (card.damage + damageMultiplier)
+          let newBasicDamage = (basicDamage * multiplier)
+          newBasicDamage = (newBasicDamage+previousCardDamage)
           damage = newBasicDamage
           selfDamage += card.selfDamage;
           break;
@@ -336,15 +338,15 @@ class BattlePage extends Component {
         case 4:
           multiplier = card.multiplier
 
-          let basicCurrentDamage = card.damage + damageMultiplier
+          let basicCurrentDamage = (card.damage + damageMultiplier)
 console.log(basicCurrentDamage);
 
-          let newMultipliedDamage = basicCurrentDamage * multiplier
+          let newMultipliedDamage = (basicCurrentDamage * multiplier)
           damage = newMultipliedDamage
           break;
 
         case 5:
-          newEnemyArmor = 0;
+          // let newEnemyArmor = 0;
           this.setState({
             currentEnemyArmor: newEnemyArmor
           });
@@ -353,7 +355,7 @@ console.log(basicCurrentDamage);
         case 6:
           userHealValue = card.healValue;
           newHealth = this.state.userHealth;
-          newHealth = newHealth + userHealValue
+          newHealth = (newHealth + userHealValue)
           this.setState({
             userHealth: newHealth
           });
