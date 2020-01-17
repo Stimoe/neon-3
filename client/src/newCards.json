@@ -1,7 +1,7 @@
 [
     {
         "id": 1,
-        "name": "DoS Attack",
+        "name": "DoS Bonus Attack!",
         "damage": 10,
         "image": "https://cdn1.vectorstock.com/i/1000x1000/72/45/two-crossed-light-neon-swords-laser-sabers-war-vector-19807245.jpg",
         "text": "This Card does 10 damage to the enemy",
@@ -11,7 +11,7 @@
 
     {
         "id": 2,
-        "name": "Syntax Error",
+        "name": "Syntax Bonus Error!",
         "armor": 6,
         "image": "TBD",
         "text": "This card increase your armor by 6 pts",

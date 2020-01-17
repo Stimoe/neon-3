@@ -1,7 +1,7 @@
 [
     {
         "id": 1,
-        "name": "DoS Attack",
+        "name": "DoS  Double Attack!",
         "damage": 20,
         "image": "https://cdn1.vectorstock.com/i/1000x1000/72/45/two-crossed-light-neon-swords-laser-sabers-war-vector-19807245.jpg",
         "text": "This Card does 20 damage to the enemy",
@@ -12,7 +12,7 @@
 
     {
         "id": 2,
-        "name": "Syntax Error",
+        "name": "Syntax Double Error!!",
         "armor": 15,
         "image": "TBD",
         "text": "This card increase your armor by 15 pts",
