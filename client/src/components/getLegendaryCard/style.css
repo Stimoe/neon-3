@@ -12,11 +12,13 @@
   .handArea {
     display: flex;
     justify-content: center;
+    margin-top: 300px
   }
   
   .handCard {
     width: 20%;
+    height: 120%;
     padding: 10px;
-    transform: scale(0.7);
+    transform: scale(1.0);
   }
   
