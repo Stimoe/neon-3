@@ -108,7 +108,7 @@ class DrawBrain extends Component {
       },
       this.drawNewCards
     );
-    if (this.state.finalNewCards.length === 4) {
+    if (this.state.finalNewCards.length === 3) {
 
       let currentNewDeck = this.state.finalNewCards;
       this.props.drawn(currentNewDeck);
