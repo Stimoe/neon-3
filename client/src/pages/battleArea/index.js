@@ -22,6 +22,7 @@ class BattlePage extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      damageMultiplier=0,
       currentUserDeck: [],
       username: '',
       winCount: 0,
@@ -297,7 +298,6 @@ class BattlePage extends Component {
 
   handlePlayedCards = (playedCards) => {
     let damage = 0;
-    let damageMultiplier = 0;
     let selfDamage = 0;
     let health = this.state.userHealth;
     let newEnemyArmor = 0
@@ -306,6 +306,7 @@ class BattlePage extends Component {
     let multiplier = 1;
     let armor = this.state.userArmor;
     playedCards.forEach(card => {
+      let damageMultiplier = 0
       switch (card.id) {
         case 1:
           let previousDamage = damage
