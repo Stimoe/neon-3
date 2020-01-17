@@ -1,0 +1,22 @@
+.row {
+    margin: 0%;
+  }
+  .playArea {
+    display: flex;
+    justify-content: center;
+  }
+  .playCard {
+    width: 20%;
+    padding: 10px;
+  }
+  .handArea {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .handCard {
+    width: 20%;
+    padding: 10px;
+    transform: scale(0.7);
+  }
+  

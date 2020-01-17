@@ -9,6 +9,7 @@ import Save from "./pages/award/index.js";
 import Storypage from "./pages/storypage"
 import GameLost from "./pages/GameLost"
 import GameWon from "./pages/GameWon"
+import Legendary from "./pages/legendaryCard"
 
 
 
@@ -31,6 +32,7 @@ function App() {
           <Route exact path="/storypage" component={Storypage} />
           <Route exact path="/gameLost" component={GameLost} />
           <Route exact path="/gameWon" component={GameWon} />
+          <Route exact path="/legendaryCard" component={Legendary} />
       </div>
         </Router>
 

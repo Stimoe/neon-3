@@ -447,7 +447,7 @@ class BattlePage extends Component {
     const { userTurnOver } = this.state;
     if (redirect) {
       return <Redirect to={{
-        pathname: '/award',
+        pathname: '/legendaryCard',
         state: {
           username: this.state.username,
           winCount: this.state.winCount,
