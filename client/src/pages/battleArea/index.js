@@ -311,7 +311,7 @@ class BattlePage extends Component {
           let previousDamage = damage
           let currentDamage = (card.damage + damageMultiplier)
           console.log("card damage plus multiplier " , currentDamage);
-          console.log("multiplierv ", damageMultiplier);
+          console.log("multiplier ", damageMultiplier);
           
           
           let newDamage = (currentDamage * multiplier)
@@ -369,7 +369,7 @@ console.log(basicCurrentDamage);
         case 8:
           let newDamageMultiplier = card.damageMultiplier
           damageMultiplier = (damageMultiplier + newDamageMultiplier)
-          console.log(damageMultiplier);
+          console.log("multiplier card played ", damageMultiplier);
           
           return;
       }
