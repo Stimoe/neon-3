@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Cards from "../cards";
+import style from "./style.css";
 import legendaryCards from "../../legendaryCards.json";
 var UserInitialDeck = require("../../cards.json");
 
