@@ -40,7 +40,7 @@
         "name": "Firewall",
         "armor": 3,
         "image": "TBD",
-        "text": "This card increase your armor by 3 pts until next turn",
+        "text": "This card increase your armor by 3 pts",
         "class": "battleMage",
         "type": "Action" 
     },
@@ -49,7 +49,7 @@
         "name": "Firewall",
         "armor": 3,
         "image": "TBD",
-        "text": "This card increase your armor by 3 pts until next turn!",
+        "text": "This card increase your armor by 3 pts!",
         "class": "battleMage",
         "type": "Action" 
     },
@@ -58,7 +58,7 @@
         "name": "Firewall",
         "armor": 3,
         "image": "TBD",
-        "text": "This card increase your armor by 3 pts until next turn!!",
+        "text": "This card increase your armor by 3 pts!!",
         "class": "battleMage",
         "type": "Action" 
     },
@@ -67,7 +67,7 @@
         "name": "Firewall",
         "armor": 3,
         "image": "TBD",
-        "text": "This card increase your armor by 3 pts until next turn!!",
+        "text": "This card increase your armor by 3 pts!!",
         "class": "battleMage",
         "type": "Action" 
     },

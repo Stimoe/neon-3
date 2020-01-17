@@ -51,6 +51,11 @@ class Save extends Component {
     })
   }
 
+// legendaryCard = () => {
+
+// }
+
+
 
 
   addCardsToServer = () => {

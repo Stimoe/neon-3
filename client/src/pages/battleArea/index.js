@@ -295,6 +295,7 @@ console.log(userCurrentDeck);
 
   handlePlayedCards = (playedCards) => {
     let damage = 0;
+    let damageMultiplier=0;
     let selfDamage = 0;
     let health = this.state.userHealth;
     let newEnemyArmor;
@@ -305,7 +306,9 @@ console.log(userCurrentDeck);
     playedCards.forEach(card => {
       switch (card.id) {
         case 1:
-          damage += card.damage * multiplier
+          let currentDamage= card.damage + damageMultiplier
+          let newDamage=currentDamage * multiplier
+          damage = newDamage
           break;
 
         case 2:
@@ -313,13 +316,17 @@ console.log(userCurrentDeck);
           break;
 
         case 3:
-          damage += card.damage;
+          let currentDamage= card.damage + damageMultiplier
+          let newDamage=currentDamage * multiplier
+          damage = newDamage
           selfDamage += card.selfDamage;
           break;
 
         case 4:
           multiplier = card.multiplier
-          damage = damage * multiplier
+          let currentDamage= card.damage + damageMultiplier
+          let newDamage=currentDamage * multiplier
+          damage = newDamage
           break;
 
         case 5:
@@ -342,6 +349,10 @@ console.log(userCurrentDeck);
           this.setState({
             frozen: true
           });
+          break;
+          case 8:
+let newDamageMultiplier = card.damageMultiplier
+damageMultiplier = (damageMultiplier + newDamageMultiplier)
           return;
       }
     });

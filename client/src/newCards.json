@@ -14,7 +14,7 @@
         "name": "Syntax Error",
         "armor": 6,
         "image": "TBD",
-        "text": "This card increase your armor by 6 pts until next turn",
+        "text": "This card increase your armor by 6 pts",
         "class": "battleMage",
         "type": "Action" 
     },
