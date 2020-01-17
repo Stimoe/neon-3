@@ -75,7 +75,7 @@ class DrawBrain extends Component {
     this.setState({
       randomLegendary: tempDraw
     }, () =>{
-      this.drawNewCards
+      this.drawNewCards()
     })
   }
 

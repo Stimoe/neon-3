@@ -316,17 +316,17 @@ console.log(userCurrentDeck);
           break;
 
         case 3:
-          let currentDamage= card.damage + damageMultiplier
-          let newDamage=currentDamage * multiplier
-          damage = newDamage
+          let basicDamage= card.damage + damageMultiplier
+          let newBasicDamage=basicDamage * multiplier
+          damage = newBasicDamage
           selfDamage += card.selfDamage;
           break;
 
         case 4:
           multiplier = card.multiplier
-          let currentDamage= card.damage + damageMultiplier
-          let newDamage=currentDamage * multiplier
-          damage = newDamage
+          let basicCurrentDamage= card.damage + damageMultiplier
+          let newMultipliedDamage=basicCurrentDamage * multiplier
+          damage = newMultipliedDamage
           break;
 
         case 5:
