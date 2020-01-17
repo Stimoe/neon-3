@@ -130,7 +130,7 @@ class LegendaryBrain extends Component {
       <div id="gameArea">
         <div className="row d-flex justify-content-center"></div>
 
-        <div className="handArea">
+        <div className="handArea legend">
           {randomLegendary.length ? randomLegendary : null}
         </div>
       </div>

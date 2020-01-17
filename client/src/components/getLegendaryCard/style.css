@@ -19,4 +19,6 @@
     padding: 10px;
     transform: scale(0.7);
   }
-  
+  .legend {
+    margin-top: 300px;
+  }
