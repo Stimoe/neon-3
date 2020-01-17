@@ -425,13 +425,13 @@ class BattlePage extends Component {
       }
     }
     else if (possibleEnemyActions.length === 4) {
-      if (randomAction <= 15) {
+      if (randomAction <= 10) {
         enemyChoiceAction = 3
       }
-      else if (randomAction >= 16 && randomAction <= 30) {
+      else if (randomAction >= 11 && randomAction <= 20) {
         enemyChoiceAction = 4
       }
-      else if (randomAction >= 30 && randomAction <= 75) {
+      else if (randomAction >= 20 && randomAction <= 60) {
         enemyChoiceAction = 1
       }
       else {
