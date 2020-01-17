@@ -32,7 +32,6 @@ class LegendaryBrain extends Component {
     );
   }
 
-
   // drawNewCards = () => {
   //   let tempDeck = [...this.state.newCards];
   //   const tempDraw = [];

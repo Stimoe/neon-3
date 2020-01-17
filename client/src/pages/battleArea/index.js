@@ -179,6 +179,8 @@ class BattlePage extends Component {
 
 
   userAttack = (damage) => {
+    console.log(damage);
+    
     let newArmor = 0;
     let gameWon = false;
     let newHealth;
