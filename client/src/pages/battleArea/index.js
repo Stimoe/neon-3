@@ -22,7 +22,7 @@ class BattlePage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      damageMultiplier=0,
+      damageMultiplier: 0,
       currentUserDeck: [],
       username: '',
       winCount: 0,
