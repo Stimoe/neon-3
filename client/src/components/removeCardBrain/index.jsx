@@ -1,51 +1,46 @@
 import React, { Component } from "react";
-import Cards from "../cards";
-import newCardsFromJson from "../../newCards.json";
-import legendaryCards from "../../legendaryCards.json"
+
+import style from "./style.css";
+import legendaryCards from "../../legendaryCards.json";
 var UserInitialDeck = require("../../cards.json");
 
-class DrawBrain extends Component {
+class LegendaryBrain extends Component {
   constructor(props) {
     super(props);
-
   }
   state = {
-    legendaryCards : [],
+currentDeck: [],
     newCards: [],
     tempHand: [],
-    randomLegendary: [],
-    legendaryChosen: false,
+newDeckAfterRemove: [],
+
     newDrawnCards: [],
     drawArea: [],
     turnEnded: false,
-    finalNewCards: [],
+
     currentDeck: UserInitialDeck, //make this an or statement
     deckBuilt: false
   };
 
   componentDidMount() {
-    const newLegendaryCards = this.shuffleCards(legendaryCards)
-    const newCardsShuffled = this.shuffleCards(newCardsFromJson);
-  
+    let newUserDeck = this.props.currentDeck;
+    
 
     this.setState(
       {
-        newCards: newCardsShuffled,
-        legendaryCards: newLegendaryCards
+        currentDeck: newUserDeck
       },
-      this.drawNewCards
+      this.getLegendary
     );
   }
 
-
-
-  drawNewCards = () => {
-    let tempDeck = [...this.state.newCards];
+  getThreeCards = () => {
+    let tempDeck = [...this.state.currentDeck];
     const tempDraw = [];
     const shuffledDeck = [...this.shuffleCards(tempDeck)];
-   
+
     while (tempDraw.length < 3) {
-     
+
       let tempCard = shuffledDeck.shift();
       tempDraw.push(tempCard);
     }
@@ -56,19 +51,27 @@ class DrawBrain extends Component {
 
 
 
+
+
   toDraw = index => {
     let card = this.state.newDrawnCards[index];
-    let tempNewDeck = this.state.finalNewCards;
+    let cardName=card.name
+let userCurrentDeck=this.state.currentDeck
+    for (let i = 0; i < userCurrentDeck.length; i++) {
+      
+      
+    }
+    let tempNewDeck = this.state.newDeckAfterRemove;
     tempNewDeck.push(card);
     this.setState(
       {
-        finalNewCards: tempNewDeck
+        newDeckAfterRemove: tempNewDeck
       },
-      this.drawNewCards
-    );
-    if (this.state.finalNewCards.length === 3) {
 
-      let currentNewDeck = this.state.finalNewCards;
+    );
+    if (this.state.newDeckAfterRemove.length === 1) {
+
+      
       this.props.drawn(currentNewDeck);
     }
   };
@@ -91,23 +94,8 @@ class DrawBrain extends Component {
 
   render() {
     const { legendaryChosen } = this.state;
-    // if (!legendaryChosen){
-    //   let randomLegendary = this.state.randomLegendary.map((card, index) => {
-    //     return (
-    //       <div className="handCard row d-flex justify-content-center">
-    //         <Cards
-    //           name={card.name}
-    //           image={card.image}
-    //           text={card.text}
-    //           handleClick={this.legendaryToDeck}
-    //           currentIndex={index}
-    //         />
-    //       </div>
-    //     );
-    //   });
-    // }
-    // else {
-    let newDrawnCards = this.state.newDrawnCards.map((card, index) => {
+
+    let randomLegendary = this.state.randomLegendary.map((card, index) => {
       return (
         <div className="handCard row d-flex justify-content-center">
           <Cards
@@ -126,8 +114,8 @@ class DrawBrain extends Component {
       <div id="gameArea">
         <div className="row d-flex justify-content-center"></div>
 
-        <div className="handArea">
-          {newDrawnCards.length ? newDrawnCards : null}
+        <div className="handArea legend">
+          {randomLegendary.length ? randomLegendary : null}
         </div>
       </div>
       // </div>
@@ -135,4 +123,4 @@ class DrawBrain extends Component {
   }
 }
 
-export default DrawBrain;
+export default LegendaryBrain;
