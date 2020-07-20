@@ -1,4 +1,4 @@
-*{
+* {
   overflow: hidden;
 }
 .container {
@@ -58,6 +58,7 @@
   position: fixed;
   top: 0;
   width: 100%;
+  height: 50%;
   color: white !important;
 }
 .nes-progress {
@@ -73,38 +74,41 @@
 .hb {
   color: #ffffff;
 }
-.raise:hover{
+.raise:hover {
   transform: translate(0px, -60px) !important;
-  transition: all .4s ease-in-out;
+  transition: all 0.4s ease-in-out;
 }
-.raise1:hover{
+.raise1:hover {
   transform: translate(0px, 100px) !important;
-  transition: all .4s ease-in-out;
+  transition: all 0.4s ease-in-out;
 }
 /* .grow:hover { transform: scale(2.1); } */
-.emm{
+.emm {
   /* background-image: url(./fire.gif); */
   position: fixed;
   left: 40%;
   top: 35%;
   width: 20%;
-  height:30%;
+  height: 30%;
   /* height: 68vh; */
   background-size: 100% 100%;
   background-position: center center;
 }
-.emm1{
+.emm1 {
   /* background-image: url(./idle.gif); */
   position: fixed;
   left: 603px;
   top: 460px;
   width: 20%;
-  height:30%;
+  height: 30%;
   /* height: 68vh; */
   background-size: 100% 100%;
   background-position: center center;
 }
-.player{
-height: 20%;
-image-rendering: pixelated;
+.player {
+  height: 20%;
+  image-rendering: pixelated;
+}
+.health {
+  width: 80%;
 }
