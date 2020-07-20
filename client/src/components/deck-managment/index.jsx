@@ -358,18 +358,20 @@ class DeckBrain extends Component {
       // this.openRulesModalHandler();
       return (
         <div id="gameArea stuffs">
-          <div className="row d-flex justify-content-center">
-            <div className="row d-flex justify-content-center">
-              {this.state.isRulesModalShowing ? (
-                <div
-                  onClick={this.closeRulesModalHandler}
-                  className="back-drop"
-                ></div>
-              ) : null}
-            </div>
+          {/* <div className="row d-flex justify-content-center">
+            <div className="row d-flex justify-content-center"> */}
+          <div classname="roles-modal row d-flex justify-content-center">
+            {this.state.isRulesModalShowing ? (
+              <div
+                onClick={this.closeRulesModalHandler}
+                className="back-drop"
+              ></div>
+            ) : null}
+            {/* </div>
+            </div> */}
           </div>
 
-          <div className="modal-div">
+          <div className="rules-modal-div">
             <RulesModal
               className="rules-modal"
               show={this.state.isRulesModalShowing}

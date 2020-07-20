@@ -50,6 +50,7 @@ class BattlePage extends Component {
     let currentUser = this.props.location.state.username;
     let userCurrentDeck = this.props.location.state.currentUserDeck;
     let currentWinCount = this.props.location.state.winCount;
+    let rulesRead = this.props.location.state.rulesRead;
     console.log(userCurrentDeck);
 
     if (userCurrentDeck === undefined || userCurrentDeck.length == 0) {

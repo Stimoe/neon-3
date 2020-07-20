@@ -10,7 +10,6 @@
   bottom: 0% !important;
 }
 .playCard {
-
   width: 20%;
   padding: 10px;
   padding-top: 100px !important;
@@ -19,7 +18,7 @@
 .handArea {
   margin-top: 0px;
   top: 650px;
- 
+
   margin-top: 0%;
   display: flex;
   justify-content: center;
@@ -34,7 +33,7 @@
   transform: scale(0.7);
 }
 
-.stuffs{
+.stuffs {
   transform: scale(0.7);
   padding: 100%;
 }
@@ -42,7 +41,7 @@
   margin-right: -60px;
   margin-left: -60px;
 }
-.buzz{
+.buzz {
   position: fixed;
   top: 2%;
   /* left: 0;
@@ -51,4 +50,9 @@
 
 .modal-div {
   float: right;
+}
+.rules-modal-div {
+  width: 50%;
+  text-align: center;
+  border: 2px solid green;
 }
