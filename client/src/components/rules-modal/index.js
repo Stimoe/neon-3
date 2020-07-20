@@ -19,7 +19,11 @@ const RulesModal = (props) => {
           </span>
         </div>
         <div className="modal-body">
-          <p className="modal-body-text">{props.children}</p>
+          <p className="modal-body-text">
+            Click on up to 2 cards to add them to center, can click again to
+            bring back to hand. After chooseing 2 cards for your turn, click End
+            Turn.
+          </p>
         </div>
         {/* <div className="modal-footer">
                     <button className="btn-cancel" onClick={props.close}>CLOSE</button>

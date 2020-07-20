@@ -263,7 +263,9 @@ class DeckBrain extends Component {
 
   render() {
     const { deckRecieved } = this.state;
-    if (deckRecieved) {
+    const { readRules } = this.state;
+    // const { deckRecieved } = this.state;
+    if (deckRecieved && readRules) {
       let hand = this.state.hand.map((card, index) => {
         return (
           <div className="handCard row1 d-flex justify-content-center">
@@ -312,21 +314,6 @@ class DeckBrain extends Component {
                 End Turn
               </button>
             </div>
-            <div className="row d-flex justify-content-center">
-              {this.state.isShowing ? (
-                <div
-                  onClick={this.closeRulesModalHandler}
-                  className="back-drop"
-                ></div>
-              ) : null}
-
-              <button
-                className=" nes-pointer buzz neon4 mb-3 nes-btn"
-                onClick={this.openRulesModalHandler}
-              >
-                End Turn
-              </button>
-            </div>
           </div>
 
           <br />
@@ -365,7 +352,7 @@ class DeckBrain extends Component {
         // </div>
       );
     } else {
-      this.openRulesModalHandler();
+      // this.openRulesModalHandler();
       return (
         <div id="gameArea stuffs">
           <div className="row d-flex justify-content-center">
@@ -376,13 +363,6 @@ class DeckBrain extends Component {
                   className="back-drop"
                 ></div>
               ) : null}
-
-              <button
-                className=" nes-pointer buzz neon4 mb-3 nes-btn"
-                onClick={this.openRulesModalHandler}
-              >
-                Start
-              </button>
             </div>
           </div>
 
