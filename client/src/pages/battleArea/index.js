@@ -449,7 +449,7 @@ class BattlePage extends Component {
     const { redirect } = this.state;
     const { deckRecieved } = this.state;
     const { userTurnOver } = this.state;
-    const { rulesRead } = this.state;
+
     if (redirect) {
       return (
         <Redirect
@@ -492,7 +492,7 @@ class BattlePage extends Component {
         />
       );
     }
-    if (deckRecieved && rulesRead) {
+    if (deckRecieved) {
       const userTurnOver = this.state.userTurnOver;
       let enemyHealth = this.state.currentEnemyHealth;
       return (

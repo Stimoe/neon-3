@@ -179,33 +179,26 @@ class DeckBrain extends Component {
   };
 
   openRulesModalHandler = () => {
-    let rules = !this.state.readRules;
+    // let rules = !this.state.readRules;
     setTimeout(
       function () {
-        this.setState({ isRulesModalShowing: true });
+        this.setState({ showRulesModal: true });
       }.bind(this),
       1000
     );
     this.setState(
       {
-        readRules: rules,
+        readRules: true,
       },
       () => {
         setTimeout(
           function () {
-            this.setState({ isRulesModalShowing: false });
+            this.setState({ showRulesModal: false });
           }.bind(this),
-          4000
+          40000
         ); // wait 5 seconds, then reset to false
       }
     );
-  };
-
-  closeRulesModalHandler = () => {
-    this.setState({
-      isRulesModalShowing: false,
-      readRules: true,
-    });
   };
 
   openModalHandler = () => {
@@ -229,6 +222,13 @@ class DeckBrain extends Component {
         ); // wait 5 seconds, then reset to false
       }
     );
+  };
+
+  closeRulesModalHandler = () => {
+    this.setState({
+      showRulesModal: false,
+      readRules: true,
+    });
   };
 
   closeModalHandler = () => {
@@ -265,6 +265,7 @@ class DeckBrain extends Component {
   render() {
     const { deckRecieved } = this.state;
     const { readRules } = this.state;
+    const { isRulesModalShowing } = this.state;
     // const { deckRecieved } = this.state;
     if (deckRecieved && readRules) {
       let hand = this.state.hand.map((card, index) => {
@@ -352,7 +353,8 @@ class DeckBrain extends Component {
         </div>
         // </div>
       );
-    } else {
+    }
+    if (isRulesModalShowing) {
       // this.openRulesModalHandler();
       return (
         <div id="gameArea stuffs">
@@ -370,7 +372,7 @@ class DeckBrain extends Component {
           <div className="modal-div">
             <RulesModal
               className="rules-modal"
-              show={this.state.isRulesModalShowing}
+              show={this.state.showRulesModal}
               close={this.closeRulesModalHandler}
             ></RulesModal>
           </div>
