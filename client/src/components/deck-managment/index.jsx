@@ -204,6 +204,7 @@ class DeckBrain extends Component {
   closeRulesModalHandler = () => {
     this.setState({
       isRulesModalShowing: false,
+      readRules: true,
     });
   };
 
