@@ -3,28 +3,26 @@ import "./style.css";
 import enemies from "../../enemy.json";
 import axios from "axios";
 import DeckBrain from "../../components/deck-managment";
-import HealthBar from "../../components/plyr-healthbar";
+// import RulesRead from "../../components/rules-modal/index"
 import EHBar from "../../components/ehealthbar";
-import { Redirect } from 'react-router-dom';
+import { Redirect } from "react-router-dom";
 import deckJson from "../../cards.json";
-import FireEm from './fire.gif';
-import IdleEm from './idle.gif';
-import Death from './death.gif';
-import Player from './players.png'
-import Rain from './rain.gif'
-import GameWon from "../../components/gameWon"
-import GameOver from "../../components/gameOver"
+import FireEm from "./fire.gif";
+import IdleEm from "./idle.gif";
+import Death from "./death.gif";
+import Player from "./players.png";
+import Rain from "./rain.gif";
+import GameWon from "../../components/gameWon";
+import GameOver from "../../components/gameOver";
 import { log } from "util";
 
-
 class BattlePage extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
       damageMultiplierbonus: 0,
       currentUserDeck: [],
-      username: '',
+      username: "",
       winCount: 0,
       userHealth: 100,
       userArmor: 0,
@@ -44,174 +42,176 @@ class BattlePage extends Component {
       maxEnemyHealth: 0,
       deckRecieved: false,
       userLost: false,
-      userWon: false
+      userWon: false,
     };
   }
 
-
-
   componentDidMount() {
-
-    let currentUser = this.props.location.state.username
-    let userCurrentDeck = this.props.location.state.currentUserDeck
-    let currentWinCount = this.props.location.state.winCount
+    let currentUser = this.props.location.state.username;
+    let userCurrentDeck = this.props.location.state.currentUserDeck;
+    let currentWinCount = this.props.location.state.winCount;
     console.log(userCurrentDeck);
 
-
-
     if (userCurrentDeck === undefined || userCurrentDeck.length == 0) {
-      let basicDeck = deckJson
-      this.setState({
-        winCount: currentWinCount,
-        currentUserDeck: basicDeck,
-        username: currentUser,
-      }, () => {
-        let currentEnemy = enemies[this.state.winCount];
-        let currentEnemyHealth = currentEnemy.health;
-        let currentEnemyArmor = currentEnemy.armor;
-        let newEnemyAbilities = currentEnemy.actions;
-        let newEnemyAttack = currentEnemy.attack;
-        let newEnemyArmorGain = currentEnemy.armorGain;
-        let newEnemyAttackGain = currentEnemy.attackGain;
-        let newEnemyAdditionalArmorGain = currentEnemy.additionalArmorGain
-        this.setState({
-          maxEnemyHealth: currentEnemyHealth,
-          currentEnemyHealth: currentEnemyHealth,
-          currentEnemyArmor: currentEnemyArmor,
-          currentEnemyAbilities: newEnemyAbilities,
-          currentEnemyAttack: newEnemyAttack,
-          currentEnemyArmorGain: newEnemyArmorGain,
-          currentEnemyAttackGain: newEnemyAttackGain,
-          currentBonusEnemyArmorGain: newEnemyAdditionalArmorGain,
-          deckRecieved: true
-        });
-
-      })
-    }
-
-    else {
-      this.setState({
-        username: currentUser,
-        winCount: currentWinCount,
-        currentUserDeck: userCurrentDeck
-      }, () => {
-        let currentEnemy = enemies[this.state.winCount];
-        let currentEnemyHealth = currentEnemy.health;
-        let currentEnemyArmor = currentEnemy.armor;
-        let newEnemyAbilities = currentEnemy.actions;
-        let newEnemyAttack = currentEnemy.attack;
-        let newEnemyArmorGain = currentEnemy.armorGain;
-        let newEnemyAttackGain = currentEnemy.attackGain;
-        let newEnemyAdditionalArmorGain = currentEnemy.additionalArmorGain
-        this.setState({
-          maxEnemyHealth: currentEnemyHealth,
-          currentEnemyHealth: currentEnemyHealth,
-          currentEnemyArmor: currentEnemyArmor,
-          currentEnemyAbilities: newEnemyAbilities,
-          currentEnemyAttack: newEnemyAttack,
-          currentEnemyArmorGain: newEnemyArmorGain,
-          currentBonusEnemyArmorGain: newEnemyAdditionalArmorGain,
-          currentEnemyAttackGain: newEnemyAttackGain,
-          deckRecieved: true
-        });
-
-      })
+      let basicDeck = deckJson;
+      this.setState(
+        {
+          winCount: currentWinCount,
+          currentUserDeck: basicDeck,
+          username: currentUser,
+        },
+        () => {
+          let currentEnemy = enemies[this.state.winCount];
+          let currentEnemyHealth = currentEnemy.health;
+          let currentEnemyArmor = currentEnemy.armor;
+          let newEnemyAbilities = currentEnemy.actions;
+          let newEnemyAttack = currentEnemy.attack;
+          let newEnemyArmorGain = currentEnemy.armorGain;
+          let newEnemyAttackGain = currentEnemy.attackGain;
+          let newEnemyAdditionalArmorGain = currentEnemy.additionalArmorGain;
+          this.setState({
+            maxEnemyHealth: currentEnemyHealth,
+            currentEnemyHealth: currentEnemyHealth,
+            currentEnemyArmor: currentEnemyArmor,
+            currentEnemyAbilities: newEnemyAbilities,
+            currentEnemyAttack: newEnemyAttack,
+            currentEnemyArmorGain: newEnemyArmorGain,
+            currentEnemyAttackGain: newEnemyAttackGain,
+            currentBonusEnemyArmorGain: newEnemyAdditionalArmorGain,
+            deckRecieved: true,
+          });
+        }
+      );
+    } else {
+      this.setState(
+        {
+          username: currentUser,
+          winCount: currentWinCount,
+          currentUserDeck: userCurrentDeck,
+        },
+        () => {
+          let currentEnemy = enemies[this.state.winCount];
+          let currentEnemyHealth = currentEnemy.health;
+          let currentEnemyArmor = currentEnemy.armor;
+          let newEnemyAbilities = currentEnemy.actions;
+          let newEnemyAttack = currentEnemy.attack;
+          let newEnemyArmorGain = currentEnemy.armorGain;
+          let newEnemyAttackGain = currentEnemy.attackGain;
+          let newEnemyAdditionalArmorGain = currentEnemy.additionalArmorGain;
+          this.setState({
+            maxEnemyHealth: currentEnemyHealth,
+            currentEnemyHealth: currentEnemyHealth,
+            currentEnemyArmor: currentEnemyArmor,
+            currentEnemyAbilities: newEnemyAbilities,
+            currentEnemyAttack: newEnemyAttack,
+            currentEnemyArmorGain: newEnemyArmorGain,
+            currentBonusEnemyArmorGain: newEnemyAdditionalArmorGain,
+            currentEnemyAttackGain: newEnemyAttackGain,
+            deckRecieved: true,
+          });
+        }
+      );
     }
   }
 
   componentDidUpdate(prevprops, prevState) {
-    let totalEnemies = enemies.length
+    let totalEnemies = enemies.length;
     const turnEnded = this.state.userTurnOver;
     const frozen = this.state.frozen;
-    if (this.state.currentEnemyHealth <= 0 && this.state.winCount === totalEnemies) {
+    if (
+      this.state.currentEnemyHealth <= 0 &&
+      this.state.winCount === totalEnemies
+    ) {
       this.setState({
-        userWon: true
-      })
+        userWon: true,
+      });
     }
 
     if (this.state.userHealth <= 0) {
       this.setState({
-        userLost: true
-      })
+        userLost: true,
+      });
     }
     if (this.state.currentEnemyHealth <= 0) {
-      let tempWins2 = this.state.winCount
-      tempWins2 = tempWins2 + 1
+      let tempWins2 = this.state.winCount;
+      tempWins2 = tempWins2 + 1;
       // console.log(tempWins2);
 
-      this.setState({
-        winCount: tempWins2,
-        currentEnemyHealth: 1
-      }, () => {
-        this.updateWinCount()
-      })
-
+      this.setState(
+        {
+          winCount: tempWins2,
+          currentEnemyHealth: 1,
+        },
+        () => {
+          this.updateWinCount();
+        }
+      );
     }
     if (this.state.userTurnOver === true) {
       this.enemyChoice();
-      setTimeout(function () {
-        this.setState({ userTurnOver: false });
-      }.bind(this), 2000);
+      setTimeout(
+        function () {
+          this.setState({ userTurnOver: false });
+        }.bind(this),
+        2000
+      );
     }
-
-
   }
-
 
   updateWinCount = () => {
     // console.log("here");
 
-    axios.patch('/api/user/winCount', {
-      params: {
-        username: this.state.username,
-        winCount: this.state.winCount
-      }
-    }).then(res => {
-      // console.log(res.data);
-      this.setState({
-        redirect: true
+    axios
+      .patch("/api/user/winCount", {
+        params: {
+          username: this.state.username,
+          winCount: this.state.winCount,
+        },
       })
-
-    }).catch(err => {
-      console.log(err.response);
-      console.log("Username already exists or password could not be validated")
-    })
-  }
-
+      .then((res) => {
+        // console.log(res.data);
+        this.setState({
+          redirect: true,
+        });
+      })
+      .catch((err) => {
+        console.log(err.response);
+        console.log(
+          "Username already exists or password could not be validated"
+        );
+      });
+  };
 
   userAttack = (damage) => {
     console.log(damage);
-    
+
     let newArmor = 0;
     let gameWon = false;
     let newHealth;
-    let newCurrentEnemyHealth = this.state.currentEnemyHealth
-    let newCurrentEnemyArmor = this.state.currentEnemyArmor
+    let newCurrentEnemyHealth = this.state.currentEnemyHealth;
+    let newCurrentEnemyArmor = this.state.currentEnemyArmor;
 
     if (newCurrentEnemyArmor >= damage) {
       let tempArmor = this.state.currentEnemyArmor;
       newArmor = tempArmor - damage;
-      newHealth = newCurrentEnemyHealth
-
+      newHealth = newCurrentEnemyHealth;
 
       return {
         newArmor,
-        newHealth
-      }
-    }
-    else {
+        newHealth,
+      };
+    } else {
       let newDamage = damage - newCurrentEnemyArmor;
       let tempHealth = this.state.currentEnemyHealth;
       newHealth = tempHealth - newDamage;
-      newArmor = 0
+      newArmor = 0;
 
       return {
         newHealth,
         newArmor,
-        gameWon
-      }
+        gameWon,
+      };
     }
-
   };
 
   firstEnemyAction = (action) => {
@@ -222,104 +222,102 @@ class BattlePage extends Component {
     let newEnemyArmorGain = this.state.currentEnemyArmorGain;
     let newUserHealth = this.state.userHealth;
     let newUserArmor = this.state.userArmor;
-    let newBonusEnemyArmor = this.state.currentBonusEnemyArmorGain
-    let randomAction = action
+    let newBonusEnemyArmor = this.state.currentBonusEnemyArmorGain;
+    let randomAction = action;
 
     switch (randomAction) {
       case 1:
-        let newEnemyAttackAction = ("Enemy Attacked for " + currentEnemyAttackPower)
+        let newEnemyAttackAction =
+          "Enemy Attacked for " + currentEnemyAttackPower;
         this.setState({
           enemyAction: newEnemyAttackAction,
-        })
+        });
         if (newUserArmor >= newEnemyAttack) {
           let newArmor = newUserArmor - newEnemyAttack;
           this.setState({
             userArmor: newArmor,
-            userTurnOver: false
+            userTurnOver: false,
           });
-        }
-        else {
+        } else {
           let newAttack = newEnemyAttack - newUserArmor;
           let newHealth = newUserHealth - newAttack;
           this.setState({
             userHealth: newHealth,
             userArmor: 0,
-            userTurnOver: false
+            userTurnOver: false,
           });
         }
         this.setState({
-          userTurnOver: false
-        })
+          userTurnOver: false,
+        });
         break;
       case 2:
         //enemy gains armor
         let newArmor = newEnemyArmor + newEnemyArmorGain;
-        let newEnemyAction = ("Enemy Gained Armor for " + newEnemyArmorGain)
+        let newEnemyAction = "Enemy Gained Armor for " + newEnemyArmorGain;
         this.setState({
           currentEnemyArmor: newArmor,
           enemyAction: newEnemyAction,
-          userTurnOver: false
+          userTurnOver: false,
         });
         break;
       case 3:
-        let newEnemyAttackPower = this.state.currentEnemyAttack
-        let newEnemyAttackBonus = ("Enemy gained " + newEnemyAttackGain + " attack damage everytime it attacks")
-        newEnemyAttackPower = (newEnemyAttackPower + newEnemyAttackGain)
+        let newEnemyAttackPower = this.state.currentEnemyAttack;
+        let newEnemyAttackBonus =
+          "Enemy gained " +
+          newEnemyAttackGain +
+          " attack damage everytime it attacks";
+        newEnemyAttackPower = newEnemyAttackPower + newEnemyAttackGain;
         this.setState({
           enemyAction: newEnemyAttackBonus,
           currentEnemyAttack: newEnemyAttackPower,
-          userTurnOver: false
+          userTurnOver: false,
         });
         break;
       case 4:
-        let enemyArmorGainBonus = newBonusEnemyArmor
-        let enemyArmorGain = newEnemyArmorGain
-        let messageOfArmorGain = ("Enemy gained " + enemyArmorGainBonus + " everytime it gains armor")
-        enemyArmorGain = (enemyArmorGain + enemyArmorGainBonus)
+        let enemyArmorGainBonus = newBonusEnemyArmor;
+        let enemyArmorGain = newEnemyArmorGain;
+        let messageOfArmorGain =
+          "Enemy gained " + enemyArmorGainBonus + " everytime it gains armor";
+        enemyArmorGain = enemyArmorGain + enemyArmorGainBonus;
         this.setState({
           enemyAction: messageOfArmorGain,
           currentEnemyArmorGain: enemyArmorGain,
-          userTurnOver: false
-        })
+          userTurnOver: false,
+        });
         break;
       case 5:
-        let messageOfSkippedTurn = ("Enemy is frozen, does nothing this turn")
+        let messageOfSkippedTurn = "Enemy is frozen, does nothing this turn";
         this.setState({
           enemyAction: messageOfSkippedTurn,
           frozen: false,
-          userTurnOver: false
-
-        })
+          userTurnOver: false,
+        });
         return;
     }
-
   };
-
 
   handlePlayedCards = (playedCards) => {
     let damage = 0;
     let selfDamage = 0;
-    let damageMultiplier = this.state.damageMultiplierbonus
+    let damageMultiplier = this.state.damageMultiplierbonus;
     let health = this.state.userHealth;
-    let newEnemyArmor = 0
+    let newEnemyArmor = 0;
     let userHealValue = 0;
     let newHealth = 0;
     let multiplier = 1;
     let armor = this.state.userArmor;
-    playedCards.forEach(card => {
+    playedCards.forEach((card) => {
       switch (card.id) {
         case 1:
-          let previousDamage = damage
-          let currentDamage = (card.damage + damageMultiplier)
-          console.log("card damage plus multiplier " , currentDamage);
+          let previousDamage = damage;
+          let currentDamage = card.damage + damageMultiplier;
+          console.log("card damage plus multiplier ", currentDamage);
           console.log("multiplier ", damageMultiplier);
-          
-          
-          let newDamage = (currentDamage * multiplier)
-          newDamage = (newDamage + previousDamage)
-          damage = newDamage
 
-
+          let newDamage = currentDamage * multiplier;
+          newDamage = newDamage + previousDamage;
+          damage = newDamage;
 
           break;
 
@@ -328,53 +326,53 @@ class BattlePage extends Component {
           break;
 
         case 3:
-          let previousCardDamage = damage
-          let basicDamage = (card.damage + damageMultiplier)
-          let newBasicDamage = (basicDamage * multiplier)
-          newBasicDamage = (newBasicDamage+previousCardDamage)
-          damage = newBasicDamage
+          let previousCardDamage = damage;
+          let basicDamage = card.damage + damageMultiplier;
+          let newBasicDamage = basicDamage * multiplier;
+          newBasicDamage = newBasicDamage + previousCardDamage;
+          damage = newBasicDamage;
           selfDamage += card.selfDamage;
           break;
 
         case 4:
-          multiplier = card.multiplier
+          multiplier = card.multiplier;
 
-          let basicCurrentDamage = (card.damage + damageMultiplier)
-console.log(basicCurrentDamage);
+          let basicCurrentDamage = card.damage + damageMultiplier;
+          console.log(basicCurrentDamage);
 
-          let newMultipliedDamage = (basicCurrentDamage * multiplier)
-          damage = newMultipliedDamage
+          let newMultipliedDamage = basicCurrentDamage * multiplier;
+          damage = newMultipliedDamage;
           break;
 
         case 5:
           // let newEnemyArmor = 0;
           this.setState({
-            currentEnemyArmor: newEnemyArmor
+            currentEnemyArmor: newEnemyArmor,
           });
           break;
 
         case 6:
           userHealValue = card.healValue;
           newHealth = this.state.userHealth;
-          newHealth = (newHealth + userHealValue)
+          newHealth = newHealth + userHealValue;
           this.setState({
-            userHealth: newHealth
+            userHealth: newHealth,
           });
           break;
 
         case 7:
           this.setState({
-            frozen: true
+            frozen: true,
           });
           break;
         case 8:
-          let newDamageMultiplier = card.damageMultiplier
-          damageMultiplier = (damageMultiplier + newDamageMultiplier)
+          let newDamageMultiplier = card.damageMultiplier;
+          damageMultiplier = damageMultiplier + newDamageMultiplier;
           this.setState({
-            damageMultiplierbonus: damageMultiplier
-          })
+            damageMultiplierbonus: damageMultiplier,
+          });
           console.log("multiplier card played ", damageMultiplier);
-          
+
           return;
       }
     });
@@ -385,81 +383,65 @@ console.log(basicCurrentDamage);
         currentEnemyArmor: newArmor,
         currentEnemyHealth: newHealth,
         userHealth: tempHealth,
-        userTurnOver: true
+        userTurnOver: true,
       });
-    }
-    else {
+    } else {
       this.setState({
         userArmor: armor,
-        userTurnOver: true
+        userTurnOver: true,
       });
     }
     this.setState({
-      userTurnOver: true
-    })
+      userTurnOver: true,
+    });
   };
 
-
-
-
   enemyChoice = () => {
-    let enemyFrozen = this.state.frozen
-    let enemyChoiceAction = 0
-    let possibleEnemyActions = this.state.currentEnemyAbilities
-    let randomAction = Math.floor(Math.random() * 100 + 1
-    );
+    let enemyFrozen = this.state.frozen;
+    let enemyChoiceAction = 0;
+    let possibleEnemyActions = this.state.currentEnemyAbilities;
+    let randomAction = Math.floor(Math.random() * 100 + 1);
     // console.log("The action the enemy did ", randomAction);
 
     if (possibleEnemyActions.length === 2) {
       if (randomAction <= 50) {
-        enemyChoiceAction = 1
-      }
-      else {
-        enemyChoiceAction = 2
+        enemyChoiceAction = 1;
+      } else {
+        enemyChoiceAction = 2;
       }
       if (!enemyFrozen) {
-        this.firstEnemyAction(enemyChoiceAction)
+        this.firstEnemyAction(enemyChoiceAction);
       }
-    }
-    else if (possibleEnemyActions.length === 3) {
+    } else if (possibleEnemyActions.length === 3) {
       if (randomAction <= 15) {
-        enemyChoiceAction = 3
-      }
-      else if (randomAction >= 16 && randomAction <= 65) {
-        enemyChoiceAction = 1
-      }
-      else {
-        enemyChoiceAction = 2
+        enemyChoiceAction = 3;
+      } else if (randomAction >= 16 && randomAction <= 65) {
+        enemyChoiceAction = 1;
+      } else {
+        enemyChoiceAction = 2;
       }
       if (!enemyFrozen) {
-        this.firstEnemyAction(enemyChoiceAction)
+        this.firstEnemyAction(enemyChoiceAction);
       }
-    }
-    else if (possibleEnemyActions.length === 4) {
+    } else if (possibleEnemyActions.length === 4) {
       if (randomAction <= 10) {
-        enemyChoiceAction = 3
-      }
-      else if (randomAction >= 11 && randomAction <= 20) {
-        enemyChoiceAction = 4
-      }
-      else if (randomAction >= 20 && randomAction <= 60) {
-        enemyChoiceAction = 1
-      }
-      else {
-        enemyChoiceAction = 2
+        enemyChoiceAction = 3;
+      } else if (randomAction >= 11 && randomAction <= 20) {
+        enemyChoiceAction = 4;
+      } else if (randomAction >= 20 && randomAction <= 60) {
+        enemyChoiceAction = 1;
+      } else {
+        enemyChoiceAction = 2;
       }
       if (!enemyFrozen) {
-        this.firstEnemyAction(enemyChoiceAction)
+        this.firstEnemyAction(enemyChoiceAction);
       }
     }
     if (enemyFrozen) {
-      enemyChoiceAction = 5
-      this.firstEnemyAction(enemyChoiceAction)
+      enemyChoiceAction = 5;
+      this.firstEnemyAction(enemyChoiceAction);
     }
-
-
-  }
-
+  };
 
   render() {
     const { userLost } = this.state;
@@ -467,36 +449,50 @@ console.log(basicCurrentDamage);
     const { redirect } = this.state;
     const { deckRecieved } = this.state;
     const { userTurnOver } = this.state;
+    const { rulesRead } = this.state;
     if (redirect) {
-      return <Redirect to={{
-        pathname: '/legendaryCard',
-        state: {
-          username: this.state.username,
-          winCount: this.state.winCount,
-          currentUserDeck: this.state.currentUserDeck,
-        }
-      }}
-      />
+      return (
+        <Redirect
+          to={{
+            pathname: "/legendaryCard",
+            state: {
+              username: this.state.username,
+              winCount: this.state.winCount,
+              currentUserDeck: this.state.currentUserDeck,
+            },
+          }}
+        />
+      );
     }
+    // if(!rulesRead){
+    //   return
+    //   <RulesRead/>
+    // }
     if (userWon) {
-      return <Redirect to={{
-        pathname: '/gameWon',
-        state: {
-          username: this.state.username,
-        }
-      }}
-      />
+      return (
+        <Redirect
+          to={{
+            pathname: "/gameWon",
+            state: {
+              username: this.state.username,
+            },
+          }}
+        />
+      );
     }
     if (userLost) {
-      return <Redirect to={{
-        pathname: '/gameLost',
-        state: {
-          username: this.state.username,
-        }
-      }}
-      />
+      return (
+        <Redirect
+          to={{
+            pathname: "/gameLost",
+            state: {
+              username: this.state.username,
+            },
+          }}
+        />
+      );
     }
-    if (deckRecieved) {
+    if (deckRecieved && rulesRead) {
       const userTurnOver = this.state.userTurnOver;
       let enemyHealth = this.state.currentEnemyHealth;
       return (
@@ -531,15 +527,13 @@ console.log(basicCurrentDamage);
           <div>
             <div>
               {userTurnOver ? (
-                <img className="emm1" src={FireEm} ></img>
+                <img className="emm1" src={FireEm}></img>
               ) : (
-                  <img className="emm" src={IdleEm}></img>
-                )}
-              {
-                (this.state.currentEnemyHealth <= 0)
-                  ? <img className="emm1" src={Death} ></img>
-                  : null
-              }
+                <img className="emm" src={IdleEm}></img>
+              )}
+              {this.state.currentEnemyHealth <= 0 ? (
+                <img className="emm1" src={Death}></img>
+              ) : null}
             </div>
           </div>
           <div className="d-flex carddeck justify-content-center">
@@ -551,12 +545,10 @@ console.log(basicCurrentDamage);
             />
           </div>
         </div>
-      )
-    }
-    else {
+      );
+    } else {
       return null;
     }
   }
 }
 export default BattlePage;
-
