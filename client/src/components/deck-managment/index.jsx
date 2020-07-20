@@ -24,7 +24,7 @@ class DeckBrain extends Component {
     enemyAction: "",
     propsRecieved: false,
     readRules: false,
-    isRulesModalShowing: false,
+    isRulesModalShowing: true,
     showRulesModal: false,
   };
 
@@ -365,7 +365,36 @@ class DeckBrain extends Component {
         // </div>
       );
     } else {
-      return null;
+      this.openRulesModalHandler();
+      return (
+        <div id="gameArea stuffs">
+          <div className="row d-flex justify-content-center">
+            <div className="row d-flex justify-content-center">
+              {this.state.isRulesModalShowing ? (
+                <div
+                  onClick={this.closeRulesModalHandler}
+                  className="back-drop"
+                ></div>
+              ) : null}
+
+              <button
+                className=" nes-pointer buzz neon4 mb-3 nes-btn"
+                onClick={this.openRulesModalHandler}
+              >
+                Start
+              </button>
+            </div>
+          </div>
+
+          <div className="modal-div">
+            <RulesModal
+              className="rules-modal"
+              show={this.state.isRulesModalShowing}
+              close={this.closeRulesModalHandler}
+            ></RulesModal>
+          </div>
+        </div>
+      );
     }
   }
 }
