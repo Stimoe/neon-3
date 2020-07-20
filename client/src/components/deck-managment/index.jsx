@@ -19,13 +19,13 @@ class DeckBrain extends Component {
     playArea: [],
     turnEnded: false,
     deckRecieved: false,
-    isShowing: false,
-    show: false,
     enemyAction: "",
     propsRecieved: false,
+    isShowing: false,
+    show: false,
     readRules: false,
     isRulesModalShowing: true,
-    showRulesModal: false,
+    showRules: false,
   };
 
   componentWillReceiveProps() {
@@ -182,7 +182,7 @@ class DeckBrain extends Component {
     // let rules = !this.state.readRules;
     setTimeout(
       function () {
-        this.setState({ showRulesModal: true });
+        this.setState({ isRulesModalShowing: true });
       }.bind(this),
       1000
     );
@@ -193,7 +193,7 @@ class DeckBrain extends Component {
       () => {
         setTimeout(
           function () {
-            this.setState({ showRulesModal: false });
+            this.setState({ isRulesModalShowing: false });
           }.bind(this),
           40000
         ); // wait 5 seconds, then reset to false
@@ -226,7 +226,7 @@ class DeckBrain extends Component {
 
   closeRulesModalHandler = () => {
     this.setState({
-      showRulesModal: false,
+      isRulesModalShowing: false,
       readRules: true,
     });
   };
@@ -372,7 +372,7 @@ class DeckBrain extends Component {
           <div className="modal-div">
             <RulesModal
               className="rules-modal"
-              show={this.state.showRulesModal}
+              show={this.state.isRulesModalShowing}
               close={this.closeRulesModalHandler}
             ></RulesModal>
           </div>
