@@ -52,7 +52,9 @@
   float: right;
 }
 .rules-modal-div {
-  width: 50%;
+  margin: auto;
+  top: 15%;
+  width: 40%;
   text-align: center;
   border: 4px solid green;
   bottom: 25%;
