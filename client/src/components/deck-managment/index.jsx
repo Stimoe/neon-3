@@ -360,7 +360,7 @@ class DeckBrain extends Component {
         <div id="gameArea stuffs">
           {/* <div className="row d-flex justify-content-center">
             <div className="row d-flex justify-content-center"> */}
-          <div classname="rules-modal row d-flex justify-content-center">
+          <div classname="rules-modal justify-content-center">
             {this.state.isRulesModalShowing ? (
               <div
                 onClick={this.closeRulesModalHandler}
