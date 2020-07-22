@@ -537,7 +537,7 @@ class BattlePage extends Component {
               ) : null}
             </div>
           </div>
-          <div className="d-flex carddeck justify-content-center">
+          <div className="deckbrain-div">
             <DeckBrain
               readPlayed={this.handlePlayedCards}
               hasWon={this.state.winCount}
